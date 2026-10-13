@@ -7,6 +7,12 @@
       "skillPath": "skills/apple-design/SKILL.md",
       "computedHash": "8b94db67cb9edaad5f1501010804caa610131f1d2dfda0a27664b2e858deade3"
     },
+    "cinematic-shot": {
+      "source": "1weiho/cinematic-shot",
+      "sourceType": "github",
+      "skillPath": "skills/cinematic-shot/SKILL.md",
+      "computedHash": "4c624808a51cefa1a58ee6fedb113b6b35d162d197257a4764143613f0ac5ab3"
+    },
     "emil-design-eng": {
       "source": "emilkowalski/skills",
       "sourceType": "github",
