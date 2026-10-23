@@ -1,5 +1,11 @@
 # @open-slide/core
 
+## 2.3.1
+
+### Patch Changes
+
+- [#574](https://github.com/open-slide/open-slide/pull/574) [`8b67b02`](https://github.com/open-slide/open-slide/commit/8b67b0257d1f23138afcd640aaa0e0a468bd5f7c) Thanks [@1weiho](https://github.com/1weiho)! - Ship the agent modules the app imports so `open-slide dev` no longer fails to resolve `agent/types`, and stop publishing test files.
+
 ## 2.3.0
 
 ### Minor Changes
