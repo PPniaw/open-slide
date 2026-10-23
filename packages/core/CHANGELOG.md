@@ -1,5 +1,24 @@
 # @open-slide/core
 
+## 2.4.0
+
+### Minor Changes
+
+- c4b1906: Add `@open-slide/core/live` (LiveJoin, LiveQA, LiveFeedback) for audience Q&A and feedback through a shared live service. Publishing a deck that uses them opens a room, bakes its id into the build, and the publish dialog takes a workshop code and shows the presenter's admin link.
+- 0edfe70: Add `@open-slide/core/motion` with step-aware `Reveal`, `Stagger`, `CountUp`, and `LayoutList` components, plus the `slide-motion` and `slide-assets` skills.
+- 282bd12: Add a Publish button to the slide toolbar that puts the current deck online through the Vercel CLI login, shows its live link, and can unpublish it.
+- 990ade4: Add `open-slide publish <ids...>`: build only the given decks, refuse to deploy if any other deck shows up in the bundle, and deploy the result to Vercel with a noindex header.
+
+### Patch Changes
+
+- 55a84ca: Default the UI to Traditional Chinese until a language is picked in the language menu.
+- Updates come from `@pik-singular/open-slide-core` and follow the npm registry the project is configured with.
+- 011a8ef: Check for and install updates from the workshop fork's npm package behind the `@open-slide/core` alias, and pass `--legacy-peer-deps` to npm.
+- 8bcece1: Enlarge the mobile present control bar so its buttons meet the 44px touch-target minimum.
+- d343462: Published decks are play-only: production build even when started from the dev server, no deck list, editor chrome or downloads, the bare domain opens the deck, and the player supports swipe on phones.
+- 2aa6381: Ask the agent panel and new workspaces to write slide content in Traditional Chinese, and route animation and image requests to the `slide-motion` and `slide-assets` skills.
+- 6243938: Translate the `slide-motion` and `slide-assets` skills to Traditional Chinese, keeping English trigger phrases in their descriptions.
+
 ## 2.3.1
 
 ### Patch Changes

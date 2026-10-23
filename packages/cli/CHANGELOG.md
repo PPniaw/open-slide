@@ -1,5 +1,15 @@
 # @open-slide/cli
 
+## 2.1.0
+
+### Minor Changes
+
+- New projects install the workshop core (`@pik-singular/open-slide-core`) behind the `@open-slide/core` alias and start with a Chinese sample deck that shows motion and live interaction, plus the fresh-nutrition and cozy-home-shop themes.
+
+### Patch Changes
+
+- 2aa6381: Ask the agent panel and new workspaces to write slide content in Traditional Chinese, and route animation and image requests to the `slide-motion` and `slide-assets` skills.
+
 ## 2.0.0
 
 ### Major Changes
