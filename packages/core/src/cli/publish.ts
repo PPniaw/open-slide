@@ -12,7 +12,10 @@ import {
 } from '../files/folders.ts';
 import { createViteConfig } from '../vite/config.ts';
 import { loadUserConfig } from '../vite/open-slide-plugin.ts';
+import { PUBLISHED_LABEL, resolveProjectName } from './publish-names.ts';
 import { createCliLogger, glyph, printHeader } from './ui.ts';
+
+export { PUBLISHED_LABEL, resolveProjectName };
 
 export interface PublishOptions {
   project?: string;
@@ -21,24 +24,9 @@ export interface PublishOptions {
   allowIndexing?: boolean;
 }
 
-const PROJECT_RE = /^[a-z0-9]([a-z0-9._-]{0,98}[a-z0-9])?$/;
-
 export async function listDecks(slidesAbs: string): Promise<string[]> {
   const hits = await fg('*/index.{tsx,jsx,ts,js}', { cwd: slidesAbs, onlyFiles: true });
   return [...new Set(hits.map((hit) => hit.split('/')[0]))].sort();
-}
-
-export function resolveProjectName(ids: string[], project?: string): string {
-  const name = project ?? (ids.length === 1 ? ids[0].toLowerCase() : undefined);
-  if (!name) {
-    throw new Error('發布多份簡報時，請用 --project <名稱> 指定 Vercel 專案名稱。');
-  }
-  if (!PROJECT_RE.test(name) || name.includes('---')) {
-    throw new Error(
-      `Vercel 專案名稱「${name}」不合法：只能用小寫英文、數字、「.」「_」「-」，最多 100 字。`,
-    );
-  }
-  return name;
 }
 
 export function validateDeckIds(ids: string[], available: string[]): void {
@@ -94,9 +82,36 @@ export function vercelConfig(allowIndexing: boolean): Record<string, unknown> {
   };
 }
 
-function runVercel(args: string[], cwd: string, stdio: 'inherit' | 'ignore'): Promise<number> {
+export function parseDeploymentUrl(output: string): string | null {
+  return output.match(/https:\/\/[a-z0-9.-]+\.vercel\.app/i)?.[0] ?? null;
+}
+
+// `vercel inspect` lists aliases under an "Aliases" heading; the first one is
+// the production domain people should be given.
+export function parseFirstAlias(output: string): string | null {
+  const section = output.split(/\n\s*Aliases\s*\n/)[1];
+  if (!section) return null;
+  return section.match(/https:\/\/[a-z0-9.-]+/i)?.[0] ?? null;
+}
+
+function runVercel(
+  args: string[],
+  cwd: string,
+  echo: boolean,
+): Promise<{ code: number; output: string }> {
   return new Promise((resolve, reject) => {
-    const child = spawn('vercel', args, { cwd, stdio, shell: process.platform === 'win32' });
+    const child = spawn('vercel', args, {
+      cwd,
+      stdio: ['ignore', 'pipe', 'pipe'],
+      shell: process.platform === 'win32',
+    });
+    let output = '';
+    const collect = (chunk: Buffer, sink: NodeJS.WriteStream) => {
+      output += chunk.toString('utf8');
+      if (echo) sink.write(chunk);
+    };
+    child.stdout.on('data', (chunk: Buffer) => collect(chunk, process.stdout));
+    child.stderr.on('data', (chunk: Buffer) => collect(chunk, process.stderr));
     child.on('error', (err: NodeJS.ErrnoException) => {
       if (err.code === 'ENOENT') {
         reject(
@@ -106,7 +121,7 @@ function runVercel(args: string[], cwd: string, stdio: 'inherit' | 'ignore'): Pr
         reject(err);
       }
     });
-    child.on('close', (code) => resolve(code ?? 1));
+    child.on('close', (code) => resolve({ code: code ?? 1, output }));
   });
 }
 
@@ -185,6 +200,15 @@ export async function publish(ids: string[], opts: PublishOptions = {}): Promise
 
   process.stdout.write(`  ${chalk.dim(glyph.bar)} 部署到 Vercel 專案：${chalk.bold(project)}\n\n`);
   const args = ['deploy', '--yes', ...(opts.preview ? [] : ['--prod'])];
-  const code = await runVercel(args, deployDir, 'inherit');
-  if (code !== 0) throw new Error(`vercel deploy 失敗（exit code ${code}）。`);
+  const deployed = await runVercel(args, deployDir, true);
+  if (deployed.code !== 0) throw new Error(`vercel deploy 失敗（exit code ${deployed.code}）。`);
+  const deploymentUrl = parseDeploymentUrl(deployed.output);
+  let url = deploymentUrl;
+  if (deploymentUrl && !opts.preview) {
+    const inspected = await runVercel(['inspect', deploymentUrl], deployDir, false);
+    url = parseFirstAlias(inspected.output) ?? deploymentUrl;
+  }
+  process.stdout.write(
+    `\n  ${chalk.green('✔')} ${PUBLISHED_LABEL}${url ?? '（請到 Vercel 後台查看網址）'}\n\n`,
+  );
 }

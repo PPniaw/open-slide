@@ -6,6 +6,8 @@ import {
   filterFolders,
   findLeakedDecks,
   listDecks,
+  parseDeploymentUrl,
+  parseFirstAlias,
   resolveProjectName,
   validateDeckIds,
   vercelConfig,
@@ -68,5 +70,22 @@ describe('publish helpers', () => {
     });
     expect(vercelConfig(true)).not.toHaveProperty('headers');
     expect(vercelConfig(true)).toHaveProperty('rewrites');
+  });
+
+  it('reads the deployment url and the first production alias from vercel output', () => {
+    const deploy = `{
+  "deployment": { "url": "https://deck-4yk-team.vercel.app", "inspectorUrl": "https://vercel.com/team/deck/x" }
+}`;
+    expect(parseDeploymentUrl(deploy)).toBe('https://deck-4yk-team.vercel.app');
+    expect(parseDeploymentUrl('no url here')).toBeNull();
+
+    const inspect = `  General
+    url\t\thttps://deck-4yk-team.vercel.app
+  Aliases
+    ╶ https://deck.vercel.app
+    ╶ https://deck-team.vercel.app
+  Builds`;
+    expect(parseFirstAlias(inspect)).toBe('https://deck.vercel.app');
+    expect(parseFirstAlias('  General\n')).toBeNull();
   });
 });

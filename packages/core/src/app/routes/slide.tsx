@@ -46,6 +46,7 @@ import {
 import { SaveBar } from '@/components/inspector/save-bar';
 import { EditorSidebar } from '@/components/panel/editor-sidebar';
 import { ResizeHandle, useStoredWidth } from '@/components/panel/resize-handle';
+import { PublishButton } from '@/components/publish/publish-button';
 import { DesignProvider } from '@/components/style-panel/design-provider';
 import { DesignToggleButton } from '@/components/style-panel/style-panel';
 import { Button, buttonVariants } from '@/components/ui/button';
@@ -788,6 +789,9 @@ export function Slide() {
                     {allowHtmlDownload && exportMenuItems}
                   </DropdownMenuContent>
                 </DropdownMenu>
+              )}
+              {import.meta.env.DEV && view === 'slides' && !narrowToolbar && slideId && (
+                <PublishButton slideId={slideId} />
               )}
               {import.meta.env.DEV && view === 'slides' && !narrowToolbar && <AgentToggleButton />}
               {view === 'slides' && !narrowToolbar && (
