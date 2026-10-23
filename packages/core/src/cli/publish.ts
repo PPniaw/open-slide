@@ -22,6 +22,9 @@ export interface PublishOptions {
   deploy?: boolean;
   preview?: boolean;
   allowIndexing?: boolean;
+  /** Live service and room id baked into the build for `@open-slide/core/live` blocks. */
+  liveServer?: string;
+  liveRoom?: string;
 }
 
 export async function listDecks(slidesAbs: string): Promise<string[]> {
@@ -137,6 +140,10 @@ export async function publish(ids: string[], opts: PublishOptions = {}): Promise
   const available = await listDecks(slidesAbs);
   validateDeckIds(ids, available);
   const project = resolveProjectName(ids, opts.project);
+  if (Boolean(opts.liveRoom) !== Boolean(opts.liveServer)) {
+    throw new Error('--live-room 和 --live-server 要一起指定。');
+  }
+  if (opts.liveRoom && ids.length !== 1) throw new Error('--live-room 一次只能用在一份簡報。');
 
   // Under node_modules so the staging copy never shows up as a workspace change.
   const workRoot = path.join(userCwd, 'node_modules', '.open-slide', 'publish');
@@ -171,6 +178,10 @@ export async function publish(ids: string[], opts: PublishOptions = {}): Promise
       // The public link is for the audience: play only, no editor chrome or
       // downloads, and a deck list only when several decks go up together.
       build: { showSlideBrowser: ids.length > 1, showSlideUi: false, allowHtmlDownload: false },
+      live:
+        opts.liveRoom && opts.liveServer
+          ? { server: opts.liveServer, rooms: { [ids[0]]: opts.liveRoom } }
+          : undefined,
     },
   });
   await viteBuild(

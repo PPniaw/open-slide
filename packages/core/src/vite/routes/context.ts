@@ -13,6 +13,8 @@ export type ApiContext = {
   manifestPath: string;
   coreVersion: string;
   agentEnabled: boolean;
+  /** Live-interaction service the publish button opens rooms on. */
+  liveServer?: string;
 };
 
 export type ApiPluginOptions = {
@@ -21,6 +23,7 @@ export type ApiPluginOptions = {
   assetsDir?: string;
   coreVersion: string;
   agentEnabled: boolean;
+  liveServer?: string;
 };
 
 export function makeContext(opts: ApiPluginOptions): ApiContext {
@@ -38,6 +41,7 @@ export function makeContext(opts: ApiPluginOptions): ApiContext {
     manifestPath,
     coreVersion: opts.coreVersion,
     agentEnabled: opts.agentEnabled,
+    liveServer: opts.liveServer,
   };
 }
 

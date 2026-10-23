@@ -15,6 +15,7 @@ declare module 'virtual:open-slide/config' {
     port?: number;
     locale?: Locale;
     version: string;
+    live?: { server?: string; rooms?: Record<string, string> };
     build: {
       showSlideBrowser: boolean;
       showSlideUi: boolean;

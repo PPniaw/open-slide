@@ -10,6 +10,13 @@ export type OpenSlideAgentConfig = {
   enabled?: boolean;
 };
 
+export type OpenSlideLiveConfig = {
+  /** Base URL of the shared live-interaction service. */
+  server?: string;
+  /** Deck id → room id. Filled in by `open-slide publish`; not set by hand. */
+  rooms?: Record<string, string>;
+};
+
 export type OpenSlideConfig = {
   base?: string;
   slidesDir?: string;
@@ -25,4 +32,5 @@ export type OpenSlideConfig = {
   locale?: Locale;
   build?: OpenSlideBuildConfig;
   agent?: OpenSlideAgentConfig;
+  live?: OpenSlideLiveConfig;
 };

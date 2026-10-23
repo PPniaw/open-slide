@@ -75,6 +75,8 @@ interface PublishFlags {
   deploy?: boolean;
   preview?: boolean;
   allowIndexing?: boolean;
+  liveServer?: string;
+  liveRoom?: string;
 }
 
 interface SyncFlags {
@@ -142,6 +144,8 @@ export async function run(argv: string[]): Promise<void> {
     .option('--no-deploy', 'build and check only, without deploying')
     .option('--preview', 'create a preview deployment instead of production')
     .option('--allow-indexing', 'omit the noindex header so search engines may index the site')
+    .option('--live-server <url>', 'live-interaction service the deck connects to')
+    .option('--live-room <id>', 'live room id for the deck (single deck only)')
     .action(async (ids: string[], flags: PublishFlags) => {
       await assertViteResolvesToCore();
       const { publish } = await import('./publish.ts');

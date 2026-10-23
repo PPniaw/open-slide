@@ -1,5 +1,6 @@
 import config from 'virtual:open-slide/config';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { LIVE_GLOBAL_KEY } from '../live/room';
 import { Toaster } from './components/ui/sonner';
 import { TooltipProvider } from './components/ui/tooltip';
 import { useLocale } from './lib/use-locale';
@@ -10,6 +11,12 @@ import { Presenter } from './routes/presenter';
 import { Preview } from './routes/preview';
 import { Slide } from './routes/slide';
 import { ThemeDetailPage, ThemesGalleryPage } from './routes/themes';
+
+// Hand the live-room config to the live blocks, which ship as a separate kit.
+(globalThis as Record<string, unknown>)[LIVE_GLOBAL_KEY] = {
+  dev: import.meta.env.DEV,
+  ...config.live,
+};
 
 export function App() {
   return (

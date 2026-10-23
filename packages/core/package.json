@@ -20,6 +20,10 @@
       "types": "./dist/motion/index.d.ts",
       "import": "./dist/motion/index.js"
     },
+    "./live": {
+      "types": "./dist/live/index.d.ts",
+      "import": "./dist/live/index.js"
+    },
     "./env": {
       "types": "./env.d.ts"
     }

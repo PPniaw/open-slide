@@ -5,10 +5,22 @@ import type { ViteDevServer } from 'vite';
 import { PUBLISHED_LABEL, resolveProjectName } from '../../cli/publish-names.ts';
 import { isLoopbackRequest, validateMutationRequest } from '../../http/request-guard.ts';
 import { type ApiContext, json, readBody } from './context.ts';
+import {
+  deckUsesLive,
+  ensureLiveRoom,
+  liveServer,
+  readLiveRooms,
+  readLiveSettings,
+  resetLiveKey,
+  saveLiveSettings,
+} from './publish-live.ts';
 
 // GET  /__publish/status?slideId=  → { vercel: { installed, loggedIn, user }, record }
 // POST /__publish            { slideId }  → runs `open-slide publish <slideId>`, returns { record }
 // POST /__publish/unpublish  { slideId }  → deletes the Vercel project, returns { ok }
+// GET  /__publish/live?slideId=           → { server, roomId } for the live blocks in dev
+// POST /__publish/live-setup { slideId, cohort, owner } → saves the workshop code
+// POST /__publish/live-reset { slideId }   → new admin link for the deck's live room
 //
 // The workshop fork's toolbar button drives these so nobody has to open a
 // terminal. Deploys reuse the machine's Vercel CLI login.
@@ -109,6 +121,18 @@ function openSlideBin(cwd: string): string {
   return path.join(cwd, 'node_modules', '.bin', bin);
 }
 
+async function liveStatus(ctx: ApiContext, slideId: string) {
+  const room = (await readLiveRooms(ctx))[slideId];
+  const settings = await readLiveSettings(ctx);
+  return {
+    uses: SLIDE_ID_RE.test(slideId) && (await deckUsesLive(ctx, slideId)),
+    server: liveServer(ctx),
+    owner: settings?.owner ?? null,
+    cohort: settings?.cohort ?? null,
+    room: room ? { roomId: room.roomId, joinUrl: room.joinUrl, adminUrl: room.adminUrl } : null,
+  };
+}
+
 export function registerPublishRoutes(server: ViteDevServer, ctx: ApiContext): void {
   let inFlight: Promise<unknown> | null = null;
 
@@ -125,27 +149,53 @@ export function registerPublishRoutes(server: ViteDevServer, ctx: ApiContext): v
         return json(res, 200, {
           vercel: await vercelStatus(ctx.userCwd),
           record: records[slideId] ?? null,
+          live: await liveStatus(ctx, slideId),
           busy: inFlight !== null,
         });
+      }
+
+      if (method === 'GET' && url.pathname === '/live') {
+        const room = (await readLiveRooms(ctx))[url.searchParams.get('slideId') ?? ''];
+        res.setHeader('cache-control', 'no-store');
+        return json(res, 200, room ? { server: room.server, roomId: room.roomId } : {});
       }
 
       if (method !== 'POST') return next();
       const guard = validateMutationRequest(req, { requireJsonBody: true });
       if (!guard.ok) return json(res, guard.status, { error: guard.error });
-      const body = (await readBody(req, 4096)) as { slideId?: unknown };
+      const body = (await readBody(req, 4096)) as {
+        slideId?: unknown;
+        cohort?: unknown;
+        owner?: unknown;
+      };
       const slideId = typeof body.slideId === 'string' ? body.slideId : '';
       if (!SLIDE_ID_RE.test(slideId)) return json(res, 400, { error: '簡報 id 不正確。' });
       if (inFlight) return json(res, 409, { error: '已經有一個發布或下架正在進行，請稍等。' });
 
+      if (url.pathname === '/live-setup') {
+        const cohort = typeof body.cohort === 'string' ? body.cohort.trim().toUpperCase() : '';
+        const owner = typeof body.owner === 'string' ? body.owner.trim().slice(0, 40) : '';
+        if (!/^[A-Z0-9]{4,32}$/.test(cohort)) {
+          return json(res, 400, { error: '工作坊代碼格式不正確。' });
+        }
+        await saveLiveSettings(ctx, { cohort, owner });
+        return json(res, 200, { live: await liveStatus(ctx, slideId) });
+      }
+
+      if (url.pathname === '/live-reset') {
+        await resetLiveKey(ctx, slideId);
+        return json(res, 200, { live: await liveStatus(ctx, slideId) });
+      }
+
       if (url.pathname === '/' || url.pathname === '') {
         const job = (async () => {
           const project = resolveProjectName([slideId]);
-          const r = await run(
-            openSlideBin(ctx.userCwd),
-            ['publish', slideId, '--project', project],
-            ctx.userCwd,
-            PUBLISH_TIMEOUT_MS,
-          );
+          const args = ['publish', slideId, '--project', project];
+          if (await deckUsesLive(ctx, slideId)) {
+            const room = await ensureLiveRoom(ctx, slideId);
+            args.push('--live-server', room.server, '--live-room', room.roomId);
+          }
+          const r = await run(openSlideBin(ctx.userCwd), args, ctx.userCwd, PUBLISH_TIMEOUT_MS);
           const published = parsePublishedUrl(r.output);
           if (r.code !== 0 || !published) {
             throw new Error(`發布失敗：\n${tail(r.output)}`);

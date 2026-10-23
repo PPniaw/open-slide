@@ -7,6 +7,7 @@ export default defineConfig({
     'vite/index': 'src/vite/index.ts',
     'locale/index': 'src/locale/index.ts',
     'motion/index': 'src/motion/index.ts',
+    'live/index': 'src/live/index.ts',
   },
   format: 'esm',
   fixedExtension: false,
