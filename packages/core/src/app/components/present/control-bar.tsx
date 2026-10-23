@@ -167,15 +167,15 @@ export function PresentControlBar({
               visible ? 'pointer-events-auto' : 'pointer-events-none',
             )}
           >
-            <div className="flex h-10 w-fit items-center gap-0.5 rounded-full border border-white/10 bg-black/60 px-1 text-white/85 shadow-[0_8px_30px_-8px_oklch(0_0_0/0.65)] backdrop-blur-md">
+            <div className="flex h-14 w-fit items-center gap-1 rounded-full border border-white/10 bg-black/60 px-1.5 text-white/85 shadow-[0_8px_30px_-8px_oklch(0_0_0/0.65)] backdrop-blur-md">
               <MobileBarButton
                 label={t.present.prevSlideAria}
                 onClick={() => handleMobileAction(onPrev)}
                 disabled={index === 0}
               >
-                <ChevronLeft className="size-4" />
+                <ChevronLeft className="size-6" />
               </MobileBarButton>
-              <span className="min-w-[3.5rem] px-1 text-center font-mono text-[11.5px] tabular-nums text-white/80 select-none">
+              <span className="min-w-[4.5rem] px-1 text-center font-mono text-[15px] tabular-nums text-white/80 select-none">
                 <span className="text-white">{index + 1}</span>
                 <span className="px-1 text-white/35">/</span>
                 <span>{total}</span>
@@ -185,21 +185,21 @@ export function PresentControlBar({
                 onClick={() => handleMobileAction(onNext)}
                 disabled={index >= total - 1}
               >
-                <ChevronRight className="size-4" />
+                <ChevronRight className="size-6" />
               </MobileBarButton>
               <MobileDivider />
               <MobileBarButton
                 label={t.present.overviewAria}
                 onClick={() => handleMobileAction(onOverview)}
               >
-                <Grid2x2 className="size-4" />
+                <Grid2x2 className="size-5" />
               </MobileBarButton>
               {allowExit && (
                 <MobileBarButton
                   label={t.present.exitAria}
                   onClick={() => handleMobileAction(onExit)}
                 >
-                  <LogOut className="size-4" />
+                  <LogOut className="size-5" />
                 </MobileBarButton>
               )}
             </div>
@@ -231,7 +231,7 @@ function MobileBarButton({
         onClick();
       }}
       className={cn(
-        'inline-flex size-8 shrink-0 touch-manipulation items-center justify-center rounded-full transition-[background-color,color,opacity,scale] duration-150',
+        'inline-flex size-11 shrink-0 touch-manipulation items-center justify-center rounded-full transition-[background-color,color,opacity,scale] duration-150',
         'text-white/85 hover:bg-white/12 focus-visible:bg-white/12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35',
         'active:scale-[0.94] active:bg-white/12',
         'disabled:pointer-events-none disabled:opacity-30',
@@ -243,7 +243,7 @@ function MobileBarButton({
 }
 
 function MobileDivider() {
-  return <span aria-hidden className="mx-0.5 h-3.5 w-px shrink-0 bg-white/15" />;
+  return <span aria-hidden className="mx-0.5 h-5 w-px shrink-0 bg-white/15" />;
 }
 
 function BarButton({
