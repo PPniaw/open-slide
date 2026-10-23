@@ -23,8 +23,12 @@ const LIVE_IMPORT = '@open-slide/core/live';
 const SOURCE_RE = /\.(tsx|ts|jsx|js|mdx)$/;
 const SERVER_TIMEOUT_MS = 15_000;
 
+// The workshop's shared service, so students never configure it. Set
+// `live: { server: '' }` in open-slide.config to turn live rooms off.
+export const DEFAULT_LIVE_SERVER = 'https://live.pik-singular.com';
+
 export function liveServer(ctx: ApiContext): string | null {
-  const server = process.env.OPEN_SLIDE_LIVE_SERVER || ctx.liveServer;
+  const server = process.env.OPEN_SLIDE_LIVE_SERVER || (ctx.liveServer ?? DEFAULT_LIVE_SERVER);
   return server ? server.replace(/\/+$/, '') : null;
 }
 
@@ -60,6 +64,15 @@ async function saveLiveRoom(ctx: ApiContext, slideId: string, room: LiveRoomReco
   const rooms = await readLiveRooms(ctx);
   rooms[slideId] = room;
   await writeJson(roomsPath(ctx), rooms);
+}
+
+/** The deck's room on the current server; rooms from another server don't count. */
+export async function currentLiveRoom(
+  ctx: ApiContext,
+  slideId: string,
+): Promise<LiveRoomRecord | null> {
+  const room = (await readLiveRooms(ctx))[slideId];
+  return room && room.server === liveServer(ctx) ? room : null;
 }
 
 /** True when any source file in the deck imports the live kit. */
@@ -116,8 +129,8 @@ async function callServer<T>(
 export async function ensureLiveRoom(ctx: ApiContext, slideId: string): Promise<LiveRoomRecord> {
   const server = liveServer(ctx);
   if (!server) throw new Error('還沒設定互動服務網址（open-slide.config.ts 的 live.server）。');
-  const existing = (await readLiveRooms(ctx))[slideId];
-  if (existing && existing.server === server) return existing;
+  const existing = await currentLiveRoom(ctx, slideId);
+  if (existing) return existing;
 
   const settings = await readLiveSettings(ctx);
   if (!settings) throw new Error('請先輸入工作坊代碼。');
@@ -140,7 +153,7 @@ export async function ensureLiveRoom(ctx: ApiContext, slideId: string): Promise<
 
 /** Swap the deck's admin key; the old admin link stops working at once. */
 export async function resetLiveKey(ctx: ApiContext, slideId: string): Promise<LiveRoomRecord> {
-  const room = (await readLiveRooms(ctx))[slideId];
+  const room = await currentLiveRoom(ctx, slideId);
   if (!room) throw new Error('這份簡報還沒有互動。');
   const next = await callServer<{ adminKey: string; adminUrl: string }>(
     room.server,

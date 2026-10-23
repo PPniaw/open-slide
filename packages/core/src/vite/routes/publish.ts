@@ -6,10 +6,10 @@ import { PUBLISHED_LABEL, resolveProjectName } from '../../cli/publish-names.ts'
 import { isLoopbackRequest, validateMutationRequest } from '../../http/request-guard.ts';
 import { type ApiContext, json, readBody } from './context.ts';
 import {
+  currentLiveRoom,
   deckUsesLive,
   ensureLiveRoom,
   liveServer,
-  readLiveRooms,
   readLiveSettings,
   resetLiveKey,
   saveLiveSettings,
@@ -122,7 +122,7 @@ function openSlideBin(cwd: string): string {
 }
 
 async function liveStatus(ctx: ApiContext, slideId: string) {
-  const room = (await readLiveRooms(ctx))[slideId];
+  const room = await currentLiveRoom(ctx, slideId);
   const settings = await readLiveSettings(ctx);
   return {
     uses: SLIDE_ID_RE.test(slideId) && (await deckUsesLive(ctx, slideId)),
@@ -155,7 +155,7 @@ export function registerPublishRoutes(server: ViteDevServer, ctx: ApiContext): v
       }
 
       if (method === 'GET' && url.pathname === '/live') {
-        const room = (await readLiveRooms(ctx))[url.searchParams.get('slideId') ?? ''];
+        const room = await currentLiveRoom(ctx, url.searchParams.get('slideId') ?? '');
         res.setHeader('cache-control', 'no-store');
         return json(res, 200, room ? { server: room.server, roomId: room.roomId } : {});
       }
