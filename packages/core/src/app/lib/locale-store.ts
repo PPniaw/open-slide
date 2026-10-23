@@ -39,7 +39,9 @@ function readStored(): Locale {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (isLocaleId(stored)) return LOCALES[stored];
   } catch {}
-  return configLocale ?? en;
+  // Workshop fork: the audience is Traditional Chinese speakers, so that is the default
+  // until someone picks a language in the UI.
+  return configLocale ?? zhTW;
 }
 
 // A module-level store (rather than React context) so every React root the
