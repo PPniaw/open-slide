@@ -70,6 +70,13 @@ interface BuildFlags {
   outDir?: string;
 }
 
+interface PublishFlags {
+  project?: string;
+  deploy?: boolean;
+  preview?: boolean;
+  allowIndexing?: boolean;
+}
+
 interface SyncFlags {
   dryRun?: boolean;
 }
@@ -125,6 +132,20 @@ export async function run(argv: string[]): Promise<void> {
       await assertViteResolvesToCore();
       const { preview } = await import('./preview.ts');
       await preview(flags);
+    });
+
+  program
+    .command('publish')
+    .description('Build only the given decks, check no other deck leaked in, and deploy to Vercel')
+    .argument('<ids...>', 'deck ids (folder names under slides/)')
+    .option('--project <name>', 'Vercel project name (defaults to the deck id for a single deck)')
+    .option('--no-deploy', 'build and check only, without deploying')
+    .option('--preview', 'create a preview deployment instead of production')
+    .option('--allow-indexing', 'omit the noindex header so search engines may index the site')
+    .action(async (ids: string[], flags: PublishFlags) => {
+      await assertViteResolvesToCore();
+      const { publish } = await import('./publish.ts');
+      await publish(ids, flags);
     });
 
   program

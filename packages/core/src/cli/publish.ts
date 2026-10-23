@@ -1,0 +1,190 @@
+import { spawn } from 'node:child_process';
+import { cp, mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
+import path from 'node:path';
+import chalk from 'chalk';
+import fg from 'fast-glob';
+import { mergeConfig, build as viteBuild } from 'vite';
+import {
+  type FoldersManifest,
+  foldersManifestPath,
+  readManifest,
+  writeManifest,
+} from '../files/folders.ts';
+import { createViteConfig } from '../vite/config.ts';
+import { loadUserConfig } from '../vite/open-slide-plugin.ts';
+import { createCliLogger, glyph, printHeader } from './ui.ts';
+
+export interface PublishOptions {
+  project?: string;
+  deploy?: boolean;
+  preview?: boolean;
+  allowIndexing?: boolean;
+}
+
+const PROJECT_RE = /^[a-z0-9]([a-z0-9._-]{0,98}[a-z0-9])?$/;
+
+export async function listDecks(slidesAbs: string): Promise<string[]> {
+  const hits = await fg('*/index.{tsx,jsx,ts,js}', { cwd: slidesAbs, onlyFiles: true });
+  return [...new Set(hits.map((hit) => hit.split('/')[0]))].sort();
+}
+
+export function resolveProjectName(ids: string[], project?: string): string {
+  const name = project ?? (ids.length === 1 ? ids[0].toLowerCase() : undefined);
+  if (!name) {
+    throw new Error('發布多份簡報時，請用 --project <名稱> 指定 Vercel 專案名稱。');
+  }
+  if (!PROJECT_RE.test(name) || name.includes('---')) {
+    throw new Error(
+      `Vercel 專案名稱「${name}」不合法：只能用小寫英文、數字、「.」「_」「-」，最多 100 字。`,
+    );
+  }
+  return name;
+}
+
+export function validateDeckIds(ids: string[], available: string[]): void {
+  if (ids.length === 0) throw new Error('請至少指定一份簡報 id。');
+  const dupes = ids.filter((id, i) => ids.indexOf(id) !== i);
+  if (dupes.length > 0) throw new Error(`簡報 id 重複了：${[...new Set(dupes)].join(', ')}`);
+  const missing = ids.filter((id) => !available.includes(id));
+  if (missing.length > 0) {
+    throw new Error(
+      `找不到這些簡報：${missing.join(', ')}\n  可用的簡報 id：${available.join(', ') || '（沒有）'}`,
+    );
+  }
+}
+
+// Deck ids are kebab-case, so a match only counts when the characters around it
+// can't continue an id; otherwise `pik-intro` would flag `pik-intro-public`.
+export function findLeakedDecks(
+  files: { name: string; text: string }[],
+  excludedIds: string[],
+): { id: string; file: string }[] {
+  const leaks: { id: string; file: string }[] = [];
+  for (const id of excludedIds) {
+    const escaped = id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const re = new RegExp(`(^|[^A-Za-z0-9_-])${escaped}([^A-Za-z0-9_-]|$)`);
+    const hit = files.find((f) => re.test(f.text));
+    if (hit) leaks.push({ id, file: hit.name });
+  }
+  return leaks;
+}
+
+// Folder names can be as private as deck names, so only keep the folders the
+// published decks actually sit in.
+export function filterFolders(manifest: FoldersManifest, ids: string[]): FoldersManifest {
+  const assignments: Record<string, string> = {};
+  for (const id of ids) {
+    const folderId = manifest.assignments[id];
+    if (folderId) assignments[id] = folderId;
+  }
+  const used = new Set(Object.values(assignments));
+  return { folders: manifest.folders.filter((f) => used.has(f.id)), assignments };
+}
+
+export function vercelConfig(allowIndexing: boolean): Record<string, unknown> {
+  return {
+    rewrites: [{ source: '/(.*)', destination: '/index.html' }],
+    ...(allowIndexing
+      ? {}
+      : {
+          headers: [
+            { source: '/(.*)', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+          ],
+        }),
+  };
+}
+
+function runVercel(args: string[], cwd: string, stdio: 'inherit' | 'ignore'): Promise<number> {
+  return new Promise((resolve, reject) => {
+    const child = spawn('vercel', args, { cwd, stdio, shell: process.platform === 'win32' });
+    child.on('error', (err: NodeJS.ErrnoException) => {
+      if (err.code === 'ENOENT') {
+        reject(
+          new Error('找不到 Vercel CLI。請先執行 `npm i -g vercel`，再執行 `vercel login` 登入。'),
+        );
+      } else {
+        reject(err);
+      }
+    });
+    child.on('close', (code) => resolve(code ?? 1));
+  });
+}
+
+export async function publish(ids: string[], opts: PublishOptions = {}): Promise<void> {
+  const userCwd = process.cwd();
+  const config = await loadUserConfig(userCwd);
+  const slidesAbs = path.resolve(userCwd, config.slidesDir ?? 'slides');
+  const available = await listDecks(slidesAbs);
+  validateDeckIds(ids, available);
+  const project = resolveProjectName(ids, opts.project);
+
+  // Under node_modules so the staging copy never shows up as a workspace change.
+  const workRoot = path.join(userCwd, 'node_modules', '.open-slide', 'publish');
+  const stagingSlides = path.join(workRoot, `${project}.staging`, 'slides');
+  const stagingThemes = path.join(workRoot, `${project}.staging`, 'themes');
+  const buildDir = path.join(workRoot, `${project}.build`);
+  // Vercel names a new project after the folder it deploys, and keeps the link
+  // in its `.vercel/`, so this folder is reused across publishes.
+  const deployDir = path.join(workRoot, project);
+
+  await rm(path.dirname(stagingSlides), { recursive: true, force: true });
+  await mkdir(stagingSlides, { recursive: true });
+  await mkdir(stagingThemes, { recursive: true });
+  for (const id of ids) {
+    await cp(path.join(slidesAbs, id), path.join(stagingSlides, id), { recursive: true });
+  }
+  const manifest = await readManifest(foldersManifestPath(slidesAbs));
+  await writeManifest(foldersManifestPath(stagingSlides), filterFolders(manifest, ids));
+
+  printHeader(`publishing ${ids.join(', ')}`);
+  // Themes stay out: a brand theme can be as private as the decks left behind.
+  const base = await createViteConfig({
+    userCwd,
+    mode: 'build',
+    config: { ...config, slidesDir: stagingSlides, themesDir: stagingThemes },
+  });
+  await viteBuild(
+    mergeConfig(base, {
+      customLogger: createCliLogger(),
+      build: { outDir: buildDir, emptyOutDir: true },
+    }),
+  );
+
+  const excluded = available.filter((id) => !ids.includes(id));
+  const outputs = await fg('**/*.{js,css,html}', { cwd: buildDir, onlyFiles: true });
+  const files = await Promise.all(
+    outputs.map(async (name) => ({
+      name,
+      text: await readFile(path.join(buildDir, name), 'utf8'),
+    })),
+  );
+  const leaks = findLeakedDecks(files, excluded);
+  if (leaks.length > 0) {
+    const list = leaks.map((l) => `${l.id}（在 ${l.file}）`).join('\n    ');
+    throw new Error(`打包結果裡出現了沒有指定的簡報，已中止發布：\n    ${list}`);
+  }
+  process.stdout.write(
+    `  ${chalk.green('✔')} 打包結果只包含：${ids.join(', ')}（已檢查 ${excluded.length} 份未指定的簡報）\n`,
+  );
+
+  await mkdir(deployDir, { recursive: true });
+  for (const entry of await readdir(deployDir)) {
+    if (entry !== '.vercel')
+      await rm(path.join(deployDir, entry), { recursive: true, force: true });
+  }
+  await cp(buildDir, deployDir, { recursive: true });
+  await writeFile(
+    path.join(deployDir, 'vercel.json'),
+    `${JSON.stringify(vercelConfig(opts.allowIndexing === true), null, 2)}\n`,
+  );
+
+  if (opts.deploy === false) {
+    process.stdout.write(`  ${chalk.dim(glyph.bar)} 沒有部署。要上線的檔案在：${deployDir}\n\n`);
+    return;
+  }
+
+  process.stdout.write(`  ${chalk.dim(glyph.bar)} 部署到 Vercel 專案：${chalk.bold(project)}\n\n`);
+  const args = ['deploy', '--yes', ...(opts.preview ? [] : ['--prod'])];
+  const code = await runVercel(args, deployDir, 'inherit');
+  if (code !== 0) throw new Error(`vercel deploy 失敗（exit code ${code}）。`);
+}
