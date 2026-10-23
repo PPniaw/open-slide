@@ -33,7 +33,8 @@ type Props = {
   onOverview: () => void;
   onBlackout: (mode: 'black' | 'white') => void;
   onLaser: () => void;
-  onPresenter: () => void;
+  /** Omitted when there is no deck to open a presenter window for. */
+  onPresenter?: () => void;
   onToggleFullscreen: () => void;
   onHelp: () => void;
   onExit: () => void;
@@ -138,9 +139,11 @@ export function PresentControlBar({
             <BarButton label={t.present.laserAria} onClick={onLaser} active={laser}>
               <Crosshair className="size-4" />
             </BarButton>
-            <BarButton label={t.present.presenterAria} onClick={onPresenter}>
-              <MonitorSpeaker className="size-4" />
-            </BarButton>
+            {onPresenter && (
+              <BarButton label={t.present.presenterAria} onClick={onPresenter}>
+                <MonitorSpeaker className="size-4" />
+              </BarButton>
+            )}
             <BarButton label={fullscreenAria} onClick={onToggleFullscreen}>
               {windowed ? <Maximize className="size-4" /> : <Minimize className="size-4" />}
             </BarButton>

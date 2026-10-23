@@ -72,6 +72,13 @@ describe('publish helpers', () => {
     expect(vercelConfig(true)).toHaveProperty('rewrites');
   });
 
+  it('sends the bare domain to the deck when only one is published', () => {
+    expect(vercelConfig(false, 'deck-a')).toMatchObject({
+      redirects: [{ source: '/', destination: '/s/deck-a', permanent: false }],
+    });
+    expect(vercelConfig(false)).not.toHaveProperty('redirects');
+  });
+
   it('reads the deployment url and the first production alias from vercel output', () => {
     const deploy = `{
   "deployment": { "url": "https://deck-4yk-team.vercel.app", "inspectorUrl": "https://vercel.com/team/deck/x" }

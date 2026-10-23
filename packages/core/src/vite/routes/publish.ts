@@ -21,6 +21,13 @@ export type PublishRecord = { project: string; url: string; publishedAt: string 
 type Records = Record<string, PublishRecord>;
 type RunResult = { code: number; output: string };
 
+// The dev server runs with NODE_ENV=development, and a child build that
+// inherits it ships the editor UI (Agent, design, edit) to the public site.
+function childEnv(): NodeJS.ProcessEnv {
+  const { NODE_ENV: _devMode, ...env } = process.env;
+  return env;
+}
+
 function run(
   cmd: string,
   args: string[],
@@ -31,7 +38,7 @@ function run(
   return new Promise((resolve, reject) => {
     const child = spawn(cmd, args, {
       cwd,
-      env: process.env,
+      env: childEnv(),
       stdio: [input === undefined ? 'ignore' : 'pipe', 'pipe', 'pipe'],
       shell: process.platform === 'win32',
       windowsHide: true,

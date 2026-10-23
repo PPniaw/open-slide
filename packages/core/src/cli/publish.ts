@@ -69,8 +69,13 @@ export function filterFolders(manifest: FoldersManifest, ids: string[]): Folders
   return { folders: manifest.folders.filter((f) => used.has(f.id)), assignments };
 }
 
-export function vercelConfig(allowIndexing: boolean): Record<string, unknown> {
+// `entry` is the single published deck: the bare domain opens it directly,
+// since audience builds have no deck list to land on.
+export function vercelConfig(allowIndexing: boolean, entry?: string): Record<string, unknown> {
   return {
+    ...(entry
+      ? { redirects: [{ source: '/', destination: `/s/${entry}`, permanent: false }] }
+      : {}),
     rewrites: [{ source: '/(.*)', destination: '/index.html' }],
     ...(allowIndexing
       ? {}
@@ -152,11 +157,21 @@ export async function publish(ids: string[], opts: PublishOptions = {}): Promise
   await writeManifest(foldersManifestPath(stagingSlides), filterFolders(manifest, ids));
 
   printHeader(`publishing ${ids.join(', ')}`);
+  // Vite builds in dev mode when NODE_ENV is already `development`, which would
+  // put the editor UI on the public site. Publishing is always a production build.
+  process.env.NODE_ENV = 'production';
   // Themes stay out: a brand theme can be as private as the decks left behind.
   const base = await createViteConfig({
     userCwd,
     mode: 'build',
-    config: { ...config, slidesDir: stagingSlides, themesDir: stagingThemes },
+    config: {
+      ...config,
+      slidesDir: stagingSlides,
+      themesDir: stagingThemes,
+      // The public link is for the audience: play only, no editor chrome or
+      // downloads, and a deck list only when several decks go up together.
+      build: { showSlideBrowser: ids.length > 1, showSlideUi: false, allowHtmlDownload: false },
+    },
   });
   await viteBuild(
     mergeConfig(base, {
@@ -190,7 +205,7 @@ export async function publish(ids: string[], opts: PublishOptions = {}): Promise
   await cp(buildDir, deployDir, { recursive: true });
   await writeFile(
     path.join(deployDir, 'vercel.json'),
-    `${JSON.stringify(vercelConfig(opts.allowIndexing === true), null, 2)}\n`,
+    `${JSON.stringify(vercelConfig(opts.allowIndexing === true, ids.length === 1 ? ids[0] : undefined), null, 2)}\n`,
   );
 
   if (opts.deploy === false) {

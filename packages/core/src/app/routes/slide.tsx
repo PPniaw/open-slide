@@ -526,6 +526,10 @@ export function Slide() {
         onIndexChange={goTo}
         onExit={() => {}}
         allowExit={false}
+        // Viewers of a play-only build still need swipe and the page controls,
+        // and a phone can't enter fullscreen without a tap first.
+        controls
+        fullscreen={false}
       />
     );
   }
