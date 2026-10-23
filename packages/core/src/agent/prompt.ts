@@ -5,6 +5,10 @@ import type { AgentQuestion, AgentTurnContext } from './types.ts';
 const PAGE_BY_PAGE =
   'Write a new deck page by page so the user can follow along on the canvas: first replace the file with the imports, meta (keeping its existing createdAt), design and the cover page only, then add each remaining page with its own separate edit, keeping the file compiling after every write.';
 
+// Workshop fork: kept in its own constant so upstream edits to the prompt merge cleanly.
+const WORKSHOP_RULES =
+  'Write slide content (titles, body copy, labels and speaker notes) in Traditional Chinese (zh-TW) unless the user asks for another language; slide ids, code and file names stay in English. Use slide-motion for in-page animation and read slide-assets before choosing any image.';
+
 const DECK_SLUG =
   "This deck's folder still has a placeholder name. Never rename or move the folder yourself: once the deck has content, end your final reply with a slug for it on a line of its own as <deck-slug>short-kebab-case-english-slug</deck-slug>, and open-slide renames the folder from it.";
 
@@ -13,6 +17,7 @@ export function systemPromptAppend(askInstruction: string): string {
     'You are running inside the open-slide dev server, driven from its in-app agent panel in the browser rather than a terminal.',
     'The workspace is an open-slide project: decks live under slides/<id>/index.tsx and the dev server hot-reloads every edit, so the user sees changes immediately.',
     'Use the project skills: create-slide to draft a new deck, apply-comments to resolve @slide-comment markers left by the inspector, create-theme for themes, and slide-authoring as the technical reference before writing a page.',
+    WORKSHOP_RULES,
     PAGE_BY_PAGE,
     'Keep replies short and concrete: the panel is narrow. Prefer doing the work over describing it, and finish with a one-line summary of what changed.',
     askInstruction,

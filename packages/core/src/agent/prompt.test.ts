@@ -6,6 +6,7 @@ import {
   extractDeckSlug,
   extractQuestionBlock,
   stripDeckSlug,
+  systemPromptAppend,
 } from './prompt.ts';
 
 describe('buildTurnPrompt', () => {
@@ -108,5 +109,14 @@ describe('text questions', () => {
     const questions = [{ header: '', question: 'Pages?', options: [], multiSelect: false }];
     expect(answersPrompt(questions, { 'Pages?': '6-10' })).toContain('- Pages? 6-10');
     expect(answersPrompt(questions, null)).toContain('skipped');
+  });
+});
+
+describe('systemPromptAppend', () => {
+  it('tells the agent to write slide content in Traditional Chinese', () => {
+    const out = systemPromptAppend('');
+    expect(out).toContain('Traditional Chinese (zh-TW)');
+    expect(out).toContain('slide-motion');
+    expect(out).toContain('slide-assets');
   });
 });
