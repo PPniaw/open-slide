@@ -15,8 +15,8 @@ export const design: DesignSystem = {
   palette: { bg: '#ffffff', text: '#0a0a0a', accent: '#de3b3d' },
   fonts: {
     display:
-      '"Geist Variable", Geist, -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif',
-    body: '"Geist Variable", Geist, -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif',
+      '"Geist Variable", Geist, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif',
+    body: '"Geist Variable", Geist, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif',
   },
   typeScale: { hero: 152, body: 32 },
   radius: 12,
@@ -46,7 +46,7 @@ const ink = {
 const font = {
   sans: 'var(--osd-font-body)',
   display: 'var(--osd-font-display)',
-  mono: '"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace',
+  mono: '"Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", monospace',
 };
 
 const shadow = {
@@ -807,7 +807,7 @@ const Footer = () => {
         animationDelay: '0.3s',
       }}
     >
-      <span>open-slide · getting started</span>
+      <span>open-slide · 新手入門</span>
       <span>
         {pad2(current)} / {pad2(total)}
       </span>
@@ -872,7 +872,7 @@ const Frame = ({
             left: 120,
             top: 224,
             margin: 0,
-            maxWidth: 1240,
+            maxWidth: 1440,
             fontSize: 26,
             lineHeight: 1.45,
             color: ink.soft,
@@ -1149,7 +1149,7 @@ const Live = () => (
         }}
       />
     </span>
-    live
+    即時
   </>
 );
 
@@ -1297,7 +1297,7 @@ const MiniFooter = ({ n }: { n: number }) => (
       color: ink.dim,
     }}
   >
-    <span>acme · product</span>
+    <span>acme · 產品</span>
     <span>{pad2(n)} / 06</span>
   </div>
 );
@@ -1318,7 +1318,7 @@ const Q2Cover = ({
   children?: ReactNode;
 }) => (
   <div style={{ position: 'absolute', inset: 0 }}>
-    <div style={miniEyebrow}>Cover</div>
+    <div style={miniEyebrow}>封面</div>
     <div style={{ position: 'absolute', left: 160, top: 420 }}>
       <div style={{ position: 'relative', display: 'inline-block' }}>
         <div
@@ -1332,14 +1332,14 @@ const Q2Cover = ({
             color: titleColor ?? ink.text,
           }}
         >
-          Q2 Launch
+          Q2 發表會
         </div>
         {frame && <SelectionFrame k={k} />}
       </div>
       <div
         style={{ marginTop: 32, fontSize: 44, lineHeight: 1.35, color: ink.soft, maxWidth: 1000 }}
       >
-        What we're shipping, why it matters.
+        我們要推出什麼，以及為什麼重要。
       </div>
     </div>
     {children}
@@ -1353,7 +1353,7 @@ const MiniRow = ({ n, children }: { n: string; children: ReactNode }) => (
       display: 'flex',
       gap: 40,
       alignItems: 'baseline',
-      padding: '24px 0',
+      padding: '20px 0',
       borderTop: `1px solid ${ink.rule}`,
       fontSize: 44,
     }}
@@ -1379,13 +1379,13 @@ const MiniPage = ({ kind }: { kind: MiniKind }) => {
   if (kind === 'agenda') {
     return (
       <div style={{ position: 'absolute', inset: 0 }}>
-        <div style={miniEyebrow}>Agenda</div>
-        <h1 style={miniTitle}>What's inside</h1>
-        <div style={{ position: 'absolute', left: 160, right: 160, top: 500 }}>
-          <MiniRow n="01">The problem</MiniRow>
-          <MiniRow n="02">Our solution</MiniRow>
-          <MiniRow n="03">Metrics</MiniRow>
-          <MiniRow n="04">What's next</MiniRow>
+        <div style={miniEyebrow}>議程</div>
+        <h1 style={miniTitle}>內容大綱</h1>
+        <div style={{ position: 'absolute', left: 160, right: 160, top: 460 }}>
+          <MiniRow n="01">問題</MiniRow>
+          <MiniRow n="02">解決方案</MiniRow>
+          <MiniRow n="03">數據</MiniRow>
+          <MiniRow n="04">下一步</MiniRow>
         </div>
         <MiniFooter n={2} />
       </div>
@@ -1394,7 +1394,7 @@ const MiniPage = ({ kind }: { kind: MiniKind }) => {
   if (kind === 'problem') {
     return (
       <div style={{ position: 'absolute', inset: 0 }}>
-        <div style={miniEyebrow}>Problem</div>
+        <div style={miniEyebrow}>問題</div>
         <div
           style={{
             position: 'absolute',
@@ -1410,7 +1410,7 @@ const MiniPage = ({ kind }: { kind: MiniKind }) => {
           3×
         </div>
         <div style={{ position: 'absolute', left: 160, top: 720, fontSize: 48, color: ink.soft }}>
-          slower onboarding than our fastest competitor.
+          新用戶上手速度，比最快的競爭對手慢。
         </div>
         <MiniFooter n={3} />
       </div>
@@ -1419,8 +1419,8 @@ const MiniPage = ({ kind }: { kind: MiniKind }) => {
   if (kind === 'solution') {
     return (
       <div style={{ position: 'absolute', inset: 0 }}>
-        <div style={miniEyebrow}>Solution</div>
-        <h1 style={{ ...miniTitle, top: 440, width: 760 }}>One flow, three clicks.</h1>
+        <div style={miniEyebrow}>解決方案</div>
+        <h1 style={{ ...miniTitle, top: 440, width: 640 }}>一個流程，三次點擊。</h1>
         <div
           style={{
             position: 'absolute',
@@ -1454,7 +1454,7 @@ const MiniPage = ({ kind }: { kind: MiniKind }) => {
   if (kind === 'metrics') {
     return (
       <div style={{ position: 'absolute', inset: 0 }}>
-        <div style={miniEyebrow}>Metrics</div>
+        <div style={miniEyebrow}>數據</div>
         <div
           style={{
             position: 'absolute',
@@ -1466,9 +1466,9 @@ const MiniPage = ({ kind }: { kind: MiniKind }) => {
             gap: 40,
           }}
         >
-          <MiniStat value="+38%" label="activation" />
-          <MiniStat value="12k" label="weekly actives" />
-          <MiniStat value="4.9" label="app rating" />
+          <MiniStat value="+38%" label="啟用率" />
+          <MiniStat value="12k" label="每週活躍用戶" />
+          <MiniStat value="4.9" label="App 評分" />
         </div>
         <MiniFooter n={5} />
       </div>
@@ -1476,12 +1476,12 @@ const MiniPage = ({ kind }: { kind: MiniKind }) => {
   }
   return (
     <div style={{ position: 'absolute', inset: 0 }}>
-      <div style={miniEyebrow}>Next</div>
-      <h1 style={miniTitle}>What's next</h1>
+      <div style={miniEyebrow}>下一步</div>
+      <h1 style={miniTitle}>下一步</h1>
       <div style={{ position: 'absolute', left: 160, right: 160, top: 500 }}>
-        <MiniRow n="→">Ship the beta in May</MiniRow>
-        <MiniRow n="→">Open the waitlist</MiniRow>
-        <MiniRow n="→">Measure, then scale</MiniRow>
+        <MiniRow n="→">五月推出 Beta 版</MiniRow>
+        <MiniRow n="→">開放候補名單</MiniRow>
+        <MiniRow n="→">先衡量，再擴大</MiniRow>
       </div>
       <MiniFooter n={6} />
     </div>
@@ -1793,8 +1793,8 @@ const EditorHeader = ({
       <div style={{ display: 'flex', alignItems: 'center', gap: u(8) }}>
         <GhostIcon name="chevron-left" size={16} />
         <Divider />
-        <TabsMock items={['Slides', 'Assets']} active={slides ? 0 : 1} />
-        {!compact && <AgentBadge label="Agent connected" />}
+        <TabsMock items={['投影片', '素材']} active={slides ? 0 : 1} />
+        {!compact && <AgentBadge label="Agent 已連線" />}
       </div>
       <div
         style={{
@@ -1830,7 +1830,7 @@ const EditorHeader = ({
             <Icon name="palette" size={14} />
             {!compact && (
               <>
-                Design
+                設計
                 <Kbd>D</Kbd>
               </>
             )}
@@ -1839,7 +1839,7 @@ const EditorHeader = ({
         {slides && (
           <Btn variant={formatActive ? 'secondary' : 'ghost'}>
             <Icon name="panel-right" size={14} />
-            {!compact && 'Format'}
+            {!compact && '格式'}
           </Btn>
         )}
         {slides && <Divider />}
@@ -1854,7 +1854,7 @@ const EditorHeader = ({
               }}
             >
               <Icon name="play" size={14} fill="currentColor" />
-              {!compact && 'Present'}
+              {!compact && '簡報'}
             </Btn>
             <Btn
               variant="brand"
@@ -1878,7 +1878,7 @@ const EditorHeader = ({
 const Editor = ({
   view = 'slides',
   mode = 'preview',
-  title = 'Q2 Launch',
+  title = 'Q2 發表會',
   compact = false,
   designActive = false,
   formatActive = false,
@@ -1956,7 +1956,15 @@ const THUMB_W = u(120);
 const THUMB_H = (THUMB_W * 9) / 16;
 const RAIL_PAGES: MiniKind[] = ['cover', 'agenda', 'problem', 'solution', 'metrics', 'next'];
 
-const Rail = ({ current = 0, streamFrom }: { current?: number; streamFrom?: number }) => (
+const Rail = ({
+  current = 0,
+  streamFrom,
+  rows = RAIL_PAGES.length,
+}: {
+  current?: number;
+  streamFrom?: number;
+  rows?: number;
+}) => (
   <aside
     style={{
       width: u(200),
@@ -1976,7 +1984,7 @@ const Rail = ({ current = 0, streamFrom }: { current?: number; streamFrom?: numb
         padding: `${u(12)}px ${u(4)}px ${u(6)}px`,
       }}
     >
-      <Eyebrow11>Pages</Eyebrow11>
+      <Eyebrow11>頁面</Eyebrow11>
       <span style={{ display: 'flex', alignItems: 'center', gap: u(6) }}>
         <Folio>{pad2(RAIL_PAGES.length)}</Folio>
         <Icon
@@ -1988,7 +1996,7 @@ const Rail = ({ current = 0, streamFrom }: { current?: number; streamFrom?: numb
       </span>
     </div>
     <div style={{ display: 'flex', flexDirection: 'column', gap: u(8) }}>
-      {RAIL_PAGES.map((kind, i) => (
+      {RAIL_PAGES.slice(0, rows).map((kind, i) => (
         <div
           key={kind}
           className={streamFrom === undefined ? undefined : 'gs gs-rise-sm'}
@@ -2441,16 +2449,16 @@ const PanelBanner = ({ tab }: { tab: 0 | 1 }) => (
       style={{ display: 'flex', alignItems: 'center', gap: u(8), fontSize: u(12), fontWeight: 500 }}
     >
       <Icon name="type" size={16} style={{ color: ink.muted }} />
-      Text
+      文字
     </span>
     <Switcher index={tab} icons={['type', 'move']} />
   </div>
 );
 
 const TypographySection = ({ size }: { size: ReactNode }) => (
-  <Section title="Typography">
+  <Section title="字體">
     <div style={{ display: 'flex', alignItems: 'center', gap: u(6) }}>
-      <SelectMock value="Semibold" />
+      <SelectMock value="半粗體" />
       <NumberShell icon="a-large-small" suffix="px" style={{ width: u(96) }}>
         {size}
       </NumberShell>
@@ -2474,28 +2482,28 @@ const TypographySection = ({ size }: { size: ReactNode }) => (
 );
 
 const ColorSection = ({ text = '#0A0A0A' }: { text?: string }) => (
-  <Section title="Color">
-    <ColorField label="Text" value={text} />
-    <ColorField label="Background" value="#FFFFFF" dim />
+  <Section title="顏色">
+    <ColorField label="文字" value={text} />
+    <ColorField label="背景" value="#FFFFFF" dim />
   </Section>
 );
 
 const ContentSection = () => (
   <Section
-    title="Content"
+    title="內容"
     action={
       <Btn variant="ghost" size="xs" style={{ color: ink.muted }}>
         <Icon name="pencil-line" size={14} />
-        Edit on slide
+        在投影片上編輯
       </Btn>
     }
   >
-    <TextareaMock>Q2 Launch</TextareaMock>
+    <TextareaMock>Q2 發表會</TextareaMock>
   </Section>
 );
 
 const SourceSection = () => (
-  <Collapsible title="Source" open>
+  <Collapsible title="原始碼" open>
     <div
       style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: u(8) }}
     >
@@ -2517,7 +2525,7 @@ const SourceSection = () => (
         }}
       >
         <PingDot />
-        Agent is watching
+        Agent 正在關注
       </span>
     </div>
   </Collapsible>
@@ -2538,9 +2546,9 @@ const EmptySelection = ({ className, style }: { className?: string; style?: CSSP
   >
     <Icon name="mouse-pointer" size={32} style={{ color: 'rgba(107, 107, 107, 0.5)' }} />
     <div style={{ display: 'flex', flexDirection: 'column', gap: u(6) }}>
-      <span style={{ fontSize: u(13), fontWeight: 500 }}>Select an object</span>
+      <span style={{ fontSize: u(13), fontWeight: 500 }}>選取一個物件</span>
       <span style={{ fontSize: u(12), lineHeight: 1.6, color: ink.muted }}>
-        Click an object to format it. Double-click text to edit.
+        按一下物件即可調整格式。按兩下文字即可編輯。
       </span>
     </div>
   </div>
@@ -2577,7 +2585,7 @@ const ArrangeButton = ({
 const ArrangeFields = ({ y }: { y: ReactNode }) => (
   <>
     <Section
-      title="Position"
+      title="位置"
       action={
         <span style={{ display: 'flex', alignItems: 'center', gap: u(2) }}>
           <GhostIcon name="corner-left-up" size={14} box={24} style={{ color: ink.muted }} />
@@ -2596,7 +2604,7 @@ const ArrangeFields = ({ y }: { y: ReactNode }) => (
       </div>
     </Section>
     <Section
-      title="Align"
+      title="對齊"
       action={<GhostIcon name="magnet" size={14} box={24} active style={{ color: ink.text }} />}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: u(8) }}>
@@ -2612,7 +2620,7 @@ const ArrangeFields = ({ y }: { y: ReactNode }) => (
         </span>
       </div>
     </Section>
-    <Section title="Layer">
+    <Section title="圖層">
       <span style={{ display: 'flex' }}>
         <ArrangeButton name="bring-to-front" first />
         <ArrangeButton name="arrow-up" />
@@ -2670,7 +2678,7 @@ const SliderMock = ({ pct, animate = false }: { pct: number; animate?: boolean }
 
 const DesignPanel = () => (
   <Panel
-    title="Design tokens"
+    title="設計樣式"
     icon="palette"
     headerRight={
       <span
@@ -2686,33 +2694,33 @@ const DesignPanel = () => (
       />
     }
   >
-    <Section title="Colors">
-      <ColorField label="Background" value="#FFFFFF" />
-      <ColorField label="Text" value="#0A0A0A" />
-      <ColorField label="Accent" value="#DE3B3D" />
+    <Section title="顏色">
+      <ColorField label="背景" value="#FFFFFF" />
+      <ColorField label="文字" value="#0A0A0A" />
+      <ColorField label="強調色" value="#DE3B3D" />
     </Section>
-    <Section title="Typography">
-      <Field label="Display">
-        <SelectMock value="Custom…" />
+    <Section title="字體">
+      <Field label="顯示">
+        <SelectMock value="自訂…" />
       </Field>
-      <Field label="Body">
-        <SelectMock value="Custom…" />
+      <Field label="內文">
+        <SelectMock value="自訂…" />
       </Field>
-      <Field label="Hero">
+      <Field label="主標">
         <SliderMock pct={79.2} animate />
         <NumberShell suffix="px" style={{ width: u(72) }}>
           <Roll from="176" to="200" delay={1.8} />
         </NumberShell>
       </Field>
-      <Field label="Body">
+      <Field label="內文">
         <SliderMock pct={28.6} />
         <NumberShell suffix="px" style={{ width: u(72) }}>
           32
         </NumberShell>
       </Field>
     </Section>
-    <Section title="Shape">
-      <Field label="Radius">
+    <Section title="形狀">
+      <Field label="圓角">
         <SliderMock pct={15} />
         <NumberShell suffix="px" style={{ width: u(72) }}>
           12
@@ -2811,7 +2819,7 @@ const UnsavedLabel = ({ children }: { children: ReactNode }) => (
 const SaveFlow = ({
   appear,
   press,
-  label = '1 unsaved change',
+  label = '1 項未儲存的變更',
 }: {
   appear: number;
   press?: number;
@@ -2826,7 +2834,7 @@ const SaveFlow = ({
         <HistoryIcons />
         <UnsavedLabel>{label}</UnsavedLabel>
         <Btn variant="ghost" style={{ color: ink.muted }}>
-          Discard
+          捨棄
         </Btn>
         <Btn
           variant="brand"
@@ -2849,7 +2857,7 @@ const SaveFlow = ({
               }}
             >
               <Icon name="save" size={14} />
-              Save
+              儲存
             </span>
             {press !== undefined && (
               <span
@@ -2865,7 +2873,7 @@ const SaveFlow = ({
                 }}
               >
                 <Icon name="loader" size={14} className="gs gs-spin" />
-                Saving
+                儲存中
               </span>
             )}
           </span>
@@ -2891,7 +2899,7 @@ const SaveFlow = ({
             }}
           >
             <Icon name="check" size={14} stroke={2.5} style={{ color: ink.mint }} />
-            Saved
+            已儲存
           </span>
         </div>
       </CenterAnchor>
@@ -2956,7 +2964,7 @@ const CommentPanel = ({ delay }: { delay: number }) => (
         borderBottom: `1px solid ${ink.rule}`,
       }}
     >
-      <span style={{ fontSize: u(12), fontWeight: 600 }}>1 comment</span>
+      <span style={{ fontSize: u(12), fontWeight: 600 }}>1 則留言</span>
       <Icon name="x" size={14} style={{ color: ink.muted }} />
     </div>
     <div
@@ -2968,8 +2976,8 @@ const CommentPanel = ({ delay }: { delay: number }) => (
       }}
     >
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontFamily: font.mono, fontSize: u(10), color: ink.muted }}>line 12</div>
-        <div style={{ marginTop: u(2), fontSize: u(12) }}>Use the accent color on this title</div>
+        <div style={{ fontFamily: font.mono, fontSize: u(10), color: ink.muted }}>第 12 行</div>
+        <div style={{ marginTop: u(2), fontSize: u(12) }}>標題改用強調色</div>
       </div>
       <GhostIcon name="trash" size={14} box={22} style={{ color: ink.muted }} />
     </div>
@@ -2981,7 +2989,7 @@ const CommentPanel = ({ delay }: { delay: number }) => (
         color: ink.muted,
       }}
     >
-      Run{' '}
+      在你的代理中執行{' '}
       <span
         style={{
           borderRadius: u(3),
@@ -2993,7 +3001,7 @@ const CommentPanel = ({ delay }: { delay: number }) => (
       >
         /apply-comments
       </span>{' '}
-      in your agent to apply these.
+      以套用這些變更。
     </div>
   </div>
 );
@@ -3055,7 +3063,7 @@ const AssetCard = ({
   preview,
   name,
   size,
-  date = 'Sep 24',
+  date = '9月24日',
   className,
   delay = 0,
 }: {
@@ -3123,7 +3131,7 @@ const AssetCard = ({
             whiteSpace: 'nowrap',
           }}
         >
-          Modified<span style={{ opacity: 0.4 }}>·</span>
+          修改於<span style={{ opacity: 0.4 }}>·</span>
           <span style={{ fontFamily: font.mono }}>{date}</span>
         </div>
       </div>
@@ -3155,7 +3163,7 @@ const AssetsView = () => (
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: u(12), minWidth: 0 }}>
-        <TabsMock items={['This slide', 'Global']} active={0} />
+        <TabsMock items={['此投影片', '全域']} active={0} />
         <span
           style={{
             fontSize: u(12),
@@ -3168,22 +3176,22 @@ const AssetsView = () => (
           <span style={{ fontFamily: font.mono, fontSize: u(11.5) }}>slides/q2-launch/assets/</span>
           <span style={{ margin: `0 ${u(8)}px`, opacity: 0.5 }}>·</span>
           <Folio>
-            <Roll from="06 files" to="07 files" delay={2.6} />
+            <Roll from="06 個檔案" to="07 個檔案" delay={2.6} />
           </Folio>
         </span>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: u(6) }}>
         <Btn variant="outline" size="default" style={{ fontSize: u(12.5) }}>
           <Icon name="search" size={14} />
-          Search logos
+          搜尋 Logo
         </Btn>
         <Btn variant="outline" size="default" style={{ fontSize: u(12.5) }}>
           <Icon name="type" size={14} />
-          Search fonts
+          搜尋字型
         </Btn>
         <Btn variant="default" size="default" style={{ fontSize: u(12.5) }}>
           <Icon name="upload" size={14} />
-          Upload
+          上傳
         </Btn>
       </div>
     </div>
@@ -3210,13 +3218,13 @@ const AssetsView = () => (
         }}
       >
         <Icon name="search" size={14} style={{ color: ink.muted }} />
-        Search assets…
+        搜尋素材…
       </div>
-      <SelectMock value="All usage" style={{ height: u(32), flex: 'none', width: u(112) }} />
-      <SelectMock value="All types" style={{ height: u(32), flex: 'none', width: u(108) }} />
+      <SelectMock value="所有狀態" style={{ height: u(32), flex: 'none', width: u(112) }} />
+      <SelectMock value="所有類型" style={{ height: u(32), flex: 'none', width: u(108) }} />
       <Btn variant="outline" size="default" style={{ fontSize: u(12.5), gap: u(4) }}>
         <Icon name="arrow-up-down" size={14} style={{ color: ink.muted, marginRight: u(2) }} />
-        Name
+        名稱
         <Icon name="chevron-down" size={12} style={{ color: ink.muted }} />
       </Btn>
       <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: u(8) }}>
@@ -3283,7 +3291,7 @@ const AssetsView = () => (
         preview={<PreviewCover />}
         name="cover.png"
         size="24 KB"
-        date="just now"
+        date="剛剛"
         className="gs gs-rise-sm"
         delay={2.55}
       />
@@ -3334,7 +3342,7 @@ const AssetsView = () => (
           }}
         >
           <Icon name="arrow-down-to-line" size={14} style={{ color: ink.accent }} />
-          Drop to upload
+          拖入即可上傳
         </span>
       </div>
     </div>
@@ -3388,7 +3396,7 @@ const AssetsView = () => (
       }}
     >
       <Icon name="check" size={14} stroke={2.5} style={{ color: ink.mint, marginTop: u(2) }} />
-      <span style={{ fontSize: u(12.5), fontWeight: 500 }}>Uploaded cover.png</span>
+      <span style={{ fontSize: u(12.5), fontWeight: 500 }}>已上傳 cover.png</span>
     </div>
   </div>
 );
@@ -3560,7 +3568,7 @@ const PresenterWindow = ({ width, height }: { width: number; height: number }) =
       }}
     >
       <span style={{ display: 'flex', alignItems: 'center', gap: u(12) }}>
-        <DarkLabel>Presenter</DarkLabel>
+        <DarkLabel>主講人</DarkLabel>
         <span
           style={{
             fontSize: u(14),
@@ -3571,7 +3579,7 @@ const PresenterWindow = ({ width, height }: { width: number; height: number }) =
             gap: u(4),
           }}
         >
-          Q2 Launch
+          Q2 發表會
           <Icon name="chevron-down" size={14} style={{ color: dark.muted }} />
         </span>
       </span>
@@ -3603,7 +3611,7 @@ const PresenterWindow = ({ width, height }: { width: number; height: number }) =
       }}
     >
       <section style={{ display: 'flex', flexDirection: 'column', gap: u(8), minHeight: 0 }}>
-        <DarkLabel>Now showing</DarkLabel>
+        <DarkLabel>目前顯示</DarkLabel>
         <div
           style={{
             flex: 1,
@@ -3620,7 +3628,7 @@ const PresenterWindow = ({ width, height }: { width: number; height: number }) =
       </section>
       <aside style={{ display: 'flex', flexDirection: 'column', gap: u(12), minHeight: 0 }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: u(8) }}>
-          <DarkLabel>Up next</DarkLabel>
+          <DarkLabel>下一張</DarkLabel>
           <div
             style={{
               position: 'relative',
@@ -3635,7 +3643,7 @@ const PresenterWindow = ({ width, height }: { width: number; height: number }) =
           </div>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: u(8), flex: 1, minHeight: 0 }}>
-          <DarkLabel>Speaker notes</DarkLabel>
+          <DarkLabel>演講備忘</DarkLabel>
           <div
             style={{
               flex: 1,
@@ -3645,11 +3653,13 @@ const PresenterWindow = ({ width, height }: { width: number; height: number }) =
               background: dark.card,
               padding: u(12),
               fontSize: u(13.5),
-              lineHeight: 1.6,
+              lineHeight: 1.5,
               overflow: 'hidden',
             }}
           >
-            Four beats, one per row. Pause after the metrics line.
+            一行一個重點。
+            <br />
+            講完數據停一下。
           </div>
         </div>
       </aside>
@@ -3667,21 +3677,21 @@ const PresenterWindow = ({ width, height }: { width: number; height: number }) =
     >
       <span style={{ display: 'flex', gap: u(8) }}>
         <DarkButton>
-          <Icon name="chevron-left" size={16} /> Prev
+          <Icon name="chevron-left" size={16} /> 上一張
         </DarkButton>
         <DarkButton>
-          Next <Icon name="chevron-right" size={16} />
+          下一張 <Icon name="chevron-right" size={16} />
         </DarkButton>
       </span>
       <span style={{ display: 'flex', gap: u(8) }}>
         <DarkButton>
-          <Icon name="square" size={16} fill="currentColor" /> Black
+          <Icon name="square" size={16} fill="currentColor" /> 黑屏
         </DarkButton>
         <DarkButton>
-          <Icon name="sun" size={16} /> White
+          <Icon name="sun" size={16} /> 白屏
         </DarkButton>
         <DarkButton ghost>
-          <Icon name="rotate-cw" size={16} /> Reset
+          <Icon name="rotate-cw" size={16} /> 重設
         </DarkButton>
       </span>
     </footer>
@@ -3732,9 +3742,7 @@ const Toast = ({ delay }: { delay: number }) => (
       style={{ color: ink.accent, marginTop: u(2) }}
     />
     <div style={{ flex: 1, minWidth: 0 }}>
-      <div style={{ fontSize: u(12.5), fontWeight: 600, letterSpacing: '-0.01em' }}>
-        Exporting PPTX
-      </div>
+      <div style={{ fontSize: u(12.5), fontWeight: 600, letterSpacing: '-0.01em' }}>匯出 PPTX</div>
       <div
         style={{
           fontFamily: font.mono,
@@ -3743,7 +3751,7 @@ const Toast = ({ delay }: { delay: number }) => (
           color: ink.muted,
         }}
       >
-        Rendering page 3 of 6
+        正在算繪第 3 / 6 頁
       </div>
       <div
         style={{
@@ -3804,7 +3812,7 @@ const Cover: Page = () => {
           color: 'var(--osd-accent)',
         }}
       >
-        Getting started
+        新手入門
       </div>
       <h1
         className="gs gs-rise"
@@ -3822,9 +3830,9 @@ const Cover: Page = () => {
           animationDelay: '0.1s',
         }}
       >
-        The slide framework
+        專為 AI agent 打造的
         <br />
-        built for agents.
+        簡報框架。
       </h1>
       <p
         className="gs gs-rise"
@@ -3840,8 +3848,9 @@ const Cover: Page = () => {
           animationDelay: '0.22s',
         }}
       >
-        Every page is a React component on a 1920 × 1080 canvas. This deck walks the loop: init,
-        prompt, edit, comment, present.
+        每一頁都是 1920 × 1080 畫布上的一個 React 元件。
+        <br />
+        這份簡報帶你走完整個流程：建立、提示、編輯、留言、簡報。
       </p>
       <div
         className="gs gs-rise"
@@ -3855,7 +3864,7 @@ const Cover: Page = () => {
         }}
       >
         <Pill dark>
-          Press <Icon name="arrow-right" size={13} stroke={2.2} /> to begin
+          按 <Icon name="arrow-right" size={13} stroke={2.2} /> 開始
         </Pill>
         <Pill>
           <span style={{ color: 'var(--osd-accent)' }}>$</span>npx @open-slide/cli init
@@ -3877,13 +3886,13 @@ const CycleWord = ({
 }) => (
   <span style={{ display: 'inline-grid', verticalAlign: 'baseline' }}>
     <span className="gs hp-a" style={{ gridArea: '1 / 1', animationDelay: `${delay}s` }}>
-      {before}deck{after}
+      {before}簡報{after}
     </span>
     <span className="gs hp-b" style={{ gridArea: '1 / 1', animationDelay: `${delay}s` }}>
-      {before}talk{after}
+      {before}演講{after}
     </span>
     <span className="gs hp-c" style={{ gridArea: '1 / 1', animationDelay: `${delay}s` }}>
-      {before}demo{after}
+      {before}展示{after}
     </span>
   </span>
 );
@@ -3902,14 +3911,12 @@ const HelloPage = () => (
     <h1
       style={{ margin: 0, fontSize: 188, fontWeight: 500, letterSpacing: '-0.04em', lineHeight: 1 }}
     >
-      Hello,{' '}
+      你好，
       <em style={{ fontStyle: 'normal', color: ink.accent }}>
-        <CycleWord delay={1.4} after="." />
+        <CycleWord delay={1.4} after="。" />
       </em>
     </h1>
-    <p style={{ margin: '40px 0 0', fontSize: 44, color: ink.soft }}>
-      A React slide, rendered live.
-    </p>
+    <p style={{ margin: '40px 0 0', fontSize: 44, color: ink.soft }}>即時渲染的 React 投影片。</p>
   </div>
 );
 
@@ -3923,17 +3930,12 @@ const code: CSSProperties = {
 
 const FilePage: Page = () => (
   <Frame
-    eyebrow="The idea"
-    title="A slide is a file."
-    lead="No DSL, no template language. Each page is a React component, and the default export is the deck."
+    eyebrow="核心概念"
+    title="一份簡報就是一個檔案。"
+    lead="沒有 DSL，也沒有範本語言。每一頁都是一個 React 元件，預設匯出（default export）就是整份簡報。"
   >
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 620px', gap: 32, height: '100%' }}>
-      <Window
-        className="gs gs-rise"
-        title="slides/hello/index.tsx"
-        right="tsx · 14 lines"
-        delay={0.2}
-      >
+      <Window className="gs gs-rise" title="slides/hello/index.tsx" right="tsx · 14 行" delay={0.2}>
         <div style={code}>
           <Line delay={0.5}>
             <K>import type</K> <P>{'{ '}</P>
@@ -3966,12 +3968,12 @@ const FilePage: Page = () => (
             <P>,</P> letterSpacing<P>:</P> <Str>'-0.04em'</Str> <P>{'}}'}&gt;</P>
           </Line>
           <Line delay={0.85}>
-            {'      '}Hello, <P>&lt;</P>
+            {'      '}你好，<P>&lt;</P>
             <Tag>em</Tag> style<P>={'{{'}</P> color<P>:</P> <Str>'#de3b3d'</Str> <P>{'}}'}&gt;</P>
             <P>{'{'}</P>WORD<P>{'}'}</P>
             <P>&lt;/</P>
             <Tag>em</Tag>
-            <P>&gt;</P>.
+            <P>&gt;</P>。
           </Line>
           <Line delay={0.9}>
             {'    '}
@@ -3983,7 +3985,7 @@ const FilePage: Page = () => (
             {'    '}
             <P>&lt;</P>
             <Tag>p</Tag>
-            <P>&gt;</P>A React slide, rendered live.<P>&lt;/</P>
+            <P>&gt;</P>即時渲染的 React 投影片。<P>&lt;/</P>
             <Tag>p</Tag>
             <P>&gt;</P>
           </Line>
@@ -4005,7 +4007,7 @@ const FilePage: Page = () => (
           </Line>
         </div>
       </Window>
-      <Window className="gs gs-rise" title="rendered output" right={<Live />} delay={0.3}>
+      <Window className="gs gs-rise" title="渲染結果" right={<Live />} delay={0.3}>
         <div
           style={{
             position: 'absolute',
@@ -4037,9 +4039,9 @@ const FilePage: Page = () => (
 
 const InitPage: Page = () => (
   <Frame
-    eyebrow="01 · Init"
-    title="One command."
-    lead="Scaffolds the workspace, installs dependencies, and initializes git. No global installs, no config to touch."
+    eyebrow="01 · 建立"
+    title="一行指令就搞定。"
+    lead="建立工作區、安裝相依套件、初始化 git。不需要全域安裝，也不用動任何設定。"
   >
     <Window className="gs gs-rise" title="~/code — zsh" delay={0.2} style={{ height: '100%' }}>
       <div style={term}>
@@ -4055,20 +4057,20 @@ const InitPage: Page = () => (
         <Line delay={2.3} />
         <Line delay={2.4}>
           <Ok />
-          <span style={{ color: ink.text }}>Created open-slide workspace</span>{' '}
-          <Dim>in ~/code/my-deck</Dim>
+          <span style={{ color: ink.text }}>已建立 open-slide 工作區</span>{' '}
+          <Dim>位置：~/code/my-deck</Dim>
         </Line>
         <Line delay={2.9}>
           <Ok />
-          <span style={{ color: ink.text }}>Installed dependencies with pnpm</span>
+          <span style={{ color: ink.text }}>已用 pnpm 安裝相依套件</span>
         </Line>
         <Line delay={3.3}>
           <Ok />
-          <span style={{ color: ink.text }}>Initialized git repository with first commit</span>
+          <span style={{ color: ink.text }}>已初始化 git repository，並建立第一個 commit</span>
         </Line>
         <Line delay={3.4} />
         <Line delay={3.5}>
-          <span style={{ color: ink.text, fontWeight: 600 }}>Next steps:</span>
+          <span style={{ color: ink.text, fontWeight: 600 }}>下一步：</span>
         </Line>
         <Line delay={3.6}>
           {'  '}
@@ -4080,7 +4082,7 @@ const InitPage: Page = () => (
         </Line>
         <Line delay={3.8} />
         <Line delay={3.9}>
-          <Dim>Then open the dev server and start authoring in slides/&lt;your-slide&gt;/.</Dim>
+          <Dim>接著開啟 dev server，到 slides/&lt;your-slide&gt;/ 開始製作。</Dim>
         </Line>
         <Line delay={4.3}>
           <Prompt />
@@ -4099,9 +4101,9 @@ const AgentNameRow = () => (
 
 const PromptPage: Page = () => (
   <Frame
-    eyebrow="02 · Prompt"
-    title="Ask your agent."
-    lead="One /create-slide prompt drafts every page as a real component. Refine with follow-ups, not templates."
+    eyebrow="02 · 提示"
+    title="跟你的 agent 說。"
+    lead="一句 /create-slide 提示，就把每一頁都寫成真正的元件。用追問來微調，不必套範本。"
   >
     <div style={{ display: 'grid', gridTemplateColumns: '600px 1fr', gap: 32, height: '100%' }}>
       <Window
@@ -4123,19 +4125,19 @@ const PromptPage: Page = () => (
           <Line delay={0} className="gs">
             <Chevron />
             <span style={{ color: ink.accent }}>/create-slide</span>{' '}
-            <Typed text="the Q2 launch deck" delay={1.0} color={ink.text} caret={false} />
+            <Typed text="Q2 發表會簡報" delay={1.0} color={ink.text} caret={false} />
           </Line>
           <Line delay={1.9} />
-          <Line delay={2.0}>Drafting 6 pages…</Line>
+          <Line delay={2.0}>正在草擬 6 頁…</Line>
           <Line delay={2.4}>
-            <Dim>write</Dim> <span style={{ color: ink.text }}>slides/q2-launch/index.tsx</span>
+            <Dim>寫入</Dim> <span style={{ color: ink.text }}>slides/q2-launch/index.tsx</span>
           </Line>
           <Line delay={4.1}>
             <Dim>hmr</Dim> <span style={{ color: ink.text }}>localhost:5173/s/q2-launch</span>{' '}
             <Ok />
           </Line>
-          <Line delay={4.5}>Done. Cover, Agenda, Problem,</Line>
-          <Line delay={4.5}>Solution, Metrics, Next.</Line>
+          <Line delay={4.5}>完成。封面、議程、問題、</Line>
+          <Line delay={4.5}>解決方案、數據、下一步。</Line>
           <Line delay={5.0}>
             <Chevron />
             <Typed text="" delay={5.0} color={ink.text} />
@@ -4159,7 +4161,7 @@ const PromptPage: Page = () => (
                 color: ink.muted,
               }}
             >
-              any agent
+              任何 agent 都行
             </span>
           </div>
         </div>
@@ -4170,7 +4172,7 @@ const PromptPage: Page = () => (
         height={604}
         compact
         delay={0.3}
-        rail={<Rail streamFrom={2.6} />}
+        rail={<Rail streamFrom={2.6} rows={4} />}
       >
         <CanvasCard
           width={664}
@@ -4188,7 +4190,7 @@ const EDIT_CARD = 1171;
 const EDIT_K = S / (EDIT_CARD / 1920);
 
 const EditPage: Page = () => (
-  <Frame eyebrow="03 · Edit" title="Click any element. Tweak it. Save once.">
+  <Frame eyebrow="03 · 編輯" title="點選任何元素，調整，一次儲存。">
     <Editor
       className="gs gs-rise"
       width={1680}
@@ -4200,7 +4202,7 @@ const EditPage: Page = () => (
       rail={<Rail />}
       panel={
         <Panel
-          title="Format"
+          title="格式"
           icon="paintbrush"
           banner={
             <div className="gs gs-fade" style={{ animationDelay: '1.65s' }}>
@@ -4243,7 +4245,7 @@ const EditPage: Page = () => (
 );
 
 const ArrangePage: Page = () => (
-  <Frame eyebrow="03 · Edit" title="Drag. Align. Snap.">
+  <Frame eyebrow="03 · 編輯" title="拖曳、對齊、吸附。">
     <Editor
       className="gs gs-rise"
       width={1680}
@@ -4255,13 +4257,13 @@ const ArrangePage: Page = () => (
       rail={<Rail />}
       panel={
         <Panel
-          title="Format"
+          title="格式"
           icon="paintbrush"
           banner={<PanelBanner tab={1} />}
           footer={
             <>
-              <Collapsible title="Comment" />
-              <Collapsible title="Source" />
+              <Collapsible title="留言" />
+              <Collapsible title="原始碼" />
             </>
           }
         >
@@ -4336,7 +4338,7 @@ const ArrangePage: Page = () => (
 );
 
 const CommentPage: Page = () => (
-  <Frame eyebrow="04 · Comment" title="Point at what's wrong.">
+  <Frame eyebrow="04 · 留言" title="指出哪裡不對。">
     <Editor
       className="gs gs-rise"
       width={1680}
@@ -4348,16 +4350,16 @@ const CommentPage: Page = () => (
       rail={<Rail />}
       panel={
         <Panel
-          title="Format"
+          title="格式"
           icon="paintbrush"
           banner={<PanelBanner tab={0} />}
           tail
           footer={
             <>
-              <Collapsible title="Comment" open>
+              <Collapsible title="留言" open>
                 <TextareaMock className="gs cm-focus">
                   <span className="gs cm-ph" style={{ color: 'rgba(107, 107, 107, 0.7)' }}>
-                    Describe a change for the agent…
+                    描述你希望代理進行的修改…
                   </span>
                   <span
                     className="gs gs-out"
@@ -4369,7 +4371,7 @@ const CommentPage: Page = () => (
                       animationDelay: '3.55s',
                     }}
                   >
-                    <Typed text="Use the accent color on this title" delay={1.2} speed={0.04} />
+                    <Typed text="標題改用強調色" delay={1.2} speed={0.04} />
                   </span>
                 </TextareaMock>
                 <div
@@ -4387,7 +4389,7 @@ const CommentPage: Page = () => (
                       color: 'rgba(107, 107, 107, 0.7)',
                     }}
                   >
-                    ⌘/ to focus · ⌘↵ to add
+                    ⌘/ 聚焦 · ⌘↵ 新增
                   </span>
                   <Btn
                     variant="brand"
@@ -4400,7 +4402,7 @@ const CommentPage: Page = () => (
                       animationTimingFunction: `linear, ${EASE}`,
                     }}
                   >
-                    Add comment
+                    新增留言
                   </Btn>
                 </div>
               </Collapsible>
@@ -4428,11 +4430,11 @@ const CommentPage: Page = () => (
 
 const ApplyPage: Page = () => (
   <Frame
-    eyebrow="04 · Apply"
-    title="The agent applies it."
-    lead="Run /apply-comments. The agent reads each marker, edits exactly what you flagged, and removes the marker."
+    eyebrow="04 · 套用"
+    title="Agent 幫你改好。"
+    lead="執行 /apply-comments。Agent 會讀取每個標記，只改你標出的地方，改完就移除標記。"
   >
-    <div style={{ display: 'grid', gridTemplateColumns: '760px 1fr', gap: 32, height: '100%' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: '808px 1fr', gap: 32, height: '100%' }}>
       <Window
         className="gs gs-rise"
         title="claude · ~/my-deck"
@@ -4445,7 +4447,7 @@ const ApplyPage: Page = () => (
             <Typed text="/apply-comments" delay={0.5} color={ink.accent} caret={false} />
           </Line>
           <Line delay={1.7} />
-          <Line delay={1.8}>1 comment found. Applying…</Line>
+          <Line delay={1.8}>找到 1 則留言，套用中…</Line>
           <div
             className="gs gs-fade"
             style={{
@@ -4476,7 +4478,7 @@ const ApplyPage: Page = () => (
               <P>12 </P>
               {'   {/* '}
               <span style={{ color: ink.kw }}>@slide-comment</span> id=<Str>"c-a1b2c3d4"</Str> text=
-              <Str>"Use the accent color on this title"</Str>
+              <Str>"標題改用強調色"</Str>
               {' */}'}
             </div>
             <Line delay={2.3}>
@@ -4487,7 +4489,7 @@ const ApplyPage: Page = () => (
               <Str>
                 '<Roll from="#0a0a0a" to="#de3b3d" delay={3.2} />'
               </Str>{' '}
-              <P>{'}}'}&gt;</P>Q2 Launch<P>&lt;/</P>
+              <P>{'}}'}&gt;</P>Q2 發表會<P>&lt;/</P>
               <Tag>h1</Tag>
               <P>&gt;</P>
             </Line>
@@ -4498,24 +4500,24 @@ const ApplyPage: Page = () => (
             </Line>
           </div>
           <Line delay={3.8}>
-            <Dim>edit</Dim> <span style={{ color: ink.text }}>slides/q2-launch/index.tsx</span>
+            <Dim>修改</Dim> <span style={{ color: ink.text }}>slides/q2-launch/index.tsx</span>
           </Line>
           <Line delay={4.0}>
             <Ok />
-            <span style={{ color: ink.text }}>1 comment applied</span>
+            <span style={{ color: ink.text }}>已套用 1 則留言</span>
           </Line>
         </div>
       </Window>
       <Editor
         className="gs gs-rise"
-        width={888}
+        width={840}
         height={604}
         compact
         title=""
         delay={0.3}
-        rail={<Rail />}
+        rail={<Rail rows={4} />}
       >
-        <CanvasCard width={504}>
+        <CanvasCard width={480}>
           <Q2Cover titleClass="gs ap-color" titleColor={ink.accent} />
         </CanvasCard>
         <CommentFab count={<Roll from="1" to="0" delay={3.9} />} />
@@ -4526,9 +4528,9 @@ const ApplyPage: Page = () => (
 
 const AssetsPage: Page = () => (
   <Frame
-    eyebrow="Toolbox"
-    title="Assets, in one place."
-    lead="Drop files, search logos on svgl, pull Google Fonts. Everything lands in slides/<id>/assets/, ready to import."
+    eyebrow="工具箱"
+    title="素材，集中管理。"
+    lead="拖入檔案、在 svgl 搜尋 Logo、加入 Google Fonts。全部都會放進 slides/<id>/assets/，隨時可以 import。"
   >
     <Editor className="gs gs-rise" width={1680} height={604} view="assets" delay={0.2}>
       <AssetsView />
@@ -4537,7 +4539,7 @@ const AssetsPage: Page = () => (
 );
 
 const DesignPage: Page = () => (
-  <Frame eyebrow="Toolbox" title="Design tokens, live.">
+  <Frame eyebrow="工具箱" title="設計樣式，即時調整。">
     <div style={{ display: 'grid', gridTemplateColumns: '560px 1fr', gap: 32, height: '100%' }}>
       <Window
         className="gs gs-rise"
@@ -4600,7 +4602,7 @@ const DesignPage: Page = () => (
           </Line>
           <Line delay={1.15} />
           <Line delay={1.2}>
-            <Dim>{'// read as var(--osd-size-hero)'}</Dim>
+            <Dim>{'// 以 var(--osd-size-hero) 讀取'}</Dim>
           </Line>
         </div>
       </Window>
@@ -4740,47 +4742,47 @@ const ThemeCard = ({
 
 const ThemesPage: Page = () => (
   <Frame
-    eyebrow="Toolbox"
-    title="Pin a look. Reuse it."
-    lead="/create-theme writes themes/<id>.md: palette, type, and paste-ready Title and Footer components. /create-slide reads it before drafting."
+    eyebrow="工具箱"
+    title="定下風格，重複使用。"
+    lead="/create-theme 會寫出 themes/<id>.md：配色、字體，加上現成的 Title 與 Footer 元件。/create-slide 會先讀它。"
   >
     <div
       style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32, height: '100%' }}
     >
       <ThemeCard
         id="editorial-noir"
-        mode="dark · serif"
+        mode="深色 · 襯線"
         bg="#0b0d10"
         text="#f4ecdc"
         accent="#d6a64b"
         muted="#7a7468"
         family='Georgia, "Times New Roman", serif'
-        sample="A quiet year."
-        sub="Annual letter, 2026"
+        sample="平靜的一年。"
+        sub="2026 年度信"
         delay={0.2}
       />
       <ThemeCard
         id="paper-press"
-        mode="light · serif"
+        mode="淺色 · 襯線"
         bg="#f6f1e7"
         text="#141210"
         accent="#c43a1d"
         muted="#8a8276"
         family='"Times New Roman", Times, serif'
-        sample="Field notes."
-        sub="Research readout"
+        sample="田野筆記。"
+        sub="研究報告"
         delay={0.3}
       />
       <ThemeCard
         id="neon-terminal"
-        mode="dark · mono"
+        mode="深色 · 等寬"
         bg="#05070a"
         text="#e6edf3"
         accent="#39ff88"
         muted="#5b6773"
         family={font.mono}
         sample="$ boot"
-        sub="Infra all-hands"
+        sub="基礎架構全員大會"
         delay={0.4}
       />
     </div>
@@ -4815,7 +4817,17 @@ const MotionCol = ({
       {children}
     </div>
     <div style={{ fontFamily: font.mono, fontSize: 22, color: ink.text }}>{label}</div>
-    <div style={{ marginTop: -10, fontSize: 24, lineHeight: 1.45, color: ink.soft }}>{copy}</div>
+    <div
+      style={{
+        marginTop: -10,
+        fontSize: 24,
+        lineHeight: 1.45,
+        color: ink.soft,
+        whiteSpace: 'pre-line',
+      }}
+    >
+      {copy}
+    </div>
   </div>
 );
 
@@ -4926,9 +4938,9 @@ const MiniTransitionPage = ({
 
 const MotionPage: Page = () => (
   <Frame
-    eyebrow="Toolbox"
-    title="Motion, in three primitives."
-    lead="Stepped reveals, one house transition, and shared-element morphs. All declared in the file."
+    eyebrow="工具箱"
+    title="動態效果，三種基本元件。"
+    lead="逐步揭示、統一的換頁轉場，以及共用元素的形變動畫。全部寫在檔案裡。"
     mark={false}
   >
     <div
@@ -4936,34 +4948,34 @@ const MotionPage: Page = () => (
     >
       <MotionCol
         label="<Steps> / <Step>"
-        copy="Each → reveals the next beat. Jumping in shows the page complete."
+        copy={'每按一次 →，就揭示下一段。\n直接跳到這頁，會顯示完整內容。'}
         delay={0.2}
       >
         <div style={{ padding: '32px 0' }}>
           <StepRow n="01" first className="gs st-row-1">
-            Set the stage.
+            鋪陳情境。
           </StepRow>
           <StepRow n="02" className="gs st-row-2">
-            Layer the consequence.
+            疊加影響。
           </StepRow>
           <StepRow n="03" className="gs st-row-3">
-            Land the turn.
+            帶出轉折。
           </StepRow>
         </div>
         <KeyCap className="gs st-key" />
       </MotionCol>
       <MotionCol
         label="SlideTransition"
-        copy="One DNA per deck: 6 px rise, 200 ms, ease-out. This deck uses it."
+        copy={'統一轉場：上升 6 px、200 ms、ease-out。\n整份簡報一致，這份簡報就是用它。'}
         delay={0.3}
       >
-        <MiniTransitionPage className="gs tr-a" label="Page 01" title="Next thought." bar={120} />
-        <MiniTransitionPage className="gs tr-b" label="Page 02" title="Then the turn." bar={80} />
+        <MiniTransitionPage className="gs tr-a" label="第 01 頁" title="下一個想法。" bar={120} />
+        <MiniTransitionPage className="gs tr-b" label="第 02 頁" title="接著轉折。" bar={80} />
         <KeyCap className="gs tr-key" />
       </MotionCol>
       <MotionCol
         label="MorphElement"
-        copy="Same id on two pages, and the object glides between them. The eyebrow mark just did."
+        copy={'兩頁用同一個 id，物件就會在兩頁間滑動。\n上一頁的紅色小方塊，剛剛就是這樣滑過來。'}
         delay={0.4}
       >
         <div
@@ -5026,9 +5038,9 @@ const STAGE_W = 1920 * STAGE_SCALE;
 
 const PresentPage: Page = () => (
   <Frame
-    eyebrow="05 · Present"
-    title="Present from the browser."
-    lead="F for fullscreen, Enter for a window. Overview, laser, blackout, and the keyboard map are one key away."
+    eyebrow="05 · 簡報"
+    title="直接在瀏覽器播放。"
+    lead="按 F 全螢幕，按 Enter 在視窗中播放。總覽、雷射筆、黑屏和鍵盤快速鍵，都只要按一個鍵。"
   >
     <div
       className="gs gs-rise"
@@ -5083,9 +5095,9 @@ const PresentPage: Page = () => (
 
 const PresenterPage: Page = () => (
   <Frame
-    eyebrow="05 · Present"
-    title="Notes travel with the deck."
-    lead="Export notes next to your pages. Presenter view shows the current slide, what's next, and your script with a timer."
+    eyebrow="05 · 簡報"
+    title="講稿跟著簡報走。"
+    lead="講稿和頁面寫在同一個檔案。主講人檢視會顯示目前這頁、下一頁，以及你的講稿和計時器。"
   >
     <div style={{ display: 'grid', gridTemplateColumns: '520px 1fr', gap: 32, height: '100%' }}>
       <Window
@@ -5101,17 +5113,17 @@ const PresenterPage: Page = () => (
           </Line>
           <Line delay={0.55}>
             {'  '}
-            <Str>'Open with the customer quote.'</Str>
+            <Str>'用客戶的一句話開場。'</Str>
             <P>,</P>
           </Line>
           <Line delay={0.6}>
             {'  '}
-            <Str>'Four beats, one per row.'</Str>
+            <Str>'一行一個重點。'</Str>
             <P>,</P>
           </Line>
           <Line delay={0.65}>
             {'  '}
-            <Str>'Let the 3× land. Then breathe.'</Str>
+            <Str>'讓 3× 停留一下，再喘口氣。'</Str>
             <P>,</P>
           </Line>
           <Line delay={0.7}>
@@ -5121,12 +5133,12 @@ const PresenterPage: Page = () => (
           </Line>
           <Line delay={0.75}>
             {'  '}
-            <Str>'Cite the Q1 baseline first.'</Str>
+            <Str>'先引用 Q1 的基準數字。'</Str>
             <P>,</P>
           </Line>
           <Line delay={0.8}>
             {'  '}
-            <Str>'End on the waitlist link.'</Str>
+            <Str>'最後停在候補名單連結。'</Str>
             <P>,</P>
           </Line>
           <Line delay={0.85}>
@@ -5134,7 +5146,7 @@ const PresenterPage: Page = () => (
           </Line>
           <Line delay={0.9} />
           <Line delay={0.95}>
-            <Dim>{'// index-aligned with the pages'}</Dim>
+            <Dim>{'// 與頁面順序一一對應'}</Dim>
           </Line>
         </div>
       </Window>
@@ -5172,9 +5184,9 @@ const MenuItem = ({
 
 const ExportPage: Page = () => (
   <Frame
-    eyebrow="Ship"
-    title="Export it. Or deploy it."
-    lead="Download HTML, PDF, or an editable PPTX from the editor. Or build once and drop dist/ on any static host."
+    eyebrow="發布"
+    title="匯出，或直接部署。"
+    lead="在編輯器裡下載 HTML、PDF 或可編輯的 PPTX。或是建置一次，把 dist/ 放到任何靜態主機。"
   >
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, height: '100%' }}>
       <Editor
@@ -5206,12 +5218,12 @@ const ExportPage: Page = () => (
             zIndex: 6,
           }}
         >
-          <MenuItem icon="file-code">Export as HTML</MenuItem>
-          <MenuItem icon="file-text">Export as PDF</MenuItem>
+          <MenuItem icon="file-code">匯出為 HTML</MenuItem>
+          <MenuItem icon="file-text">匯出為 PDF</MenuItem>
           <MenuItem icon="presentation" hover>
-            Export as PPTX
+            匯出 PPTX
           </MenuItem>
-          <MenuItem icon="file-image">Export as image PPTX</MenuItem>
+          <MenuItem icon="file-image">匯出圖片 PPTX</MenuItem>
         </div>
         <Cursor className="gs ex-cursor" left={330} top={128} press={[1.7]} />
         <Toast delay={2.1} />
@@ -5229,11 +5241,11 @@ const ExportPage: Page = () => (
               <Typed text="pnpm build" delay={0.9} color={ink.text} caret={false} />
             </Line>
             <Line delay={1.9}>
-              <Dim>vite v7</Dim> <span style={{ color: ink.text }}>building for production…</span>
+              <Dim>vite v7</Dim> <span style={{ color: ink.text }}>正在建置正式版…</span>
             </Line>
             <Line delay={2.5}>
               <Ok />
-              <span style={{ color: ink.text }}>built in 1.2s</span> <Dim>→ dist/</Dim>
+              <span style={{ color: ink.text }}>建置完成，耗時 1.2s</span> <Dim>→ dist/</Dim>
             </Line>
             <Line delay={3.0}>
               <Prompt />
@@ -5307,14 +5319,14 @@ const TreeRow = ({
 
 const AgentsPage: Page = () => (
   <Frame
-    eyebrow="Why open-slide"
-    title="Bring your own agent."
-    lead="Every workspace ships with agent rules and skills. Slides are plain .tsx, so no SDK, no lock-in."
+    eyebrow="為什麼選 open-slide"
+    title="用你自己的 agent。"
+    lead="每個工作區都內建 agent 規則與技能。投影片就是單純的 .tsx，不需要 SDK，也不會被綁死。"
   >
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 520px', gap: 64, height: '100%' }}>
       <Window className="gs gs-rise" title="~/my-deck" delay={0.2} style={{ height: '100%' }}>
         <div style={term}>
-          <TreeRow name="AGENTS.md" note="house rules" hot delay={0.4} />
+          <TreeRow name="AGENTS.md" note="專案規則" hot delay={0.4} />
           <TreeRow name="CLAUDE.md" delay={0.46} />
           <TreeRow name=".agents/skills/" delay={0.52} />
           <TreeRow depth={1} name="create-slide" hot delay={0.58} />
@@ -5327,9 +5339,9 @@ const AgentsPage: Page = () => (
         </div>
       </Window>
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-        <GitRow label="AGENTS.md" caption="Rules any agent picks up." delay={0.4} />
-        <GitRow label="Built-in skills" caption="Draft, edit, theme, apply comments." delay={0.5} />
-        <GitRow label="Plain React" caption="If it edits code, it edits slides." delay={0.6} />
+        <GitRow label="AGENTS.md" caption="任何 agent 都會讀的規則。" delay={0.4} />
+        <GitRow label="內建技能" caption="草擬、編輯、主題、套用留言。" delay={0.5} />
+        <GitRow label="純 React" caption="會改程式碼，就會改投影片。" delay={0.6} />
       </div>
     </div>
   </Frame>
@@ -5337,9 +5349,9 @@ const AgentsPage: Page = () => (
 
 const GitPage: Page = () => (
   <Frame
-    eyebrow="Why open-slide"
-    title="Yours. Forever."
-    lead="Every slide is a file in your repo. Diff it, review it, branch it. No proprietary database, no export-and-pray."
+    eyebrow="為什麼選 open-slide"
+    title="永遠屬於你。"
+    lead="每份投影片都是你 repo 裡的檔案。可以比對差異、審閱、開分支。沒有專屬資料庫，也不用匯出後祈禱一切正常。"
   >
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 520px', gap: 64, height: '100%' }}>
       <Window
@@ -5359,10 +5371,10 @@ const GitPage: Page = () => (
             />
           </Line>
           <Line delay={2.2} />
-          <Commit hash="a1b2c3d" head="(HEAD -> main)" msg="refine cover typography" delay={2.3} />
-          <Commit hash="9f8e7d6" msg="revise Q2 metrics after finance review" delay={2.55} />
-          <Commit hash="6a5b4c3" msg="apply comments from design crit" delay={2.8} />
-          <Commit hash="3c2d1e0" msg="initial draft of the Q2 launch deck" delay={3.05} />
+          <Commit hash="a1b2c3d" head="(HEAD -> main)" msg="調整封面字體" delay={2.3} />
+          <Commit hash="9f8e7d6" msg="依財務審閱修正 Q2 數據" delay={2.55} />
+          <Commit hash="6a5b4c3" msg="套用設計評審的留言" delay={2.8} />
+          <Commit hash="3c2d1e0" msg="Q2 發表會簡報初稿" delay={3.05} />
           <Line delay={3.3} />
           <Line delay={3.4}>
             <Prompt />
@@ -5371,9 +5383,9 @@ const GitPage: Page = () => (
         </div>
       </Window>
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-        <GitRow label="Plain .tsx files" caption="No proprietary format." delay={0.4} />
-        <GitRow label="Diffable in any tool" caption="Review it like any other PR." delay={0.5} />
-        <GitRow label="Branch · merge · revert" caption="The tools you already know." delay={0.6} />
+        <GitRow label="純 .tsx 檔案" caption="沒有專屬格式。" delay={0.4} />
+        <GitRow label="任何工具都能比對" caption="像審其他 PR 一樣審閱。" delay={0.5} />
+        <GitRow label="分支 · 合併 · 還原" caption="都是你熟悉的工具。" delay={0.6} />
       </div>
     </div>
   </Frame>
@@ -5438,7 +5450,7 @@ const RecapPage: Page = () => {
           color: 'var(--osd-accent)',
         }}
       >
-        Recap
+        回顧
       </div>
       <h2
         className="gs gs-rise"
@@ -5455,7 +5467,7 @@ const RecapPage: Page = () => {
           animationDelay: '0.06s',
         }}
       >
-        That's the whole loop.
+        這就是完整流程。
       </h2>
       <div
         style={{
@@ -5470,19 +5482,19 @@ const RecapPage: Page = () => {
       >
         <Steps>
           <Step>
-            <RecapStep n="01" title="Init" caption="npx @open-slide/cli init" delay={0.25} />
+            <RecapStep n="01" title="建立" caption="npx @open-slide/cli init" delay={0.25} />
           </Step>
           <Step>
-            <RecapStep n="02" title="Prompt" caption="/create-slide" delay={0.32} />
+            <RecapStep n="02" title="提示" caption="/create-slide" delay={0.32} />
           </Step>
           <Step>
-            <RecapStep n="03" title="Edit" caption="click · tweak · save" delay={0.39} />
+            <RecapStep n="03" title="編輯" caption="點選 · 調整 · 儲存" delay={0.39} />
           </Step>
           <Step>
-            <RecapStep n="04" title="Comment" caption="/apply-comments" delay={0.46} />
+            <RecapStep n="04" title="留言" caption="/apply-comments" delay={0.46} />
           </Step>
           <Step>
-            <RecapStep n="05" title="Present" caption="F · fullscreen" delay={0.53} />
+            <RecapStep n="05" title="簡報" caption="F · 全螢幕" delay={0.53} />
           </Step>
         </Steps>
       </div>
@@ -5499,11 +5511,11 @@ const RecapPage: Page = () => {
           animationDelay: '0.7s',
         }}
       >
-        Edit{' '}
+        編輯{' '}
         <span style={{ fontFamily: font.mono, fontSize: 26, color: ink.text }}>
           slides/&lt;your-slide&gt;/index.tsx
-        </span>{' '}
-        and watch it hot-reload.
+        </span>
+        ，畫面就會即時更新。
       </p>
       <Footer />
     </div>
@@ -5515,28 +5527,28 @@ MotionPage.transition = morphFade;
 PresentPage.transition = morphFade;
 
 export const notes: (string | undefined)[] = [
-  'Welcome. This deck is the getting-started tour. Arrow keys move, F goes fullscreen, P opens this presenter view.',
-  'Every slide is a plain React file. The default export is the array of pages, in order.',
-  'One command scaffolds the workspace: dependencies, git, and a dev server ready to go.',
-  'Prompt your agent with /create-slide. Pages stream into the rail as the file is written.',
-  'Switch to Edit, click any element, and change it in the Format panel. Save writes the whole batch once.',
-  'The Arrange tab and smart guides handle position, size, rotation, and layer order.',
-  'Leave a note on an element. It lands in the source as an @slide-comment marker.',
-  'Run /apply-comments. The agent edits exactly what you flagged and removes the marker.',
-  'Assets live next to the slide. Drop files, or search logos and fonts without leaving the editor.',
-  'A design const declares the tokens. The Design panel tweaks them live and writes them back.',
-  'Themes are markdown: palette, type, and paste-ready components. /create-slide reads them first.',
-  'Three motion primitives: Steps, SlideTransition, and MorphElement. Each box runs its own loop.',
-  'Press F to present. Overview, laser, blackout, and the keyboard map are one key away.',
-  'Speaker notes ship in the file and show up here, in presenter view, next to the timer.',
-  'Export HTML, PDF, or PPTX from the editor, or build once and deploy the dist folder anywhere.',
-  'Any agent that writes files works. No SDK, no lock-in.',
-  'Slides are files in your repo. Diff them, review them, branch them.',
-  'That is the whole loop. Press → to bring each step back, then edit this file and watch it hot-reload.',
+  '歡迎！這份簡報是新手入門導覽。用方向鍵換頁，按 F 進入全螢幕，按 P 開啟這個主講人檢視。',
+  '每份投影片都是一個普通的 React 檔案。預設匯出（default export）就是依序排列的頁面陣列。',
+  '一行指令就建好工作區：相依套件、git，還有隨時可以啟動的 dev server。',
+  '用 /create-slide 提示你的 agent。檔案寫入的同時，頁面會陸續出現在左側縮圖欄。',
+  '切換到編輯模式，點選任何元素，在格式面板裡修改。按儲存會一次寫入所有變更。',
+  '排列分頁和智慧對齊線，負責位置、大小、旋轉和圖層順序。',
+  '在元素上留言，它會以 @slide-comment 標記的形式寫進原始碼。',
+  '執行 /apply-comments。Agent 只會修改你標出的地方，然後移除標記。',
+  '素材就放在投影片旁邊。拖入檔案，或直接搜尋 Logo 和字型，不必離開編輯器。',
+  '用一個 design 常數宣告設計樣式。設計面板可以即時調整，並寫回檔案。',
+  '主題就是 markdown 檔：配色、字體，以及可直接貼上的元件。/create-slide 會先讀取它。',
+  '三種動態基本元件：Steps、SlideTransition 和 MorphElement。每個方框都各自循環播放。',
+  '按 F 開始播放。總覽、雷射筆、黑屏和鍵盤快速鍵，都只要按一個鍵。',
+  '演講備忘就寫在檔案裡，會顯示在這裡：主講人檢視的計時器旁邊。',
+  '在編輯器裡匯出 HTML、PDF 或 PPTX，或是建置一次，把 dist 資料夾部署到任何地方。',
+  '任何能寫檔案的 agent 都能用。不需要 SDK，也不會被綁死。',
+  '投影片就是你 repo 裡的檔案。可以比對差異、審閱、開分支。',
+  '這就是完整流程。按 → 讓每個步驟逐一出現，接著編輯這個檔案，看畫面即時更新。',
 ];
 
 export const meta: SlideMeta = {
-  title: 'Getting started',
+  title: '新手入門',
   createdAt: '2026-09-25T06:36:11.800Z',
 };
 
