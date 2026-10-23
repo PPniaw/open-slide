@@ -1,4 +1,73 @@
 {
-  "folders": [],
-  "assignments": {}
+  "folders": [
+    {
+      "id": "f-84e7ad4a",
+      "name": "產品發表",
+      "icon": {
+        "type": "emoji",
+        "value": "🚀"
+      }
+    },
+    {
+      "id": "f-07f2e94b",
+      "name": "投資人與董事會",
+      "icon": {
+        "type": "emoji",
+        "value": "💼"
+      }
+    },
+    {
+      "id": "f-fce6ad5b",
+      "name": "計畫與檢討",
+      "icon": {
+        "type": "emoji",
+        "value": "📊"
+      }
+    },
+    {
+      "id": "f-14f46f3f",
+      "name": "品牌與活動",
+      "icon": {
+        "type": "emoji",
+        "value": "🎨"
+      }
+    },
+    {
+      "id": "f-6a4a2186",
+      "name": "教學與演講",
+      "icon": {
+        "type": "emoji",
+        "value": "🎓"
+      }
+    },
+    {
+      "id": "f-fe53787a",
+      "name": "工作坊素材",
+      "icon": {
+        "type": "emoji",
+        "value": "✨"
+      }
+    }
+  ],
+  "assignments": {
+    "aero-3-launch": "f-84e7ad4a",
+    "halden-core-launch": "f-84e7ad4a",
+    "lattice-ship-keynote": "f-84e7ad4a",
+    "quire-slate-keynote": "f-84e7ad4a",
+    "stackyard-cli-launch": "f-84e7ad4a",
+    "marlow-investor-day": "f-07f2e94b",
+    "northfold-q3-board": "f-07f2e94b",
+    "pommi-series-b": "f-07f2e94b",
+    "solenne-rd-day": "f-07f2e94b",
+    "fieldwork-fy27-plan": "f-fce6ad5b",
+    "lanternfall-postmortem": "f-fce6ad5b",
+    "arden-footbridge-review": "f-fce6ad5b",
+    "selene-4-mission-brief": "f-fce6ad5b",
+    "ardent-colour-ss27": "f-14f46f3f",
+    "pulso-festival-partners": "f-14f46f3f",
+    "papercut-zine-fest": "f-14f46f3f",
+    "crumb-school-fermentation": "f-6a4a2186",
+    "reef-acoustics-talk": "f-6a4a2186",
+    "motion-catalog": "f-fe53787a"
+  }
 }
