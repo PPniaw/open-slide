@@ -16,6 +16,10 @@
       "types": "./dist/locale/index.d.ts",
       "import": "./dist/locale/index.js"
     },
+    "./motion": {
+      "types": "./dist/motion/index.d.ts",
+      "import": "./dist/motion/index.js"
+    },
     "./env": {
       "types": "./env.d.ts"
     }
@@ -91,6 +95,7 @@
     "fflate": "^0.8.3",
     "html-to-image": "^1.11.13",
     "lucide-react": "^1.25.0",
+    "motion": "^14.6.0",
     "next-themes": "^0.4.6",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
