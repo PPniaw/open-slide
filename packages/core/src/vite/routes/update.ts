@@ -2,6 +2,7 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import type { ViteDevServer } from 'vite';
+import { FORK_CORE_PACKAGE } from '../../fork.ts';
 import { validateMutationRequest } from '../../http/request-guard.ts';
 import { type ApiContext, json } from './context.ts';
 
@@ -13,10 +14,7 @@ import { type ApiContext, json } from './context.ts';
 //   runs `open-slide sync:skills`.
 
 const PKG = '@open-slide/core';
-// This fork publishes under its own name and is installed behind the `@open-slide/core`
-// alias, so imports, skills and docs keep the upstream name while updates come from here.
-// TODO: placeholder until the npm package name is chosen.
-const PUBLISHED_PKG = '@ppniaw/open-slide-core';
+const PUBLISHED_PKG = FORK_CORE_PACKAGE;
 const INSTALL_SPEC = `${PKG}@npm:${PUBLISHED_PKG}@latest`;
 const CACHE_TTL_MS = 10 * 60 * 1000;
 const COMMAND_TIMEOUT_MS = 300_000;
@@ -51,10 +49,16 @@ function isOutdated(current: string, latest: string): boolean {
   return false;
 }
 
+// Follow the registry npm itself is pointed at (a mirror, or a local one in tests).
+function registryUrl(): string {
+  const configured = process.env.npm_config_registry || process.env.NPM_CONFIG_REGISTRY;
+  return (configured || 'https://registry.npmjs.org').replace(/\/+$/, '');
+}
+
 async function fetchLatest(now: number): Promise<string | null> {
   if (cache && now - cache.at < CACHE_TTL_MS) return cache.latest;
   try {
-    const res = await fetch(`https://registry.npmjs.org/${PUBLISHED_PKG}/latest`, {
+    const res = await fetch(`${registryUrl()}/${PUBLISHED_PKG}/latest`, {
       signal: AbortSignal.timeout(3000),
       headers: { accept: 'application/json' },
     });

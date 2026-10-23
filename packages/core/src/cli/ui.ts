@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { stripVTControlCharacters } from 'node:util';
 import chalk from 'chalk';
 import type { LogErrorOptions, Logger, LogOptions, LogType, ResolvedServerUrls } from 'vite';
+import { FORK_CORE_PACKAGE } from '../fork.ts';
 
 // Legacy Windows consoles render box-drawing glyphs as garbage; Windows
 // Terminal and VS Code's terminal are fine.
@@ -27,7 +28,8 @@ export function readVersion(): string {
     const pkgPath = path.join(dir, 'package.json');
     if (existsSync(pkgPath)) {
       const pkg = JSON.parse(readFileSync(pkgPath, 'utf8')) as { name?: string; version?: string };
-      if (pkg.name === '@open-slide/core' && pkg.version) return pkg.version;
+      const isCore = pkg.name === '@open-slide/core' || pkg.name === FORK_CORE_PACKAGE;
+      if (isCore && pkg.version) return pkg.version;
     }
     dir = path.dirname(dir);
   }

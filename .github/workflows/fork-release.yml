@@ -1,0 +1,80 @@
+name: Fork release
+
+# Publishes the workshop fork as @pik-singular/open-slide-core and
+# @pik-singular/open-slide. Every push to `workshop` runs the full test suite;
+# packages are published only when their package.json version is not on npm
+# yet, so bump versions with `pnpm changeset version` to release.
+
+on:
+  push:
+    branches: [workshop]
+  workflow_dispatch:
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Format, lint and package contents
+        run: pnpm format:check && pnpm lint && pnpm core check:pack
+
+      # Only the published packages: apps/demo has no TypeScript of its own and
+      # falls back to whatever `tsc` the machine has. Its decks are covered by e2e.
+      - name: Typecheck
+        run: pnpm --filter @open-slide/core --filter @open-slide/cli typecheck
+
+      - name: Unit tests
+        run: pnpm test
+
+      - name: Install Playwright browser
+        run: pnpm --filter @open-slide/core exec playwright install --with-deps chromium
+
+      - name: End-to-end tests
+        run: pnpm test:e2e
+
+  publish:
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: "https://registry.npmjs.org"
+          cache: pnpm
+
+      - name: Upgrade npm for OIDC trusted publishing
+        run: npm install -g npm@11
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Publish new versions
+        run: node scripts/fork-release.mjs publish
+        env:
+          NPM_CONFIG_PROVENANCE: true

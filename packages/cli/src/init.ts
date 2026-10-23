@@ -36,8 +36,12 @@ export async function isDirNonEmpty(target: string): Promise<boolean> {
 
 declare const __CORE_VERSION_AT_BUILD__: string;
 
+// Same names as packages/core/src/fork.ts: the core is installed behind the
+// upstream name so imports and skills keep working unchanged.
+const FORK_CORE_PACKAGE = '@pik-singular/open-slide-core';
+
 function coreVersionRange(): string {
-  return `^${__CORE_VERSION_AT_BUILD__}`;
+  return `npm:${FORK_CORE_PACKAGE}@^${__CORE_VERSION_AT_BUILD__}`;
 }
 
 async function linkOrCopy(relSrc: string, dst: string): Promise<void> {

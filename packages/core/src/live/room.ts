@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
+import { LIVE_GLOBAL_KEY } from '../app/lib/live-config.ts';
 
 export type LiveRoom = { server: string; roomId: string };
 
 type LiveGlobal = { dev: boolean; server?: string; rooms?: Record<string, string> };
 
-// Set by the app from `virtual:open-slide/config`. Read through globalThis so
-// the kit (shipped in dist) and the app (built from src) agree on one value.
-export const LIVE_GLOBAL_KEY = '__open_slide_live__';
+export { LIVE_GLOBAL_KEY };
 
 function liveGlobal(): LiveGlobal | null {
   return (

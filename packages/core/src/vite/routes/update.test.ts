@@ -54,7 +54,7 @@ describe('update routes helpers', () => {
   });
 
   it('installs the fork behind the @open-slide/core alias for each package manager', () => {
-    const spec = '@open-slide/core@npm:@ppniaw/open-slide-core@latest';
+    const spec = '@open-slide/core@npm:@pik-singular/open-slide-core@latest';
     expect(updateCommandFor('pnpm')).toEqual({ cmd: 'pnpm', args: ['add', spec] });
     expect(updateCommandFor('yarn')).toEqual({ cmd: 'yarn', args: ['add', spec] });
     expect(updateCommandFor('bun')).toEqual({ cmd: 'bun', args: ['add', spec] });
