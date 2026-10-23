@@ -14,8 +14,9 @@ import { type CSSProperties, type ReactNode, useId } from 'react';
 export const design: DesignSystem = {
   palette: { bg: '#000000', text: '#EDEDED', accent: '#52A8FF' },
   fonts: {
-    display: '"Geist", system-ui, -apple-system, sans-serif',
-    body: '"Geist", system-ui, -apple-system, sans-serif',
+    display:
+      '"Geist", system-ui, -apple-system, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
+    body: '"Geist", system-ui, -apple-system, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
   },
   typeScale: { hero: 200, body: 28 },
   radius: 12,
@@ -34,7 +35,8 @@ const BLUE = '#0A72EF';
 const GREEN = '#45A557';
 const GREEN_TEXT = '#62C073';
 const PINK = '#F75F8F';
-const MONO = '"Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace';
+const MONO =
+  '"Geist Mono", ui-monospace, SFMono-Regular, Menlo, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", monospace';
 
 const SLIDE_ID = 'lattice-ship-keynote';
 const FONT_HREF =
@@ -120,7 +122,7 @@ const TALL_BAND = 392;
 const HEAD: CSSProperties = {
   fontFamily: 'var(--osd-font-display)',
   fontWeight: 600,
-  letterSpacing: '-0.045em',
+  letterSpacing: '-0.01em',
   lineHeight: 1.04,
   margin: 0,
 };
@@ -138,9 +140,10 @@ const LABEL: CSSProperties = {
 const BODY: CSSProperties = {
   fontSize: 'var(--osd-size-body)',
   lineHeight: 1.45,
-  letterSpacing: '-0.012em',
+  letterSpacing: '0',
   color: SEC,
   margin: 0,
+  textWrap: 'balance',
 };
 
 const NUM: CSSProperties = { fontVariantNumeric: 'tabular-nums' };
@@ -563,7 +566,7 @@ const MetaCell = ({ x, label, value }: { x: number; label: string; value: string
     })}
   >
     <span style={{ ...LABEL, color: DIM }}>{label}</span>
-    <span style={{ fontSize: 34, fontWeight: 500, letterSpacing: '-0.025em' }}>{value}</span>
+    <span style={{ fontSize: 34, fontWeight: 500, letterSpacing: '-0.01em' }}>{value}</span>
   </div>
 );
 
@@ -576,7 +579,7 @@ const GRADIENT_TEXT: CSSProperties = {
 };
 
 const Cover: Page = () => (
-  <Stage section="Opening keynote">
+  <Stage section="開場主題演講">
     <Beam />
     <HLine y={336} />
     <HLine y={744} />
@@ -617,11 +620,11 @@ const Cover: Page = () => (
       >
         Ship ’26
       </h1>
-      <p style={{ ...BODY, fontSize: 30, marginTop: 20 }}>The opening keynote</p>
+      <p style={{ ...BODY, fontSize: 30, marginTop: 20 }}>開場主題演講</p>
     </div>
-    <MetaCell x={FL} label="City" value="San Francisco" />
-    <MetaCell x={col(4)} label="Venue" value="Pier 48" />
-    <MetaCell x={col(8)} label="Date" value="Oct 21, 2026 · 9:30 PT" />
+    <MetaCell x={FL} label="城市" value="San Francisco" />
+    <MetaCell x={col(4)} label="場地" value="Pier 48" />
+    <MetaCell x={col(8)} label="日期" value="2026年10月21日 · 9:30 PT" />
   </Stage>
 );
 
@@ -712,18 +715,18 @@ const Metric = ({
         color: DIM,
       })}
     >
-      <span>Oct ’25</span>
-      <span>Sep ’26</span>
+      <span>2025年10月</span>
+      <span>2026年9月</span>
     </div>
   </div>
 );
 
 const Year: Page = () => (
-  <Stage section="The year">
+  <Stage section="年度回顧">
     <TitleBand
-      eyebrow="Oct 2025 – Sep 2026"
-      title="A year on Lattice."
-      body="Twelve months, measured across every team on the platform."
+      eyebrow="2025年10月 – 2026年9月"
+      title="Lattice 的這一年。"
+      body="十二個月，橫跨平台上每個團隊的數據。"
     />
     <VLine x={col(3)} y1={336} y2={FB} />
     <VLine x={col(6)} y1={336} y2={FB} />
@@ -736,32 +739,32 @@ const Year: Page = () => (
     <Cross x={col(9)} y={FB} />
     <Metric
       x={col(0)}
-      label="Deployments / week"
+      label="每週部署次數"
       value="4.8M"
-      delta="↑ 62% year over year"
+      delta="↑ 較去年成長 62%"
       data={[2.96, 3.05, 3.18, 3.3, 3.42, 3.61, 3.78, 3.95, 4.12, 4.36, 4.58, 4.8]}
     />
     <Metric
       x={col(3)}
-      label="Requests served"
+      label="處理請求數"
       value="1.2T"
-      delta="↑ 2× year over year"
+      delta="↑ 較去年成長 2 倍"
       data={[68, 72, 79, 84, 88, 95, 101, 108, 112, 121, 128, 136]}
     />
     <Metric
       x={col(6)}
-      label="Compute regions"
+      label="運算區域"
       value="18"
-      delta="+6 opened this year"
+      delta="今年新增 6 個"
       data={[12, 12, 13, 13, 14, 14, 15, 16, 16, 17, 18, 18]}
       step
     />
     <Metric
       x={col(9)}
-      label="Cold start · p50"
+      label="冷啟動 · p50"
       value="210"
       unit="ms"
-      delta="↓ 34% from 318 ms"
+      delta="↓ 較 318 ms 減少 34%"
       data={[318, 309, 301, 288, 270, 262, 251, 240, 233, 224, 216, 210]}
     />
   </Stage>
@@ -959,10 +962,10 @@ const RouteScene = ({ fabric }: { fabric: boolean }) => {
         Washington, D.C. · iad1
       </Eyebrow>
 
-      <RouteNode id="rt-user" x={144} kind="user" label="User" value="Singapore" />
-      <RouteNode id="rt-edge" x={400} kind="edge" label="Edge" value="sin1" />
-      <RouteNode id="rt-fn" x={fnX} kind="fn" label="Function" value="/checkout" lit={fabric} />
-      <RouteNode id="rt-db" x={1584} kind="db" label="Database" value="Postgres" />
+      <RouteNode id="rt-user" x={144} kind="user" label="使用者" value="Singapore" />
+      <RouteNode id="rt-edge" x={400} kind="edge" label="邊緣" value="sin1" />
+      <RouteNode id="rt-fn" x={fnX} kind="fn" label="函式" value="/checkout" lit={fabric} />
+      <RouteNode id="rt-db" x={1584} kind="db" label="資料庫" value="Postgres" />
 
       <Link x1={336} x2={400} live={live} />
       <HopLabel cx={368} y={476} value="4 ms" />
@@ -1014,9 +1017,9 @@ const RouteScene = ({ fabric }: { fabric: boolean }) => {
               style={{ animation: live ? 'lt-flow 1.4s linear infinite 0.4s' : undefined }}
             />
           </svg>
-          <HopLabel cx={976} y={NODE_MID + 20} top="3 queries" value="3 × 212 ms" />
+          <HopLabel cx={976} y={NODE_MID + 20} top="3 次查詢" value="3 × 212 ms" />
           <div style={abs(656, NODE_Y + NODE_H + 20, { ...LABEL, fontSize: 15, color: TER })}>
-            Cold start · <span style={{ color: 'var(--osd-text)' }}>210 ms</span>
+            冷啟動 · <span style={{ color: 'var(--osd-text)' }}>210 ms</span>
           </div>
         </>
       )}
@@ -1024,17 +1027,17 @@ const RouteScene = ({ fabric }: { fabric: boolean }) => {
       {fabric && (
         <div style={after}>
           <Link x1={592} x2={1152} live={live} />
-          <HopLabel cx={848} y={476} top="1 round trip" value="212 ms" />
+          <HopLabel cx={848} y={476} top="1 次往返" value="212 ms" />
           <Link x1={1344} x2={1584} live={live} />
-          <HopLabel cx={1464} y={476} top="3 queries" value="3 × 1.3 ms" />
+          <HopLabel cx={1464} y={476} top="3 次查詢" value="3 × 1.3 ms" />
           <div style={abs(1152, NODE_Y + NODE_H + 20, { ...LABEL, fontSize: 15, color: TER })}>
-            Snapshot · <span style={{ color: 'var(--osd-accent)' }}>18 ms</span>
+            快照 · <span style={{ color: 'var(--osd-accent)' }}>18 ms</span>
           </div>
         </div>
       )}
 
       <Eyebrow x={144} y={792}>
-        Time to first byte · /checkout
+        首位元組時間 · /checkout
       </Eyebrow>
       <div
         style={{
@@ -1048,9 +1051,9 @@ const RouteScene = ({ fabric }: { fabric: boolean }) => {
           color: SEC,
         }}
       >
-        <LegendItem look={NETWORK} label="Network" />
-        <LegendItem look={COLD} label="Cold start" />
-        <LegendItem look={COMPUTE} label="Compute" />
+        <LegendItem look={NETWORK} label="網路" />
+        <LegendItem look={COLD} label="冷啟動" />
+        <LegendItem look={COMPUTE} label="運算" />
       </div>
 
       {fabric ? (
@@ -1103,17 +1106,17 @@ const RouteScene = ({ fabric }: { fabric: boolean }) => {
 };
 
 const Problem: Page = () => (
-  <Stage section="The problem">
+  <Stage section="問題所在">
     <TitleBand
-      eyebrow="Anatomy of a request"
+      eyebrow="一個請求的剖析"
       title={
         <>
-          Your users are everywhere.
+          你的使用者遍布全球。
           <br />
-          <span style={{ color: TER }}>Your data isn’t.</span>
+          <span style={{ color: TER }}>你的資料卻不是。</span>
         </>
       }
-      body="A page that runs three queries crosses the Pacific six times before it sends a byte."
+      body="跑三次查詢的頁面，在送出第一個位元組前，就已橫越太平洋六次。"
       bodyWidth={480}
       line={TALL_BAND}
     />
@@ -1122,18 +1125,24 @@ const Problem: Page = () => (
 );
 
 const WithFabric: Page = () => (
-  <Stage section="The fix">
+  <Stage section="解法">
     <TitleBand
-      eyebrow="With Lattice Fabric"
+      eyebrow="使用 Lattice Fabric"
       title={
         <>
-          Same page.
+          同一個頁面。
           <br />
-          <span style={{ color: TER }}>Two crossings, not six.</span>
+          <span style={{ color: TER }}>只橫越兩次，不是六次。</span>
         </>
       }
-      body="Fabric runs /checkout beside Postgres. The three queries now take 4 ms."
-      bodyWidth={480}
+      body={
+        <>
+          Fabric 讓 /checkout 緊鄰 Postgres 執行，
+          <br />
+          三次查詢現在只需 4 ms。
+        </>
+      }
+      bodyWidth={600}
       line={TALL_BAND}
     />
     <RouteScene fabric />
@@ -1300,7 +1309,7 @@ const Weave = () => {
         fontSize={15}
         letterSpacing="0.6"
       >
-        COMPUTE
+        運算
       </text>
       <text
         x={lx}
@@ -1311,7 +1320,7 @@ const Weave = () => {
         fontSize={15}
         letterSpacing="0.6"
       >
-        DATA
+        資料
       </text>
     </svg>
   );
@@ -1326,7 +1335,7 @@ const Fact = ({ x, label, value }: { x: number; label: string; value: string }) 
       style={{
         fontSize: 34,
         fontWeight: 500,
-        letterSpacing: '-0.03em',
+        letterSpacing: '-0.01em',
         marginTop: 16,
         ...NUM,
       }}
@@ -1339,7 +1348,7 @@ const Fact = ({ x, label, value }: { x: number; label: string; value: string }) 
 const Announce: Page = () => {
   const rise = useEnter(0.15, 0.7);
   return (
-    <Stage section="Introducing">
+    <Stage section="全新發表">
       <VLine x={col(7)} y1={FT} y2={FB} />
       <HLine y={840} x1={FL} x2={col(7)} />
       <VLine x={FL + 336} y1={840} y2={FB} />
@@ -1356,23 +1365,23 @@ const Announce: Page = () => {
       <div style={abs(144, 236, { width: 912, ...rise })}>
         <Pill tone="accent">
           <Dot color="#52A8FF" size={7} />
-          Public beta · today
+          公開測試版 · 即日起
         </Pill>
         <h1
-          style={{ ...HEAD, fontSize: 112, marginTop: 44, letterSpacing: '-0.05em', lineHeight: 1 }}
+          style={{ ...HEAD, fontSize: 112, marginTop: 44, letterSpacing: '-0.02em', lineHeight: 1 }}
         >
-          <span style={{ color: DIM }}>Introducing</span>
+          <span style={{ color: DIM }}>全新登場</span>
           <br />
           <span style={{ ...GRADIENT_TEXT, padding: '0 0.1em 0.1em 0' }}>Lattice Fabric.</span>
         </h1>
-        <p style={{ ...BODY, fontSize: 32, marginTop: 40, maxWidth: 760 }}>
-          A compute layer that runs every function next to the data it reads.{' '}
-          <span style={{ color: 'var(--osd-text)' }}>Automatically.</span>
+        <p style={{ ...BODY, fontSize: 32, marginTop: 40, maxWidth: 840, textWrap: 'wrap' }}>
+          一個運算層，讓每個函式都在它所讀取的資料旁邊執行。
+          <span style={{ color: 'var(--osd-text)', whiteSpace: 'nowrap' }}>全自動。</span>
         </p>
       </div>
-      <Fact x={FL} label="Cold start · p50" value="18 ms" />
-      <Fact x={FL + 336} label="Time to first byte" value="3.4× faster" />
-      <Fact x={FL + 672} label="Config" value="1 line" />
+      <Fact x={FL} label="冷啟動 · p50" value="18 ms" />
+      <Fact x={FL + 336} label="首位元組時間" value="快 3.4 倍" />
+      <Fact x={FL + 672} label="設定" value="1 行" />
     </Stage>
   );
 };
@@ -1498,7 +1507,7 @@ const Explain = ({ x, n, title, body }: { x: number; n: string; title: string; b
     style={abs(x, 744, { width: 576, height: 240, boxSizing: 'border-box', padding: '44px 48px' })}
   >
     <div style={{ ...LABEL, color: 'var(--osd-accent)' }}>{n}</div>
-    <div style={{ fontSize: 34, fontWeight: 600, letterSpacing: '-0.035em', marginTop: 18 }}>
+    <div style={{ fontSize: 34, fontWeight: 600, letterSpacing: '-0.01em', marginTop: 18 }}>
       {title}
     </div>
     <p style={{ ...BODY, fontSize: 26, marginTop: 10, lineHeight: 1.4 }}>{body}</p>
@@ -1512,11 +1521,11 @@ const ColHead = ({ x, children }: { x: number; children: ReactNode }) => (
 const Architecture: Page = () => {
   const live = useIsActivePage();
   return (
-    <Stage section="How it works">
+    <Stage section="運作原理">
       <TitleBand
-        eyebrow="Architecture"
-        title="How Fabric works."
-        body="Three steps between a request and your data, all before your code runs."
+        eyebrow="架構"
+        title="Fabric 如何運作。"
+        body="從請求到你的資料只需三步，而且都在你的程式碼執行之前完成。"
       />
       <HLine y={744} />
       <VLine x={col(4)} y1={744} y2={FB} />
@@ -1528,11 +1537,11 @@ const Architecture: Page = () => {
       <Cross x={col(4)} y={FB} />
       <Cross x={col(8)} y={FB} />
 
-      <ColHead x={144}>Users</ColHead>
-      <ColHead x={432}>Edge network</ColHead>
-      <ColHead x={744}>Fabric router</ColHead>
-      <ColHead x={1104}>Regional compute</ColHead>
-      <ColHead x={1488}>Your data</ColHead>
+      <ColHead x={144}>使用者</ColHead>
+      <ColHead x={432}>邊緣網路</ColHead>
+      <ColHead x={744}>Fabric 路由器</ColHead>
+      <ColHead x={1104}>區域運算</ColHead>
+      <ColHead x={1488}>你的資料</ColHead>
 
       <svg width={1920} height={1080} style={abs(0, 0, { pointerEvents: 'none' })}>
         <Flow d="M336,474 C384,474 384,572 432,572" live={live} />
@@ -1572,8 +1581,8 @@ const Architecture: Page = () => {
         >
           126
         </span>
-        <span style={{ fontSize: 20, color: SEC, marginTop: 4 }}>locations</span>
-        <span style={{ ...LABEL, fontSize: 13, color: DIM, marginTop: 20 }}>TLS · cache · WAF</span>
+        <span style={{ fontSize: 20, color: SEC, marginTop: 4 }}>個據點</span>
+        <span style={{ ...LABEL, fontSize: 13, color: DIM, marginTop: 20 }}>TLS · 快取 · WAF</span>
       </div>
 
       <div
@@ -1616,41 +1625,41 @@ const Architecture: Page = () => {
           </div>
         </div>
         <span style={{ ...LABEL, fontSize: 13, color: 'var(--osd-accent)', marginTop: 20 }}>
-          Placement table
+          配置表
         </span>
       </div>
 
-      <RegionBox y={440} code="iad1" city="Washington" fns="warm" />
-      <RegionBox y={536} code="fra1" city="Frankfurt" fns="warm" />
-      <RegionBox y={632} code="hnd1" city="Tokyo" fns="warm" />
+      <RegionBox y={440} code="iad1" city="Washington" fns="已預熱" />
+      <RegionBox y={536} code="fra1" city="Frankfurt" fns="已預熱" />
+      <RegionBox y={632} code="hnd1" city="Tokyo" fns="已預熱" />
 
       <DataBox y={440} name="Postgres" code="iad1" />
       <DataBox y={536} name="Redis" code="fra1" />
-      <DataBox y={632} name="Blob store" code="hnd1" />
+      <DataBox y={632} name="Blob 儲存體" code="hnd1" />
 
       <Steps>
         <Step duration={260}>
           <Explain
             x={FL}
-            n="01 · Route"
-            title="Terminate at the edge."
-            body="The nearest of 126 locations handles TLS and hands off to the router."
+            n="01 · 路由"
+            title="在邊緣終結連線。"
+            body="126 個據點中最近的一個負責處理 TLS，再交給路由器。"
           />
         </Step>
         <Step duration={260}>
           <Explain
             x={col(4)}
-            n="02 · Place"
-            title="Run next to the data."
-            body="Each route runs in the region that holds the data it reads."
+            n="02 · 配置"
+            title="在資料旁邊執行。"
+            body="每條路由都在存放其資料的區域中執行。"
           />
         </Step>
         <Step duration={260}>
           <Explain
             x={col(8)}
-            n="03 · Warm"
-            title="Start from a snapshot."
-            body="A ready snapshot waits in that region and boots in 18 ms."
+            n="03 · 預熱"
+            title="從快照啟動。"
+            body="該區域已備妥快照，18 ms 即可啟動。"
           />
         </Step>
       </Steps>
@@ -1876,15 +1885,15 @@ const DeployCard = () => (
     })}
   >
     <Thumb />
-    <Field x={24} y={276} label="Status">
+    <Field x={24} y={276} label="狀態">
       <Dot color={GREEN} size={10} glow />
-      Ready
+      就緒
     </Field>
-    <Field x={324} y={276} label="Duration">
+    <Field x={324} y={276} label="耗時">
       <span style={NUM}>23s</span>
-      <span style={{ color: DIM, fontSize: 18 }}>· just now</span>
+      <span style={{ color: DIM, fontSize: 18 }}>· 剛剛</span>
     </Field>
-    <Field x={24} y={354} label="Domains">
+    <Field x={24} y={354} label="網域">
       halyard.com
       <span
         style={{
@@ -1899,10 +1908,10 @@ const DeployCard = () => (
         +2
       </span>
     </Field>
-    <Field x={324} y={354} label="Environment">
-      Production
+    <Field x={324} y={354} label="環境">
+      正式環境
     </Field>
-    <Field x={24} y={432} label="Source">
+    <Field x={24} y={432} label="來源">
       <BranchIcon />
       <span>main</span>
       <span style={{ fontFamily: MONO, fontSize: 18, color: SEC, marginLeft: 10 }}>a41f9c2</span>
@@ -1929,17 +1938,17 @@ const DeployCard = () => (
         <Icon kind="route" size={15} />
         FABRIC
       </span>
-      <span>12 functions · 3 regions</span>
+      <span>12 個函式 · 3 個區域</span>
     </div>
   </div>
 );
 
 const Deploy: Page = () => (
-  <Stage section="Deploy">
+  <Stage section="部署">
     <TitleBand
-      eyebrow="Developer experience"
-      title="Deploy the way you already do."
-      body="Fabric runs during the build. Same command, same Git flow."
+      eyebrow="開發者體驗"
+      title="照你原本的方式部署。"
+      body="Fabric 在建置期間運作。同樣的指令，同樣的 Git 流程。"
       bodyWidth={480}
     />
     <VLine x={col(7)} y1={336} y2={FB} />
@@ -2071,18 +2080,18 @@ const Callout = ({ y, n, title, body }: { y: number; n: string; title: string; b
   >
     <div style={{ display: 'flex', alignItems: 'baseline', gap: 18 }}>
       <span style={{ ...LABEL, color: 'var(--osd-accent)' }}>{n}</span>
-      <span style={{ fontSize: 34, fontWeight: 600, letterSpacing: '-0.035em' }}>{title}</span>
+      <span style={{ fontSize: 34, fontWeight: 600, letterSpacing: '-0.01em' }}>{title}</span>
     </div>
     <p style={{ ...BODY, fontSize: 26, marginTop: 16, lineHeight: 1.4, paddingLeft: 42 }}>{body}</p>
   </div>
 );
 
 const Config: Page = () => (
-  <Stage section="Configuration">
+  <Stage section="設定">
     <TitleBand
       eyebrow="lattice.config.ts"
-      title="One line to turn it on."
-      body="No region lists. No new SDK. Fabric reads what your code already does."
+      title="一行設定就能啟用。"
+      body="不用列區域清單，不用換新 SDK。Fabric 會讀取你的程式本來的行為。"
       bodyWidth={480}
     />
     <VLine x={col(7)} y1={336} y2={FB} />
@@ -2170,29 +2179,29 @@ const Config: Page = () => (
         letterSpacing: '-0.01em',
       })}
     >
-      <span style={{ marginRight: 8 }}>Or from the dashboard</span>
+      <span style={{ marginRight: 8 }}>或從控制台操作</span>
       <Kbd>⌘</Kbd>
       <Kbd>K</Kbd>
       <span style={{ margin: '0 6px', color: DIM }}>→</span>
-      <span style={{ color: 'var(--osd-text)' }}>Enable Fabric</span>
+      <span style={{ color: 'var(--osd-text)' }}>啟用 Fabric</span>
     </div>
     <Callout
       y={336}
       n="01"
-      title="Reads your bindings"
-      body="At build time, Fabric maps each route to the databases it queries."
+      title="讀取你的繫結"
+      body="建置時，Fabric 會將每條路由對應到它所查詢的資料庫。"
     />
     <Callout
       y={552}
       n="02"
-      title="Places every function"
-      body="Each route runs in the region that holds its data. Nothing to tune."
+      title="配置每個函式"
+      body="每條路由都在存放其資料的區域中執行，無需調校。"
     />
     <Callout
       y={768}
       n="03"
-      title="Keeps snapshots warm"
-      body="A ready snapshot waits in every placed region. Cold starts take 18 ms."
+      title="保持快照預熱"
+      body="每個配置區域都備有快照，冷啟動只需 18 ms。"
     />
   </Stage>
 );
@@ -2444,7 +2453,7 @@ const RegionRow = ({
 );
 
 const Regions: Page = () => (
-  <Stage section="Regions">
+  <Stage section="區域">
     <VLine x={col(6)} y1={FT} y2={FB} />
     <HLine y={408} x1={col(6)} x2={FR} />
     <Cross x={col(6)} y={FT} />
@@ -2464,17 +2473,17 @@ const Regions: Page = () => (
     />
     <Globe />
     <Eyebrow x={144} y={144}>
-      Fabric regions
+      Fabric 區域
     </Eyebrow>
-    <div style={abs(144, 936, { ...LABEL, fontSize: 15, color: DIM })}>
-      Orthographic · 30°W 30°N
-    </div>
+    <div style={abs(144, 936, { ...LABEL, fontSize: 15, color: DIM })}>正射投影 · 30°W 30°N</div>
     <Eyebrow x={col(6) + 48} y={144}>
-      18 of 18 regions
+      18 / 18 個區域
     </Eyebrow>
-    <h2 style={abs(col(6) + 48, 184, { ...HEAD, fontSize: 64 })}>Every region, day one.</h2>
+    <h2 style={abs(col(6) + 48, 184, { ...HEAD, fontSize: 64 })}>第一天，全區域上線。</h2>
     <p style={abs(col(6) + 48, 270, { ...BODY, width: 720 })}>
-      Fabric is live in all 18 compute regions. Cold start by region, in milliseconds.
+      Fabric 已在全部 18 個運算區域上線。
+      <br />
+      以下是各區域的冷啟動時間（毫秒）。
     </p>
     <div
       style={abs(col(6) + 48, 440, {
@@ -2488,8 +2497,8 @@ const Regions: Page = () => (
         color: DIM,
       })}
     >
-      <span style={{ width: 300 }}>Region</span>
-      <span style={{ width: 140 }}>Code</span>
+      <span style={{ width: 300 }}>區域</span>
+      <span style={{ width: 140 }}>代碼</span>
       <span style={{ flex: 1 }}>
         <span style={{ color: 'var(--osd-accent)' }}>■</span> p50{' '}
         <span style={{ color: FAINT }}>■</span> p99
@@ -2644,7 +2653,7 @@ const CdfChart = () => {
           fontFamily={MONO}
           fontSize={18}
         >
-          3.4× faster at p50
+          p50 快 3.4 倍
         </text>
       </g>
     </svg>
@@ -2727,11 +2736,11 @@ const ChartLegend = ({ x, y }: { x: number; y: number }) => (
 );
 
 const Benchmarks: Page = () => (
-  <Stage section="Benchmarks">
+  <Stage section="效能基準測試">
     <TitleBand
-      eyebrow="Production-shaped test"
-      title="3.4× faster to first byte."
-      body="Same app, same database, same traffic. One change in the config."
+      eyebrow="貼近正式環境的測試"
+      title="首位元組快 3.4 倍。"
+      body="同樣的應用程式、同樣的資料庫、同樣的流量，只改了一處設定。"
       bodyWidth={480}
     />
     <VLine x={col(7)} y1={336} y2={912} />
@@ -2741,12 +2750,12 @@ const Benchmarks: Page = () => (
     <Cross x={FL} y={912} />
     <Cross x={FR} y={912} />
     <Eyebrow x={144} y={384}>
-      Time to first byte · CDF
+      首位元組時間 · CDF
     </Eyebrow>
     <ChartLegend x={col(7) - 48 - 290} y={384} />
     <CdfChart />
     <Eyebrow x={col(7) + 48} y={384}>
-      Cold start · ms
+      冷啟動 · ms
     </Eyebrow>
     <BarPair y={448} label="p50" before={210} after={18} />
     <BarPair y={544} label="p95" before={640} after={52} />
@@ -2763,13 +2772,13 @@ const Benchmarks: Page = () => (
       >
         11.7×
       </span>
-      <span style={{ ...BODY, fontSize: 24 }}>faster cold starts at p50</span>
+      <span style={{ ...BODY, fontSize: 24 }}>p50 冷啟動速度提升</span>
     </div>
     <div
       style={abs(144, 936, { fontSize: 18, color: DIM, letterSpacing: '-0.005em', width: 1632 })}
     >
-      Method: Next.js 16 storefront, three sequential Postgres queries per request, database in
-      iad1. Traffic from 9 regions, 14.2M requests, Sep 8–28, 2026.
+      測試方法：Next.js 16 商店前台，每個請求依序執行三次 Postgres 查詢，資料庫位於 iad1。流量來自 9
+      個區域，共 14.2M 次請求，2026年9月8日至28日。
     </div>
   </Stage>
 );
@@ -2817,7 +2826,7 @@ const Result = ({ x, value, caption }: { x: number; value: string; caption: Reac
 );
 
 const Customer: Page = () => (
-  <Stage section="Customers">
+  <Stage section="客戶案例">
     <VLine x={col(9)} y1={FT} y2={744} />
     <HLine y={744} />
     <VLine x={col(4)} y1={744} y2={FB} />
@@ -2831,22 +2840,24 @@ const Customer: Page = () => (
     <Cross x={col(4)} y={FB} />
     <Cross x={col(8)} y={FB} />
     <Eyebrow x={144} y={144}>
-      Customer story · Halyard
+      客戶案例 · Halyard
     </Eyebrow>
     <blockquote
       style={abs(144, 216, {
         ...HEAD,
-        fontSize: 68,
+        fontSize: 60,
         fontWeight: 500,
-        letterSpacing: '-0.045em',
+        letterSpacing: '-0.01em',
         lineHeight: 1.12,
         width: 1180,
-        textIndent: -30,
+        textIndent: -34,
         textWrap: 'balance',
       })}
     >
-      “We changed one line of config. Checkout got 472 ms faster
-      <span style={{ color: TER }}>, and we didn’t touch a single query.”</span>
+      「我們只改了一行設定，
+      <br />
+      結帳就快了 472 ms
+      <span style={{ color: TER }}>，連一條查詢都沒動。」</span>
     </blockquote>
     <div style={abs(144, 584, { display: 'flex', alignItems: 'center', gap: 20 })}>
       <div
@@ -2868,35 +2879,35 @@ const Customer: Page = () => (
       </div>
       <div>
         <div style={{ fontSize: 26, fontWeight: 500, letterSpacing: '-0.02em' }}>Priya Raman</div>
-        <div style={{ fontSize: 21, color: TER, marginTop: 4 }}>VP Engineering, Halyard</div>
+        <div style={{ fontSize: 21, color: TER, marginTop: 4 }}>工程副總裁，Halyard</div>
       </div>
     </div>
     <div style={abs(col(9) + 48, 144)}>
       <HalyardMark />
     </div>
     <div style={abs(col(9) + 48, 220, { ...BODY, fontSize: 22, width: 336, lineHeight: 1.5 })}>
-      Outdoor gear, sold direct in 14 countries. 2.1M shoppers a month.
+      戶外用品，直營銷售至 14 個國家，每月 2.1M 位消費者。
     </div>
-    <KV y={488} k="Industry" v="Retail" />
-    <KV y={552} k="Stack" v="Next.js · Postgres" />
-    <KV y={616} k="Database" v="iad1" />
-    <KV y={680} k="On Lattice" v="Since 2023" />
+    <KV y={488} k="產業" v="零售" />
+    <KV y={552} k="技術堆疊" v="Next.js · Postgres" />
+    <KV y={616} k="資料庫" v="iad1" />
+    <KV y={680} k="使用 Lattice" v="自 2023 年起" />
     <Result
       x={FL}
       value="−64%"
       caption={
         <>
-          Checkout TTFB, p50 <span style={{ color: DIM }}>· 740 → 268 ms</span>
+          結帳 TTFB，p50 <span style={{ color: DIM }}>· 740 → 268 ms</span>
         </>
       }
     />
-    <Result x={col(4)} value="+4.2%" caption="Checkout conversion, first 30 days" />
+    <Result x={col(4)} value="+4.2%" caption="結帳轉換率，前 30 天" />
     <Result
       x={col(8)}
-      value="1 line"
+      value="1 行"
       caption={
         <>
-          Config changed{' '}
+          變更的設定{' '}
           <span style={{ fontFamily: MONO, fontSize: 21, color: 'var(--osd-accent)' }}>
             fabric: true
           </span>
@@ -2932,17 +2943,17 @@ const Milestone = ({
       {live ? (
         <Pill tone="live">
           <Dot color={GREEN} size={7} />
-          Live
+          已上線
         </Pill>
       ) : (
-        <Pill>Planned</Pill>
+        <Pill>規劃中</Pill>
       )}
     </div>
     <div
       style={abs(48, 190, {
         fontSize: 44,
         fontWeight: 600,
-        letterSpacing: '-0.04em',
+        letterSpacing: '-0.01em',
         lineHeight: 1.1,
       })}
     >
@@ -2961,7 +2972,7 @@ const Price = ({ x, label, body }: { x: number; label: string; body: ReactNode }
       style={{
         fontSize: 32,
         fontWeight: 500,
-        letterSpacing: '-0.03em',
+        letterSpacing: '-0.01em',
         lineHeight: 1.3,
         marginTop: 20,
         width: 470,
@@ -2975,11 +2986,11 @@ const Price = ({ x, label, body }: { x: number; label: string; body: ReactNode }
 const Availability: Page = () => {
   const ping = useLoop('lt-ping 2.4s ease-out infinite');
   return (
-    <Stage section="Availability">
+    <Stage section="供應時程">
       <TitleBand
-        eyebrow="Rollout"
-        title="Public beta starts today."
-        body="On for every Pro and Enterprise team, in all 18 regions."
+        eyebrow="推出時程"
+        title="公開測試版，即日起開放。"
+        body="所有 Pro 與 Enterprise 團隊皆可使用，涵蓋全部 18 個區域。"
         bodyWidth={480}
       />
       <HLine y={744} />
@@ -3016,35 +3027,41 @@ const Availability: Page = () => {
       </svg>
       <Milestone
         x={FL}
-        date="Oct 21, 2026"
-        title="Public beta"
-        body="Pro and Enterprise teams. Turn it on with one line, or from the dashboard."
+        date="2026年10月21日"
+        title="公開測試版"
+        body="適用 Pro 與 Enterprise 團隊。一行設定或從控制台即可啟用。"
         live
       />
       <Milestone
         x={col(4)}
-        date="Dec 2026"
-        title="Placement policies"
-        body="Pin routes to regions, set allowlists, and audit every placement."
+        date="2026年12月"
+        title="配置政策"
+        body="將路由固定到指定區域、設定允許清單，並稽核每一次配置。"
       />
       <Milestone
         x={col(8)}
-        date="Feb 2027"
-        title="General availability"
-        body="Backed by the 99.99% compute SLA. Hobby plans included."
+        date="2027年2月"
+        title="正式上市（GA）"
+        body="享有 99.99% 運算 SLA，並納入 Hobby 方案。"
       />
-      <Price x={FL} label="During beta" body="No added cost. Fabric usage is free until GA." />
       <Price
-        x={col(4)}
-        label="At GA"
-        body="Billed as standard function compute. Snapshots included."
+        x={FL}
+        label="測試期間"
+        body={
+          <>
+            不另收費。
+            <br />
+            GA 前使用 Fabric 免費。
+          </>
+        }
       />
+      <Price x={col(4)} label="GA 之後" body="依一般函式運算計費，含快照。" />
       <Price
         x={col(8)}
         label="Hobby"
         body={
           <>
-            Waitlist opens today at{' '}
+            候補名單今天開放，網址{' '}
             <span style={{ color: 'var(--osd-accent)' }}>lattice.dev/fabric</span>
           </>
         }
@@ -3063,7 +3080,7 @@ const CopyIcon = () => (
 const Close: Page = () => {
   const rise = useEnter(0.1, 0.7);
   return (
-    <Stage section="Get started">
+    <Stage section="立即開始">
       <Beam />
       <HLine y={336} />
       <HLine y={744} />
@@ -3099,11 +3116,11 @@ const Close: Page = () => {
             ...HEAD,
             ...GRADIENT_TEXT,
             fontSize: 168,
-            letterSpacing: '-0.06em',
+            letterSpacing: '-0.02em',
             lineHeight: 1,
           }}
         >
-          Ship something.
+          發布點什麼吧。
         </h2>
         <div
           style={{
@@ -3128,9 +3145,9 @@ const Close: Page = () => {
           </span>
         </div>
       </div>
-      <MetaCell x={FL} label="Docs" value="lattice.dev/fabric" />
-      <MetaCell x={col(4)} label="Beta" value="Pro & Enterprise, today" />
-      <MetaCell x={col(8)} label="Next" value="Breakouts · 11:00, Hall B" />
+      <MetaCell x={FL} label="文件" value="lattice.dev/fabric" />
+      <MetaCell x={col(4)} label="測試版" value="Pro 與 Enterprise，即日起" />
+      <MetaCell x={col(8)} label="下一場" value="分組場次 · 11:00，Hall B" />
     </Stage>
   );
 };
@@ -3142,67 +3159,67 @@ Announce.transition = settle;
 Close.transition = settle;
 
 export const meta: SlideMeta = {
-  title: 'Lattice — Ship ’26 keynote',
+  title: 'Lattice — Ship ’26 開場主題演講',
   createdAt: '2026-10-12T05:18:06.665Z',
 };
 
 export const notes: (string | undefined)[] = [
-  `Walk on while the room settles. Wait for quiet.
-"Good morning, San Francisco. Welcome to Pier 48, and welcome to Ship '26."
-"We have a lot to show you today, and one thing we've been building for two years."
-Click.`,
-  `"First, a look back at the year."
-Left to right: "Four point eight million deployments every week, up sixty-two percent. One point two trillion requests served. Six new compute regions, eighteen in total."
-Land on the last cell: "And the median cold start is down a third, to two hundred and ten milliseconds."
-Beat. "We're proud of that number. But it's not the one that hurts most." Click.`,
-  `"Here's the one that hurts."
-"Your users are everywhere. Your data usually lives in one place."
-Trace the diagram: "A shopper in Singapore. The edge is four milliseconds away. The function runs right there. Then it needs Postgres, in Virginia."
-"Three queries. Three trips across the Pacific and back. Six hundred and thirty-six milliseconds of waiting."
-Point at the bar: "Eight hundred and sixty-two milliseconds before the first byte. Most of it is the ocean." Click.`,
-  `Let the function glide across before you speak.
-"Now move the function instead."
-"One trip across. The three queries now happen inside the same data center: one point three milliseconds each."
-"The cold start drops from two-ten to eighteen, because there's a snapshot waiting."
-"Same page. Two hundred and fifty milliseconds." Pause. Click.`,
-  `Say the name slowly.
-"This is Lattice Fabric."
-"A compute layer that runs every function next to the data it reads. You don't choose the region. Fabric does."
-Read the three facts: "Eighteen-millisecond cold starts. Three point four times faster to first byte. One line of config."
-"It's in public beta, starting today." Click.`,
-  `"Here's how it works. Three steps."
-Click: "Route. The nearest of our one hundred twenty-six edge locations takes the request and hands it to the Fabric router."
-Click: "Place. The router knows which data each route reads, so it sends the request to that region. Cart goes to Virginia, recommendations to Frankfurt, stock to Tokyo."
-Click: "Warm. A snapshot is already waiting there. It boots in eighteen milliseconds."
-"All of this happens before your code runs." Click.`,
-  `"And you deploy exactly the way you do today."
-Walk the log: "Upload, build, and then one new step: Fabric places each function next to its data, and snapshots it."
-"Twenty-three seconds, and Halyard's storefront is live with Fabric."
-Point at the card: "Ready. Twelve functions, three regions. Same Git flow." Click.`,
-  `"How do you turn it on?"
-Point at the highlighted line. "That's it. fabric: true."
-"Fabric reads your database bindings at build time. It places every route next to the data it queries. And it keeps a warm snapshot in each of those regions."
-"If you prefer, Command K, Enable Fabric, from the dashboard." Click.`,
-  `"Fabric isn't rolling out region by region. It's live everywhere, today."
-"All eighteen compute regions."
-Gesture at the table: "Median cold starts between sixteen and twenty-one milliseconds, wherever you are. p99 stays under one hundred and five." Click.`,
-  `"We ran the benchmark the boring way."
-"Same Next.js storefront, same database in Virginia, traffic from nine regions. Fourteen million requests over three weeks."
-Left chart: "Median time to first byte goes from eight sixty-two to two-fifty. Three point four times faster, and the whole curve moves, not just the median."
-Right chart: "Cold starts: two-ten down to eighteen at p50. Eleven-hundred-forty down to ninety-six at p99." Click.`,
-  `"Halyard was one of our first design partners."
-Read the quote in full. Let it land.
-"Checkout time to first byte down sixty-four percent, seven-forty to two sixty-eight. A four point two percent lift in checkout conversion in the first thirty days."
-"And one line changed in their config." Click.`,
-  `"So, when can you use it?"
-"Right now. Public beta starts today for every Pro and Enterprise team, in all eighteen regions."
-"In December, placement policies: pin routes, set allowlists, audit placements."
-"General availability in February, with the compute SLA, and Hobby plans included."
-"No added cost during the beta." Click.`,
-  `"One command to start."
-Pause on the command. "npx lattice at latest init."
-"Docs are live at lattice.dev slash fabric. Breakouts start at eleven in Hall B, and the team that built Fabric will be there."
-"Thank you. Go ship something."`,
+  `等台下安靜下來再走上台，等到全場安靜。
+「早安，San Francisco。歡迎來到 Pier 48，歡迎來到 Ship '26。」
+「今天有很多東西要給各位看，其中有一樣，是我們花了兩年打造的。」
+點擊。`,
+  `「首先，回顧這一年。」
+由左到右：「每週四百八十萬次部署，成長百分之六十二。處理了一點二兆次請求。新增六個運算區域，總共十八個。」
+停在最後一格：「而且冷啟動中位數下降了三分之一，降到兩百一十毫秒。」
+停頓。「這個數字我們很自豪。但它不是最讓人頭痛的那一個。」點擊。`,
+  `「接下來這個才是讓人頭痛的。」
+「你的使用者遍布全球，你的資料通常只放在一個地方。」
+沿著圖示說明：「一位在 Singapore 的消費者。邊緣節點離他只有四毫秒。函式就在那裡執行。接著它需要 Postgres，而 Postgres 在 Virginia。」
+「三次查詢。三趟橫越太平洋的往返。六百三十六毫秒都在等待。」
+指向長條：「第一個位元組送出之前，要等八百六十二毫秒，其中大部分時間都花在海洋上。」點擊。`,
+  `先讓函式滑過去，再開口。
+「現在，我們把函式搬過去。」
+「只橫越一次。三次查詢現在都在同一個資料中心內完成：每次一點三毫秒。」
+「冷啟動從兩百一十降到十八毫秒，因為有一份快照在那裡等著。」
+「同一個頁面，兩百五十毫秒。」停頓。點擊。`,
+  `慢慢說出這個名字。
+「這就是 Lattice Fabric。」
+「一個運算層，讓每個函式都在它所讀取的資料旁邊執行。你不用選區域，Fabric 幫你選。」
+唸出三項數據：「十八毫秒的冷啟動。首位元組快三點四倍。一行設定。」
+「它今天起進入公開測試版。」點擊。`,
+  `「來看它怎麼運作。總共三步。」
+點擊：「路由。我們一百二十六個邊緣據點中最近的一個接下請求，交給 Fabric 路由器。」
+點擊：「配置。路由器知道每條路由讀取哪些資料，所以會把請求送到那個區域。購物車送到 Virginia，推薦送到 Frankfurt，庫存送到 Tokyo。」
+點擊：「預熱。那裡已經有一份快照在等了，十八毫秒就能啟動。」
+「這一切，都發生在你的程式碼執行之前。」點擊。`,
+  `「而你部署的方式，和現在完全一樣。」
+帶著大家看記錄：「上傳、建置，然後多了一個新步驟：Fabric 把每個函式配置到資料旁邊，並建立快照。」
+「二十三秒，Halyard 的商店前台就帶著 Fabric 上線了。」
+指向卡片：「就緒。十二個函式，三個區域。同樣的 Git 流程。」點擊。`,
+  `「要怎麼啟用？」
+指向標示出來的那一行。「就這樣，fabric: true。」
+「Fabric 在建置時讀取你的資料庫繫結，把每條路由配置到它所查詢的資料旁邊，並且在每個區域都保留一份預熱好的快照。」
+「如果你喜歡，也可以在控制台按 Command K，選『啟用 Fabric』。」點擊。`,
+  `「Fabric 不是一個區域一個區域慢慢推出，而是今天就在所有地方上線。」
+「全部十八個運算區域。」
+比向表格：「不論你在哪裡，冷啟動中位數都落在十六到二十一毫秒之間，p99 低於一百零五毫秒。」點擊。`,
+  `「我們用最樸實的方式跑了這次基準測試。」
+「同一個 Next.js 商店前台、同一個位於 Virginia 的資料庫、來自九個區域的流量。三週內共一千四百二十萬次請求。」
+左邊的圖：「首位元組時間中位數從八百六十二降到兩百五十。快了三點四倍，而且整條曲線都往左移，不只是中位數。」
+右邊的圖：「冷啟動：p50 從兩百一十降到十八，p99 從一千一百四十降到九十六。」點擊。`,
+  `「Halyard 是我們最早的設計夥伴之一。」
+完整唸出這段引言，讓它沉澱一下。
+「結帳的首位元組時間下降百分之六十四，從七百四十降到兩百六十八。前三十天，結帳轉換率提升百分之四點二。」
+「而他們只改了設定檔裡的一行。」點擊。`,
+  `「那麼，什麼時候可以用？」
+「現在。公開測試版今天起開放給每一個 Pro 與 Enterprise 團隊，涵蓋全部十八個區域。」
+「十二月推出配置政策：固定路由、設定允許清單、稽核配置。」
+「二月正式上市，附帶運算 SLA，Hobby 方案也一併納入。」
+「測試期間不另收費。」點擊。`,
+  `「只需要一行指令就能開始。」
+停在指令上。「npx lattice at latest init。」
+「文件現在就上線了，網址是 lattice.dev 斜線 fabric。分組場次十一點在 Hall B 開始，打造 Fabric 的團隊都會在場。」
+「謝謝大家。去發布點什麼吧。」`,
 ];
 
 export default [

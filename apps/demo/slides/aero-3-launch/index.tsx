@@ -14,8 +14,9 @@ import { type CSSProperties, type ReactNode, useId } from 'react';
 export const design: DesignSystem = {
   palette: { bg: '#4B1DFF', text: '#FFFFFF', accent: '#D8FF2E' },
   fonts: {
-    display: '"Barlow Condensed", "Arial Narrow", system-ui, sans-serif',
-    body: '"Barlow", system-ui, sans-serif',
+    display:
+      '"Barlow Condensed", "Arial Narrow", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif',
+    body: '"Barlow", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif',
   },
   typeScale: { hero: 620, body: 30 },
   radius: 0,
@@ -255,8 +256,8 @@ const Bib = ({ tone }: { tone: Tone }) => {
       </span>
       <span style={{ fontVariantNumeric: 'tabular-nums', marginLeft: -8 }}>/ {pad(total)}</span>
       <span style={{ color: t.fg, marginLeft: 14 }}>Ostra</span>
-      <span>AERO 3 GTM</span>
-      <span style={{ marginLeft: 'auto' }}>Spring 2027 · Confidential</span>
+      <span>AERO 3 上市策略</span>
+      <span style={{ marginLeft: 'auto' }}>2027 春季 · 機密</span>
     </div>
   );
 };
@@ -491,7 +492,7 @@ const Cover: Page = () => {
 
       <Wordmark x={120} y={92} />
       <div style={abs(1100, 104, { ...LABEL, width: 700, textAlign: 'right', color: LAV })}>
-        Retail partners + leadership
+        通路夥伴與經營團隊
       </div>
 
       <h1
@@ -520,9 +521,9 @@ const Cover: Page = () => {
           ...enter(0.18),
         })}
       >
-        <span style={{ ...DISPLAY, fontSize: 92, lineHeight: 1 }}>Go-to-market</span>
+        <span style={{ ...DISPLAY, fontSize: 92, lineHeight: 1 }}>上市策略</span>
         <Mark color={INK} h={64} />
-        <span style={{ ...NUM, fontSize: 92, lineHeight: 1 }}>Spring 2027</span>
+        <span style={{ ...NUM, fontSize: 92, lineHeight: 1 }}>2027 春季</span>
       </div>
 
       <div
@@ -536,12 +537,12 @@ const Cover: Page = () => {
         })}
       >
         <span>168 g</span>
-        <SpecChip>39 / 31 mm stack</SpecChip>
-        <SpecChip>Full-length carbon</SpecChip>
+        <SpecChip>39 / 31 mm 堆疊高度</SpecChip>
+        <SpecChip>全長碳纖維板</SpecChip>
         <SpecChip>€260</SpecChip>
       </div>
       <div style={abs(1380, 896, { width: 420, textAlign: 'right' })}>
-        <div style={{ ...LABEL, fontSize: 17, color: LAV }}>Wide release</div>
+        <div style={{ ...LABEL, fontSize: 17, color: LAV }}>全面開賣</div>
         <div style={{ ...NUM, fontSize: 64, fontWeight: 800, marginTop: 6 }}>09·04·27</div>
       </div>
     </Stage>
@@ -569,12 +570,12 @@ const Race: Page = () => {
     : {};
   return (
     <Stage>
-      <Kicker tag="Market">The race we're in</Kicker>
+      <Kicker tag="市場">我們身處的這場競賽</Kicker>
 
       <div style={abs(120, 176)}>
         <div style={{ ...NUM, fontSize: 300 }}>3.4×</div>
         <p style={{ ...BODY, marginTop: 26, color: LAV, width: 560 }}>
-          Super-shoe category growth since 2022.
+          自2022年起，超級跑鞋品類的成長倍數。
         </p>
       </div>
       <div
@@ -589,16 +590,16 @@ const Race: Page = () => {
       <div style={abs(980, 176)}>
         <div style={{ ...NUM, fontSize: 300 }}>€2.9B</div>
         <p style={{ ...BODY, marginTop: 26, color: LAV, width: 640 }}>
-          Global retail value, 2026. Still accelerating.
+          2026年全球零售規模，仍在加速成長。
         </p>
       </div>
 
-      <div style={abs(120, 604, { ...LABEL, color: LAV })}>Ostra share of category</div>
+      <div style={abs(120, 604, { ...LABEL, color: LAV })}>Ostra 品類市佔率</div>
 
       <div style={abs(120, 650, { height: 115, display: 'flex', alignItems: 'center' })}>
         <div>
           <div style={{ ...NUM, fontSize: 52, fontWeight: 800 }}>2026</div>
-          <div style={{ ...LABEL, fontSize: 15, color: LAV, marginTop: 4 }}>Today</div>
+          <div style={{ ...LABEL, fontSize: 15, color: LAV, marginTop: 4 }}>現況</div>
         </div>
       </div>
       <ShareBar y={650} w={753} color={DEEP} />
@@ -611,7 +612,7 @@ const Race: Page = () => {
           <div style={{ ...NUM, fontSize: 52, fontWeight: 800, color: 'var(--osd-accent)' }}>
             2027
           </div>
-          <div style={{ ...LABEL, fontSize: 15, color: LAV, marginTop: 4 }}>Target</div>
+          <div style={{ ...LABEL, fontSize: 15, color: LAV, marginTop: 4 }}>目標</div>
         </div>
       </div>
       <VoltBand x={300} y={795} w={1380} />
@@ -626,7 +627,7 @@ const Race: Page = () => {
           ...land,
         })}
       >
-        <span style={{ ...LABEL, fontSize: 18, fontWeight: 700 }}>+5 pts · end of 2027</span>
+        <span style={{ ...LABEL, fontSize: 18, fontWeight: 700 }}>+5 個百分點 · 2027年底</span>
         <span style={{ ...NUM, fontSize: 104 }}>11%</span>
       </div>
     </Stage>
@@ -667,16 +668,16 @@ const HistTick = ({ i, label, end = false }: { i: number; label: string; end?: b
 
 const Runner: Page = () => (
   <Stage>
-    <Kicker tag="Runner">Who it's for</Kicker>
-    <h2 style={{ ...DISPLAY, ...abs(116, 168), fontSize: 150 }}>
-      Sub-3:30
+    <Kicker tag="跑者">目標客群</Kicker>
+    <h2 style={{ ...DISPLAY, ...abs(116, 168), fontSize: 128, lineHeight: 1.06 }}>
+      破 3:30 的跑者
       <br />
-      is the market.
+      就是主力市場。
     </h2>
     <div style={abs(1240, 168, { width: 560 })}>
       <div style={{ ...NUM, fontSize: 220, color: 'var(--osd-accent)' }}>2.1M</div>
       <p style={{ ...BODY, fontSize: 26, color: LAV, marginTop: 20 }}>
-        Runners worldwide with a sub-3:30 marathon in the last 36 months.
+        近 36 個月內全馬完賽時間破 3:30 的全球跑者。
       </p>
     </div>
 
@@ -686,7 +687,7 @@ const Runner: Page = () => (
       viewBox="0 0 1680 440"
       style={abs(120, 486, { overflow: 'visible' })}
       role="img"
-      aria-label="Marathon finish-time distribution with the sub-3:30 band highlighted"
+      aria-label="馬拉松完賽時間分布，破 3:30 的區間以強調色標示"
     >
       <HistBar i={0} v={0.3} hot />
       <HistBar i={1} v={0.6} hot />
@@ -736,7 +737,7 @@ const Runner: Page = () => (
           fontFamily: 'var(--osd-font-body)',
         }}
       >
-        MEDIAN 4:28
+        中位數 4:28
       </text>
 
       <path
@@ -754,7 +755,7 @@ const Runner: Page = () => (
           fontFamily: 'var(--osd-font-body)',
         }}
       >
-        TARGET · 2:30–3:29
+        目標 · 2:30–3:29
       </text>
       <text
         x={12}
@@ -768,7 +769,7 @@ const Runner: Page = () => (
           fontVariantNumeric: 'tabular-nums',
         }}
       >
-        11.4% OF FINISHERS
+        佔完賽者 11.4%
       </text>
 
       <HistTick i={0} label="2:30" />
@@ -791,7 +792,7 @@ const Runner: Page = () => (
           fontFamily: 'var(--osd-font-body)',
         }}
       >
-        FINISH TIME · 10-MIN BINS
+        完賽時間 · 每 10 分鐘一組
       </text>
     </svg>
   </Stage>
@@ -894,7 +895,7 @@ const Shoe = () => {
       viewBox="0 -10 1440 490"
       style={{ display: 'block', overflow: 'visible' }}
       role="img"
-      aria-label="AERO 3 side-profile midsole cross-section"
+      aria-label="AERO 3 側面輪廓與中底剖面圖"
     >
       <defs>
         <clipPath id={mid}>
@@ -1084,11 +1085,11 @@ const LegendItem = ({ n, title, sub }: { n: string; title: string; sub: string }
 
 const Product: Page = () => (
   <Stage>
-    <Kicker tag="Product">The shoe</Kicker>
-    <h2 style={{ ...DISPLAY, ...abs(116, 160), fontSize: 120 }}>Engineered to roll.</h2>
+    <Kicker tag="產品">這雙鞋</Kicker>
+    <h2 style={{ ...DISPLAY, ...abs(116, 160), fontSize: 120 }}>為滾動推進而生。</h2>
     <div style={abs(1440, 120, { width: 360, textAlign: 'right' })}>
       <div style={{ ...NUM, fontSize: 200, color: 'var(--osd-accent)' }}>168</div>
-      <div style={{ ...LABEL, marginTop: 10 }}>Grams · US M9</div>
+      <div style={{ ...LABEL, marginTop: 10 }}>公克 · US M9</div>
     </div>
 
     <div style={abs(240, 280)}>
@@ -1097,22 +1098,22 @@ const Product: Page = () => (
 
     <div style={abs(120, 604, { width: 170, textAlign: 'right' })}>
       <div style={{ ...NUM, fontSize: 84 }}>39</div>
-      <div style={{ ...LABEL, fontSize: 16, marginTop: 6, color: LAV }}>mm heel</div>
+      <div style={{ ...LABEL, fontSize: 16, marginTop: 6, color: LAV }}>mm 後跟</div>
     </div>
     <div style={abs(1656, 630, { width: 160 })}>
       <div style={{ ...NUM, fontSize: 84 }}>31</div>
-      <div style={{ ...LABEL, fontSize: 16, marginTop: 6, color: LAV }}>mm forefoot</div>
+      <div style={{ ...LABEL, fontSize: 16, marginTop: 6, color: LAV }}>mm 前掌</div>
     </div>
     <div style={abs(1656, 566, { width: 200, display: 'flex', alignItems: 'baseline', gap: 10 })}>
       <span style={{ ...NUM, fontSize: 40, color: 'var(--osd-accent)' }}>8 mm</span>
-      <span style={{ ...LABEL, fontSize: 16, color: LAV }}>Drop</span>
+      <span style={{ ...LABEL, fontSize: 16, color: LAV }}>落差</span>
     </div>
 
     <div style={abs(120, 806, { display: 'flex', gap: 24 })}>
-      <LegendItem n="1" title="PEBA Lift foam" sub="Top layer · 87% energy return" />
-      <LegendItem n="2" title="Carbon plate" sub="Full length, spoon-shaped toe" />
-      <LegendItem n="3" title="Carrier foam" sub="Firmer base for a stable heel" />
-      <LegendItem n="4" title="Outsole" sub="1.5 mm rubber, forefoot + heel" />
+      <LegendItem n="1" title="PEBA Lift 泡棉" sub="頂層 · 87% 能量回饋" />
+      <LegendItem n="2" title="碳纖維板" sub="全長設計，湯匙形鞋頭" />
+      <LegendItem n="3" title="承載泡棉" sub="較硬的底層，穩定後跟" />
+      <LegendItem n="4" title="大底" sub="1.5 mm 橡膠，前掌與後跟" />
     </div>
   </Stage>
 );
@@ -1193,11 +1194,11 @@ const LabRow = ({
 
 const Lab: Page = () => (
   <Stage tone="volt">
-    <Kicker tag="Lab" tone="volt">
-      Lab results
+    <Kicker tag="實驗室" tone="volt">
+      實驗室數據
     </Kicker>
-    <h2 style={{ ...DISPLAY, ...abs(116, 156), fontSize: 104, color: INK }}>
-      The lab says faster.
+    <h2 style={{ ...DISPLAY, ...abs(116, 156), fontSize: 88, color: INK }}>
+      實驗室數據證明：更快。
     </h2>
     <div
       style={abs(1210, 166, {
@@ -1219,34 +1220,24 @@ const Lab: Page = () => (
       </span>
       <span style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
         <span style={{ width: 30, height: 16, background: INK_A(0.24), clipPath: cut(16) }} />
-        Category avg
+        品類平均
       </span>
     </div>
 
-    <LabRow
-      y={300}
-      metric="Running economy"
-      value="+4.1%"
-      caption="Less oxygen at the same pace vs AERO 2"
-    >
+    <LabRow y={300} metric="跑步經濟性" value="+4.1%" caption="相同配速下，耗氧量比 AERO 2 更低">
       <LabBar name="AERO 3" w={655} value="6.9%" fill="var(--osd-bg)" bold />
       <LabBar name="AERO 2" w={266} value="2.8%" fill={INK} />
-      <LabBar name="Category avg" w={380} value="4.0%" fill={INK_A(0.24)} />
+      <LabBar name="品類平均" w={380} value="4.0%" fill={INK_A(0.24)} />
     </LabRow>
-    <LabRow
-      y={524}
-      metric="Energy return"
-      value="87%"
-      caption="Foam rebound, ASTM F1976 impact test"
-    >
+    <LabRow y={524} metric="能量回饋" value="87%" caption="泡棉回彈率，ASTM F1976 衝擊測試">
       <LabBar name="AERO 3" w={661} value="87%" fill="var(--osd-bg)" bold />
       <LabBar name="AERO 2" w={600} value="79%" fill={INK} />
-      <LabBar name="Category avg" w={616} value="81%" fill={INK_A(0.24)} />
+      <LabBar name="品類平均" w={616} value="81%" fill={INK_A(0.24)} />
     </LabRow>
-    <LabRow y={748} metric="Weight" value="168 g" caption="31 g lighter than AERO 2, US M9">
+    <LabRow y={748} metric="重量" value="168 g" caption="比 AERO 2 輕 31 g，US M9">
       <LabBar name="AERO 3" w={580} value="168 g" fill="var(--osd-bg)" bold />
       <LabBar name="AERO 2" w={687} value="199 g" fill={INK} />
-      <LabBar name="Category avg" w={663} value="192 g" fill={INK_A(0.24)} />
+      <LabBar name="品類平均" w={663} value="192 g" fill={INK_A(0.24)} />
     </LabRow>
 
     <div
@@ -1259,8 +1250,9 @@ const Lab: Page = () => (
         lineHeight: 1.3,
       })}
     >
-      Ostra Lab Porto · n = 24 sub-3:15 runners · treadmill, 16 km/h · randomised crossover · Aug
-      2026. Economy shown as gain vs a non-plated control.
+      {
+        'Ostra Lab Porto · n = 24 位全馬破 3:15 跑者 · 跑步機，16 km/h · 隨機交叉試驗 · 2026年8月。跑步經濟性以相對於無碳板對照鞋的進步幅度表示。'
+      }
     </div>
   </Stage>
 );
@@ -1332,11 +1324,11 @@ const CountryChip = ({ code }: { code: string }) => (
 
 const Proof: Page = () => (
   <Stage tone="ink">
-    <Kicker tag="Race" tone="ink">
-      Proof on road
+    <Kicker tag="賽事" tone="ink">
+      實戰驗證
     </Kicker>
     <div style={abs(120, 176, { ...LABEL, color: WHITE_A(0.6) })}>
-      Valencia Marathon · 06 Dec 2026
+      Valencia Marathon · 2026年12月6日
     </div>
     <div style={{ ...NUM, ...abs(110, 214), fontSize: 300, color: 'var(--osd-accent)' }}>
       2:04:17
@@ -1356,11 +1348,11 @@ const Proof: Page = () => (
           lineHeight: 1,
         }}
       >
-        1st
+        第 1 名
       </span>
       <div style={{ ...DISPLAY, fontSize: 48, marginTop: 26 }}>E. Kimani · KEN</div>
       <div style={{ ...BODY, fontSize: 24, color: WHITE_A(0.6), marginTop: 12 }}>
-        Negative split. Second half 1:02:08.
+        後半程更快（negative split）。後半馬 1:02:08。
       </div>
     </div>
 
@@ -1376,32 +1368,32 @@ const Proof: Page = () => (
     >
       <SplitCell label="5 km" time="14:42" />
       <SplitCell label="10 km" time="29:25" />
-      <SplitCell label="Half" time="1:02:09" />
+      <SplitCell label="半程" time="1:02:09" />
       <SplitCell label="30 km" time="1:28:20" />
       <SplitCell label="40 km" time="1:57:50" />
-      <SplitCell label="Finish" time="2:04:17" last />
+      <SplitCell label="終點" time="2:04:17" last />
     </div>
 
     <div style={abs(120, 744, { width: 760 })}>
-      <div style={{ ...LABEL, color: WHITE_A(0.6) }}>Berlin Marathon · 27 Sep 2026</div>
+      <div style={{ ...LABEL, color: WHITE_A(0.6) }}>Berlin Marathon · 2026年9月27日</div>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 30, marginTop: 18 }}>
         <span style={{ ...NUM, fontSize: 128 }}>2:03:51</span>
-        <span style={{ ...DISPLAY, fontSize: 56, color: 'var(--osd-accent)' }}>3rd</span>
+        <span style={{ ...DISPLAY, fontSize: 56, color: 'var(--osd-accent)' }}>第 3 名</span>
       </div>
       <div style={{ ...BODY, fontSize: 24, color: WHITE_A(0.6), marginTop: 14 }}>
-        J. Tefera · ETH · AERO 3 prototype
+        J. Tefera · ETH · AERO 3 原型款
       </div>
     </div>
     <div style={abs(1000, 744, { width: 800, display: 'flex', gap: 34 })}>
       <div style={{ ...NUM, fontSize: 236, color: CORAL, marginTop: -10 }}>6</div>
       <div>
-        <div style={{ ...DISPLAY, fontSize: 64 }}>
-          National
+        <div style={{ ...DISPLAY, fontSize: 64, lineHeight: 1.05 }}>
+          國家
           <br />
-          records
+          紀錄
         </div>
         <div style={{ ...BODY, fontSize: 22, color: WHITE_A(0.6), marginTop: 12 }}>
-          Set in AERO 3 prototypes, 2026
+          2026年穿著 AERO 3 原型款締造
         </div>
         <div style={{ display: 'flex', gap: 8, marginTop: 16 }}>
           <CountryChip code="POR" />
@@ -1455,7 +1447,7 @@ const Divider: Page = () => {
         viewBox="0 0 1920 1080"
         style={abs(0, 0)}
         role="img"
-        aria-label="Running track bend with a volt line in lane one"
+        aria-label="田徑場彎道，第一道上畫著一條螢光線"
       >
         <path
           d={lanePath(TRACK.r0 + 4 * TRACK.lane)}
@@ -1498,16 +1490,16 @@ const Divider: Page = () => {
         />
       </svg>
 
-      <Kicker tag="Campaign" x={120} y={300}>
-        Spring–autumn 2027
+      <Kicker tag="行銷活動" x={120} y={300}>
+        2027年春季至秋季
       </Kicker>
-      <h2 style={{ ...DISPLAY, ...abs(112, 366), fontSize: 236 }}>
-        Run the
+      <h2 style={{ ...DISPLAY, ...abs(112, 366), fontSize: 200, lineHeight: 1.04 }}>
+        跑上
         <br />
-        <span style={{ color: 'var(--osd-accent)' }}>line.</span>
+        <span style={{ color: 'var(--osd-accent)' }}>那條線。</span>
       </h2>
       <p style={{ ...BODY, ...abs(120, 790), color: LAV }}>
-        Six marathons. One volt line. 42.195 km each.
+        六場馬拉松，一條螢光線，每場 42.195 km。
       </p>
     </Stage>
   );
@@ -1613,15 +1605,14 @@ const CityRow = ({ n, city, date }: { n: string; city: string; date: string }) =
 
 const Idea: Page = () => (
   <Stage>
-    <Kicker tag="Campaign">The idea</Kicker>
-    <h2 style={{ ...DISPLAY, ...abs(116, 160), fontSize: 132 }}>
-      One line.
+    <Kicker tag="行銷活動">核心概念</Kicker>
+    <h2 style={{ ...DISPLAY, ...abs(116, 160), fontSize: 112, lineHeight: 1.04 }}>
+      一條線，
       <br />
-      42.195 km.
+      42.195 km。
     </h2>
     <p style={{ ...BODY, ...abs(120, 404), width: 800, color: LAV }}>
-      The night before race day we paint one volt line along the full course. Every runner follows
-      it. Every camera finds it.
+      賽前一晚，我們沿著整條賽道畫上一條螢光線。每位跑者都跟著它跑，每台鏡頭都拍得到它。
     </p>
     <svg
       width={960}
@@ -1629,7 +1620,7 @@ const Idea: Page = () => (
       viewBox="0 0 960 330"
       style={abs(120, 540, { overflow: 'visible' })}
       role="img"
-      aria-label="Stylised marathon course with a volt line"
+      aria-label="馬拉松賽道示意圖，上面畫著一條螢光線"
     >
       <path
         d={ROUTE_D}
@@ -1651,7 +1642,7 @@ const Idea: Page = () => (
           strokeLinejoin: 'round',
         }}
       />
-      <RouteMark x={24} y={270} label="START" />
+      <RouteMark x={24} y={270} label="起點" />
       <RouteMark x={ROUTE[2][0]} y={110} label="10 KM" />
       <RouteMark x={470} y={110} label="21.1 KM" />
       <RouteMark x={ROUTE[6][0]} y={64} label="30 KM" />
@@ -1660,14 +1651,14 @@ const Idea: Page = () => (
 
     <div style={abs(1120, 168, { width: 680 })}>
       <div style={{ ...LABEL, color: LAV, paddingBottom: 14, borderBottom: '2px solid #FFFFFF' }}>
-        2027 · Six courses
+        2027 · 六條賽道
       </div>
-      <CityRow n="01" city="Tokyo" date="07 Mar" />
-      <CityRow n="02" city="Paris" date="11 Apr" />
-      <CityRow n="03" city="Boston" date="19 Apr" />
-      <CityRow n="04" city="London" date="25 Apr" />
-      <CityRow n="05" city="Berlin" date="26 Sep" />
-      <CityRow n="06" city="New York" date="07 Nov" />
+      <CityRow n="01" city="Tokyo" date="3月7日" />
+      <CityRow n="02" city="Paris" date="4月11日" />
+      <CityRow n="03" city="Boston" date="4月19日" />
+      <CityRow n="04" city="London" date="4月25日" />
+      <CityRow n="05" city="Berlin" date="9月26日" />
+      <CityRow n="06" city="New York" date="11月7日" />
     </div>
   </Stage>
 );
@@ -1719,13 +1710,13 @@ const LaunchStop = ({
 
 const Launch: Page = () => (
   <Stage tone="ink">
-    <Kicker tag="Launch" tone="ink">
-      Launch sequence · Feb–Jun 2027
+    <Kicker tag="上市" tone="ink">
+      上市節奏 · 2027年2月至6月
     </Kicker>
-    <h2 style={{ ...DISPLAY, ...abs(116, 160), fontSize: 120 }}>
-      Four drops.
+    <h2 style={{ ...DISPLAY, ...abs(116, 160), fontSize: 108, lineHeight: 1.05 }}>
+      四波開賣，
       <br />
-      <span style={{ color: 'var(--osd-accent)' }}>One build.</span>
+      <span style={{ color: 'var(--osd-accent)' }}>同一款鞋。</span>
     </h2>
     <svg width={1920} height={1080} viewBox="0 0 1920 1080" style={abs(0, 0)} aria-hidden="true">
       <line
@@ -1744,33 +1735,33 @@ const Launch: Page = () => (
       <Step duration={260}>
         <LaunchStop
           x={200}
-          date="03 Feb"
-          title="Athlete-only"
-          body="200 Ostra athletes race it first. No retail."
+          date="2月3日"
+          title="運動員限定"
+          body="200 位 Ostra 運動員率先穿著比賽，通路尚未販售。"
         />
       </Step>
       <Step duration={260}>
         <LaunchStop
           x={620}
-          date="07 Mar"
-          title="Run clubs"
-          body="300 clubs, 9,000 pairs seeded. Tokyo line day."
+          date="3月7日"
+          title="跑步社團"
+          body="鋪貨 300 個社團、9,000 雙，同日是 Tokyo 的畫線日。"
         />
       </Step>
       <Step duration={260}>
         <LaunchStop
           x={1040}
-          date="15 Mar"
-          title="Members"
-          body="Ostra.com members get 72-hour early access."
+          date="3月15日"
+          title="會員"
+          body="Ostra.com 會員可提前 72 小時購買。"
         />
       </Step>
       <Step duration={260}>
         <LaunchStop
           x={1460}
-          date="09 Apr"
-          title="Wide release"
-          body="DTC and 1,400 partner doors in 38 markets."
+          date="4月9日"
+          title="全面開賣"
+          body="官網直營，以及 38 個市場的 1,400 家合作門市。"
         />
       </Step>
     </Steps>
@@ -1844,35 +1835,29 @@ const LadderRow = ({
 
 const Price: Page = () => (
   <Stage tone="volt">
-    <Kicker tag="Price" tone="volt">
-      Price &amp; channels
+    <Kicker tag="價格" tone="volt">
+      價格與通路
     </Kicker>
     <div style={{ ...NUM, ...abs(104, 150), fontSize: 360, color: INK }}>€260</div>
     <p style={{ ...BODY, ...abs(120, 470), color: INK, width: 820 }}>
-      One price, every market. No markdowns before 1 September.
+      各市場統一售價，9月1日前不打折。
     </p>
     <div style={abs(1240, 178, { width: 560 })}>
-      <div style={{ ...LABEL, fontSize: 17, color: INK_A(0.66), marginBottom: 14 }}>
-        Price ladder
-      </div>
+      <div style={{ ...LABEL, fontSize: 17, color: INK_A(0.66), marginBottom: 14 }}>價格帶</div>
       <LadderRow name="AERO 3" price="€260" bold />
-      <LadderRow name="Category flagship avg" price="€252" />
+      <LadderRow name="品類旗艦款均價" price="€252" />
       <LadderRow name="AERO 2" price="€230" />
     </div>
 
     <div style={abs(120, 618, { ...LABEL, fontSize: 17, color: INK_A(0.66) })}>
-      Channel mix · year-one units
+      通路組合 · 第一年銷量
     </div>
-    <ChannelSeg x={120} w={742} pct="45%" name="DTC" fill="var(--osd-bg)" fg="#FFFFFF" />
-    <ChannelSeg x={878} w={577} pct="35%" name="Run specialty" fill={INK} fg="var(--osd-accent)" />
-    <ChannelSeg x={1471} w={329} pct="20%" name="Wholesale" fill="#FFFFFF" fg={INK} />
-    <ChannelNote x={120} title="Ostra.com + 31 brand stores" body="64% gross margin" />
-    <ChannelNote
-      x={878}
-      title="1,100 run-specialty doors"
-      body="45% partner margin at full price"
-    />
-    <ChannelNote x={1471} title="300 sport-chain doors" body="MAP held for 90 days" />
+    <ChannelSeg x={120} w={742} pct="45%" name="直營" fill="var(--osd-bg)" fg="#FFFFFF" />
+    <ChannelSeg x={878} w={577} pct="35%" name="跑步專賣" fill={INK} fg="var(--osd-accent)" />
+    <ChannelSeg x={1471} w={329} pct="20%" name="批發" fill="#FFFFFF" fg={INK} />
+    <ChannelNote x={120} title="Ostra.com + 31 間品牌店" body="毛利率 64%" />
+    <ChannelNote x={878} title="1,100 間跑步專賣店" body="原價銷售時夥伴毛利 45%" />
+    <ChannelNote x={1471} title="300 間連鎖運動用品店" body="90 天內維持 MAP 最低廣告價" />
   </Stage>
 );
 
@@ -1925,21 +1910,21 @@ const QBar = ({
 
 const Forecast: Page = () => (
   <Stage>
-    <Kicker tag="Forecast">Year one</Kicker>
+    <Kicker tag="預測">第一年</Kicker>
     <div style={abs(120, 176)}>
       <div style={{ ...NUM, fontSize: 280, color: 'var(--osd-accent)' }}>320K</div>
-      <div style={{ ...LABEL, fontSize: 24, marginTop: 20 }}>Pairs in year one</div>
+      <div style={{ ...LABEL, fontSize: 24, marginTop: 20 }}>第一年銷售雙數</div>
       <div style={{ ...NUM, fontSize: 150, marginTop: 64 }}>€52M</div>
-      <div style={{ ...LABEL, fontSize: 24, marginTop: 18 }}>Net revenue · FY27</div>
+      <div style={{ ...LABEL, fontSize: 24, marginTop: 18 }}>淨營收 · FY27</div>
       <p style={{ ...BODY, fontSize: 22, color: LAV, marginTop: 36, width: 540 }}>
-        Assumes 1,400 partner doors live on 9 April and six Run the Line races.
+        假設4月9日有 1,400 家合作門市同步開賣，並舉辦六場「跑上那條線」賽事。
       </p>
     </div>
     <div style={abs(800, 860, { width: 1000, height: 2, background: '#FFFFFF' })} />
-    <QBar x={820} k={38} q="Q1" months="Jan–Mar" note="Athletes + clubs" />
-    <QBar x={1050} k={96} q="Q2" months="Apr–Jun" note="Wide release" />
-    <QBar x={1280} k={74} q="Q3" months="Jul–Sep" note="Summer build, Berlin" />
-    <QBar x={1510} k={112} q="Q4" months="Oct–Dec" note="New York + holiday" hot />
+    <QBar x={820} k={38} q="Q1" months="1–3月" note="運動員與社團" />
+    <QBar x={1050} k={96} q="Q2" months="4–6月" note="全面開賣" />
+    <QBar x={1280} k={74} q="Q3" months="7–9月" note="夏季累積，含 Berlin" />
+    <QBar x={1510} k={112} q="Q4" months="10–12月" note="New York 與年終檔期" hot />
   </Stage>
 );
 
@@ -1989,10 +1974,10 @@ const AskRow = ({
 
 const Asks: Page = () => (
   <Stage tone="volt">
-    <Kicker tag="Partners" tone="volt">
-      What we need
+    <Kicker tag="夥伴" tone="volt">
+      我們需要什麼
     </Kicker>
-    <h2 style={{ ...DISPLAY, ...abs(112, 156), fontSize: 200, color: INK }}>Three asks.</h2>
+    <h2 style={{ ...DISPLAY, ...abs(112, 156), fontSize: 200, color: INK }}>三項請求。</h2>
     <div
       style={abs(1300, 258, {
         ...LABEL,
@@ -2002,34 +1987,34 @@ const Asks: Page = () => (
         fontWeight: 700,
       })}
     >
-      Launch window · 09–19 Apr 2027
+      上市檔期 · 2027年4月9–19日
     </div>
     <Steps>
       <Step duration={260}>
         <AskRow
           y={384}
           n="01"
-          title="The line, in store"
-          body="A 4 m volt line fixture, floor to wall. We ship and install."
-          meta="Live by 01 Apr"
+          title="門市裡的那條線"
+          body="一座 4 m 的螢光線陳列架，從地板延伸到牆面。由我們出貨並安裝。"
+          meta="4月1日前上線"
         />
       </Step>
       <Step duration={260}>
         <AskRow
           y={572}
           n="02"
-          title="Run-club launch nights"
-          body="Host one AERO 3 run. We bring pacers and test pairs."
-          meta="Launch week"
+          title="跑步社團上市之夜"
+          body="舉辦一場 AERO 3 路跑活動。我們提供配速員與試穿鞋款。"
+          meta="上市週"
         />
       </Step>
       <Step duration={260}>
         <AskRow
           y={760}
           n="03"
-          title="The front window"
-          body="Ten days of launch window. Creative and install on us."
-          meta="09–19 Apr"
+          title="店面櫥窗"
+          body="提供十天的上市櫥窗檔期，設計與安裝由我們負責。"
+          meta="4月9–19日"
         />
       </Step>
     </Steps>
@@ -2069,19 +2054,19 @@ const Close: Page = () => {
   return (
     <Stage footer={false}>
       <Wordmark x={120} y={92} />
-      <h2 style={{ ...DISPLAY, ...abs(112, 186), fontSize: 196, ...enter(0.05) }}>
-        See you at
+      <h2 style={{ ...DISPLAY, ...abs(112, 186), fontSize: 164, lineHeight: 1.05, ...enter(0.05) }}>
+        我們在
         <br />
-        the start line.
+        起跑線上見。
       </h2>
       <div style={abs(120, 560, { ...enter(0.18) })}>
         <div style={{ ...DISPLAY, fontSize: 48, lineHeight: 1 }}>Tomás Vieira</div>
         <div style={{ ...BODY, color: LAV, marginTop: 12 }}>
-          VP Global Running · tomas.vieira@ostra.run
+          全球跑步事業部副總 · tomas.vieira@ostra.run
         </div>
       </div>
       <div style={abs(1380, 560, { width: 420, textAlign: 'right' })}>
-        <div style={{ ...LABEL, fontSize: 17, color: LAV }}>Wide release</div>
+        <div style={{ ...LABEL, fontSize: 17, color: LAV }}>全面開賣</div>
         <div
           style={{
             ...NUM,
@@ -2121,51 +2106,51 @@ Cover.transition = morphTransition;
 Race.transition = morphTransition;
 
 export const meta: SlideMeta = {
-  title: 'Ostra AERO 3 — Go-to-market, Spring 2027',
+  title: 'Ostra AERO 3 — 上市策略，2027 春季',
   createdAt: '2026-10-11T11:45:09.631Z',
 };
 
 export const notes: (string | undefined)[] = [
-  `Let the speed lines run for a beat before you speak.
-"This is AERO 3, our third carbon racer, and the most important shoe Ostra will ship in 2027."
-"Next forty minutes: the market, the shoe, the proof, and exactly what we need from you." Click.`,
-  `Watch the volt band drop into the bar. That's the whole plan in one move.
-"The super-shoe category has grown three point four times since 2022. It's now two point nine billion euros."
-"We hold six percent of it. AERO 3 takes us to eleven by the end of 2027." Click.`,
-  `"We're not building for everyone. We're building for the sub-3:30 runner."
-Point at the volt bars: "About eleven percent of marathon finishers. Two point one million people worldwide."
-"They buy early, they buy every season, and they set the shoe the rest of the start corral wants." Click.`,
-  `"Here's what's under the foot."
-Walk the layers bottom up: outsole, carrier foam, a full-length carbon plate, and a top layer of PEBA we call Lift.
-"Thirty-nine millimetres at the heel, thirty-one at the forefoot, eight millimetre drop. One hundred sixty-eight grams in a men's nine." Click.`,
-  `"We took it to our lab in Porto. Twenty-four runners, sixteen kilometres an hour, randomised."
-"Four point one percent better running economy than AERO 2. Eighty-seven percent energy return. Thirty-one grams lighter."
-"Note the category bar. AERO 2 had fallen behind the field. AERO 3 is ahead of it." Click.`,
-  `"Lab numbers are nice. Race results sell shoes."
-"Valencia, December: Elias Kimani wins in two oh four seventeen, negative split, in AERO 3."
-"Berlin podium in September. And six national records in prototypes this year." Click.`,
-  `Pause on the track. Let the pace lights circle once.
-"So how do we tell the world? We don't buy the course. We draw on it."
-"Run the Line." Click.`,
-  `"In six marathons this year, the night before the race, we paint one volt line along the full 42.195 kilometres."
-"Every runner follows it. Every broadcast camera picks it up. Every photo from the day has our colour in it."
-Read the six cities and dates, Tokyo to New York. Click.`,
-  `Four clicks, one per drop.
-"February third, athletes only. March seventh, three hundred run clubs, nine thousand pairs, the same day Tokyo gets its line."
-"March fifteenth, members. April ninth, wide release, fourteen hundred partner doors in thirty-eight markets." Click.`,
-  `"Two hundred sixty euros. One price everywhere, and no markdowns before September."
-"Mix: forty-five percent direct, thirty-five run specialty, twenty wholesale."
-"For specialty partners that's forty-five percent margin at full price, and MAP held for ninety days." Click.`,
-  `"Year one: three hundred twenty thousand pairs, about fifty-two million euros net."
-"Q2 is the wide release. Q4 is the peak, Berlin, New York and holiday."
-"This assumes all fourteen hundred doors are live on April ninth, which brings me to what we need." Click.`,
-  `Three clicks, one per ask.
-"One: the line in your store. A four metre fixture, floor to wall. We ship it and install it by April first."
-"Two: host one launch-night run. We bring pacers and test pairs."
-"Three: your front window for ten days of launch week. Creative and install are on us." Click.`,
-  `"Thank you. See you at the start line."
-"I'm Tomás Vieira, I run Global Running. My team will follow up this week with fixture specs and your allocation."
-Open for questions.`,
+  `先讓速度線跑一拍再開口。
+「這是 AERO 3，我們的第三代碳板競速鞋，也是 Ostra 在2027年最重要的一雙鞋。」
+「接下來四十分鐘：市場、這雙鞋、實戰證明，以及我們到底需要各位做什麼。」點擊換頁。`,
+  `看著螢光色帶落進長條圖，整個計畫就在這一個動作裡。
+「超級跑鞋這個品類，自2022年起成長了三點四倍，現在是 29 億歐元的規模。」
+「我們目前佔 6%，AERO 3 會讓我們在2027年底拉到 11%。」點擊換頁。`,
+  `「我們不是要做給所有人的鞋，而是做給全馬破 3:30 的跑者。」
+指向螢光色長條：「大約佔全馬完賽者的 11%，全球有 210 萬人。」
+「他們買得早、每一季都買，而且他們穿什麼，起跑區裡其他人就想穿什麼。」點擊換頁。`,
+  `「來看看腳底下有什麼。」
+由下往上帶過每一層：大底、承載泡棉、全長碳纖維板，以及我們稱為 Lift 的 PEBA 頂層泡棉。
+「後跟 39 毫米、前掌 31 毫米，落差 8 毫米。男款 US 9 只有 168 公克。」點擊換頁。`,
+  `「我們把它帶到波爾圖的實驗室：24 位跑者，時速 16 公里，隨機分組。」
+「跑步經濟性比 AERO 2 好 4.1%，能量回饋 87%，輕了 31 公克。」
+「請看品類平均那條長條：AERO 2 已經落後同儕，而 AERO 3 領先。」點擊換頁。`,
+  `「實驗室數字很漂亮，但賣鞋靠的是賽道上的成績。」
+「12月的 Valencia：Elias Kimani 以 2 小時 04 分 17 秒奪冠，後半程更快，穿的是 AERO 3。」
+「9月的 Berlin 登上頒獎台，還有今年六項國家紀錄，都是穿原型款創下的。」點擊換頁。`,
+  `停在田徑場這一頁，讓配速燈繞一圈。
+「那麼，我們要怎麼讓全世界知道？我們不買下賽道，我們直接在上面畫。」
+「跑上那條線。」點擊換頁。`,
+  `「今年的六場馬拉松，賽前一晚，我們會沿著完整的 42.195 公里畫上一條螢光線。」
+「每位跑者都跟著它跑，每台轉播鏡頭都拍得到它，當天每一張照片裡都有我們的顏色。」
+唸出六個城市和日期，從 Tokyo 到 New York。點擊換頁。`,
+  `四次點擊，一次一波開賣。
+「2月3日，運動員限定。3月7日，300 個跑步社團、9,000 雙鞋，同一天 Tokyo 也畫上它的那條線。」
+「3月15日是會員。4月9日全面開賣，38 個市場、1,400 家合作門市。」點擊換頁。`,
+  `「260 歐元。全球同一個價格，9月之前不打折。」
+「通路組合：直營 45%、跑步專賣 35%、批發 20%。」
+「對專賣店夥伴來說，原價銷售的毛利是 45%，而且 MAP 最低廣告價會維持 90 天。」點擊換頁。`,
+  `「第一年：32 萬雙，淨營收約 5,200 萬歐元。」
+「第二季是全面開賣，第四季是高峰：Berlin、New York 加上年終檔期。」
+「這個預測假設 1,400 家門市在4月9日全部開賣，這也帶到我們需要各位的地方。」點擊換頁。`,
+  `三次點擊，一次一項請求。
+「第一：在各位的門市放上那條線。一座 4 公尺的陳列架，從地板延伸到牆面，由我們出貨，4月1日前安裝完成。」
+「第二：舉辦一場上市之夜路跑。配速員和試穿鞋款由我們帶來。」
+「第三：讓出店面櫥窗，上市週共十天。設計和安裝都由我們負責。」點擊換頁。`,
+  `「謝謝大家，我們起跑線上見。」
+「我是 Tomás Vieira，負責全球跑步事業。我的團隊本週會跟進陳列架規格和各位的配貨量。」
+開放提問。`,
 ];
 
 export default [

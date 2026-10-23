@@ -14,8 +14,9 @@ import { type CSSProperties, type ReactNode, useId } from 'react';
 export const design: DesignSystem = {
   palette: { bg: '#FFFEFC', text: '#191919', accent: '#E8553B' },
   fonts: {
-    display: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, sans-serif',
-    body: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, sans-serif',
+    display:
+      '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, sans-serif, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
+    body: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, sans-serif, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
   },
   typeScale: { hero: 150, body: 34 },
   radius: 24,
@@ -59,7 +60,8 @@ const RED_HEX = '#E8553B';
 const BODY = '#5F5E5B';
 const SOFT = '#9B9A97';
 const RULE = 'rgba(25,25,25,0.12)';
-const SERIF = '"Newsreader", "Iowan Old Style", Georgia, serif';
+const SERIF =
+  '"Newsreader", "Iowan Old Style", Georgia, serif, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif';
 
 const YELLOW = '#F8DA7E';
 const BLUE = '#8DBDEB';
@@ -294,7 +296,7 @@ const Footer = () => {
       <span style={{ ...row, gap: 12 }}>
         <Mark size={24} />
         <span style={{ color: INK, fontWeight: 720, letterSpacing: '-0.02em' }}>Fieldwork</span>
-        <span style={{ marginLeft: 12 }}>FY27 Operating Plan</span>
+        <span style={{ marginLeft: 12 }}>FY27 營運計畫</span>
       </span>
       <span>
         {pad2(current)} / {pad2(total)}
@@ -384,11 +386,9 @@ const Cover: Page = () => {
         <span style={{ fontSize: 30, fontWeight: 760, letterSpacing: '-0.03em' }}>Fieldwork</span>
       </div>
       <h1 style={{ ...abs(X0, 262), ...headline(150), fontSize: 'var(--osd-size-hero)' }}>
-        The FY27
+        FY27
         <br />
-        operating
-        <br />
-        plan.
+        營運計畫
       </h1>
       <p
         style={{
@@ -399,10 +399,10 @@ const Cover: Page = () => {
           color: BODY,
         }}
       >
-        How we get from $28.6M to <Highlight>$40.0M ARR</Highlight>, and who does what.
+        我們如何從 $28.6M 走到 <Highlight>$40.0M ARR</Highlight>，以及誰負責什麼。
       </p>
       <div style={{ ...abs(X0, 906), fontSize: 24, color: SOFT }}>
-        All-hands and board pre-read · January 14, 2027 · Maya Lindqvist, CEO
+        全員大會與董事會預讀資料 · 2027 年 1 月 14 日 · Maya Lindqvist，執行長
       </div>
       <CoverArt />
     </Frame>
@@ -431,8 +431,8 @@ const Summary: Page = () => {
   const live = useIsActivePage();
   return (
     <Frame>
-      <Eyebrow>TL;DR</Eyebrow>
-      <h2 style={{ ...abs(X0, 160), ...headline(104) }}>The plan, on one page.</h2>
+      <Eyebrow>重點摘要</Eyebrow>
+      <h2 style={{ ...abs(X0, 160), ...headline(104) }}>一頁看懂整份計畫。</h2>
       <p
         style={{
           ...abs(X0, 318, 1240),
@@ -442,13 +442,13 @@ const Summary: Page = () => {
           color: BODY,
         }}
       >
-        FY26 closed ahead of plan on ARR, but <Highlight>larger crews outgrew us</Highlight> and
-        retention missed. FY27 fixes that with three bets, and grows Fieldwork to $40.0M ARR and 186
-        people at a 1.1× burn multiple.
+        FY26 的 ARR 超前目標，但<Highlight>大型團隊已經用不下我們</Highlight>
+        ，留存率也沒有達標。FY27 靠三項押注補上這個缺口，在 1.1× 的燒錢倍數下，把 Fieldwork 帶到
+        $40.0M ARR、186 位夥伴。
       </p>
-      <BigNumber x={X0} value="$40.0M" label="ARR by December 31" sub="from $28.6M, up 40%" />
-      <BigNumber x={700} value="116%" label="Net revenue retention" sub="from 109%, up 7 points" />
-      <BigNumber x={1280} value="186" label="People on the team" sub="from 142, 44 new roles" />
+      <BigNumber x={X0} value="$40.0M" label="12 月 31 日的 ARR" sub="從 $28.6M 成長 40%" />
+      <BigNumber x={700} value="116%" label="淨營收留存率" sub="從 109% 提升 7 個百分點" />
+      <BigNumber x={1280} value="186" label="團隊人數" sub="從 142 人，新增 44 個職缺" />
       <CircleDoodle x={52} y={560} w={660} h={232} live={live} />
       <Ink width={400} height={50} style={abs(694, 730)}>
         <Stroke
@@ -499,7 +499,7 @@ const ScoreRow = ({
     <div style={{ ...abs(0, 26), fontSize: 34, fontWeight: 660, letterSpacing: '-0.015em' }}>
       {metric}
     </div>
-    <div style={{ ...abs(0, 74), fontSize: 24, color: SOFT }}>Target {target}</div>
+    <div style={{ ...abs(0, 74), fontSize: 24, color: SOFT }}>目標 {target}</div>
     <div
       style={{
         ...abs(560, 30, 260),
@@ -559,11 +559,11 @@ const Scorecard: Page = () => {
   const live = useIsActivePage();
   return (
     <Frame>
-      <Eyebrow>FY26 scorecard</Eyebrow>
+      <Eyebrow>FY26 成績單</Eyebrow>
       <h2 style={{ ...abs(X0, 160), ...headline(120), lineHeight: 0.98 }}>
-        Five out
+        六項目標，
         <br />
-        of six.
+        達成五項。
       </h2>
       <p
         style={{
@@ -574,7 +574,7 @@ const Scorecard: Page = () => {
           color: BODY,
         }}
       >
-        We beat on growth and efficiency. Retention missed, and that miss shapes most of FY27.
+        成長與效率都超前，只有留存率沒達標，而這個落差決定了 FY27 的大部分規劃。
       </p>
       <Ink width={420} height={60} style={abs(X0, 640)}>
         <TallyBox x={0} live={live} />
@@ -584,25 +584,12 @@ const Scorecard: Page = () => {
         <TallyBox x={280} live={live} />
         <TallyBox x={350} miss live={live} />
       </Ink>
-      <ScoreRow top={150} metric="Ending ARR" target="$27.5M" actual="$28.6M" status="Beat" />
-      <ScoreRow top={274} metric="New customers" target="1,150" actual="1,186" status="Hit" />
-      <ScoreRow
-        top={398}
-        metric="Net revenue retention"
-        target="115%"
-        actual="109%"
-        status="Missed by 6"
-        miss
-      />
-      <ScoreRow top={522} metric="Gross margin" target="76.0%" actual="77.8%" status="Hit" />
-      <ScoreRow top={646} metric="Logo churn" target="10% or less" actual="9.4%" status="Hit" />
-      <ScoreRow
-        top={770}
-        metric="Burn multiple"
-        target="1.3× or less"
-        actual="1.1×"
-        status="Beat"
-      />
+      <ScoreRow top={150} metric="年底 ARR" target="$27.5M" actual="$28.6M" status="超標" />
+      <ScoreRow top={274} metric="新增客戶數" target="1,150" actual="1,186" status="達標" />
+      <ScoreRow top={398} metric="淨營收留存率" target="115%" actual="109%" status="差 6 點" miss />
+      <ScoreRow top={522} metric="毛利率" target="76.0%" actual="77.8%" status="達標" />
+      <ScoreRow top={646} metric="客戶流失率" target="10% 以下" actual="9.4%" status="達標" />
+      <ScoreRow top={770} metric="燒錢倍數" target="1.3× 以下" actual="1.1×" status="超標" />
       <div style={{ ...abs(760, 894, 1040), borderTop: `1.5px solid ${RULE}` }} />
       <CircleDoodle x={1372} y={400} w={240} h={122} live={live} delay={0.5} />
     </Frame>
@@ -662,33 +649,33 @@ const Lesson = ({ top, value, children }: { top: number; value: string; children
 
 const Learnings: Page = () => (
   <Frame>
-    <Eyebrow>What we learned</Eyebrow>
+    <Eyebrow>我們學到什麼</Eyebrow>
     <blockquote
       style={{
         ...abs(X0, 168, 1000),
         margin: 0,
         fontFamily: SERIF,
-        fontStyle: 'italic',
-        fontSize: 66,
+        fontSize: 62,
+        fontWeight: 600,
         lineHeight: 1.16,
         letterSpacing: '-0.01em',
       }}
     >
-      “Once we passed 30 techs and a second branch, the office went back to spreadsheets.”
+      “技師一過 30 人又開第二間分公司，辦公室就退回試算表了。”
     </blockquote>
     <div style={{ ...abs(X0, 440), fontSize: 26, color: BODY }}>
-      <span style={{ color: INK, fontWeight: 650 }}>Dana Ruiz</span>, Operations Director, Ruiz
-      Mechanical · Phoenix, 42 techs
+      <span style={{ color: INK, fontWeight: 650 }}>Dana Ruiz</span>，營運總監，Ruiz Mechanical ·
+      Phoenix，42 位技師
     </div>
     <div style={{ ...abs(X0, 530, 1000), borderTop: `1.5px solid ${RULE}` }} />
     <Lesson top={574} value="61%">
-      of lost ARR came from 25+ tech accounts (38% of ARR).
+      的流失 ARR 來自 25 位以上技師的帳戶（這類帳戶占 ARR 的 38%）。
     </Lesson>
     <Lesson top={694} value="14×">
-      a day, technicians open the app. Office users: 3 times.
+      技師每天開啟 App 的次數；辦公室使用者只有 3 次。
     </Lesson>
     <Lesson top={814} value="4.1%">
-      logo churn with payments. Everyone else churns at 11.2%.
+      是有使用支付功能客戶的流失率；其他客戶為 11.2%。
     </Lesson>
     <PapersArt />
   </Frame>
@@ -804,10 +791,10 @@ const BetCard = ({
 
 const Bets: Page = () => (
   <Frame>
-    <Eyebrow>Strategy</Eyebrow>
-    <h2 style={{ ...abs(X0, 160), ...headline(104) }}>Three bets for FY27.</h2>
+    <Eyebrow>策略</Eyebrow>
+    <h2 style={{ ...abs(X0, 160), ...headline(104) }}>FY27 的三項押注。</h2>
     <div style={{ ...abs(1220, 196, 580), fontSize: 28, lineHeight: 1.45, color: BODY }}>
-      Each answers a lesson from FY26, and each moves one number.
+      每一項都回應 FY26 的一個教訓，也各自要推動一個指標。
     </div>
     <BetCard
       x={120}
@@ -815,9 +802,9 @@ const Bets: Page = () => (
       index="01"
       art={<BranchesArt />}
       title="Branches"
-      body="One board across every branch, with a shared tech pool."
+      body="一個看板涵蓋所有分公司，技師共用同一個人力池。"
       owner="Priya Nair"
-      metric="Net revenue retention"
+      metric="淨營收留存率"
       from="109%"
       to="116%"
       morphId="bet-branches"
@@ -827,10 +814,10 @@ const Bets: Page = () => (
       tint={TINT_GREEN}
       index="02"
       art={<PaymentsArt />}
-      title="Payments"
-      body="Techs collect on site from the app, so invoices stop sitting for 30 days."
+      title="支付"
+      body="技師在現場用 App 收款，帳單不再一放就是 30 天。"
       owner="Marcus Bell"
-      metric="Payments attach rate"
+      metric="支付搭載率"
       from="22%"
       to="40%"
     />
@@ -839,10 +826,10 @@ const Bets: Page = () => (
       tint={TINT_YELLOW}
       index="03"
       art={<OfflineArt />}
-      title="Offline app"
-      body="Jobs, forms and photos work with no signal, then sync."
+      title="離線 App"
+      body="沒有訊號也能處理工單、表單和照片，連線後自動同步。"
       owner="Lena Okafor"
-      metric="Crash-free sessions"
+      metric="無當機工作階段"
       from="99.2%"
       to="99.8%"
     />
@@ -902,21 +889,21 @@ const BranchesDeep: Page = () => {
           Tucson
         </DiagramLabel>
         <div style={{ ...abs(1530, 470, 220), fontSize: 24, lineHeight: 1.3, color: RED }}>
-          One board,
+          一個看板，
           <br />
-          one tech pool
+          共用技師池
         </div>
         <div style={{ ...abs(990, 890), fontSize: 22, fontWeight: 650, color: BODY }}>
-          Beta with 14 accounts · GA June 30
+          14 個帳戶測試中 · 6 月 30 日正式上線
         </div>
       </div>
-      <Eyebrow>Bet 01 · Branches</Eyebrow>
+      <Eyebrow>押注 01 · Branches</Eyebrow>
       <h2 style={{ ...abs(X0, 160), ...headline(112), lineHeight: 0.98 }}>
-        One board
+        一個看板，
         <br />
-        for every
+        涵蓋每一間
         <br />
-        branch.
+        分公司。
       </h2>
       <p
         style={{
@@ -927,20 +914,20 @@ const BranchesDeep: Page = () => {
           color: BODY,
         }}
       >
-        Larger crews run one Fieldwork account per branch today. Branches puts them on one board,
-        with technicians shared across locations.
+        目前大型團隊每個分公司各開一個 Fieldwork 帳戶。Branches
+        把它們整合到同一個看板，技師可以跨據點共用。
       </p>
       <div style={{ ...abs(X0, 730, 760), display: 'flex', gap: 60 }}>
         <div style={{ width: 330 }}>
           <div style={{ ...headline(84), letterSpacing: '-0.045em' }}>38%</div>
           <div style={{ marginTop: 14, fontSize: 25, lineHeight: 1.4, color: BODY }}>
-            of ARR sits in accounts with 25+ techs
+            的 ARR 集中在 25 位以上技師的帳戶
           </div>
         </div>
         <div style={{ width: 330 }}>
           <div style={{ ...headline(84), letterSpacing: '-0.045em', color: RED }}>61%</div>
           <div style={{ marginTop: 14, fontSize: 25, lineHeight: 1.4, color: BODY }}>
-            of the ARR we lost in FY26 came from them
+            的 FY26 流失 ARR 來自這些帳戶
           </div>
         </div>
       </div>
@@ -1019,10 +1006,10 @@ const Okrs: Page = () => {
   const live = useIsActivePage();
   return (
     <Frame>
-      <Eyebrow>FY27 objectives</Eyebrow>
-      <h2 style={{ ...abs(X0, 160), ...headline(104) }}>What we commit to.</h2>
+      <Eyebrow>FY27 目標</Eyebrow>
+      <h2 style={{ ...abs(X0, 160), ...headline(104) }}>我們的承諾。</h2>
       <div style={{ ...abs(1300, 196, 500), fontSize: 26, lineHeight: 1.45, color: BODY }}>
-        Progress as of January 14. Owners update it every Friday.
+        進度截至 1 月 14 日，負責人每週五更新。
       </div>
       <div
         style={{
@@ -1035,48 +1022,48 @@ const Okrs: Page = () => {
       >
         <Steps>
           <Step duration={240}>
-            <Objective code="O1" title="Grow inside our largest accounts" owner="Priya Nair">
-              <KeyResult text="Branches GA by June 30" pct={35} status="On track" live={live} />
+            <Objective code="O1" title="深耕最大的客戶" owner="Priya Nair">
               <KeyResult
-                text="180 large accounts on Branches"
-                pct={8}
-                status="On track"
+                text="6 月 30 日前 Branches 正式上線"
+                pct={35}
+                status="進度正常"
                 live={live}
               />
+              <KeyResult text="180 個大型帳戶採用 Branches" pct={8} status="進度正常" live={live} />
               <KeyResult
-                text="NRR from 109% to 116%"
+                text="NRR 從 109% 提升到 116%"
                 pct={0}
-                status="Not started"
+                status="尚未開始"
                 color={SOFT}
                 live={live}
               />
             </Objective>
           </Step>
           <Step duration={240}>
-            <Objective code="O2" title="Get paid on the job" owner="Marcus Bell">
-              <KeyResult text="Attach rate from 22% to 40%" pct={6} status="On track" live={live} />
-              <KeyResult text="Tap to Pay live by April" pct={60} status="On track" live={live} />
+            <Objective code="O2" title="做完工作就收到款" owner="Marcus Bell">
+              <KeyResult text="搭載率從 22% 提升到 40%" pct={6} status="進度正常" live={live} />
+              <KeyResult text="4 月前 Tap to Pay 上線" pct={60} status="進度正常" live={live} />
               <KeyResult
-                text="Next-day payouts, 95% of volume"
+                text="95% 交易量可隔日撥款"
                 pct={15}
-                status="At risk"
+                status="有風險"
                 color={RED_HEX}
                 live={live}
               />
             </Objective>
           </Step>
           <Step duration={240}>
-            <Objective code="O3" title="A tech app that works anywhere" owner="Lena Okafor">
+            <Objective code="O3" title="隨處可用的技師 App" owner="Lena Okafor">
               <KeyResult
-                text="Full job flow offline by Oct 15"
+                text="10 月 15 日前完整工作流程可離線運作"
                 pct={20}
-                status="On track"
+                status="進度正常"
                 live={live}
               />
               <KeyResult
-                text="Crash-free from 99.2% to 99.8%"
+                text="無當機率從 99.2% 提升到 99.8%"
                 pct={25}
-                status="On track"
+                status="進度正常"
                 live={live}
               />
             </Objective>
@@ -1169,8 +1156,8 @@ const Roadmap: Page = () => {
   const today = mx(13 / 31);
   return (
     <Frame>
-      <Eyebrow>Roadmap</Eyebrow>
-      <h2 style={{ ...abs(X0, 160), ...headline(104) }}>FY27, month by month.</h2>
+      <Eyebrow>路線圖</Eyebrow>
+      <h2 style={{ ...abs(X0, 160), ...headline(104) }}>FY27 逐月規劃。</h2>
       <div
         style={{
           position: 'absolute',
@@ -1182,52 +1169,52 @@ const Roadmap: Page = () => {
           color: BODY,
         }}
       >
-        <LegendDot fill={BLUE}>Product</LegendDot>
-        <LegendDot fill={GREEN}>Payments</LegendDot>
-        <LegendDot fill={PINK}>Engineering</LegendDot>
-        <LegendDot fill={YELLOW}>Sales</LegendDot>
+        <LegendDot fill={BLUE}>產品</LegendDot>
+        <LegendDot fill={GREEN}>支付</LegendDot>
+        <LegendDot fill={PINK}>工程</LegendDot>
+        <LegendDot fill={YELLOW}>業務</LegendDot>
       </div>
       <Quarter q={0} />
       <Quarter q={1} />
       <Quarter q={2} />
       <Quarter q={3} />
-      <MonthLabel m={0} label="Jan" />
-      <MonthLabel m={1} label="Feb" />
-      <MonthLabel m={2} label="Mar" />
-      <MonthLabel m={3} label="Apr" />
-      <MonthLabel m={4} label="May" />
-      <MonthLabel m={5} label="Jun" />
-      <MonthLabel m={6} label="Jul" />
-      <MonthLabel m={7} label="Aug" />
-      <MonthLabel m={8} label="Sep" />
-      <MonthLabel m={9} label="Oct" />
-      <MonthLabel m={10} label="Nov" />
-      <MonthLabel m={11} label="Dec" />
+      <MonthLabel m={0} label="1 月" />
+      <MonthLabel m={1} label="2 月" />
+      <MonthLabel m={2} label="3 月" />
+      <MonthLabel m={3} label="4 月" />
+      <MonthLabel m={4} label="5 月" />
+      <MonthLabel m={5} label="6 月" />
+      <MonthLabel m={6} label="7 月" />
+      <MonthLabel m={7} label="8 月" />
+      <MonthLabel m={8} label="9 月" />
+      <MonthLabel m={9} label="10 月" />
+      <MonthLabel m={10} label="11 月" />
+      <MonthLabel m={11} label="12 月" />
       <div style={{ ...abs(X0, 404, W), borderTop: `2px solid ${INK_HEX}` }} />
       <div style={{ ...abs(today, 404, 0, 500), borderLeft: `2.5px solid ${RED_HEX}` }} />
       <Bar from={0.1} to={6} i={0} fill={BLUE}>
-        Branches: beta to GA
+        Branches：從測試版到正式上線
       </Bar>
-      <Milestone at={6} i={0} label="GA, Jun 30" />
+      <Milestone at={6} i={0} label="6/30 正式上線" />
       <Bar from={6.25} to={9} i={1} fill={BLUE}>
-        Branch-level reports
+        分公司層級報表
       </Bar>
       <Bar from={0.33} to={3.47} i={2} fill={GREEN}>
-        Tap to Pay in the app
+        App 內建 Tap to Pay
       </Bar>
-      <Milestone at={3.47} i={2} label="Live, Apr 15" />
+      <Milestone at={3.47} i={2} label="4/15 上線" />
       <Bar from={3} to={8} i={3} fill={GREEN}>
-        Next-day payouts
+        隔日撥款
       </Bar>
       <Bar from={0.55} to={5} i={4} fill={PINK}>
-        Offline sync engine
+        離線同步引擎
       </Bar>
       <Bar from={5.5} to={9.47} i={5} fill={PINK}>
-        Tech app 4.0
+        技師 App 4.0
       </Bar>
-      <Milestone at={9.47} i={5} label="Ships, Oct 15" />
+      <Milestone at={9.47} i={5} label="10/15 發布" />
       <Bar from={1} to={11.5} i={6} fill={YELLOW}>
-        Mid-market sales pod, 6 account executives
+        中型市場業務小組，6 位業務代表
       </Bar>
       <Ink width={200} height={80} style={abs(today - 2, 900)}>
         <Stroke
@@ -1238,7 +1225,7 @@ const Roadmap: Page = () => {
         />
       </Ink>
       <div style={{ ...abs(today + 88, 940), fontSize: 23, fontWeight: 650, color: RED }}>
-        We are here: January 14
+        目前位置：1 月 14 日
       </div>
     </Frame>
   );
@@ -1316,7 +1303,7 @@ const Stage = ({ n, label, accent = false }: { n: number; label: string; accent?
 
 const Hiring: Page = () => (
   <Frame>
-    <Eyebrow>Hiring plan</Eyebrow>
+    <Eyebrow>招募計畫</Eyebrow>
     <h2 style={{ ...abs(X0, 160), ...headline(170), letterSpacing: '-0.045em' }}>
       142 <span style={{ color: SOFT, fontWeight: 400 }}>→</span> 186
     </h2>
@@ -1329,7 +1316,7 @@ const Hiring: Page = () => (
         color: BODY,
       }}
     >
-      44 net new roles by December 31. 28 of them land in the first half, on purpose.
+      12 月 31 日前淨新增 44 個職缺，其中 28 個刻意安排在上半年。
     </p>
     <Ink width={760} height={320} style={abs(1060, 110)}>
       <Bust x={100} shirt={BLUE} hair="short" bg={TINT_YELLOW} />
@@ -1337,22 +1324,22 @@ const Hiring: Page = () => (
       <Bust x={472} shirt={GREEN} hair="beard" bg={TINT_PINK} />
       <Bust x={658} shirt={YELLOW} hair="long" bg={TINT_GREEN} />
     </Ink>
-    <div style={{ ...abs(X0, 540), fontSize: 24, fontWeight: 700 }}>New roles by team</div>
+    <div style={{ ...abs(X0, 540), fontSize: 24, fontWeight: 700 }}>各團隊新增職缺</div>
     <div style={abs(X0, 586, 820)}>
-      <TeamRow team="Engineering" n={18} />
-      <TeamRow team="Sales" n={9} />
-      <TeamRow team="Customer Success" n={6} />
-      <TeamRow team="Product and Design" n={5} />
-      <TeamRow team="Payments" n={3} />
-      <TeamRow team="G&A" n={3} />
+      <TeamRow team="工程" n={18} />
+      <TeamRow team="業務" n={9} />
+      <TeamRow team="客戶成功" n={6} />
+      <TeamRow team="產品與設計" n={5} />
+      <TeamRow team="支付" n={3} />
+      <TeamRow team="行政管理" n={3} />
     </div>
-    <div style={{ ...abs(1060, 540), fontSize: 24, fontWeight: 700 }}>Where the 44 are today</div>
+    <div style={{ ...abs(1060, 540), fontSize: 24, fontWeight: 700 }}>這 44 個職缺的目前進度</div>
     <div style={{ ...abs(1060, 600), display: 'flex', gap: 2 }}>
-      <Stage n={27} label="Planned" />
-      <Stage n={10} label="Open" />
-      <Stage n={4} label="Interviews" />
-      <Stage n={2} label="Offers out" />
-      <Stage n={1} label="Hired" accent />
+      <Stage n={27} label="規劃中" />
+      <Stage n={10} label="開缺中" />
+      <Stage n={4} label="面試中" />
+      <Stage n={2} label="已發 Offer" />
+      <Stage n={1} label="已錄用" accent />
     </div>
     <div
       style={{
@@ -1367,7 +1354,7 @@ const Hiring: Page = () => (
         <Sparkle x={0} y={0} s={0.95} />
       </Ink>
       <span>
-        Our first FY27 hire, a senior Android engineer, starts <Highlight>February 1</Highlight>.
+        FY27 的第一位新進夥伴——資深 Android 工程師——將於 <Highlight>2 月 1 日</Highlight>報到。
       </span>
     </div>
   </Frame>
@@ -1464,25 +1451,25 @@ const Budget: Page = () => {
   const live = useIsActivePage();
   return (
     <Frame>
-      <Eyebrow>Budget</Eyebrow>
-      <h2 style={{ ...abs(X0, 160), ...headline(104) }}>Where $39.5M goes.</h2>
+      <Eyebrow>預算</Eyebrow>
+      <h2 style={{ ...abs(X0, 160), ...headline(104) }}>$39.5M 花在哪裡。</h2>
       <div style={{ ...abs(X0, 300), fontSize: 28, color: BODY }}>
-        FY27 operating expenses by function, in millions. Up 33% on FY26.
+        FY27 各職能營運費用，單位：百萬美元。較 FY26 成長 33%。
       </div>
       <div style={{ ...abs(X0, 380), ...row, gap: 28, fontSize: 22, color: BODY }}>
         <span style={{ ...row, gap: 10 }}>
           <span style={{ width: 18, height: 18, borderRadius: 4, background: '#E7E5E0' }} />
-          FY26 actual
+          FY26 實際
         </span>
         <span style={{ ...row, gap: 10 }}>
           <span style={{ width: 18, height: 18, borderRadius: 4, background: INK }} />
-          FY27 plan
+          FY27 計畫
         </span>
       </div>
-      <BarGroup cx={240} label="R&D" a={11.9} b={15.8} live={live} />
-      <BarGroup cx={480} label="Sales & Marketing" a={10.6} b={14.2} live={live} />
-      <BarGroup cx={720} label="G&A" a={4.2} b={5.3} live={live} />
-      <BarGroup cx={960} label="Customer Success" a={3.1} b={4.2} live={live} />
+      <BarGroup cx={240} label="研發" a={11.9} b={15.8} live={live} />
+      <BarGroup cx={480} label="業務與行銷" a={10.6} b={14.2} live={live} />
+      <BarGroup cx={720} label="行政管理" a={4.2} b={5.3} live={live} />
+      <BarGroup cx={960} label="客戶成功" a={3.1} b={4.2} live={live} />
       <div style={{ ...abs(X0, BASE, 980), borderTop: `2px solid ${INK_HEX}` }} />
       <div
         style={{
@@ -1493,7 +1480,7 @@ const Budget: Page = () => {
           fontWeight: 600,
         }}
       >
-        +$3.9M in R&D, mostly engineers for Branches and offline
+        研發增加 $3.9M，主要用於 Branches 與離線功能的工程師
       </div>
       <Ink width={330} height={110} style={abs(310, 430)}>
         <Stroke
@@ -1504,12 +1491,12 @@ const Budget: Page = () => {
         />
       </Ink>
       <div style={abs(1180, 392, 620)}>
-        <SpendRow fn="R&D" value="15.8" share="40%" />
-        <SpendRow fn="Sales & Marketing" value="14.2" share="36%" />
-        <SpendRow fn="G&A" value="5.3" share="13%" />
-        <SpendRow fn="Customer Success" value="4.2" share="11%" />
+        <SpendRow fn="研發" value="15.8" share="40%" />
+        <SpendRow fn="業務與行銷" value="14.2" share="36%" />
+        <SpendRow fn="行政管理" value="5.3" share="13%" />
+        <SpendRow fn="客戶成功" value="4.2" share="11%" />
         <div style={{ ...row, height: 66, fontSize: 28, fontWeight: 720 }}>
-          <span style={{ flex: 1 }}>Total opex</span>
+          <span style={{ flex: 1 }}>營運費用合計</span>
           <span style={{ width: 120, textAlign: 'right' }}>39.5</span>
           <span style={{ width: 100 }} />
         </div>
@@ -1517,8 +1504,8 @@ const Budget: Page = () => {
       <div style={{ ...abs(1180, 760), ...headline(110), letterSpacing: '-0.05em' }}>1.1×</div>
       <CircleDoodle x={1134} y={724} w={290} h={176} live={live} delay={1} />
       <div style={{ ...abs(1430, 770, 370), fontSize: 24, lineHeight: 1.4, color: BODY }}>
-        <span style={{ color: INK, fontWeight: 650 }}>Burn multiple.</span> $12.6M of burn buys
-        $11.4M of net new ARR. Cash ends FY27 at $33.4M.
+        <span style={{ color: INK, fontWeight: 650 }}>燒錢倍數。</span>燒掉 $12.6M，換來 $11.4M
+        的淨新增 ARR。FY27 年底的現金餘額為 $33.4M。
       </div>
     </Frame>
   );
@@ -1578,10 +1565,10 @@ const RiskCard = ({
     <div style={abs(44, 34)}>{art}</div>
     <div style={{ ...abs(210, 30), fontSize: 22, fontWeight: 700, color: levelColor }}>{level}</div>
     <div style={{ ...abs(210, 64), ...headline(42), whiteSpace: 'nowrap' }}>{title}</div>
-    <div style={{ ...abs(210, 122, 940), fontSize: 27, lineHeight: 1.4, color: BODY }}>{body}</div>
+    <div style={{ ...abs(210, 122, 1000), fontSize: 27, lineHeight: 1.4, color: BODY }}>{body}</div>
     <div style={abs(1220, 34, 420)}>
       <div style={{ fontSize: 26, fontWeight: 680 }}>{owner}</div>
-      <div style={{ marginTop: 4, fontSize: 26, color: BODY }}>Decide by {by}</div>
+      <div style={{ marginTop: 4, fontSize: 26, color: BODY }}>決策期限 {by}</div>
       <div style={{ marginTop: 14, fontSize: 23, lineHeight: 1.35, color: BODY }}>{call}</div>
     </div>
   </div>
@@ -1589,46 +1576,46 @@ const RiskCard = ({
 
 const Risks: Page = () => (
   <Frame>
-    <Eyebrow>Risks</Eyebrow>
-    <h2 style={{ ...abs(X0, 160), ...headline(104) }}>What could go wrong.</h2>
+    <Eyebrow>風險</Eyebrow>
+    <h2 style={{ ...abs(X0, 160), ...headline(104) }}>可能出什麼狀況。</h2>
     <div style={{ ...abs(1300, 196, 500), fontSize: 26, lineHeight: 1.45, color: BODY }}>
-      Each risk has one owner and a date by which we decide.
+      每項風險都有一位負責人，以及一個做出決定的期限。
     </div>
     <RiskCard
       top={330}
       tint={TINT_PINK}
       art={<CalendarDoodle />}
-      level="High"
+      level="高風險"
       levelColor={RED_HEX}
-      title="Branches GA slips past June"
-      body="Half of FY27 expansion ARR assumes Branches is live before Q3 renewals."
+      title="Branches 正式上線延到 6 月之後"
+      body="FY27 有一半的擴張 ARR，都假設 Branches 會在 Q3 續約前上線。"
       owner="Priya Nair"
-      by="February 15"
-      call="Freeze scope; reports can slip to Q4."
+      by="2 月 15 日"
+      call="凍結範圍；報表可延到 Q4。"
     />
     <RiskCard
       top={538}
       tint={TINT_YELLOW}
       art={<CardDoodle />}
-      level="Medium"
+      level="中風險"
       levelColor="#B07A12"
-      title="Processor fees rise in April"
-      body="New pricing cuts our payments margin from 0.9% to 0.6% of volume."
+      title="4 月起支付處理費調漲"
+      body="新費率會讓支付毛利從交易量的 0.9% 降到 0.6%。"
       owner="Marcus Bell"
-      by="March 31"
-      call="Renegotiate, or add a second processor."
+      by="3 月 31 日"
+      call="重新議價，或增加第二家處理商。"
     />
     <RiskCard
       top={746}
       tint={TINT_BLUE}
       art={<HourglassDoodle />}
-      level="Watch"
+      level="持續觀察"
       levelColor="#3E7FCF"
-      title="Hiring runs ahead of revenue"
-      body="28 of 44 hires land in H1. If Q1 new ARR is under $1.4M, we pause 12 H2 roles."
+      title="招募速度跑在營收前面"
+      body="28 個職缺落在上半年；若 Q1 新增 ARR 低於 $1.4M，暫停 12 個下半年職缺。"
       owner="Owen Carter"
-      by="April 14"
-      call="The Q1 business review sets the gate."
+      by="4 月 14 日"
+      call="由 Q1 業務檢討會設定門檻。"
     />
   </Frame>
 );
@@ -1690,29 +1677,29 @@ const Question = ({
 
 const Questions: Page = () => (
   <Frame>
-    <Eyebrow>Open questions</Eyebrow>
-    <h2 style={{ ...abs(X0, 160), ...headline(104) }}>Still open.</h2>
+    <Eyebrow>待決議題</Eyebrow>
+    <h2 style={{ ...abs(X0, 160), ...headline(104) }}>尚未定案。</h2>
     <Question
       top={330}
       n="01"
-      title="How do we price Branches?"
-      meta="Jordan Reyes and Priya Nair · test with 20 accounts in February"
+      title="Branches 要怎麼定價？"
+      meta="Jordan Reyes 與 Priya Nair · 2 月先找 20 個帳戶測試"
     >
-      Per branch is simpler to sell, but{' '}
-      <Highlight>60% of our 25+ tech accounts run a single branch</Highlight>. The proposal: price
-      per technician, with a two-branch minimum.
+      依分公司數計價比較好賣，但
+      <Highlight>25 位以上技師的帳戶中，有 60% 只有一個分公司</Highlight>
+      。建議方案：依技師人數計價，並設兩個分公司的最低門檻。
     </Question>
     <Question
       top={590}
       n="02"
-      title="Should payments be on by default?"
-      meta="Marcus Bell and Theo Brandt · proposal is default-on from March"
+      title="支付功能要預設開啟嗎？"
+      meta="Marcus Bell 與 Theo Brandt · 建議自 3 月起預設開啟"
     >
-      <Highlight color="#FADDE4">Default-on doubled attach in the October cohort</Highlight>, but
-      support tickets rose 18% in the same group. The payouts FAQ ships first.
+      <Highlight color="#FADDE4">10 月那批客戶預設開啟後，搭載率翻了一倍</Highlight>
+      ，但同一批客戶的客服工單增加了 18%。撥款常見問題會先上線。
     </Question>
-    <Question top={850} n="03" title="Canada in FY27?" done>
-      Resolved by Maya: not this year. We revisit it in FY28 planning.
+    <Question top={850} n="03" title="FY27 要進入加拿大嗎？" done>
+      Maya 已裁示：今年不做，FY28 規劃時再重新評估。
     </Question>
     <CompassArt />
   </Frame>
@@ -1781,25 +1768,22 @@ const Close: Page = () => {
   return (
     <Frame>
       <h2 style={{ ...abs(X0, 140), ...headline(130), lineHeight: 0.98 }}>
-        Thank you
-        <br />
-        for FY26.
+        感謝大家
+        <br />在 FY26 的付出。
       </h2>
-      <div style={{ ...abs(X0, 420), fontSize: 34, color: BODY }}>
-        See you at the Q1 review on April 14.
-      </div>
-      <div style={{ ...abs(X0, 520), fontSize: 24, fontWeight: 700 }}>Next</div>
+      <div style={{ ...abs(X0, 420), fontSize: 34, color: BODY }}>4 月 14 日 Q1 檢討會見。</div>
+      <div style={{ ...abs(X0, 520), fontSize: 24, fontWeight: 700 }}>接下來</div>
       <div style={abs(X0, 562, 860)}>
-        <Todo done live={live} date="Jan 14">
-          Board pre-read sent · Maya
+        <Todo done live={live} date="1/14">
+          董事會預讀資料已寄出 · Maya
         </Todo>
-        <Todo date="Jan 29">Team OKRs drafted from this plan · all leads</Todo>
-        <Todo date="Feb 15">Branches scope freeze · Priya</Todo>
-        <Todo date="Mar 31">Payments processor decision · Marcus</Todo>
-        <Todo date="Apr 14">Q1 business review · Owen</Todo>
+        <Todo date="1/29">依本計畫擬定各團隊 OKR · 所有主管</Todo>
+        <Todo date="2/15">Branches 範圍凍結 · Priya</Todo>
+        <Todo date="3/31">支付處理商決策 · Marcus</Todo>
+        <Todo date="4/14">Q1 業務檢討會 · Owen</Todo>
       </div>
       <div style={{ ...abs(X0, 900), fontSize: 23, color: SOFT }}>
-        The plan locks on January 22. Comments are open until then.
+        計畫將於 1 月 22 日定稿，在此之前都開放留言。
       </div>
       <ToolboxArt />
     </Frame>
@@ -1807,50 +1791,50 @@ const Close: Page = () => {
 };
 
 export const meta: SlideMeta = {
-  title: 'Fieldwork — FY27 Operating Plan',
+  title: 'Fieldwork — FY27 營運計畫',
   createdAt: '2026-10-12T05:15:09.357Z',
 };
 
 export const notes: (string | undefined)[] = [
-  `Maya (CEO) opens. Welcome to kickoff. This is the plan of record for FY27; the board got the same document as a pre-read this morning.
-Twenty-five minutes: where FY26 landed, what we learned, the three bets, then targets, roadmap, hiring and money. Comments stay open until January 21.`,
-  `Maya. If you remember one page, make it this one.
-FY26 closed at $28.6M ARR, $1.1M over plan. Net revenue retention came in at 109% against 115%, and that miss is the story of the year.
-FY27: $40.0M ARR, NRR back to 116%, 186 people by December 31. Burn multiple stays at 1.1×.`,
-  `Owen (CFO). Six targets, five met.
-ARR $28.6M on $27.5M. 1,186 new customers. Gross margin 77.8%, burn multiple 1.1× against a 1.3× ceiling.
-The circled number is NRR: 109% against 115%. We are not going to soften it. Priya explains why on the next page.`,
-  `Priya (VP Product). We read 214 customer calls against the numbers.
-Read Dana's quote. Ruiz Mechanical has 42 techs and two branches, and they went back to spreadsheets.
-Three numbers: accounts with 25+ techs are 38% of ARR and 61% of what we lost. Techs open the app 14 times a day. Payments customers churn at 4.1% against 11.2%.`,
-  `Maya. Three bets follow straight from those three lessons.
-Branches for multi-location crews, owned by Priya. Payments on every job, owned by Marcus. An offline tech app, owned by Lena.
-Each card has one number it has to move. Let's open the first one.`,
-  `Priya. Branches is the largest bet and the NRR plan depends on it.
-Beta is live with 14 accounts; GA is June 30. The why: 38% of ARR, 61% of lost ARR, most of them running one account per branch.
-What ships: one board across branches, a shared tech pool, and branch-level reports in Q3.`,
-  `Owners, one each. Advance to bring in each objective.
-O1, Priya: GA by June 30, 180 large accounts on Branches, NRR to 116%. NRR is lagging, so it reads "not started" until Q3 renewals.
-O2, Marcus: attach 22% to 40%, Tap to Pay by April. Next-day payouts is at risk; that is the processor issue on the risks page.
-O3, Lena: offline by October 15, crash-free to 99.8%.`,
-  `Lena (VP Engineering). The red line is today, January 14.
-Two dependencies matter: the offline sync engine must finish in May before Tech app 4.0 starts, and Branches GA gates the branch reports in July.
-Jordan's mid-market pod hires through the year; that is the yellow bar.`,
-  `Hana (VP People). 44 net new roles takes us from 142 to 186. 28 of them land in H1, which is deliberate and also a risk.
-Engineering is 18 of the 44, Sales 9, Success 6, Product and Design 5, Payments and G&A 3 each.
-Two offers out, one hire already signed: our Android lead starts February 1.`,
-  `Owen. Opex goes from $29.8M to $39.5M, up 33%. R&D is 40% of it, Sales and Marketing 36%.
-Point at the arrow: most of the R&D increase is engineers for Branches and offline.
-Burn is $12.6M for $11.4M of net new ARR, so the burn multiple holds at 1.1×. We end the year with $33.4M in the bank.`,
-  `Maya. Three risks, each with a decision date.
-Branches slipping is the big one; scope freezes February 15. Processor pricing changes in April; Marcus brings a recommendation by March 31.
-Hiring ahead of revenue: if Q1 new ARR is under $1.4M we pause 12 second-half roles. Owen calls it at the Q1 review on April 14.`,
-  `Maya. Two questions are still open, and we want your input in the plan's comments.
-Pricing for Branches: Jordan and Priya propose per tech with a two-branch minimum, tested with 20 accounts in February.
-Payments default-on: doubled attach, but tickets rose 18%. Canada is resolved: not in FY27.`,
-  `Maya closes. Five dates to remember; the first is done.
-Team OKRs by January 29, Branches scope by February 15, processor by March 31, Q1 review April 14.
-Thank you for FY26. Questions go in the comments; we answer every one before the plan locks on January 22.`,
+  `Maya（執行長）開場。歡迎來到年度啟動會。這份是 FY27 的正式計畫，董事會今天早上也收到同一份文件作為預讀資料。
+接下來二十五分鐘：先看 FY26 的結果、我們學到什麼、三項押注，再談目標、路線圖、招募和預算。意見回饋開放到 1 月 21 日。`,
+  `Maya。如果你只記得一頁，就記這一頁。
+FY26 以 $28.6M ARR 收尾，比計畫多 $1.1M。淨營收留存率是 109%，目標是 115%，這個落差就是今年的重點。
+FY27：$40.0M ARR、NRR 回到 116%、12 月 31 日前達到 186 人。燒錢倍數維持在 1.1×。`,
+  `Owen（財務長）。六項目標，達成五項。
+ARR $28.6M，目標是 $27.5M。新增客戶 1,186 家。毛利率 77.8%，燒錢倍數 1.1×，上限是 1.3×。
+圈起來的數字是 NRR：109%，目標是 115%。我們不會粉飾這個數字。下一頁由 Priya 說明原因。`,
+  `Priya（產品副總）。我們聽了 214 通客戶電話，並對照數據。
+請看 Dana 的這句話。Ruiz Mechanical 有 42 位技師、兩間分公司，結果他們又退回去用試算表。
+三個數字：25 位以上技師的帳戶占 ARR 的 38%，卻占流失 ARR 的 61%。技師每天開啟 App 14 次。使用支付功能的客戶流失率是 4.1%，其他客戶是 11.2%。`,
+  `Maya。三項押注，直接對應這三個教訓。
+Branches 服務多據點團隊，由 Priya 負責。每一筆工作都能收款的支付功能，由 Marcus 負責。離線技師 App，由 Lena 負責。
+每張卡片都有一個必須推動的數字。我們先打開第一項。`,
+  `Priya。Branches 是最大的一項押注，NRR 的計畫也倚賴它。
+測試版已有 14 個帳戶在使用，正式上線日是 6 月 30 日。原因：38% 的 ARR、61% 的流失 ARR，多半都是每個分公司各開一個帳戶的客戶。
+產品內容：跨分公司的單一看板、共用的技師人力池，以及 Q3 推出的分公司層級報表。`,
+  `負責人每人一位。按下一步，依序帶出各項目標。
+O1，Priya：6 月 30 日前正式上線、180 個大型帳戶採用 Branches、NRR 提升到 116%。NRR 是落後指標，所以在 Q3 續約之前都會顯示「尚未開始」。
+O2，Marcus：搭載率從 22% 提升到 40%，4 月前上線 Tap to Pay。隔日撥款有風險，原因就是風險頁提到的處理商問題。
+O3，Lena：10 月 15 日前支援離線，無當機率提升到 99.8%。`,
+  `Lena（工程副總）。紅線代表今天，也就是 1 月 14 日。
+兩個相依關係很重要：離線同步引擎必須在 5 月完成，技師 App 4.0 才能開工；Branches 正式上線則是 7 月分公司報表的前提。
+Jordan 的中型市場業務小組全年陸續招募，也就是黃色那條。`,
+  `Hana（人資副總）。淨新增 44 個職缺，讓我們從 142 人成長到 186 人。其中 28 個在上半年到位，這是刻意的安排，同時也是風險。
+44 個職缺中，工程 18、業務 9、客戶成功 6、產品與設計 5，支付和行政管理各 3。
+目前有兩份 offer 已發出，也有一位已簽約：我們的 Android 負責人 2 月 1 日報到。`,
+  `Owen。營運費用從 $29.8M 增加到 $39.5M，成長 33%。研發占 40%，業務與行銷占 36%。
+請看箭頭：研發增加的部分，大多是投入 Branches 和離線功能的工程師。
+燒掉 $12.6M，換來 $11.4M 的淨新增 ARR，所以燒錢倍數維持在 1.1×。年底帳上有 $33.4M 現金。`,
+  `Maya。三項風險，各有一個決策日期。
+Branches 延後是最大的風險；範圍在 2 月 15 日凍結。處理商費率 4 月調整；Marcus 會在 3 月 31 日前提出建議。
+招募跑在營收前面：如果 Q1 新增 ARR 低於 $1.4M，我們會暫停 12 個下半年職缺。Owen 會在 4 月 14 日的 Q1 檢討會上做決定。`,
+  `Maya。還有兩個議題未定案，希望大家在計畫文件的留言中提供意見。
+Branches 的定價：Jordan 和 Priya 建議依技師人數計價，並設兩個分公司的最低門檻，2 月先找 20 個帳戶測試。
+支付功能預設開啟：搭載率翻倍，但客服工單增加了 18%。加拿大已有結論：FY27 不做。`,
+  `Maya 收尾。五個要記住的日期，第一個已經完成。
+1 月 29 日前完成各團隊 OKR、2 月 15 日凍結 Branches 範圍、3 月 31 日決定處理商、4 月 14 日舉行 Q1 檢討會。
+感謝大家在 FY26 的付出。有問題請直接留言；在 1 月 22 日計畫定稿之前，每一則我們都會回覆。`,
 ];
 
 export default [

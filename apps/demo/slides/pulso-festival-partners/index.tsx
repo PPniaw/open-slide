@@ -14,8 +14,9 @@ import type { CSSProperties, ReactNode } from 'react';
 export const design: DesignSystem = {
   palette: { bg: '#F1EADB', text: '#111111', accent: '#FF3D1F' },
   fonts: {
-    display: '"Archivo", "Helvetica Neue", Arial, sans-serif',
-    body: '"Archivo", "Helvetica Neue", Arial, sans-serif',
+    display:
+      '"Archivo", "Helvetica Neue", Arial, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
+    body: '"Archivo", "Helvetica Neue", Arial, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
   },
   typeScale: { hero: 388, body: 30 },
   radius: 0,
@@ -174,7 +175,7 @@ const Footer = ({ left = INK, right = left }: { left?: string; right?: string })
     <>
       <div style={{ ...FOOT, left: 120, color: left }}>Pulso Lisboa 2027</div>
       <div style={{ ...FOOT, right: 120, color: right, display: 'flex', gap: 32 }}>
-        <span>Partnership proposal</span>
+        <span>合作提案</span>
         <span style={NUM}>
           {String(current).padStart(2, '0')} / {String(total).padStart(2, '0')}
         </span>
@@ -215,9 +216,9 @@ const Heading = ({
   <h2
     style={{
       ...DISPLAY,
-      ...abs(120, capTop(top, size, 0.94)),
+      ...abs(120, capTop(top, size, 1.04)),
       fontSize: size,
-      lineHeight: 0.94,
+      lineHeight: 1.04,
       color,
       width,
     }}
@@ -281,9 +282,9 @@ const Cover: Page = () => (
         letterSpacing: '-0.01em',
       })}
     >
-      Partnership proposal
+      給 Brisa Drinks 的
       <br />
-      for Brisa Drinks
+      合作提案
     </div>
     <h1
       style={{
@@ -351,7 +352,7 @@ const Audience: Page = () => {
     : {};
   return (
     <Poster bg={YELLOW} footer={<Footer />}>
-      <Kicker n="01">Público · Audience</Kicker>
+      <Kicker n="01">Público · 觀眾</Kicker>
       <Disc left={880} top={60} size={1000} color={RED} />
       <div
         style={{
@@ -374,27 +375,27 @@ const Audience: Page = () => {
           lineHeight: 0.96,
         }}
       >
-        People over
+        三天累計
         <br />
-        three days
+        觀眾人次
       </div>
       <Stat left={120} value="41">
-        Days to sell out
+        2026年
         <br />
-        the 2026 edition
+        售罄所需天數
       </Stat>
       <Stat left={400} value="37" unit="%">
-        Of the crowd
+        觀眾
         <br />
-        from abroad
+        來自海外
       </Stat>
       <Stat left={680} value="27">
-        Average age
+        購票者
         <br />
-        of a ticket buyer
+        平均年齡
       </Stat>
       <div style={abs(1180, 880, { ...LABEL, width: 400, textAlign: 'center', ...landed })}>
-        Capped · 42,700 a day
+        上限 · 每日 42,700 人
       </div>
     </Poster>
   );
@@ -458,11 +459,11 @@ const GrowthDisc = ({
 
 const Growth: Page = () => (
   <Poster bg={PAPER} footer={<Footer />}>
-    <Kicker n="01">Público · Growth</Kicker>
+    <Kicker n="01">Público · 成長</Kicker>
     <Heading top={160} size={76}>
-      3.6× the crowd
+      自2022年起，
       <br />
-      since 2022.
+      觀眾成長 3.6 倍。
     </Heading>
     <div
       style={abs(1240, 160, {
@@ -472,8 +473,8 @@ const Growth: Page = () => (
         lineHeight: 1.4,
       })}
     >
-      Six editions, each one bigger than the last. From 2027 the city caps the site at 128,000, so
-      demand now outruns supply.
+      共舉辦六屆，一屆比一屆盛大。自2027年起，市政府將場地人數上限訂為 128,000
+      人，需求已經超過供給。
     </div>
     <GrowthDisc x={120} d={155} year="2022" value="34K" color={COBALT} delay={0} />
     <GrowthDisc x={315} d={207} year="2023" value="61K" color={COBALT} delay={70} />
@@ -482,7 +483,7 @@ const Growth: Page = () => (
       d={249}
       year="2024"
       value="88K"
-      note="Sold out · 88 days"
+      note="88 天售罄"
       color={COBALT}
       delay={140}
     />
@@ -491,7 +492,7 @@ const Growth: Page = () => (
       d={277}
       year="2025"
       value="109K"
-      note="Sold out · 63 days"
+      note="63 天售罄"
       color={COBALT}
       delay={210}
     />
@@ -500,16 +501,16 @@ const Growth: Page = () => (
       d={292}
       year="2026"
       value="121K"
-      note="Sold out · 41 days"
+      note="41 天售罄"
       color={RED}
       delay={280}
     />
     <GrowthDisc
       x={1500}
       d={300}
-      year="2027 · cap"
+      year="2027 · 上限"
       value="128K"
-      note="Projected"
+      note="預估"
       color={RED}
       projected
       delay={350}
@@ -618,31 +619,31 @@ const OriginBlock = ({
 const WhoComes: Page = () => (
   <Poster bg={COBALT} color={PAPER} footer={<Footer left={PAPER} />}>
     <Kicker n="01" color={PAPER}>
-      Público · Who comes
+      Público · 觀眾組成
     </Kicker>
     <Heading top={160} size={72} color={PAPER}>
-      Mostly under 35.
+      多數未滿 35 歲，
       <br />
-      One in three flies in.
+      每三人就有一人搭機而來。
     </Heading>
-    <div style={abs(120, 392, { ...LABEL, color: PAPER })}>Age</div>
+    <div style={abs(120, 392, { ...LABEL, color: PAPER })}>年齡</div>
     <AgeBar x={120} h={332} pct="34%" band="18–24" color={PAPER} delay={0} />
     <AgeBar x={312} h={400} pct="41%" band="25–34" color={YELLOW} delay={80} />
     <AgeBar x={504} h={166} pct="17%" band="35–44" color={PAPER} delay={160} />
     <AgeBar x={696} h={78} pct="8%" band="45+" color={PAPER} delay={240} />
-    <div style={abs(1000, 392, { ...LABEL, color: PAPER })}>Origin</div>
-    <div style={abs(1000, 440, { ...LABEL, fontSize: 17, color: PAPER })}>Portugal 63%</div>
-    <div style={abs(1507, 440, { ...LABEL, fontSize: 17, color: PAPER })}>Abroad 37%</div>
-    <OriginBlock x={1000} y={480} w={499} h={255} name="Lisbon metro" pct="41%" bg={RED} />
-    <OriginBlock x={1000} y={743} w={499} h={137} name="Rest of Portugal" pct="22%" bg={YELLOW} />
-    <OriginBlock x={1507} y={480} w={293} h={112} name="Spain" pct="11%" bg={PAPER} compact />
-    <OriginBlock x={1507} y={600} w={293} h={81} name="UK" pct="8%" bg={PINK} compact />
+    <div style={abs(1000, 392, { ...LABEL, color: PAPER })}>來源</div>
+    <div style={abs(1000, 440, { ...LABEL, fontSize: 17, color: PAPER })}>葡萄牙 63%</div>
+    <div style={abs(1507, 440, { ...LABEL, fontSize: 17, color: PAPER })}>海外 37%</div>
+    <OriginBlock x={1000} y={480} w={499} h={255} name="里斯本都會區" pct="41%" bg={RED} />
+    <OriginBlock x={1000} y={743} w={499} h={137} name="葡萄牙其他地區" pct="22%" bg={YELLOW} />
+    <OriginBlock x={1507} y={480} w={293} h={112} name="西班牙" pct="11%" bg={PAPER} compact />
+    <OriginBlock x={1507} y={600} w={293} h={81} name="英國" pct="8%" bg={PINK} compact />
     <OriginBlock
       x={1507}
       y={689}
       w={293}
       h={61}
-      name="France"
+      name="法國"
       pct="6%"
       bg="#111111"
       fg={PAPER}
@@ -653,7 +654,7 @@ const WhoComes: Page = () => (
       y={758}
       w={293}
       h={122}
-      name="Other"
+      name="其他"
       pct="12%"
       bg={PAPER}
       fg={PAPER}
@@ -751,7 +752,7 @@ const SiteDivider: Page = () => (
   <Divider
     n="02"
     title="O Recinto"
-    sub="The site — Parque Tejo, 90 hectares on the river"
+    sub="場地 — Parque Tejo，河岸 90 公頃"
     bg={RED}
     fg={INK}
     numColor={INK}
@@ -875,7 +876,7 @@ const SitePlan: Page = () => (
       viewBox="0 0 1920 1080"
       style={abs(0, 0)}
       role="img"
-      aria-label="Site plan"
+      aria-label="場地平面圖"
     >
       <polygon points="1720,0 1920,0 1920,1080 1830,1080" style={{ fill: COBALT }} />
       <polygon
@@ -967,28 +968,28 @@ const SitePlan: Page = () => (
     <Gate x={1150} y={96} rotate={0} />
     <Gate x={1200} y={960} rotate={180} />
     <PlanLabel x={866} y={504}>
-      Metro
+      地鐵
     </PlanLabel>
     <PlanLabel x={1184} y={112}>
-      Norte
+      北門
     </PlanLabel>
     <PlanLabel x={1234} y={926}>
-      Sul · Night Line
+      南門 · Night Line
     </PlanLabel>
-    <Kicker n="02">O Recinto · Site plan</Kicker>
+    <Kicker n="02">O Recinto · 場地平面圖</Kicker>
     <Heading top={160} size={64}>
-      Four stages
+      四座舞台，
       <br />
-      on the river.
+      坐落河岸。
     </Heading>
     <StageKey y={336} name="Palco Tejo" capacity="45,000" color={RED} />
     <StageKey y={400} name="Palco Sol" capacity="18,000" color={YELLOW} />
     <StageKey y={464} name="Cúpula" capacity="6,000" color={COBALT} />
     <StageKey y={528} name="Rio Club" capacity="3,000" color={PINK} />
-    <div style={abs(120, 616, { ...LABEL, fontSize: 17 })}>Stage area scaled to capacity</div>
+    <div style={abs(120, 616, { ...LABEL, fontSize: 17 })}>舞台面積依容納人數等比例繪製</div>
     <KeyRow
       y={700}
-      label="Cúpula Brisa, by the metro gate"
+      label="Cúpula Brisa，位於地鐵入口旁"
       swatch={
         <div
           style={{
@@ -1004,7 +1005,7 @@ const SitePlan: Page = () => (
     />
     <KeyRow
       y={764}
-      label="Linha de Recarga · 60 refill taps"
+      label="Linha de Recarga · 60 座補水站"
       swatch={
         <div style={{ display: 'flex', gap: 8 }}>
           <div style={{ width: 12, height: 12, borderRadius: '50%', background: COBALT }} />
@@ -1015,7 +1016,7 @@ const SitePlan: Page = () => (
     />
     <KeyRow
       y={828}
-      label="Other partner zones"
+      label="其他贊助商展區"
       swatch={
         <div
           style={{
@@ -1029,7 +1030,7 @@ const SitePlan: Page = () => (
     />
     <KeyRow
       y={892}
-      label="Entrances"
+      label="入口"
       swatch={
         <div
           style={{
@@ -1164,13 +1165,13 @@ const BrisaBar = ({
 const Schedule: Page = () => (
   <Poster bg="#111111" color={PAPER} footer={<Footer left={PAPER} />}>
     <Kicker n="02" color={PAPER}>
-      O Recinto · Saturday 12 June
+      O Recinto · 6月12日（週六）
     </Kicker>
     <Heading top={160} size={72} color={PAPER}>
-      A day at Pulso
+      Pulso 的一天
     </Heading>
     <div style={abs(1240, 156, { width: 560, fontSize: 24, fontWeight: 500, lineHeight: 1.4 })}>
-      Gates open at 15:00. Stages are staggered so the top of the bill never clashes.
+      15:00 開放入場。各舞台時段錯開，壓軸卡司彼此不會撞期。
     </div>
     <HourTick h={16} />
     <HourTick h={18} />
@@ -1184,31 +1185,31 @@ const Schedule: Page = () => (
     <StageRow row={1} name="Palco Sol" capacity="18,000" />
     <StageRow row={2} name="Cúpula" capacity="6,000" />
     <StageRow row={3} name="Rio Club" capacity="3,000" />
-    <Slot row={0} from={17} to={18} label="Opening" bg={RED} />
-    <Slot row={0} from={18.5} to={19.75} label="Live" bg={RED} />
-    <Slot row={0} from={20.25} to={21.75} label="Live" bg={RED} />
-    <Slot row={0} from={22.5} to={24.25} label="Headliner" bg={RED} strong />
-    <Slot row={0} from={24.75} to={26} label="Live" bg={RED} />
-    <Slot row={1} from={16} to={17.25} label="Live" bg={YELLOW} />
-    <Slot row={1} from={17.75} to={19} label="Live" bg={YELLOW} />
-    <Slot row={1} from={19.5} to={20.75} label="Sunset set" bg={YELLOW} />
-    <Slot row={1} from={21.25} to={22.5} label="Live" bg={YELLOW} />
-    <Slot row={1} from={23} to={24.5} label="Special guest" bg={YELLOW} />
-    <Slot row={2} from={20} to={22} label="DJ set" bg={COBALT} fg={PAPER} />
-    <Slot row={2} from={22} to={24} label="DJ set" bg={COBALT} fg={PAPER} />
+    <Slot row={0} from={17} to={18} label="開場" bg={RED} />
+    <Slot row={0} from={18.5} to={19.75} label="演出" bg={RED} />
+    <Slot row={0} from={20.25} to={21.75} label="演出" bg={RED} />
+    <Slot row={0} from={22.5} to={24.25} label="壓軸" bg={RED} strong />
+    <Slot row={0} from={24.75} to={26} label="演出" bg={RED} />
+    <Slot row={1} from={16} to={17.25} label="演出" bg={YELLOW} />
+    <Slot row={1} from={17.75} to={19} label="演出" bg={YELLOW} />
+    <Slot row={1} from={19.5} to={20.75} label="日落演出" bg={YELLOW} />
+    <Slot row={1} from={21.25} to={22.5} label="演出" bg={YELLOW} />
+    <Slot row={1} from={23} to={24.5} label="特別嘉賓" bg={YELLOW} />
+    <Slot row={2} from={20} to={22} label="DJ 表演" bg={COBALT} fg={PAPER} />
+    <Slot row={2} from={22} to={24} label="DJ 表演" bg={COBALT} fg={PAPER} />
     <Slot row={2} from={24} to={26} label="B2B" bg={COBALT} fg={PAPER} />
-    <Slot row={2} from={26} to={28} label="Closing set" bg={COBALT} fg={PAPER} />
-    <Slot row={3} from={16} to={19} label="Day party" bg={PINK} />
-    <Slot row={3} from={19} to={21.5} label="DJ set" bg={PINK} />
-    <Slot row={3} from={21.5} to={24} label="Live" bg={PINK} />
+    <Slot row={2} from={26} to={28} label="閉幕演出" bg={COBALT} fg={PAPER} />
+    <Slot row={3} from={16} to={19} label="日間派對" bg={PINK} />
+    <Slot row={3} from={19} to={21.5} label="DJ 表演" bg={PINK} />
+    <Slot row={3} from={21.5} to={24} label="演出" bg={PINK} />
     <Slot row={3} from={24} to={27} label="B2B" bg={PINK} />
     <div style={abs(120, 850, { color: YELLOW, paddingTop: 4 })}>
       <div style={{ fontSize: 26, fontWeight: 800, lineHeight: 1 }}>Brisa</div>
-      <div style={{ fontSize: 18, fontWeight: 500, marginTop: 12 }}>On site, all day</div>
+      <div style={{ fontSize: 18, fontWeight: 500, marginTop: 12 }}>全天駐場</div>
     </div>
     <BrisaBar y={846} from={16} to={21} label="Cúpula Brisa" />
     <BrisaBar y={846} from={24} to={28} label="Night Line" />
-    <BrisaBar y={898} from={16} to={28} label="Linha de Recarga · 60 taps" />
+    <BrisaBar y={898} from={16} to={28} label="Linha de Recarga · 60 座補水站" />
   </Poster>
 );
 
@@ -1216,7 +1217,7 @@ const PartnershipDivider: Page = () => (
   <Divider
     n="03"
     title="Parceria"
-    sub="Partnership — three tiers, one headline slot"
+    sub="合作 — 三個層級，一個冠名席位"
     bg={COBALT}
     fg={PAPER}
     numColor={YELLOW}
@@ -1329,12 +1330,12 @@ const Tier = ({
 
 const Tiers: Page = () => (
   <Poster bg={PAPER} footer={<Footer />}>
-    <Kicker n="03">Parceria · Tiers</Kicker>
+    <Kicker n="03">Parceria · 合作層級</Kicker>
     <Heading top={160} size={72}>
-      Three ways in.
+      三種合作方式。
     </Heading>
     <div style={abs(1240, 156, { width: 560, fontSize: 24, fontWeight: 500, lineHeight: 1.4 })}>
-      Seven partners, one per category. Fees cover the 2027 edition; build is quoted separately.
+      共七位贊助夥伴，每個品類限一家。費用涵蓋2027年度活動，搭建費用另行報價。
     </div>
     <Steps>
       <Step duration={320}>
@@ -1344,17 +1345,17 @@ const Tiers: Page = () => (
           h={272}
           bg={RED}
           fg={INK}
-          name="Headline partner"
+          name="冠名贊助商"
           price="€1.2M"
           priceSize={168}
           slots={<Slot3 color={INK} />}
-          available="1 available"
-          tag="Proposed for Brisa"
+          available="尚餘 1 席"
+          tag="建議由 Brisa 擔任"
         >
-          <li>Co-branded festival lock-up</li>
-          <li>Exclusive in water & soft drinks</li>
-          <li>Two activation sites, 900 m²</li>
-          <li>120 hospitality passes a day</li>
+          <li>與音樂祭聯名的識別標誌</li>
+          <li>水與清涼飲料品類獨家</li>
+          <li>兩處體驗展區，共 900 m²</li>
+          <li>每日 120 張貴賓接待通行證</li>
         </Tier>
       </Step>
       <Step duration={320}>
@@ -1364,7 +1365,7 @@ const Tiers: Page = () => (
           h={204}
           bg={COBALT}
           fg={PAPER}
-          name="Stage partner"
+          name="舞台贊助商"
           price="€450K"
           priceSize={124}
           slots={
@@ -1373,11 +1374,11 @@ const Tiers: Page = () => (
               <Slot3 color={PAPER} />
             </>
           }
-          available="2 available"
+          available="尚餘 2 席"
         >
-          <li>Naming of Palco Sol or Cúpula</li>
-          <li>One activation site, 400 m²</li>
-          <li>40 hospitality passes a day</li>
+          <li>Palco Sol 或 Cúpula 冠名權</li>
+          <li>一處體驗展區，400 m²</li>
+          <li>每日 40 張貴賓接待通行證</li>
         </Tier>
       </Step>
       <Step duration={320}>
@@ -1387,7 +1388,7 @@ const Tiers: Page = () => (
           h={176}
           bg={YELLOW}
           fg={INK}
-          name="Supporting partner"
+          name="協力贊助商"
           price="€150K"
           priceSize={96}
           slots={
@@ -1398,11 +1399,11 @@ const Tiers: Page = () => (
               <Slot3 color={INK} />
             </>
           }
-          available="4 available"
+          available="尚餘 4 席"
         >
-          <li>Bar and product placement</li>
-          <li>Logo on site signage and app</li>
-          <li>12 hospitality passes a day</li>
+          <li>吧台與產品陳列</li>
+          <li>場內指標與 App 露出 Logo</li>
+          <li>每日 12 張貴賓通行證</li>
         </Tier>
       </Step>
     </Steps>
@@ -1501,20 +1502,20 @@ const NightArt = () => (
 
 const Activations: Page = () => (
   <Poster bg={YELLOW} footer={<Footer />}>
-    <Kicker n="03">Parceria · Activations</Kicker>
+    <Kicker n="03">Parceria · 現場體驗</Kicker>
     <Heading top={160} size={64}>
-      Three things Brisa does on site.
+      Brisa 在現場做的三件事。
     </Heading>
     <Concept
       x={120}
       index="A"
       title="Cúpula Brisa"
-      body="A shaded dome at the metro gate, misting through the afternoon heat."
+      body="地鐵入口旁的遮陽穹頂，在午後酷熱中噴灑降溫水霧。"
       art={<DomeArt />}
       stats={
         <>
-          <Figure value="32" label="Misting stations" />
-          <Figure value="1,200" label="m² of shade" />
+          <Figure value="32" label="噴霧站" />
+          <Figure value="1,200" label="平方公尺遮蔭" />
         </>
       }
     />
@@ -1522,12 +1523,12 @@ const Activations: Page = () => (
       x={700}
       index="B"
       title="Linha de Recarga"
-      body="Free refill taps across the site. Every refill is a Brisa moment, not a plastic bottle."
+      body="全場免費補水站。每一次補水都是屬於 Brisa 的時刻，而不是又一個塑膠瓶。"
       art={<RefillArt />}
       stats={
         <>
-          <Figure value="410K" label="Est. refills" />
-          <Figure value="120K" label="Bottles avoided" />
+          <Figure value="410K" label="預估補水次數" />
+          <Figure value="120K" label="減少塑膠瓶" />
         </>
       }
     />
@@ -1535,12 +1536,12 @@ const Activations: Page = () => (
       x={1280}
       index="C"
       title="Night Line"
-      body="A free after-hours shuttle from the south gate to Cais do Sodré, 00:00 to 04:00."
+      body="00:00 至 04:00 的免費夜間接駁車，從南門直達 Cais do Sodré。"
       art={<NightArt />}
       stats={
         <>
-          <Figure value="12" label="Minutes apart" />
-          <Figure value="16K" label="Est. riders" />
+          <Figure value="12" label="發車間隔（分）" />
+          <Figure value="16K" label="預估乘客數" />
         </>
       }
     />
@@ -1633,7 +1634,7 @@ const Reach: Page = () => (
     <BandValue r={765} value="9M" size={40} color={INK} />
     <BandValue r={836} value="5M" size={24} color={INK} />
     <Kicker n="03" color={PAPER}>
-      Parceria · Reach
+      Parceria · 觸及
     </Kicker>
     <div
       style={{
@@ -1649,40 +1650,35 @@ const Reach: Page = () => (
       46M
     </div>
     <div style={abs(120, 418, { fontSize: 30, fontWeight: 500, lineHeight: 1.35, width: 780 })}>
-      Projected impressions carrying the Brisa mark,
+      預估帶有 Brisa 標誌的曝光次數，
       <br />
-      March to June 2027.
+      期間為2027年3月至6月。
     </div>
     <Channel
       y={548}
       color={RED}
-      name="Owned social"
-      detail="Instagram, TikTok and YouTube · 2.1M followers"
+      name="自有社群"
+      detail="Instagram、TikTok 與 YouTube · 2.1M 追蹤者"
     />
     <Channel
       y={640}
       color={COBALT}
-      name="Broadcast & stream"
-      detail="RTP highlights + YouTube live, all three days"
+      name="電視轉播與直播"
+      detail="RTP 精華轉播 + YouTube 直播，三天全程"
     />
     <Channel
       y={732}
       color={YELLOW}
-      name="OOH Lisbon"
-      detail="Metro, MUPI and riverfront, six weeks"
+      name="里斯本戶外廣告"
+      detail="地鐵、MUPI 燈箱與河岸，為期六週"
     />
-    <Channel
-      y={824}
-      color={PAPER}
-      name="Press"
-      detail="Music and lifestyle titles in PT, ES and UK"
-    />
+    <Channel y={824} color={PAPER} name="媒體報導" detail="葡、西、英三國的音樂與生活風格媒體" />
     <div style={abs(1000, 176, { width: 440, color: PAPER })}>
       <div style={{ ...DISPLAY, ...NUM, fontSize: 96, lineHeight: 0.71 }}>+410K</div>
       <div style={{ ...LABEL, fontSize: 17, lineHeight: 1.5, marginTop: 22 }}>
-        Ticket buyers in the Pulso CRM,
+        Pulso CRM 中的購票者，
         <br />
-        one co-branded send a month
+        每月一次聯名電子報
       </div>
     </div>
   </Poster>
@@ -1756,22 +1752,22 @@ const Timeline: Page = () => {
   const report = mx(10, 15, 30);
   return (
     <Poster bg={PAPER} footer={<Footer />}>
-      <Kicker n="03">Parceria · Timeline</Kicker>
+      <Kicker n="03">Parceria · 時程</Kicker>
       <Heading top={160} size={72}>
-        Six months to the gates.
+        距離開場，還有六個月。
       </Heading>
       <div style={abs(T0, AXIS_Y, { width: 1680, height: 40, background: INK })} />
-      <MonthTick m={0} label="Nov" />
-      <MonthTick m={1} label="Dec" />
-      <MonthTick m={2} label="Jan" />
-      <MonthTick m={3} label="Feb" />
-      <MonthTick m={4} label="Mar" />
-      <MonthTick m={5} label="Apr" />
-      <MonthTick m={6} label="May" />
-      <MonthTick m={7} label="Jun" />
-      <MonthTick m={8} label="Jul" />
-      <MonthTick m={9} label="Aug" />
-      <MonthTick m={10} label="Sep" />
+      <MonthTick m={0} label="11月" />
+      <MonthTick m={1} label="12月" />
+      <MonthTick m={2} label="1月" />
+      <MonthTick m={3} label="2月" />
+      <MonthTick m={4} label="3月" />
+      <MonthTick m={5} label="4月" />
+      <MonthTick m={6} label="5月" />
+      <MonthTick m={7} label="6月" />
+      <MonthTick m={8} label="7月" />
+      <MonthTick m={9} label="8月" />
+      <MonthTick m={10} label="9月" />
       <div style={abs(T0, AXIS_Y + 56, { ...LABEL, ...NUM, fontSize: 16 })}>2026</div>
       <div style={abs(Math.round(T0 + 2 * PX_M), AXIS_Y + 56, { ...LABEL, ...NUM, fontSize: 16 })}>
         2027
@@ -1781,9 +1777,9 @@ const Timeline: Page = () => {
           <Milestone
             x={sign}
             above
-            date="30 Nov 2026"
-            title="Sign"
-            detail="Contract and exclusivity locked."
+            date="2026/11/30"
+            title="簽約"
+            detail="合約與獨家權利確定。"
             marker={
               <div
                 style={abs(sign - 28, AXIS_Y - 56, { width: 56, height: 56, background: INK })}
@@ -1794,9 +1790,9 @@ const Timeline: Page = () => {
         <Step duration={280}>
           <Milestone
             x={announce}
-            date="10 Feb 2027"
-            title="Announce"
-            detail="Brisa named headline partner."
+            date="2027/02/10"
+            title="對外發表"
+            detail="公布 Brisa 為冠名贊助商。"
             marker={<HalfDisc cx={announce} cy={AXIS_Y} r={44} facing="up" color={COBALT} />}
           />
         </Step>
@@ -1804,9 +1800,9 @@ const Timeline: Page = () => {
           <Milestone
             x={lineup}
             above
-            date="04 Mar 2027"
-            title="Line-up"
-            detail="Full bill drops, co-branded."
+            date="2027/03/04"
+            title="卡司公布"
+            detail="完整卡司曝光，聯名宣傳。"
             marker={
               <div
                 style={abs(lineup - 36, AXIS_Y - 72, {
@@ -1824,9 +1820,9 @@ const Timeline: Page = () => {
         <Step duration={280}>
           <Milestone
             x={buildFrom}
-            date="18 May — 10 Jun"
-            title="Build"
-            detail="Cúpula and taps go in."
+            date="5/18 — 6/10"
+            title="搭建"
+            detail="Cúpula 與補水站進場。"
             width={260}
             marker={
               <div
@@ -1843,9 +1839,9 @@ const Timeline: Page = () => {
           <Milestone
             x={festival}
             above
-            date="11 — 13 Jun 2027"
+            date="2027/6/11 — 13"
             title="Pulso"
-            detail="128,000 people, four stages."
+            detail="128,000 名觀眾，四座舞台。"
             marker={
               <div
                 style={abs(festival - 60, AXIS_Y - 120, {
@@ -1861,9 +1857,9 @@ const Timeline: Page = () => {
         <Step duration={280}>
           <Milestone
             x={report}
-            date="15 Sep 2027"
-            title="Report"
-            detail="Audited reach and refills."
+            date="2027/09/15"
+            title="成效報告"
+            detail="經查核的觸及與補水數據。"
             width={300}
             alignRight
             marker={
@@ -1914,9 +1910,9 @@ const Close: Page = () => (
         letterSpacing: '-0.01em',
       })}
     >
-      Let's make
+      一起把現場
       <br />
-      some noise.
+      炒熱吧。
     </div>
     <h2
       style={{
@@ -1933,7 +1929,7 @@ const Close: Page = () => (
     </h2>
     <div style={abs(120, 300, { width: 440, fontSize: 26, fontWeight: 500, lineHeight: 1.45 })}>
       <div style={{ fontWeight: 800 }}>Inês Duarte</div>
-      <div>Head of Partnerships</div>
+      <div>合作夥伴部主管</div>
       <div>partners@pulso.pt</div>
     </div>
     <div style={abs(120, 960, { ...LABEL, lineHeight: 1.6 })}>
@@ -1948,47 +1944,47 @@ Cover.transition = morphTransition;
 Audience.transition = morphTransition;
 
 export const meta: SlideMeta = {
-  title: 'Pulso Lisboa 2027 — Partnership proposal',
+  title: 'Pulso Lisboa 2027 — 合作提案',
   createdAt: '2026-10-11T11:45:48.190Z',
 };
 
 export const notes: (string | undefined)[] = [
-  `Open on the poster and let it sit for a beat.
-"This is PULSO, the sixth edition: three days on the river in Lisbon, 11 to 13 June 2027."
-"We've put this together for Brisa specifically, and we'll show you why the fit is so good." Click.`,
-  `The circle grows into the crowd. Wait for it to land.
-"One hundred and twenty-eight thousand people over three days. That's the capped capacity for 2027."
-Then the three supporting numbers: sold out in 41 days last year, 37 percent international, average age 27.`,
-  `"This didn't happen overnight." Walk left to right along the circles.
-"Thirty-four thousand in 2022. Sixty-one. Eighty-eight. A hundred and nine. A hundred and twenty-one last year."
-Point at the dashed ring: "2027 is capped at 128,000. Demand is ahead of supply, which is exactly where a partner wants to be."`,
-  `"Who are they?" Left: "Three quarters are between 18 and 34. The biggest group is 25 to 34, the people building their brand habits now."
-Right: "Sixty-three percent Portuguese, forty-one percent from greater Lisbon. And thirty-seven percent travel in, mostly from Spain, the UK and France."`,
-  `Short pause. "Let's walk the site."`,
-  `"Parque Tejo, on the river. Four stages, drawn here at a size that matches their capacity."
-"Palco Tejo holds forty-five thousand; Rio Club, on the water, three thousand."
-Point to the striped circle: "This is the Brisa zone, right at the metro gate, where most of the crowd arrives. The blue dotted line is the refill line."`,
-  `"Here's a Saturday." Trace the rows.
-"Music from four in the afternoon to four in the morning, staggered so the main stages never clash at the top of the bill."
-Point to the striped bars: "Brisa is present all day: the Cúpula through the afternoon heat, refills the whole time, the Night Line from midnight."`,
-  `Short pause. "So, how do we work together?"`,
-  `"Three tiers, seven partners in total, one per category."
-Click: "Headline partner, 1.2 million euros. There's one. This is what we're proposing for Brisa."
-Click: "Stage partner, 450 thousand, two available."
-Click: "Supporting partner, 150 thousand, four available."`,
-  `"Three things Brisa does on site, all of them useful to people, not just signage."
-"The Cúpula: shade and 32 misting stations by the metro gate."
-"The Linha de Recarga: 60 free refill taps, about 410,000 refills, around 120,000 plastic bottles that never get made."
-"And the Night Line: a free shuttle to Cais do Sodré every twelve minutes after midnight."`,
-  `"What does Brisa get back? Forty-six million projected impressions, March to June."
-"Eighteen million on our own social, fourteen million through RTP and the YouTube live stream, nine million in outdoor across Lisbon, five in press."
-"Plus direct access to 410,000 ticket buyers in our CRM."`,
-  `"Here's how we get there." Click through each milestone.
-"Sign by the end of November. Announce Brisa in February, a month before the line-up drops on co-branded media."
-"Build from mid-May, festival 11 to 13 June, and an audited impact report in September."`,
-  `"Vamos fazer barulho. Let's make some noise."
-"Inês Duarte leads partnerships; she'll follow up this week with the full deliverables schedule."
-Hold on this page for questions.`,
+  `先停在海報封面，讓畫面停留一拍。
+「這是 PULSO，第六屆：2027年6月11日到13日，三天，在里斯本的河岸。」
+「這份提案是專為 Brisa 準備的，接下來我會說明為什麼雙方這麼契合。」點擊換頁。`,
+  `圓圈長成人群，等它定格。
+「三天，十二萬八千人。這是2027年的容量上限。」
+接著帶出三個輔助數字：去年41 天售罄、37% 來自海外、平均年齡 27 歲。`,
+  `「這不是一夜之間發生的。」沿著圓圈由左到右帶過去。
+「2022年三萬四千人，接著六萬一、八萬八、十萬九，去年是十二萬一。」
+指向虛線圓圈：「2027年上限 128,000 人。需求已經跑在供給前面，這正是贊助商最想要的位置。」`,
+  `「他們是誰？」左邊：「四分之三的人介於 18 到 34 歲，最大族群是 25 到 34 歲，正是現在養成品牌習慣的人。」
+右邊：「63% 來自葡萄牙，41% 來自大里斯本地區；另外 37% 是遠道而來，主要來自西班牙、英國和法國。」`,
+  `稍作停頓。「我們來走一趟場地。」`,
+  `「Parque Tejo，就在河岸邊。四座舞台，圖上的大小對應各自的容納人數。」
+「Palco Tejo 容納四萬五千人；臨水的 Rio Club 三千人。」
+指向條紋圓圈：「這是 Brisa 專區，就在地鐵入口，也是大多數觀眾進場的地方。藍色虛線是補水動線。」`,
+  `「來看看週六這一天。」沿著每一列帶過去。
+「音樂從下午四點一路到凌晨四點，各舞台時段錯開，壓軸卡司不會彼此撞期。」
+指向條紋色塊：「Brisa 全天都在：午後酷熱有 Cúpula，補水站全程開放，午夜之後還有 Night Line。」`,
+  `稍作停頓。「那麼，我們要怎麼合作？」`,
+  `「三個層級，共七位贊助夥伴，每個品類一家。」
+點擊：「冠名贊助商，120 萬歐元，只有一席。這就是我們為 Brisa 提出的方案。」
+點擊：「舞台贊助商，45 萬歐元，還有兩席。」
+點擊：「協力贊助商，15 萬歐元，還有四席。」`,
+  `「Brisa 在現場做三件事，每一件都對觀眾有實際幫助，而不只是掛個招牌。」
+「Cúpula：地鐵入口旁的遮蔭，加上 32 座噴霧站。」
+「Linha de Recarga：60 座免費補水站，預估補水約 41 萬次，等於少生產約 12 萬個塑膠瓶。」
+「還有 Night Line：午夜之後每 12 分鐘一班的免費接駁車，直達 Cais do Sodré。」`,
+  `「Brisa 能得到什麼回報？3月到6月，預估 4,600 萬次曝光。」
+「其中 1,800 萬來自我們自有的社群，1,400 萬來自 RTP 轉播與 YouTube 直播，900 萬來自里斯本各處的戶外廣告，500 萬來自媒體報導。」
+「另外，還能直接觸及我們 CRM 裡的 41 萬名購票者。」`,
+  `「接下來是我們怎麼走到那一天。」逐一點擊每個里程碑。
+「11月底簽約。2月對外發表 Brisa，一個月後卡司公布時同步聯名曝光。」
+「5月中開始搭建，6月11 到13日音樂祭登場，9月提交經過查核的成效報告。」`,
+  `「Vamos fazer barulho，一起把現場炒熱吧。」
+「Inês Duarte 負責贊助合作，她會在本週跟進完整的交付時程表。」
+停在這一頁，開放提問。`,
 ];
 
 export default [

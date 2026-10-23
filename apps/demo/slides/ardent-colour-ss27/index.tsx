@@ -14,8 +14,9 @@ import { type CSSProperties, type ReactNode, useId } from 'react';
 export const design: DesignSystem = {
   palette: { bg: '#F6F0E8', text: '#1B0F0A', accent: '#E0127A' },
   fonts: {
-    display: '"Bodoni Moda", "Didot", "Bodoni 72", serif',
-    body: '"Jost", "Futura", "Avenir Next", sans-serif',
+    display:
+      '"Bodoni Moda", "Didot", "Bodoni 72", serif, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
+    body: '"Jost", "Futura", "Avenir Next", sans-serif, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei"',
   },
   typeScale: { hero: 400, body: 32 },
   radius: 2,
@@ -195,7 +196,7 @@ const Folio = ({ tone, left = 120, right = 120, label = true, number = true }: F
         zIndex: 5,
       }}
     >
-      {label && <span style={{ ...LABEL, fontSize: 17 }}>Maison Ardent · Colour Report SS27</span>}
+      {label && <span style={{ ...LABEL, fontSize: 17 }}>Maison Ardent · 色彩報告 SS27</span>}
       <span style={{ flex: 1, height: 1, background: 'currentColor', opacity: 0.32 }} />
       {number && (
         <span style={{ ...DIDONE, fontSize: 32, lineHeight: 1, letterSpacing: 0 }}>
@@ -971,7 +972,9 @@ const Badge = ({
         letterSpacing="5.6"
         style={{ fontFamily: 'var(--osd-font-body)', fontWeight: 500 }}
       >
-        <textPath href={`#${uid}ring`}>CAPPED AT NINE PER CENT · BY DESIGN ·</textPath>
+        <textPath href={`#${uid}ring`} textLength="572" lengthAdjust="spacing">
+          占比上限 9% · 刻意為之 ·
+        </textPath>
       </text>
       <text
         x="122"
@@ -1022,31 +1025,31 @@ const Cover: Page = () => {
         MAISON ARDENT
       </div>
       <div style={abs(0, 86, { width: 1920, textAlign: 'center', ...LABEL })}>
-        Colour Report — Spring/Summer 2027
+        色彩報告 — 2027 春夏
       </div>
       <div style={abs(1300, 86, { width: 500, textAlign: 'right', ...LABEL })}>
-        Nº 14 · Paris · October 2026
+        第 14 期 · Paris · 2026 年 10 月
       </div>
       <div style={abs(120, 134, { width: 1680, height: 1, background: mix(IVORY, FUCHSIA, 30) })} />
       <h1
-        style={abs(96, 150, {
+        style={abs(96, 170, {
           ...DIDONE,
-          fontSize: 'var(--osd-size-hero)',
+          fontSize: 350,
           lineHeight: 0.8,
           ...rise(0.1),
         })}
       >
-        Heat
+        熱力
       </h1>
       <h1
-        style={abs(352, 456, {
+        style={abs(352, 504, {
           ...DIDONE,
-          fontSize: 'var(--osd-size-hero)',
+          fontSize: 350,
           lineHeight: 0.8,
           ...rise(0.25),
         })}
       >
-        Season<span style={{ letterSpacing: 0 }}>.</span>
+        盛季<span style={{ letterSpacing: 0 }}>。</span>
       </h1>
       <div style={{ position: 'absolute', inset: 0, zIndex: 2, ...rise(0.45) }}>
         <Lipstick x={1494} y={196} height={760} shade={RIOT_BULLET} finish="satin" />
@@ -1060,9 +1063,9 @@ const Cover: Page = () => {
       </div>
       <div style={abs(700, 884, { width: 620 })}>
         <div style={{ ...DIDONE, fontSize: 44, lineHeight: 1.05 }}>
-          Five colours for a loud summer,
+          為喧鬧的夏天準備的五種色彩，
         </div>
-        <div style={{ ...LABEL, marginTop: 18 }}>and why nude stopped growing</div>
+        <div style={{ ...LABEL, marginTop: 18 }}>以及裸色為何停止成長</div>
       </div>
     </Field>
   );
@@ -1114,27 +1117,24 @@ const QUOTE_MARK: CSSProperties = {
 const Letter: Page = () => (
   <Field bg="var(--osd-bg)" color="var(--osd-text)" folio={INK}>
     <VerticalLabel x={62} y={404} tone={mix(INK, IVORY, 40)}>
-      Editor’s letter — Nº 14
+      編者的話 — 第 14 期
     </VerticalLabel>
-    <div style={abs(200, 120, { ...LABEL, color: 'var(--osd-accent)' })}>The thesis</div>
+    <div style={abs(200, 120, { ...LABEL, color: 'var(--osd-accent)' })}>核心主張</div>
     <blockquote style={abs(200, 196, { margin: 0, width: 1000 })}>
       <p style={{ ...DIDONE, fontSize: 124, lineHeight: 0.98, position: 'relative' }}>
         <span style={{ ...QUOTE_MARK, position: 'absolute', right: '100%' }}>“</span>
-        After three seasons of beige, she wants{' '}
+        經過三季的米色，她想要的是
         <span style={{ color: 'var(--osd-accent)' }}>
-          volume.<span style={QUOTE_MARK}>”</span>
+          存在感。<span style={QUOTE_MARK}>”</span>
         </span>
       </p>
     </blockquote>
     <div style={abs(200, 640, { display: 'flex', alignItems: 'baseline', gap: 20 })}>
       <span style={{ ...DIDONE, fontSize: 40, lineHeight: 1 }}>— Camille Roux</span>
-      <span style={{ ...LABEL, fontSize: 17, color: mix(INK, IVORY, 40) }}>
-        Creative Director of Colour
-      </span>
+      <span style={{ ...LABEL, fontSize: 17, color: mix(INK, IVORY, 40) }}>色彩創意總監</span>
     </div>
     <p style={abs(200, 734, { ...BODY, width: 880, color: mix(INK, IVORY, 18) })}>
-      Nude carried lip for three seasons. It has stopped growing. The customer who bought it is
-      buying a second, louder shade — and wearing both.
+      裸色唇妝撐了三季，如今已停止成長。當初買它的顧客，正在買第二支更大膽的顏色——而且兩支一起用。
     </p>
     <div style={abs(1300, 160, { width: 500, display: 'flex', flexDirection: 'column', gap: 44 })}>
       <Signal
@@ -1142,8 +1142,8 @@ const Letter: Page = () => (
         unit="%"
         caption={
           <>
-            Nude share of lip sales in 2026, down from <b style={{ fontWeight: 500 }}>41%</b> in
-            2023.
+            2026 年裸色占唇彩銷售的比重，從 2023 年的 <b style={{ fontWeight: 500 }}>41%</b>
+            下滑而來。
           </>
         }
       />
@@ -1155,14 +1155,14 @@ const Letter: Page = () => (
           </>
         }
         unit="%"
-        caption="Searches for ‘bold lip’, year on year."
+        caption="「大膽唇色」搜尋量的年增幅。"
       />
       <Signal
         figure="2.6"
         caption={
           <>
-            Bright shades owned by buyers aged 18–34, against <b style={{ fontWeight: 500 }}>1.1</b>{' '}
-            for everyone else.
+            支亮色，是 18–34 歲買家平均擁有的數量；其他族群只有{' '}
+            <b style={{ fontWeight: 500 }}>1.1</b> 支。
           </>
         }
       />
@@ -1243,7 +1243,7 @@ const SellThroughChart = () => (
       Q2 ’26
     </AxisNote>
     <AxisNote x={sx(4.5)} y={sy(67.6) + 40} anchor="middle">
-      CROSSED
+      交叉
     </AxisNote>
   </svg>
 );
@@ -1321,11 +1321,11 @@ const ReturnsChart = () => (
     viewBox="0 0 540 220"
     style={{ overflow: 'visible', display: 'block' }}
   >
-    <ReturnRow y={64} label="NUDES" value={11.2} colour={SAND} />
-    <ReturnRow y={156} label="BRIGHTS" value={6.4} colour={LILAC} />
+    <ReturnRow y={64} label="裸色" value={11.2} colour={SAND} />
+    <ReturnRow y={156} label="亮色" value={6.4} colour={LILAC} />
     <line x1="16" x2="516" y1="196" y2="196" stroke={SIGNAL_RULE} strokeWidth="1" />
     <AxisNote x={16} y={222}>
-      RETURN RATE, H1 2026
+      退貨率，2026 上半年
     </AxisNote>
   </svg>
 );
@@ -1357,9 +1357,9 @@ const SignalColumn = ({
 
 const Signals: Page = () => (
   <Field bg={INK} color={IVORY} folio={IVORY}>
-    <div style={abs(120, 120, { ...LABEL, color: lift(FUCHSIA, 30) })}>Signals</div>
+    <div style={abs(120, 120, { ...LABEL, color: lift(FUCHSIA, 30) })}>市場訊號</div>
     <h2 style={abs(120, 168, { ...DIDONE, fontSize: 132, lineHeight: 0.95 })}>
-      Loud is outselling quiet.
+      大膽款，賣贏了低調款。
     </h2>
     <div style={abs(120, 392, { display: 'flex', gap: 30 })}>
       <Steps>
@@ -1368,7 +1368,7 @@ const Signals: Page = () => (
             index="i."
             figure="78%"
             chart={<SellThroughChart />}
-            caption="Full-price sell-through on bright lip. Nudes slid to 61% — the lines crossed in Q1."
+            caption="亮色唇彩的原價售出率。裸色滑落至 61%——兩條線在 Q1 交叉。"
           />
         </Step>
         <Step duration={420}>
@@ -1381,7 +1381,7 @@ const Signals: Page = () => (
               </>
             }
             chart={<CheekChart />}
-            caption="Blush and cheek-tint units in eight quarters. Colour has moved up the face."
+            caption="八季以來腮紅與頰彩的銷售件數。色彩已從嘴唇一路往臉上移動。"
           />
         </Step>
         <Step duration={420}>
@@ -1389,7 +1389,7 @@ const Signals: Page = () => (
             index="iii."
             figure="6.4%"
             chart={<ReturnsChart />}
-            caption="Returns on brights. People send back disappointment, not drama."
+            caption="亮色的退貨率：退回的是失望，不是張力。"
           />
         </Step>
       </Steps>
@@ -1439,11 +1439,10 @@ const RIOT_FIELD = 'ar-riot-field';
 
 const TheFive: Page = () => (
   <Field bg="var(--osd-bg)" color="var(--osd-text)">
-    <div style={abs(120, 80, { ...LABEL, color: 'var(--osd-accent)' })}>The colour story</div>
-    <h2 style={abs(112, 112, { ...DIDONE, fontSize: 168 })}>The Five.</h2>
+    <div style={abs(120, 80, { ...LABEL, color: 'var(--osd-accent)' })}>色彩故事</div>
+    <h2 style={abs(112, 112, { ...DIDONE, fontSize: 168 })}>五色。</h2>
     <p style={abs(1160, 104, { ...BODY, fontSize: 30, width: 640, color: mix(INK, IVORY, 18) })}>
-      Five colours, sized by their share of the range. Two lead, two support — and one is here to
-      dare{'\u00a0'}you.
+      五種顏色，依其在系列中的占比決定大小。兩色領軍、兩色輔助——還有一色，專門來挑戰你。
     </p>
     <MorphElement id={RIOT_FIELD}>
       <div
@@ -1547,23 +1546,23 @@ const Riot: Page = () => {
         <div style={abs(0, 0, { width: 1920, height: 1080, background: FUCHSIA })} />
       </MorphElement>
       <div style={{ position: 'absolute', inset: 0, ...late }}>
-        <div style={abs(120, 112, LABEL)}>AR-01 — Lead colour</div>
+        <div style={abs(120, 112, LABEL)}>AR-01 — 主打色</div>
         <h2 style={abs(108, 160, { ...DIDONE, fontSize: 230 })}>
           Fuchsia
           <br />
           Riot.
         </h2>
         <div style={abs(120, 590, { ...DIDONE, fontSize: 46, lineHeight: 1.1 })}>
-          Electric, unapologetic, ten p.m. in July.
+          電光般耀眼、毫不道歉，七月的晚上十點。
         </div>
         <p style={abs(120, 672, { ...BODY, width: 820 })}>
-          For the woman who wore beige to every meeting since 2023 and is done apologising.
-          Blue-based, so it brightens teeth and wakes up every depth.
+          獻給自 2023
+          年起每場會議都穿米色、如今不想再委屈自己的女人。藍調底色，讓牙齒更亮白，也喚醒每一種膚色深度。
         </p>
         <StatRow x={120} width={900} rule={mix(IVORY, FUCHSIA, 45)}>
-          <Stat label="Share of range" value="28%" />
-          <Stat label="Lands in" value="Lip, blush" />
-          <Stat label="Finishes" value="Satin, matte" />
+          <Stat label="系列占比" value="28%" />
+          <Stat label="主要品項" value="唇彩、腮紅" />
+          <Stat label="質地" value="緞面、霧面" />
         </StatRow>
         <SwatchCard
           x={1520}
@@ -1586,46 +1585,44 @@ const Tangerine: Page = () => (
   <Field bg={TANGERINE} color={INK} folio={INK}>
     <Pan x={120} y={226} d={600} shade={mix(TANGERINE, '#C2551E', 30)} sparkle={0.55} sheen />
     <Lipstick x={672} y={410} height={500} shade={mix(TANGERINE, '#E43A1F', 20)} finish="gloss" />
-    <div style={abs(940, 112, LABEL)}>AR-02 — Support colour</div>
+    <div style={abs(940, 112, LABEL)}>AR-02 — 輔助色</div>
     <h2 style={abs(928, 160, { ...DIDONE, fontSize: 216 })}>
       Tangerine
       <br />
       Heat.
     </h2>
     <div style={abs(940, 590, { ...DIDONE, fontSize: 46, lineHeight: 1.1 })}>
-      Sunlit, juicy, four o’clock in Marseille.
+      陽光灑落、多汁鮮甜，Marseille 的下午四點。
     </div>
     <p style={abs(940, 672, { ...BODY, width: 860 })}>
-      Cheek first, lip second. Sheer, it reads as warmth, not orange: the flush you bring home after
-      a long, slow lunch outside.
+      先是臉頰，再是嘴唇。薄透上色時，呈現的是暖意而非橘色：像在戶外慢慢吃完一頓長長的午餐後，帶回家的那抹紅暈。
     </p>
     <StatRow x={940} width={860} rule={deep(TANGERINE, 45)}>
-      <Stat label="Share of range" value="22%" />
-      <Stat label="Lands in" value="Cheek, lip" />
-      <Stat label="Finishes" value="Sheer, gloss" />
+      <Stat label="系列占比" value="22%" />
+      <Stat label="主要品項" value="頰彩、唇彩" />
+      <Stat label="質地" value="透薄、亮面" />
     </StatRow>
   </Field>
 );
 
 const Chartreuse: Page = () => (
   <Field bg={CHARTREUSE} color={INK} folio={INK}>
-    <div style={abs(120, 112, LABEL)}>AR-03 — Accent colour, capped</div>
+    <div style={abs(120, 112, LABEL)}>AR-03 — 點綴色，限量控制</div>
     <h2 style={abs(108, 160, { ...DIDONE, fontSize: 230 })}>
       Acid
       <br />
       Chartreuse.
     </h2>
     <div style={abs(120, 590, { ...DIDONE, fontSize: 46, lineHeight: 1.1 })}>
-      Sour, graphic, the one they’ll photograph.
+      酸勁十足、圖像感強烈，大家都會拍下來的那一色。
     </div>
     <p style={abs(120, 672, { ...BODY, width: 860 })}>
-      A seasoning, not a meal. We keep it off the face, where it turns a complexion sallow, and put
-      it where it sings: one flick of liner, ten bright nails.
+      它是調味料，不是主菜。我們不讓它上臉，因為它會讓膚色顯得暗黃；而是放在最能發光的地方：一抹眼線，加上十片亮眼的指甲。
     </p>
     <StatRow x={120} width={900} rule={deep(CHARTREUSE, 45)}>
-      <Stat label="Share of range" value="9%" />
-      <Stat label="Lands in" value="Liner, nail" />
-      <Stat label="SKUs" value="Two, limited" />
+      <Stat label="系列占比" value="9%" />
+      <Stat label="主要品項" value="眼線、指甲油" />
+      <Stat label="品項數" value="兩款，限量" />
     </StatRow>
     <NailBottle x={1296} y={340} height={540} shade={mix(CHARTREUSE, '#8FA514', 30)} />
     <LinerPencil x={1120} y={930} length={720} angle={-12} tip={CHARTREUSE} />
@@ -1668,8 +1665,8 @@ const DuoHalf = ({
     <div style={abs(x, 486, { ...DIDONE, fontSize: 40, lineHeight: 1.1, width: 560 })}>{mood}</div>
     <p style={abs(x, 590, { ...BODY, fontSize: 30, width: 490 })}>{body}</p>
     <StatRow x={x} width={720} rule={rule}>
-      <Stat label="Share of range" value={share} />
-      <Stat label="Lands in" value={lands} />
+      <Stat label="系列占比" value={share} />
+      <Stat label="主要品項" value={lands} />
     </StatRow>
   </>
 );
@@ -1681,13 +1678,13 @@ const Duo: Page = () => (
       <DuoHalf
         x={120}
         code="AR-04"
-        rank="Support"
+        rank="輔助色"
         first="Lilac"
         second="Static."
-        mood="Cool, charged, a little sugared."
-        body="The cool counterweight to all that heat. On lids and high points, with a pearl that catches the flash."
+        mood="冷冽、帶電、微微甜膩。"
+        body="為這一季滿滿的熱度，帶來冷調的平衡。用在眼皮與臉部高光處，珍珠光澤能捕捉閃光燈。"
         share="18%"
-        lands="Eye, highlight"
+        lands="眼影、打亮"
         rule={deep(LILAC, 45)}
       />
     </div>
@@ -1695,13 +1692,13 @@ const Duo: Page = () => (
       <DuoHalf
         x={1080}
         code="AR-05"
-        rank="Lead"
+        rank="主打色"
         first="Oxblood"
         second="Velvet."
-        mood="Dense, candlelit, the last table."
-        body="The grown-up in the room. A blackened red for women who won’t do pink — our bridge to autumn."
+        mood="濃郁、燭光搖曳、最後一桌。"
+        body="全場最成熟的那一位。近乎墨黑的紅，獻給不碰粉紅的女性——我們通往秋天的橋梁。"
         share="23%"
-        lands="Lip, nail"
+        lands="唇彩、指甲油"
         rule={mix(IVORY, OXBLOOD, 55)}
       />
     </div>
@@ -1721,6 +1718,7 @@ type BulletProps = {
 };
 
 const SHELF = 820;
+const FINISH_ZH: Record<Finish, string> = { matte: '霧面', satin: '緞面', gloss: '亮面' };
 
 const RangeBullet = ({ cx, shade, finish, name, code }: BulletProps) => (
   <>
@@ -1728,7 +1726,7 @@ const RangeBullet = ({ cx, shade, finish, name, code }: BulletProps) => (
     <div style={abs(cx - 140, SHELF + 34, { width: 280, textAlign: 'center' })}>
       <div style={{ ...DIDONE, fontSize: 46, lineHeight: 1, whiteSpace: 'nowrap' }}>{name}</div>
       <div style={{ ...LABEL, fontSize: 15, marginTop: 16, color: mix(INK, IVORY, 35) }}>
-        {finish} · {code}
+        {FINISH_ZH[finish]} · {code}
       </div>
     </div>
   </>
@@ -1736,12 +1734,12 @@ const RangeBullet = ({ cx, shade, finish, name, code }: BulletProps) => (
 
 const Range: Page = () => (
   <Field bg="var(--osd-bg)" color="var(--osd-text)" folio={INK}>
-    <div style={abs(120, 112, { ...LABEL, color: 'var(--osd-accent)' })}>The range</div>
-    <h2 style={abs(112, 156, { ...DIDONE, fontSize: 132 })}>Six bullets, one price.</h2>
+    <div style={abs(120, 112, { ...LABEL, color: 'var(--osd-accent)' })}>產品系列</div>
+    <h2 style={abs(112, 156, { ...DIDONE, fontSize: 132 })}>六支唇膏，同一價格。</h2>
     <div style={abs(1460, 112, { width: 340, textAlign: 'right' })}>
       <div style={{ ...ROMAN, fontSize: 150, lineHeight: 0.86 }}>€38</div>
       <div style={{ ...LABEL, fontSize: 15, marginTop: 18, color: mix(INK, IVORY, 35) }}>
-        Refillable case · bullet €24
+        可補充式外殼 · 替換膏芯 €24
       </div>
     </div>
     <div style={abs(120, SHELF, { width: 1680, height: 1, background: mix(INK, IVORY, 70) })} />
@@ -1853,10 +1851,10 @@ const ColumnHead = ({ col, name, colour }: { col: number; name: string; colour: 
 
 const WearTest: Page = () => (
   <Field bg={INK} color={IVORY} folio={IVORY}>
-    <div style={abs(120, 112, { ...LABEL, color: lift(FUCHSIA, 30) })}>Wear test</div>
-    <h2 style={abs(112, 156, { ...DIDONE, fontSize: 120 })}>Every colour, every depth.</h2>
+    <div style={abs(120, 112, { ...LABEL, color: lift(FUCHSIA, 30) })}>試用測試</div>
+    <h2 style={abs(112, 156, { ...DIDONE, fontSize: 120 })}>每個顏色，每種膚色深度。</h2>
     <p style={abs(120, 290, { ...BODY, fontSize: 28, color: mix(IVORY, INK, 30) })}>
-      412 wearers in six cities, fourteen days each. Dot size is approval.
+      六座城市共 412 位試用者，每人試用十四天。圓點大小代表認可度。
     </p>
     <ColumnHead col={0} name="Riot" colour={FUCHSIA} />
     <ColumnHead col={1} name="Heat" colour={TANGERINE} />
@@ -1900,7 +1898,7 @@ const WearTest: Page = () => (
     <Approval col={3} row={5} value={81} colour={LILAC} />
     <Approval col={4} row={5} value={96} colour={OXBLOOD} />
     <div style={abs(1480, 396, { width: 320 })}>
-      <div style={{ ...LABEL, fontSize: 16, color: mix(IVORY, INK, 30) }}>The floor</div>
+      <div style={{ ...LABEL, fontSize: 16, color: mix(IVORY, INK, 30) }}>最低門檻</div>
       <div
         style={{
           ...ROMAN,
@@ -1921,8 +1919,8 @@ const WearTest: Page = () => (
           color: mix(IVORY, INK, 14),
         }}
       >
-        Lilac Static on depth VI, after two reformulations on a warmer base. Nothing ships below
-        {'\u00a0'}80%.
+        Lilac Static 在膚色深度 VI 的成績，是改用偏暖底色、兩度重新調配後的結果。低於 80%
+        的產品一律不出貨。
       </p>
     </div>
   </Field>
@@ -2019,47 +2017,47 @@ const DropKey = ({
 
 const Rollout: Page = () => (
   <Field bg="var(--osd-bg)" color="var(--osd-text)" folio={INK}>
-    <div style={abs(120, 112, { ...LABEL, color: 'var(--osd-accent)' })}>Rollout, 2027</div>
-    <h2 style={abs(112, 152, { ...DIDONE, fontSize: 110 })}>Six months, five drops.</h2>
-    <Month index={0} name="Jan" />
-    <Month index={1} name="Feb" />
-    <Month index={2} name="Mar" />
-    <Month index={3} name="Apr" />
-    <Month index={4} name="May" />
-    <Month index={5} name="Jun" />
-    <Channel index={0} name="Ardent.com" note="Two-week exclusive" />
-    <Channel index={1} name="Sephora EU" note="412 doors, 9 markets" />
-    <Channel index={2} name="Galeries Lafayette" note="Haussmann + 6 stores" />
-    <Channel index={3} name="Travel retail" note="CDG · ORY · LHR · FCO" />
+    <div style={abs(120, 112, { ...LABEL, color: 'var(--osd-accent)' })}>2027 上市時程</div>
+    <h2 style={abs(112, 152, { ...DIDONE, fontSize: 110 })}>六個月，五波上市。</h2>
+    <Month index={0} name="1 月" />
+    <Month index={1} name="2 月" />
+    <Month index={2} name="3 月" />
+    <Month index={3} name="4 月" />
+    <Month index={4} name="5 月" />
+    <Month index={5} name="6 月" />
+    <Channel index={0} name="Ardent.com" note="兩週獨家" />
+    <Channel index={1} name="Sephora EU" note="412 間門市，9 個市場" />
+    <Channel index={2} name="Galeries Lafayette" note="Haussmann 店 + 6 間分店" />
+    <Channel index={3} name="旅遊零售" note="CDG · ORY · LHR · FCO" />
     <Steps>
       <Step duration={320}>
-        <DropKey x={120} colour={FUCHSIA} name="Riot" date="15 Jan" />
+        <DropKey x={120} colour={FUCHSIA} name="Riot" date="1/15" />
         <Lane channel={0} lane={0} start={0.45} colour={FUCHSIA} />
         <Lane channel={1} lane={0} start={1.12} colour={FUCHSIA} />
         <Lane channel={2} lane={0} start={1.12} colour={FUCHSIA} />
         <Lane channel={3} lane={0} start={3} colour={FUCHSIA} />
       </Step>
       <Step duration={320}>
-        <DropKey x={450} colour={TANGERINE} name="Heat" date="12 Feb" />
+        <DropKey x={450} colour={TANGERINE} name="Heat" date="2/12" />
         <Lane channel={0} lane={1} start={1.38} colour={TANGERINE} />
         <Lane channel={1} lane={1} start={2.13} colour={TANGERINE} />
         <Lane channel={2} lane={1} start={2.13} colour={TANGERINE} />
         <Lane channel={3} lane={1} start={4} colour={TANGERINE} />
       </Step>
       <Step duration={320}>
-        <DropKey x={780} colour={LILAC} name="Static" date="12 Mar" />
+        <DropKey x={780} colour={LILAC} name="Static" date="3/12" />
         <Lane channel={0} lane={2} start={2.37} colour={LILAC} />
         <Lane channel={1} lane={2} start={3.05} colour={LILAC} />
         <Lane channel={2} lane={2} start={3.05} colour={LILAC} />
         <Lane channel={3} lane={2} start={5} colour={LILAC} />
       </Step>
       <Step duration={320}>
-        <DropKey x={1120} colour={CHARTREUSE} name="Acid" date="9 Apr · limited" />
+        <DropKey x={1120} colour={CHARTREUSE} name="Acid" date="4/9 · 限量" />
         <Lane channel={0} lane={3} start={3.28} colour={CHARTREUSE} />
         <Lane channel={2} lane={3} start={3.28} colour={CHARTREUSE} />
       </Step>
       <Step duration={320}>
-        <DropKey x={1540} colour={OXBLOOD} name="Velvet" date="7 May" />
+        <DropKey x={1540} colour={OXBLOOD} name="Velvet" date="5/7" />
         <Lane channel={0} lane={4} start={4.2} colour={OXBLOOD} />
         <Lane channel={1} lane={4} start={5.1} colour={OXBLOOD} />
         <Lane channel={2} lane={4} start={5.1} colour={OXBLOOD} />
@@ -2097,16 +2095,16 @@ const Close: Page = () => {
     <Field bg={OXBLOOD} color={IVORY}>
       <CropMarks tone={mix(IVORY, OXBLOOD, 50)} />
       <Registration x={942} y={38} tone={mix(IVORY, OXBLOOD, 50)} />
-      <div style={abs(120, 112, LABEL)}>Fin</div>
-      <h2 style={abs(96, 170, { ...DIDONE, fontSize: 330, lineHeight: 0.82, ...rise(0.1) })}>
-        <span style={{ marginRight: '-0.15em' }}>W</span>ear it
+      <div style={abs(120, 112, LABEL)}>完</div>
+      <h2 style={abs(96, 150, { ...DIDONE, fontSize: 300, lineHeight: 1, ...rise(0.1) })}>
+        大膽
         <br />
-        <span style={{ color: lift(FUCHSIA, 28) }}>loud.</span>
+        <span style={{ color: lift(FUCHSIA, 28) }}>上妝。</span>
       </h2>
       <div style={abs(120, 800, { ...rise(0.3) })}>
         <div style={{ ...DIDONE, fontSize: 52, lineHeight: 1 }}>Camille Roux</div>
         <div style={{ ...LABEL, fontSize: 16, marginTop: 18, color: mix(IVORY, OXBLOOD, 30) }}>
-          Creative Director of Colour · c.roux@maison-ardent.com
+          色彩創意總監 · c.roux@maison-ardent.com
         </div>
       </div>
       <div style={abs(1220, 452, { width: 580, height: 14, display: 'flex' })}>
@@ -2118,11 +2116,11 @@ const Close: Page = () => {
       </div>
       <div style={abs(1220, 560, { width: 580 })}>
         <div style={{ ...LABEL, fontSize: 16, marginBottom: 18, color: mix(IVORY, OXBLOOD, 30) }}>
-          Next
+          接下來
         </div>
-        <NextStep date="4–8 Nov" what="Buyer previews, rue Saint-Honoré" />
-        <NextStep date="22 Nov" what="Range lock and first orders" />
-        <NextStep date="2 Dec" what="Tester units ship to doors" />
+        <NextStep date="11/4–8" what="買家預覽會，rue Saint-Honoré" />
+        <NextStep date="11/22" what="系列定案與首批下單" />
+        <NextStep date="12/2" what="試用品出貨至各門市" />
       </div>
       <Folio tone={mix(IVORY, OXBLOOD, 25)} />
     </Field>
@@ -2133,47 +2131,47 @@ TheFive.transition = morphTransition;
 Riot.transition = morphTransition;
 
 export const meta: SlideMeta = {
-  title: 'Maison Ardent — Colour Report SS27',
+  title: 'Maison Ardent — 色彩報告 SS27',
   createdAt: '2026-10-11T11:44:33.763Z',
 };
 
 export const notes: (string | undefined)[] = [
-  `Let the cover sit for a beat.
-"This is Colour Report number fourteen — spring/summer 2027. We’re calling it Heat Season."
-"Five colours, one range, one very clear bet: the customer is done with beige." Click.`,
-  `Read the quote, then let it land. "After three seasons of beige, she wants volume."
-Then the proof, top to bottom: nude has fallen from 41 to 29 per cent of lip sales; searches for ‘bold lip’ are up 212 per cent; and the 18-to-34 buyer already owns 2.6 bright shades.
-"She isn’t replacing nude. She’s adding to it — loudly."`,
-  `"Three signals from our own sell-through." Reveal one at a time.
-One: brights now sell through at 78 per cent at full price; nudes at 61. The lines crossed in Q1.
-Two: blush and cheek tint up 68 per cent in eight quarters — colour is moving up the face.
-Three: brights are returned less than nudes. Pause on that one; it surprises buyers.`,
-  `"Here is the season in one picture." Each stripe is sized by its share of the range.
-"Riot and Velvet lead. Heat and Static support. Acid is capped at nine per cent — it’s there to dare, not to carry." Click into Riot.`,
-  `Wait for the field to fill the screen.
-"Fuchsia Riot — our lead colour, 28 per cent of the range."
-Blue-based, so it flatters every depth and brightens the smile. It lands in lip, satin and matte, and in a pressed blush.`,
-  `"Tangerine Heat — 22 per cent."
-Cheek first: sheer, it reads as warmth, not orange. Then lip tint and a gloss bullet.
-Point at the compact: the bronzer is the hero SKU for travel retail.`,
-  `"Acid Chartreuse is the risk, and we’re treating it like one."
-Nine per cent, two SKUs — liner and nail — both limited. We keep it off the face on purpose.
-"It’s the colour they’ll photograph. It is not the colour that pays the rent."`,
-  `"Two counterweights."
-Lilac Static, 18 per cent: cool, pearled, for eye and highlight.
-Oxblood Velvet, 23 per cent: our second lead and the bridge into autumn — for the customer who won’t wear pink.`,
-  `"Six bullets, one price."
-Walk left to right: Riot, Heatwave, Sour, Static, Velvet Hour, Afterparty. Three finishes across the line.
-Everything is €38 in a refillable gold case; refills are €24. Simple at the till, simple on the wall.`,
-  `"We tested every colour on every depth."
-412 wearers, six cities, two weeks each. Bigger dot, higher approval.
-Land the floor: the lowest score in the grid is 81 per cent, Lilac on depth six — after two reformulations. Nothing ships below 80.`,
-  `"Six months, five drops." Reveal drop by drop.
-Each colour opens on Ardent.com for two weeks, then Sephora and Galeries Lafayette, then travel retail.
-Acid stays limited: Ardent.com and Lafayette only. Velvet arrives in May to carry us into autumn.`,
-  `"Wear it loud."
-Next steps: buyer previews on rue Saint-Honoré from the 4th to the 8th of November, range lock on the 22nd, testers ship on the 2nd of December.
-"I’m Camille — come and find me after. Thank you."`,
+  `讓封面停留一個呼吸的時間。
+「這是第十四期色彩報告——2027 春夏。我們把這一季叫做『熱力盛季』。」
+「五種顏色、一個系列、一個非常明確的賭注：顧客已經受夠米色了。」點擊。`,
+  `先念引言，讓它沉澱一下。「經過三季的米色，她想要的是存在感。」
+接著由上而下給證據：裸色占唇彩銷售的比重從 41% 掉到 29%；「大膽唇色」的搜尋量成長 212%；18 到 34 歲的買家平均已經擁有 2.6 支亮色。
+「她不是要取代裸色，她是要加碼——而且是大聲地加。」`,
+  `「這是來自我們自家銷售數據的三個訊號。」一次揭露一個。
+第一：亮色現在的原價售出率是 78%，裸色是 61%。兩條線在 Q1 交叉。
+第二：腮紅與頰彩在八季內成長 68%——色彩正從嘴唇往臉上移動。
+第三：亮色的退貨率比裸色低。這點停一下，買家常常會很意外。`,
+  `「這就是這一季的全貌。」每一條色帶的寬度，代表它在系列中的占比。
+「Riot 和 Velvet 領軍，Heat 和 Static 輔助。Acid 的占比上限是 9%——它是來挑戰你的，不是來扛業績的。」點擊進入 Riot。`,
+  `等色塊鋪滿整個畫面。
+「Fuchsia Riot——我們的主打色，占系列的 28%。」
+藍調底色，所以適合每一種膚色深度，也讓笑容更亮。它出現在唇彩（緞面與霧面），也出現在一款壓粉腮紅裡。`,
+  `「Tangerine Heat——占 22%。」
+先是臉頰：薄透上色時，呈現的是暖意而不是橘色。接著是唇彩與一款亮面唇膏。
+指向粉餅盒：這款古銅粉餅是旅遊零售的明星品項。`,
+  `「Acid Chartreuse 是風險，我們也把它當成風險來管理。」
+占 9%、兩個品項——眼線與指甲油——都是限量。我們刻意不讓它上臉。
+「它是大家會拍下來的顏色，但不是撐起營收的顏色。」`,
+  `「兩個平衡的力量。」
+Lilac Static，占 18%：冷調、珍珠光澤，用在眼妝與打亮。
+Oxblood Velvet，占 23%：我們的第二主打，也是通往秋天的橋梁——給不穿粉紅色的顧客。`,
+  `「六支唇膏，同一價格。」
+由左到右介紹：Riot、Heatwave、Sour、Static、Velvet Hour、Afterparty。整條產品線有三種質地。
+所有品項都是 €38，附可補充式金色外殼；替換膏芯是 €24。結帳簡單，陳列也簡單。`,
+  `「我們把每一種顏色，在每一種膚色深度上都測過了。」
+412 位試用者、六座城市、各試用兩週。圓點越大，認可度越高。
+重點放在最低門檻：整張圖裡最低的分數是 81%，是 Lilac 在膚色深度六——而且是重新調配兩次之後的結果。低於 80% 的產品一律不出貨。`,
+  `「六個月，五波上市。」一波一波揭露。
+每個顏色先在 Ardent.com 獨家上架兩週，接著是 Sephora 和 Galeries Lafayette，最後是旅遊零售。
+Acid 維持限量：只在 Ardent.com 和 Lafayette 販售。Velvet 在五月登場，帶我們進入秋天。`,
+  `「大膽上妝。」
+接下來：買家預覽會 11 月 4 日到 8 日在 rue Saint-Honoré 舉行，22 日系列定案，12 月 2 日試用品出貨。
+「我是 Camille，會後歡迎來找我。謝謝大家。」`,
 ];
 
 export default [

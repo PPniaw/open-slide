@@ -13,8 +13,9 @@ import { type CSSProperties, type ReactNode, useId } from 'react';
 export const design: DesignSystem = {
   palette: { bg: '#F3EDE0', text: '#0078BF', accent: '#FF48B0' },
   fonts: {
-    display: '"Bricolage Grotesque", "Arial Narrow", sans-serif',
-    body: '"Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif',
+    display:
+      '"Bricolage Grotesque", "Arial Narrow", sans-serif, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
+    body: '"Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
   },
   typeScale: { hero: 300, body: 34 },
   radius: 0,
@@ -24,8 +25,10 @@ const PAPER = 'var(--osd-bg)';
 const BLUE = 'var(--osd-text)';
 const PINK = 'var(--osd-accent)';
 const SHEET = '#FBF8F1';
-const MONO = '"Courier Prime", "Courier New", monospace';
-const STAMP = '"Rubik Mono One", "Arial Black", sans-serif';
+const MONO =
+  '"Courier Prime", "Courier New", monospace, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif';
+const STAMP =
+  '"Rubik Mono One", "Arial Black", sans-serif, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif';
 
 const SLIDE_ID = 'papercut-zine-fest';
 const FONT_HREF =
@@ -217,7 +220,7 @@ const Folio = () => {
   return (
     <>
       <div style={abs(120, 1012, { ...MONO_LABEL, fontSize: 18, color: BLUE, zIndex: 21 })}>
-        Papercut Zine Fest 2027 · funding proposal
+        Papercut Zine Fest 2027 · 經費提案
       </div>
       <div
         style={{
@@ -231,7 +234,7 @@ const Folio = () => {
           zIndex: 21,
         }}
       >
-        pg. {String(current).padStart(2, '0')} / {String(total).padStart(2, '0')}
+        第 {String(current).padStart(2, '0')} / {String(total).padStart(2, '0')} 頁
       </div>
     </>
   );
@@ -701,9 +704,9 @@ const Cover: Page = () => (
     <div
       style={abs(120, 104, { ...MONO_LABEL, fontSize: 22, color: BLUE, display: 'flex', gap: 18 })}
     >
-      <span>Issue Nº 7</span>
+      <span>第 7 期</span>
       <span style={{ color: PINK }}>✂</span>
-      <span>A proposal to the Port Ardley Arts Fund &amp; venue partners</span>
+      <span>致 Port Ardley 藝術基金會與場地夥伴的提案</span>
     </div>
     <RisoText left={112} top={196} size="var(--osd-size-hero)" dx={9} dy={-6}>
       Papercut
@@ -712,12 +715,12 @@ const Cover: Page = () => (
       Zine Fest
     </RisoText>
     <div style={abs(120, 760, { ...BODY, fontSize: 46, fontWeight: 700, lineHeight: 1.15 })}>
-      A free weekend of zines, comics
+      一個免費的週末，
       <br />
-      &amp; risograph prints.
+      屬於小誌、漫畫與孔版印刷。
     </div>
     <div style={abs(120, 902, { ...MONO_LABEL, fontSize: 24, letterSpacing: '0.06em' })}>
-      12–13 June 2027 · The Old Tram Depot, Port Ardley
+      2027 年 6 月 12–13 日 · Port Ardley 舊電車車庫
     </div>
     <Scrap left={1230} top={700} w={500} h={220} rot={4} tone="blue" seed={7} amp={8}>
       <div
@@ -742,7 +745,7 @@ const Cover: Page = () => (
       top={430}
       size={250}
       rot={-14}
-      ring="FREE ENTRY · ALL WELCOME · "
+      ring="免費入場 · 歡迎所有人 · 免費入場 · 歡迎所有人 · "
       center="Nº 7"
       sub="PORT ARDLEY"
       color={BLUE}
@@ -809,14 +812,13 @@ const FactScrap = ({
 
 const WhatItIs: Page = () => (
   <Sheet>
-    <Kicker n="01">What it is</Kicker>
-    <Title width={1060}>A weekend for things people made by hand</Title>
+    <Kicker n="01">活動簡介</Kicker>
+    <Title width={1060}>一個屬於手作創作的週末</Title>
     <p style={abs(120, 400, { ...BODY, width: 900 })}>
-      Papercut is Port Ardley’s free, two-day festival of independent publishing: 140 tables of
-      makers, a free risograph print lab, and twenty hands-on workshops, all under one tram-shed
-      roof.
+      Papercut 是 Port Ardley 免費舉辦的兩天獨立出版節：140
+      個創作者攤位、免費的孔版印刷實驗室，以及二十場動手做工作坊，全都在同一個電車棚屋頂下。
     </p>
-    <div style={abs(120, 680, { ...MONO_LABEL, fontSize: 20, color: PINK })}>On the tables</div>
+    <div style={abs(120, 680, { ...MONO_LABEL, fontSize: 20, color: PINK })}>攤位上有</div>
     <div
       style={abs(120, 724, {
         display: 'flex',
@@ -826,16 +828,16 @@ const WhatItIs: Page = () => (
         alignItems: 'center',
       })}
     >
-      <TagChip rot={-2}>Zines</TagChip>
+      <TagChip rot={-2}>小誌</TagChip>
       <TagChip rot={1.5} tone="pink">
-        Comics
+        漫畫
       </TagChip>
-      <TagChip rot={-1}>Riso prints</TagChip>
-      <TagChip rot={2}>Artist books</TagChip>
+      <TagChip rot={-1}>孔版印刷品</TagChip>
+      <TagChip rot={2}>藝術家書</TagChip>
       <TagChip rot={-2.5} tone="pink">
-        Poetry pamphlets
+        詩集小冊
       </TagChip>
-      <TagChip rot={1}>Tiny presses</TagChip>
+      <TagChip rot={1}>迷你出版社</TagChip>
     </div>
     <FactScrap
       left={1220}
@@ -843,8 +845,8 @@ const WhatItIs: Page = () => (
       rot={-3}
       seed={11}
       tone="sheet"
-      big="2 days"
-      label="Sat + Sun, 10:00–18:00"
+      big="2 天"
+      label="週六 + 週日，10:00–18:00"
       delay={0.1}
     />
     <FactScrap
@@ -853,8 +855,8 @@ const WhatItIs: Page = () => (
       rot={2.5}
       seed={12}
       tone="pinkTint"
-      big="140 tables"
-      label="Up from 132 in 2026"
+      big="140 個攤位"
+      label="2026 年為 132 個"
       delay={0.2}
     />
     <FactScrap
@@ -863,8 +865,8 @@ const WhatItIs: Page = () => (
       rot={-1.5}
       seed={13}
       tone="copy"
-      big="£0 entry"
-      label="Since the first one in 2021"
+      big="£0 入場"
+      label="自 2021 年首屆起"
       delay={0.3}
     />
     <Tape left={1400} top={234} w={130} rot={4} tone="blue" />
@@ -922,12 +924,12 @@ const NumScrap = ({
 
 const Numbers: Page = () => (
   <Sheet>
-    <Kicker n="02">Last year</Kicker>
-    <Title>Issue Nº 6, in numbers</Title>
+    <Kicker n="02">去年成果</Kicker>
+    <Title>第 6 期的數字</Title>
     <RectStamp left={1430} top={128} rot={5} size={24}>
-      June 2026
+      2026 年 6 月
       <br />
-      door count
+      入場人數統計
     </RectStamp>
     <NumScrap
       left={120}
@@ -936,8 +938,8 @@ const Numbers: Page = () => (
       seed={21}
       tone="sheet"
       value="6,800"
-      label="visitors through the door"
-      note="2,400 more than 2024"
+      label="入場參觀人次"
+      note="比 2024 年多 2,400 人"
       delay={0.05}
     />
     <NumScrap
@@ -947,8 +949,8 @@ const Numbers: Page = () => (
       seed={22}
       tone="pinkTint"
       value="132"
-      label="exhibitor tables"
-      note="Sold out in nine days"
+      label="參展攤位"
+      note="九天內完售"
       delay={0.12}
     />
     <NumScrap
@@ -958,8 +960,8 @@ const Numbers: Page = () => (
       seed={23}
       tone="copy"
       value="31,400"
-      label="zines & prints sold"
-      note="Average price: £4"
+      label="售出的小誌與印刷品"
+      note="平均價格：£4"
       delay={0.19}
     />
     <NumScrap
@@ -969,8 +971,8 @@ const Numbers: Page = () => (
       seed={24}
       tone="blueTint"
       value="£96k"
-      label="kept by exhibitors"
-      note="We take 0% commission"
+      label="參展者的收入"
+      note="我們不抽佣金（0%）"
       delay={0.26}
     />
     <NumScrap
@@ -980,8 +982,8 @@ const Numbers: Page = () => (
       seed={25}
       tone="sheet"
       value="412"
-      label="workshop places"
-      note="18 sessions, every one full"
+      label="工作坊名額"
+      note="18 場，場場額滿"
       delay={0.33}
     />
     <NumScrap
@@ -991,8 +993,8 @@ const Numbers: Page = () => (
       seed={26}
       tone="pinkTint"
       value="2,950"
-      label="people printed in the lab"
-      note="Most for the first time"
+      label="在實驗室動手印刷的人次"
+      note="多數是第一次體驗"
       delay={0.4}
     />
     <Tape left={590} top={276} w={150} rot={-6} />
@@ -1076,10 +1078,10 @@ const Bar = ({
 
 const Growth: Page = () => (
   <Sheet>
-    <Kicker n="03">Growth</Kicker>
-    <Title width={1100}>The queue keeps getting longer</Title>
+    <Kicker n="03">成長</Kicker>
+    <Title width={1100}>排隊人龍越來越長</Title>
     <div style={abs(120, 252, { ...MONO_LABEL, fontSize: 22, letterSpacing: '0.04em' })}>
-      Visitors through the door, both days combined
+      入場參觀人次（兩天合計）
     </div>
     <div
       style={abs(120, BAR_BASE, {
@@ -1096,7 +1098,7 @@ const Growth: Page = () => (
     <Bar x={910} year="2024" value={4900} delay={0.18} />
     <Bar x={1140} year="2025" value={5900} delay={0.24} />
     <Bar x={1370} year="2026" value={6800} delay={0.3} />
-    <Bar x={1600} year="2027 goal" value={8500} target delay={0.36} />
+    <Bar x={1600} year="2027 目標" value={8500} target delay={0.36} />
     <Scribble
       left={300}
       top={380}
@@ -1114,7 +1116,7 @@ const Growth: Page = () => (
         letterSpacing: '0.02em',
       })}
     >
-      ×6 in six years
+      六年成長 6 倍
     </div>
   </Sheet>
 );
@@ -1178,19 +1180,19 @@ const AgeBar = ({ top, label, pct }: { top: number; label: string; pct: number }
 
 const WhoComes: Page = () => (
   <Sheet>
-    <Kicker n="04">Who comes</Kicker>
-    <Title width={1500}>Brand-new makers, curious readers</Title>
+    <Kicker n="04">誰會來</Kicker>
+    <Title width={1500}>全新的創作者，好奇的讀者</Title>
     <div style={abs(120, 330, { ...MONO_LABEL, fontSize: 22, color: PINK })}>
-      At the tables · 132 exhibitors
+      攤位這一側 · 132 位參展者
     </div>
     <PctStat
       top={400}
       value="41%"
       label={
         <>
-          selling their own work
+          首次販售
           <br />
-          for the very first time
+          自己的作品
         </>
       }
       delay={0.05}
@@ -1200,9 +1202,9 @@ const WhoComes: Page = () => (
       value="68%"
       label={
         <>
-          based within 30 miles
+          住在車庫周圍
           <br />
-          of the depot
+          30 英里內
         </>
       }
       delay={0.15}
@@ -1212,9 +1214,9 @@ const WhoComes: Page = () => (
       value="22"
       label={
         <>
-          bursary tables for
+          保留給低收入創作者的
           <br />
-          low-income makers
+          補助攤位
         </>
       }
       delay={0.25}
@@ -1228,24 +1230,24 @@ const WhoComes: Page = () => (
       })}
     />
     <div style={abs(1040, 330, { ...MONO_LABEL, fontSize: 22, color: PINK })}>
-      In the aisles · visitors by age
+      走道這一側 · 觀眾年齡分布
     </div>
-    <AgeBar top={410} label="Under 18" pct={14} />
+    <AgeBar top={410} label="18 歲以下" pct={14} />
     <AgeBar top={500} label="18–24" pct={22} />
     <AgeBar top={590} label="25–34" pct={31} />
     <AgeBar top={680} label="35–49" pct={21} />
-    <AgeBar top={770} label="50 +" pct={12} />
+    <AgeBar top={770} label="50 歲以上" pct={12} />
     <RectStamp left={1460} top={800} rot={-7} size={24} color={BLUE}>
-      1 in 3 at their
+      三分之一是第一次
       <br />
-      first zine fair
+      逛小誌市集
     </RectStamp>
   </Sheet>
 );
 
 const Voices: Page = () => (
   <Sheet>
-    <Kicker n="05">In their words</Kicker>
+    <Kicker n="05">他們怎麼說</Kicker>
     <Scrap left={250} top={230} w={1340} h={560} rot={-1.4} seed={41} tone="sheet" amp={8}>
       <p
         style={abs(110, 90, {
@@ -1257,13 +1259,12 @@ const Voices: Page = () => (
           letterSpacing: '-0.01em',
         })}
       >
-        I printed forty copies of my first zine in the lab on Saturday morning. By four o’clock they
-        were all gone.
+        週六早上，我在實驗室印了四十本我的第一本小誌。到下午四點，已經一本不剩。
       </p>
       <div
         style={abs(110, 420, { ...MONO_LABEL, fontSize: 24, letterSpacing: '0.06em', color: PINK })}
       >
-        — Amara Osei, first-time exhibitor, Papercut Nº 6
+        — Amara Osei，首次參展者，Papercut 第 6 期
       </div>
     </Scrap>
     <RisoText left={190} top={150} size={300} dx={8} dy={-6} style={{ fontStretch: '100%' }}>
@@ -1281,10 +1282,10 @@ const Voices: Page = () => (
           width: 560,
         })}
       >
-        “The only weekend the depot is louder than the trams ever were.”
+        「這是車庫唯一比當年電車還吵的週末。」
       </p>
       <div style={abs(40, 128, { ...MONO_LABEL, fontSize: 19, letterSpacing: '0.04em' })}>
-        — Glen Whitlow, depot caretaker
+        — Glen Whitlow，車庫管理員
       </div>
     </Scrap>
     <Tape left={1430} top={744} w={120} rot={-4} tone="blue" />
@@ -1356,8 +1357,8 @@ const TableRow = ({ x, y, w }: { x: number; y: number; w: number }) => (
 
 const FloorPlan: Page = () => (
   <Sheet>
-    <Kicker n="06">The venue</Kicker>
-    <Title>The Old Tram Depot, mapped</Title>
+    <Kicker n="06">場地</Kicker>
+    <Title>舊電車車庫平面圖</Title>
     <div
       style={abs(PLAN_X - 8, PLAN_Y - 8, {
         width: 1696,
@@ -1388,9 +1389,9 @@ const FloorPlan: Page = () => (
         zIndex: 3,
       })}
     >
-      <div style={{ ...DISPLAY, fontSize: 40, lineHeight: 1 }}>Main shed</div>
+      <div style={{ ...DISPLAY, fontSize: 40, lineHeight: 1 }}>主展棚</div>
       <div style={{ ...MONO_LABEL, fontSize: 18, letterSpacing: '0.04em', marginTop: 6 }}>
-        140 tables · 5 aisles along the old rails
+        140 個攤位 · 沿著舊軌道的 5 條走道
       </div>
     </div>
     <Room
@@ -1399,8 +1400,8 @@ const FloorPlan: Page = () => (
       w={190}
       h={180}
       fill={dots(PINK, 10, 2.6)}
-      name="Kids"
-      note="zine table"
+      name="兒童區"
+      note="小誌桌"
       lx={18}
     />
     <Room
@@ -1409,8 +1410,8 @@ const FloorPlan: Page = () => (
       w={190}
       h={200}
       fill={dots(BLUE, 10, 2.4)}
-      name="Library"
-      note="read + swap"
+      name="圖書室"
+      note="閱讀 + 交換"
       lx={18}
     />
     <div
@@ -1427,8 +1428,8 @@ const FloorPlan: Page = () => (
       w={570}
       h={240}
       fill={PINK}
-      name="Print lab"
-      note="2 riso duplicators · free"
+      name="印刷實驗室"
+      note="2 台孔版印刷機 · 免費"
     />
     <Room
       x={1110}
@@ -1436,8 +1437,8 @@ const FloorPlan: Page = () => (
       w={281}
       h={200}
       fill={dotsDiag(BLUE, 12, 2.6)}
-      name="Room A"
-      note="workshops"
+      name="A 教室"
+      note="工作坊"
     />
     <Room
       x={1399}
@@ -1445,8 +1446,8 @@ const FloorPlan: Page = () => (
       w={281}
       h={200}
       fill={dotsDiag(BLUE, 12, 2.6)}
-      name="Room B"
-      note="workshops"
+      name="B 教室"
+      note="工作坊"
     />
     <Room
       x={1110}
@@ -1454,10 +1455,10 @@ const FloorPlan: Page = () => (
       w={330}
       h={168}
       fill={hatch(PINK, 12, 3)}
-      name="Café + bar"
-      note="run by Tram Stop Coffee"
+      name="咖啡館 + 酒吧"
+      note="由 Tram Stop Coffee 經營"
     />
-    <Room x={1448} y={456} w={232} h={168} fill={dots(PINK, 8, 1.6)} name="Quiet" note="room" />
+    <Room x={1448} y={456} w={232} h={168} fill={dots(PINK, 8, 1.6)} name="靜音" note="休息室" />
     <div
       style={abs(PLAN_X + 140, PLAN_Y + 612, {
         width: 150,
@@ -1484,10 +1485,10 @@ const FloorPlan: Page = () => (
         zIndex: 3,
       })}
     >
-      step-free route, door to every room
+      無障礙動線，從大門通往每個空間
     </div>
     <RectStamp left={PLAN_X + 330} top={PLAN_Y + 652} rot={-4} size={22}>
-      ← Way in
+      ← 入口
     </RectStamp>
   </Sheet>
 );
@@ -1546,70 +1547,52 @@ const Ticket = ({
 
 const Workshops: Page = () => (
   <Sheet>
-    <Kicker n="07">Workshop programme</Kicker>
-    <Title width={1600}>20 workshops. Free. Hands-on.</Title>
+    <Kicker n="07">工作坊節目表</Kicker>
+    <Title width={1600}>20 場工作坊，免費，動手做。</Title>
     <RectStamp left={120} top={276} rot={-3} size={26} color={BLUE}>
-      Sat 12 June
+      6 月 12 日（六）
     </RectStamp>
     <RectStamp left={1000} top={276} rot={2} size={26} color={BLUE}>
-      Sun 13 June
+      6 月 13 日（日）
     </RectStamp>
-    <Ticket
-      left={120}
-      top={384}
-      time="10:30"
-      title="Make a zine in 60 minutes"
-      who="w/ Dee Okafor"
-    />
+    <Ticket left={120} top={384} time="10:30" title="60 分鐘做出一本小誌" who="主持：Dee Okafor" />
     <Ticket
       left={120}
       top={514}
       time="12:00"
-      title="Two-colour riso basics"
-      who="w/ the print lab crew"
+      title="雙色孔版印刷入門"
+      who="主持：印刷實驗室團隊"
       hot
     />
-    <Ticket
-      left={120}
-      top={644}
-      time="14:00"
-      title="Comics jam for beginners"
-      who="w/ Sol Brannigan"
-    />
-    <Ticket
-      left={120}
-      top={774}
-      time="15:30"
-      title="Saddle-stitch & stab binding"
-      who="w/ Hester Kim"
-    />
+    <Ticket left={120} top={644} time="14:00" title="新手漫畫接力創作" who="主持：Sol Brannigan" />
+    <Ticket left={120} top={774} time="15:30" title="騎馬釘與線裝" who="主持：Hester Kim" />
     <Ticket
       left={1000}
       top={384}
       time="10:30"
-      title="Collage if you “can’t draw”"
-      who="w/ Priya Lund"
+      title="「不會畫畫」也能做拼貼"
+      who="主持：Priya Lund"
     />
-    <Ticket left={1000} top={514} time="12:00" title="Lettering by hand" who="w/ Marco Teale" />
+    <Ticket left={1000} top={514} time="12:00" title="手寫字體設計" who="主持：Marco Teale" />
     <Ticket
       left={1000}
       top={644}
       time="14:00"
-      title="Pricing your work, calmly"
-      who="w/ Ruth Adeyemi"
+      title="冷靜為作品定價"
+      who="主持：Ruth Adeyemi"
       hot
     />
     <Ticket
       left={1000}
       top={774}
       time="15:30"
-      title="Start a zine library"
-      who="w/ Port Ardley Libraries"
+      title="成立小誌圖書館"
+      who="主持：Port Ardley 圖書館"
     />
     <div
       style={abs(120, 930, { ...MONO_LABEL, fontSize: 20, letterSpacing: '0.04em', color: PINK })}
     >
-      + 12 drop-in sessions · ~22 places each · BSL at 8 sessions · book at the lab desk on the day
+      + 12 場自由參加 · 每場約 22 個名額 · 其中 8 場提供英國手語（BSL）· 當天請至實驗室櫃台報名
     </div>
   </Sheet>
 );
@@ -1778,7 +1761,7 @@ const RisoMachine = () => {
           textAlign: 'center',
         })}
       >
-        drum 1 · pink
+        滾筒 1 · 粉紅
       </div>
       <div
         style={abs(ox + 475, oy + 500, {
@@ -1788,7 +1771,7 @@ const RisoMachine = () => {
           textAlign: 'center',
         })}
       >
-        drum 2 · blue
+        滾筒 2 · 藍色
       </div>
     </>
   );
@@ -1837,34 +1820,30 @@ const LabStep = ({ n, title, body }: { n: string; title: string; body: string })
 
 const PrintLab: Page = () => (
   <Sheet>
-    <Kicker n="08">The print lab</Kicker>
-    <Title width={1200}>Walk in with a drawing</Title>
+    <Kicker n="08">印刷實驗室</Kicker>
+    <Title width={1200}>帶著畫稿走進來</Title>
     <div style={abs(120, 252, { ...MONO_LABEL, fontSize: 22, letterSpacing: '0.04em' })}>
-      Walk out with fifty two-colour prints. Free, both days.
+      帶著五十張雙色印刷品走出去。兩天免費。
     </div>
     <RectStamp left={1460} top={120} rot={6} size={24}>
-      2,950 people
+      2026 年有 2,950 人
       <br />
-      printed in 2026
+      來動手印刷
     </RectStamp>
     <RisoMachine />
     <div style={abs(1180, 370, { zIndex: 5 })}>
       <Steps>
         <Step>
-          <LabStep n="1" title="Bring a drawing" body="Pen, pencil, collage. Black on white." />
+          <LabStep n="1" title="帶一張畫稿來" body="鋼筆、鉛筆、拼貼都可以。白紙黑稿。" />
         </Step>
         <Step>
-          <LabStep n="2" title="We burn two masters" body="One stencil per ink, cut in seconds." />
+          <LabStep n="2" title="我們製作兩張版紙" body="每種油墨一張版，幾秒就製好。" />
         </Step>
         <Step>
-          <LabStep
-            n="3"
-            title="Pink pass, then blue"
-            body="One colour per drum. Overlaps go purple."
-          />
+          <LabStep n="3" title="先印粉紅，再印藍色" body="每個滾筒一種顏色。重疊處會變紫。" />
         </Step>
         <Step>
-          <LabStep n="4" title="Take fifty home" body="100gsm recycled. Costs us 4p a sheet." />
+          <LabStep n="4" title="帶五十張回家" body="100gsm 再生紙，每張成本是 4p。" />
         </Step>
       </Steps>
     </div>
@@ -1903,19 +1882,19 @@ const Check = ({ top, children }: { top: number; children: ReactNode }) => (
 
 const Access: Page = () => (
   <Sheet>
-    <Kicker n="09">Free &amp; open</Kicker>
-    <Title width={1300}>Free to enter. Built to be reachable.</Title>
+    <Kicker n="09">免費且開放</Kicker>
+    <Title width={1300}>免費入場，人人到得了。</Title>
     <Check top={380}>
-      <b>30 bursary tables</b> with £150 for travel &amp; materials
+      <b>30 個補助攤位</b>，附 £150 交通與材料補助
     </Check>
     <Check top={510}>
-      <b>BSL interpreters</b> at 8 of the 20 workshops
+      <b>英國手語（BSL）翻譯</b>，20 場工作坊中的 8 場
     </Check>
     <Check top={640}>
-      <b>Step-free throughout,</b> a quiet room and a sensory map
+      <b>全場無障礙動線，</b>另有靜音休息室與感官地圖
     </Check>
     <Check top={770}>
-      <b>A kids’ zine table,</b> run with Port Ardley Libraries
+      <b>兒童小誌桌，</b>與 Port Ardley 圖書館合辦
     </Check>
     <Scrap left={1290} top={380} w={480} h={300} rot={-6} seed={91} tone="pink" amp={4}>
       <div
@@ -1928,9 +1907,9 @@ const Access: Page = () => (
         Nº 000 001 · Papercut
       </div>
       <div style={abs(36, 76, { ...DISPLAY, fontSize: 104, lineHeight: 0.88, color: SHEET })}>
-        Admit
+        歡迎
         <br />
-        anyone
+        任何人
       </div>
       <div
         style={abs(36, 252, {
@@ -1946,9 +1925,9 @@ const Access: Page = () => (
       top={640}
       size={230}
       rot={10}
-      ring="NO TICKET · NO FEE · NO QUEUE · "
+      ring="免票 · 免費 · 免排隊 · 免票 · 免費 · 免排隊 · "
       center="£0"
-      sub="SINCE 2021"
+      sub="自 2021 年起"
       color={BLUE}
     />
   </Sheet>
@@ -2026,8 +2005,8 @@ const FILL_SPARE = hatch(PINK, 12, 4, 45);
 
 const Budget: Page = () => (
   <Sheet>
-    <Kicker n="10">Budget</Kicker>
-    <Title width={1600}>Where £168,400 goes</Title>
+    <Kicker n="10">預算</Kicker>
+    <Title width={1600}>£168,400 的去向</Title>
     <div style={abs(130, 300, { width: 620, height: 620, ...inked })}>
       <Slice from={0} to={88.1} fill={FILL_VENUE} />
       <Slice from={88.1} to={152.9} fill={FILL_FEES} />
@@ -2050,35 +2029,23 @@ const Budget: Page = () => (
         zIndex: 3,
       })}
     >
-      <div style={{ ...MONO_LABEL, fontSize: 18 }}>Total</div>
+      <div style={{ ...MONO_LABEL, fontSize: 18 }}>總計</div>
       <div style={{ ...DISPLAY, ...NUM, fontSize: 64, lineHeight: 1 }}>£168k</div>
       <div style={{ ...MONO_LABEL, fontSize: 18, color: PINK }}>2027</div>
     </div>
-    <Legend
-      top={310}
-      fill={FILL_VENUE}
-      label="Venue, power & production"
-      amount="£41.2k"
-      pct="24%"
-    />
-    <Legend top={398} fill={FILL_FEES} label="Workshop & artist fees" amount="£30.3k" pct="18%" />
-    <Legend
-      top={486}
-      fill={FILL_STAFF}
-      label="Three part-time coordinators"
-      amount="£28.6k"
-      pct="17%"
-    />
-    <Legend top={574} fill={FILL_ACCESS} label="Bursaries & access" amount="£26.9k" pct="16%" />
+    <Legend top={310} fill={FILL_VENUE} label="場地、電力與製作" amount="£41.2k" pct="24%" />
+    <Legend top={398} fill={FILL_FEES} label="工作坊與藝術家費用" amount="£30.3k" pct="18%" />
+    <Legend top={486} fill={FILL_STAFF} label="三位兼職統籌人員" amount="£28.6k" pct="17%" />
+    <Legend top={574} fill={FILL_ACCESS} label="補助與無障礙服務" amount="£26.9k" pct="16%" />
     <Legend
       top={662}
       fill={FILL_LAB}
-      label="Print lab: ink, masters, paper"
+      label="印刷實驗室：油墨、版紙、紙張"
       amount="£21.9k"
       pct="13%"
     />
-    <Legend top={750} fill={FILL_PROMO} label="Printed promotion" amount="£11.8k" pct="7%" />
-    <Legend top={838} fill={FILL_SPARE} label="Contingency" amount="£7.7k" pct="5%" />
+    <Legend top={750} fill={FILL_PROMO} label="印刷宣傳品" amount="£11.8k" pct="7%" />
+    <Legend top={838} fill={FILL_SPARE} label="預備金" amount="£7.7k" pct="5%" />
   </Sheet>
 );
 
@@ -2150,18 +2117,18 @@ const Buys = ({ left, title, note }: { left: number; title: string; note: string
 
 const Ask: Page = () => (
   <Sheet>
-    <Kicker n="11">The ask</Kicker>
+    <Kicker n="11">我們的請求</Kicker>
     <RisoText left={114} top={146} size={170} dx={7} dy={-5} style={NUM}>
       £60,000
     </RisoText>
     <div style={abs(120, 316, { ...BODY, fontSize: 40, fontWeight: 700 })}>
-      from the Arts Fund: 36% of the budget. We raise the rest.
+      向藝術基金申請：佔預算的 36%。其餘由我們自行籌募。
     </div>
-    <Income x={120} w={339} label="Exhibitor tables" amount="£34k" />
-    <Income x={459} w={180} label="Bar + café" amount="£18k" />
-    <Income x={639} w={259} label="Partners" amount="£26k" />
-    <Income x={898} w={303} label="Trusts + foundations" amount="£30.4k" />
-    <Income x={1201} w={605} label="Port Ardley Arts Fund" amount="£60,000" ask />
+    <Income x={120} w={339} label="參展攤位費" amount="£34k" />
+    <Income x={459} w={180} label="酒吧與咖啡" amount="£18k" />
+    <Income x={639} w={259} label="合作夥伴" amount="£26k" />
+    <Income x={898} w={303} label="信託與基金會" amount="£30.4k" />
+    <Income x={1201} w={605} label="Port Ardley 藝術基金" amount="£60,000" ask />
     <Scribble
       left={1470}
       top={640}
@@ -2179,19 +2146,19 @@ const Ask: Page = () => (
         rotate: '-4deg',
       })}
     >
-      this bit
+      就是這筆
     </div>
-    <div style={abs(120, 700, { ...MONO_LABEL, fontSize: 20, color: PINK })}>What £60k buys</div>
+    <div style={abs(120, 700, { ...MONO_LABEL, fontSize: 20, color: PINK })}>£60k 能買到什麼</div>
     <div style={abs(120, 750, { width: 1680, height: 200 })}>
       <Steps>
         <Step>
-          <Buys left={0} title="Free entry for 8,500 people" note="About £7 per visitor" />
+          <Buys left={0} title="讓 8,500 人免費入場" note="每位觀眾約 £7" />
         </Step>
         <Step>
-          <Buys left={580} title="All 30 bursary tables" note="Pitch, travel & materials" />
+          <Buys left={580} title="全部 30 個補助攤位" note="攤位費、交通與材料" />
         </Step>
         <Step>
-          <Buys left={1160} title="A fair fee for every tutor" note="£350 a day, 20 workshops" />
+          <Buys left={1160} title="給每位講師合理的報酬" note="每天 £350，共 20 場工作坊" />
         </Step>
       </Steps>
     </div>
@@ -2293,25 +2260,25 @@ const Tier = ({
 
 const Tiers: Page = () => (
   <Sheet>
-    <Kicker n="12">Venue &amp; partner tiers</Kicker>
-    <Title width={1600}>Sized like the things we print</Title>
+    <Kicker n="12">場地與夥伴方案</Kicker>
+    <Title width={1600}>尺寸就像我們印的東西</Title>
     <div style={abs(120, 252, { ...MONO_LABEL, fontSize: 22, letterSpacing: '0.04em' })}>
-      Partner target £26,000 · in-kind space, power &amp; storage count at face value
+      夥伴目標 £26,000 · 以實物提供的空間、電力與儲藏空間，按面額計入
     </div>
     <Tier
       left={120}
       rot={-1.5}
       seed={61}
-      name="Staple"
+      name="騎馬釘"
       price="£1,500"
       kind="staple"
       perks={
         <>
-          Logo on the fest map
+          Logo 上活動地圖
           <br />
-          Team print-lab session
+          團隊印刷實驗室體驗
           <br />
-          Thanks on every door
+          每扇門都有致謝
         </>
       }
     />
@@ -2319,16 +2286,16 @@ const Tiers: Page = () => (
       left={550}
       rot={1}
       seed={62}
-      name="Fold"
+      name="對摺"
       price="£4,000"
       kind="fold"
       perks={
         <>
-          Name a workshop room
+          冠名一間工作坊教室
           <br />
-          Staff zine-making day
+          員工小誌製作日
           <br />
-          Everything in Staple
+          含騎馬釘方案內容
         </>
       }
     />
@@ -2336,16 +2303,16 @@ const Tiers: Page = () => (
       left={980}
       rot={-0.8}
       seed={63}
-      name="Spread"
+      name="雙頁"
       price="£8,000"
       kind="spread"
       perks={
         <>
-          Name the print lab
+          冠名印刷實驗室
           <br />
-          Co-branded riso poster
+          聯名孔版印刷海報
           <br />
-          Everything in Fold
+          含對摺方案內容
         </>
       }
     />
@@ -2353,22 +2320,22 @@ const Tiers: Page = () => (
       left={1410}
       rot={1.8}
       seed={64}
-      name="Centrefold"
+      name="中央拉頁"
       price="£15,000"
       kind="centre"
       hot
       perks={
         <>
-          Presenting credit
+          冠名贊助掛名
           <br />
-          Host the launch night
+          主辦開幕之夜
           <br />
-          Everything in Spread
+          含雙頁方案內容
         </>
       }
     />
     <RectStamp left={1630} top={306} rot={12} size={24}>
-      Only 1
+      僅限 1 名
     </RectStamp>
   </Sheet>
 );
@@ -2429,60 +2396,53 @@ const Badge = ({
 
 const Crew: Page = () => (
   <Sheet>
-    <Kicker n="13">Volunteer crew</Kicker>
-    <Title width={1600}>90 volunteers, six crews</Title>
+    <Kicker n="13">志工團隊</Kicker>
+    <Title width={1600}>90 位志工，六支小組</Title>
     <div style={abs(120, 252, { ...MONO_LABEL, fontSize: 22, letterSpacing: '0.04em' })}>
-      360 shifts · every volunteer gets lunch, a crew zine &amp; first pick of next year’s tables
+      360 個班次 · 每位志工都有午餐、小組專屬小誌，以及明年攤位的優先選位權
     </div>
     <Badge
       left={120}
       top={340}
       rot={-1.2}
-      crew="Door & count"
+      crew="入口與計數"
       count="16"
-      job="Clickers, maps, first hellos"
+      job="計數器、地圖、第一聲問候"
     />
     <Badge
       left={710}
       top={350}
       rot={1}
-      crew="Table runners"
+      crew="攤位協助"
       count="22"
-      job="Load-in, break cover, tape"
+      job="進場布置、代班、貼膠帶"
       pink
     />
     <Badge
       left={1300}
       top={336}
       rot={-0.6}
-      crew="Lab techs"
+      crew="實驗室技師"
       count="14"
-      job="Drums, masters, paper jams"
+      job="滾筒、版紙、卡紙處理"
     />
     <Badge
       left={120}
       top={650}
       rot={0.8}
-      crew="Access stewards"
+      crew="無障礙引導員"
       count="14"
-      job="Quiet room, BSL, step-free"
+      job="靜音室、手語、無障礙動線"
       pink
     />
-    <Badge
-      left={710}
-      top={640}
-      rot={-1.4}
-      crew="Workshop hosts"
-      count="12"
-      job="Rooms, timings, glue sticks"
-    />
+    <Badge left={710} top={640} rot={-1.4} crew="工作坊主持" count="12" job="教室、時程、膠水棒" />
     <Badge
       left={1300}
       top={654}
       rot={1.3}
-      crew="Build & strike"
+      crew="搭建與拆場"
       count="12"
-      job="Tables up Fri, down Sun"
+      job="週五搭桌、週日收桌"
       pink
     />
   </Sheet>
@@ -2552,8 +2512,8 @@ const Milestone = ({
 
 const Timeline: Page = () => (
   <Sheet>
-    <Kicker n="14">Timeline</Kicker>
-    <Title width={1600}>From yes to doors open</Title>
+    <Kicker n="14">時程</Kicker>
+    <Title width={1600}>從點頭到開門迎客</Title>
     <div
       style={abs(120, TL_Y, {
         width: 1680,
@@ -2564,21 +2524,21 @@ const Timeline: Page = () => (
         ...inked,
       })}
     />
-    <Milestone x={170} above when="Dec 2026" what="Arts Fund decision" />
-    <Milestone x={375} above={false} when="Jan 2027" what="Exhibitor call opens" />
-    <Milestone x={580} above when="Feb" what="Bursary panel picks 30 makers" />
-    <Milestone x={785} above={false} when="Mar" what="Line-up announced" />
-    <Milestone x={990} above when="Apr" what="Volunteer call + lab training" />
-    <Milestone x={1195} above={false} when="May" what="Four pre-fest print nights" />
-    <Milestone x={1400} above when="12–13 Jun" what="Papercut Nº 7" big w={340} />
-    <Milestone x={1605} above={false} when="Jul" what="Report + fest zine" w={200} />
+    <Milestone x={170} above when="2026 年 12 月" what="藝術基金審查結果" />
+    <Milestone x={375} above={false} when="2027 年 1 月" what="開放參展徵件" />
+    <Milestone x={580} above when="2 月" what="選出 30 位補助創作者" w={340} />
+    <Milestone x={785} above={false} when="3 月" what="公布參展名單" />
+    <Milestone x={990} above when="4 月" what="志工招募與實驗室訓練" />
+    <Milestone x={1195} above={false} when="5 月" what="四場活動前印刷之夜" />
+    <Milestone x={1400} above when="6 月 12–13 日" what="Papercut 第 7 期" big w={340} />
+    <Milestone x={1605} above={false} when="7 月" what="成果報告與小誌" w={230} />
     <RoundStamp
       left={1600}
       top={190}
       size={170}
       rot={-10}
-      ring="DOORS OPEN · SAT + SUN · "
-      center="10am"
+      ring="開門時間 · 週六 + 週日 · 開門時間 · 週六 + 週日 · "
+      center="10 點"
     />
   </Sheet>
 );
@@ -2587,17 +2547,17 @@ const Close: Page = () => (
   <Sheet folio={false}>
     <HalftoneDisc left={-180} top={430} size={760} lx={0.7} ly={0.2} color={BLUE} />
     <div style={abs(120, 104, { ...MONO_LABEL, fontSize: 22 })}>
-      Papercut Zine Fest · Issue Nº 7 · 12–13 June 2027
+      Papercut Zine Fest · 第 7 期 · 2027 年 6 月 12–13 日
     </div>
-    <RisoText left={112} top={190} size={230} dx={8} dy={-6}>
-      Help us keep
+    <RisoText left={112} top={190} size={220} dx={8} dy={-6}>
+      協助我們
     </RisoText>
-    <RisoText left={112} top={392} size={230} dx={8} dy={-6} delay={0.1}>
-      it free.
+    <RisoText left={112} top={392} size={220} dx={8} dy={-6} delay={0.1}>
+      維持免費。
     </RisoText>
     <Scrap left={900} top={640} w={880} h={260} rot={-1.5} seed={81} tone="sheet" amp={6}>
       <div style={abs(50, 40, { ...BODY, fontSize: 40, fontWeight: 800, lineHeight: 1.1 })}>
-        Jo Marchetti, festival director
+        Jo Marchetti，小誌節總監
       </div>
       <div
         style={abs(50, 108, {
@@ -2616,9 +2576,9 @@ const Close: Page = () => (
     <Tape left={860} top={640} w={150} rot={-30} tone="blue" />
     <Tape left={1680} top={620} w={140} rot={26} />
     <RectStamp left={1290} top={250} rot={-8} size={40}>
-      See you in
+      車庫裡
       <br />
-      the depot
+      不見不散
     </RectStamp>
     <div
       style={abs(900, 940, {
@@ -2628,72 +2588,72 @@ const Close: Page = () => (
         letterSpacing: '0.2em',
       })}
     >
-      Cut · fold · staple · repeat
+      剪 · 摺 · 釘 · 再來一次
     </div>
     <CutLine top={1000} color={PINK} />
   </Sheet>
 );
 
 export const notes: (string | undefined)[] = [
-  `Hold on the cover for a second. "Thank you for having us. I'm Jo Marchetti, and I run Papercut."
-"Next June is our seventh festival: two days, the Old Tram Depot, free to walk in."
-"In the next ten minutes I'll show you who comes, what it costs, and the one big ask."`,
-  `"If you've never been: picture a tram shed full of folding tables, and on every one, something a person made at their kitchen table."
-"Zines, comics, risograph prints, poetry pamphlets. One hundred and forty tables next year."
-"And it has been free to enter since the very first one in 2021. That's the bit we want to protect."`,
-  `"This is last June, issue six." Point at the numbers in order.
-"Sixty-eight hundred people through the door. Tables sold out in nine days."
-"Exhibitors took ninety-six thousand pounds, and kept all of it, because we take no commission."
-"And nearly three thousand people made a print in the lab. For most of them it was their first."`,
-  `"The line has gone one way." Trace the arrow with your hand.
-"Eleven hundred in our first year, sixty-eight hundred last year. Six times over."
-"Our goal for 2027 is eighty-five hundred, and the depot holds that comfortably across two days."`,
-  `"Who's actually in the room? Two groups."
-"At the tables: four in ten are selling their work for the first time ever. Most live within thirty miles."
-"In the aisles: it skews young, twenty-five to thirty-four is the biggest group, but look at the under-eighteens."
-"And one in three visitors had never been to a zine fair before. That's new audience, not the usual crowd."`,
-  `Read the main quote slowly, then stop. Let it land.
-"Amara had never sold anything before. She made the zine on Friday night and printed it in our lab on Saturday."
-Optional laugh line: the caretaker's quote. "Glen has worked at the depot for twenty-two years."`,
-  `"Here's the building." Start at the entrance, bottom left.
-"Five long aisles of tables run along the old tram rails in the main shed."
-"Off to the right: the print lab, two workshop rooms, the café, and a quiet room."
-"The pink line is our step-free route. Every room is on it, and that's a design rule, not an afterthought."`,
-  `"Twenty workshops over two days. All free, all hands-on, nothing where you sit and listen."
-Pick two to describe: "Make a zine in sixty minutes is the one that always has a queue. Pricing your work is the one exhibitors thank us for."
-"Every tutor is paid. Eight sessions have BSL interpretation."`,
-  `"The thing people remember most is the print lab." Click through the four steps.
-"You bring a drawing." Click. "We burn two masters, one per colour." Click.
-"The paper goes through pink, then blue. Where they overlap, you get this purple." Click.
-"And you leave with fifty copies. It costs us four pence a sheet. Last year, twenty-nine hundred and fifty people did it."`,
-  `"For a city fund, this is probably the page that matters most."
-"Thirty bursary tables, with a hundred and fifty pounds for travel and materials."
-"BSL at eight workshops, step-free everywhere, a quiet room, and a kids' table with the library service."
-"No ticket, ever. That's the promise on the stamp."`,
-  `"Here's the whole budget: a hundred and sixty-eight thousand four hundred pounds."
-"The biggest piece is the venue and production, about a quarter."
-"Then people: tutors, artists, and our three part-time coordinators."
-"Bursaries and access are sixteen percent of everything we spend. We'd like to keep that number."`,
-  `"So, the ask. Sixty thousand pounds from the Arts Fund."
-"That's thirty-six percent of the budget. The rest we raise ourselves, from tables, the bar, partners and trusts."
-Click: "It keeps entry free for eighty-five hundred people, about seven pounds a head."
-Click: "It funds all thirty bursary tables." Click: "And it pays every tutor properly."`,
-  `"For venue and business partners, we've sized the tiers like the things we print."
-"Staple, Fold, Spread and Centrefold, from fifteen hundred pounds to fifteen thousand."
-"There's only one Centrefold. And if you'd rather give space, power or storage, we count it at face value."`,
-  `"None of this works without the crew. Ninety volunteers, six crews, three hundred and sixty shifts."
-"Lab techs are the hardest to find. We train them in April."
-"Every volunteer gets lunch, a crew zine, and first pick of next year's tables, which is why many of them come back as exhibitors."`,
-  `"Here's how we get from a yes to the doors opening."
-"A decision in December lets us open the exhibitor call in January and pick bursary makers in February."
-"Doors open at ten on the twelfth of June. In July you get a full report, and a zine of the festival."`,
-  `"Papercut works because it's free. We'd like your help to keep it that way."
-"Thank you. I'm happy to take questions, and you're all invited to print something in June."
-Leave this page up during questions.`,
+  `在封面停一下。「謝謝你們邀請我們。我是 Jo Marchetti，Papercut 是我主辦的。」
+「明年六月是我們的第七屆：兩天，在舊電車車庫，免費入場。」
+「接下來十分鐘，我會跟各位說明來的是誰、要花多少錢，以及我們那一個大請求。」`,
+  `「如果你沒來過：想像一座電車棚，裡面擺滿折疊桌，每張桌上都是某個人在自家餐桌上做出來的東西。」
+「小誌、漫畫、孔版印刷品、詩集小冊。明年有一百四十個攤位。」
+「而且從 2021 年第一屆開始，入場就一直是免費的。這是我們想守住的部分。」`,
+  `「這是去年六月，第六期。」依序指著這些數字。
+「六千八百人進場。攤位九天內賣光。」
+「參展者賺進九萬六千英鎊，而且全部歸他們，因為我們不抽佣。」
+「還有將近三千人在實驗室印出了一張作品。對大多數人來說，這是第一次。」`,
+  `「這條線一路都往同一個方向走。」用手順著箭頭描一遍。
+「第一年是一千一百人，去年是六千八百人。成長了六倍。」
+「我們 2027 年的目標是八千五百人，而車庫兩天下來容納得很從容。」`,
+  `「現場到底是哪些人？分成兩群。」
+「攤位這一側：十個人裡有四個是第一次賣自己的作品。多數住在三十英里內。」
+「走道這一側：年齡偏輕，25 到 34 歲是最大宗，但請看看未滿 18 歲的這一條。」
+「還有三分之一的觀眾從沒逛過小誌市集。這是新的觀眾，不是平常那一群人。」`,
+  `慢慢念出主要那句引言，然後停下來，讓它沉澱。
+「Amara 以前從來沒賣過任何東西。她週五晚上做好小誌，週六就在我們的實驗室印出來。」
+可選的笑點：管理員的那句話。「Glen 在車庫工作二十二年了。」`,
+  `「這是整棟建築。」從左下角的入口開始講。
+「主棚裡有五條長長的走道，沿著舊電車軌道排開。」
+「右手邊依序是：印刷實驗室、兩間工作坊教室、咖啡館，還有一間靜音休息室。」
+「粉紅色那條線是我們的無障礙動線。每個空間都在這條動線上，這是設計原則，不是事後補上的。」`,
+  `「兩天二十場工作坊。全部免費、全部動手做，沒有哪一場是坐著聽講的。」
+挑兩場來介紹：「『60 分鐘做出一本小誌』這場永遠都在排隊。『冷靜為作品定價』則是參展者最常來跟我們道謝的一場。」
+「每位講師都有酬勞。有八場提供英國手語翻譯。」`,
+  `「大家最記得的就是印刷實驗室。」逐一點出四個步驟。
+「你帶一張畫稿來。」點。「我們製作兩張版紙，一種顏色一張。」點。
+「紙先過粉紅，再過藍色。兩色重疊的地方，就會出現這種紫色。」點。
+「最後你帶著五十張回家。每張成本我們只花四便士。去年有兩千九百五十人做過。」`,
+  `「對一個市政基金來說，這大概是最重要的一頁。」
+「三十個補助攤位，每個附一百五十英鎊的交通與材料補助。」
+「八場工作坊有英國手語翻譯、全場無障礙動線、一間靜音休息室，還有和圖書館服務處合辦的兒童桌。」
+「永遠不用票。這就是章上的承諾。」`,
+  `「這是完整預算：十六萬八千四百英鎊。」
+「最大的一塊是場地與製作，約四分之一。」
+「接著是人：講師、藝術家，還有我們三位兼職統籌人員。」
+「補助與無障礙占我們所有支出的百分之十六。我們希望守住這個數字。」`,
+  `「那麼，我們的請求。向藝術基金申請六萬英鎊。」
+「這佔預算的百分之三十六。其餘我們自己籌：攤位費、酒吧、夥伴和信託基金。」
+點一下：「這能讓八千五百人免費入場，平均每人約七英鎊。」
+點一下：「這能支應全部三十個補助攤位。」點一下：「也能讓每位講師都拿到合理的報酬。」`,
+  `「對場地與企業夥伴，我們把方案的尺寸做得像我們印的東西。」
+「騎馬釘、對摺、雙頁和中央拉頁，從一千五百英鎊到一萬五千英鎊。」
+「中央拉頁只有一個名額。如果你比較想提供空間、電力或儲藏空間，我們也按面額計入。」`,
+  `「沒有這群志工，什麼都轉不起來。九十位志工、六支小組、三百六十個班次。」
+「實驗室技師最難找。我們四月會訓練他們。」
+「每位志工都有午餐、小組專屬小誌，還有明年攤位的優先選位權，這也是為什麼很多人後來都回來當參展者。」`,
+  `「這是從點頭到開門迎客的過程。」
+「十二月做出決定，我們就能在一月開放參展徵件、二月選出補助創作者。」
+「六月十二日上午十點開門。七月，各位會收到完整的成果報告，還有一本這場活動的小誌。」`,
+  `「Papercut 之所以能成立，是因為它是免費的。我們希望能得到你們的協助，讓它一直如此。」
+「謝謝。我很樂意回答問題，也歡迎各位六月來印點東西。」
+提問時間請把這一頁留在螢幕上。`,
 ];
 
 export const meta: SlideMeta = {
-  title: 'Papercut Zine Fest 2027',
+  title: 'Papercut Zine Fest 2027 經費提案',
   createdAt: '2026-10-12T12:07:13.565Z',
 };
 

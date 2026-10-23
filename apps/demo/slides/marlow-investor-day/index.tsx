@@ -13,8 +13,9 @@ import { type CSSProperties, type ReactNode, useEffect, useState } from 'react';
 export const design: DesignSystem = {
   palette: { bg: '#0B0A08', text: '#ECE6D6', accent: '#FFB21A' },
   fonts: {
-    display: '"IBM Plex Sans Condensed", "Arial Narrow", sans-serif',
-    body: '"IBM Plex Mono", ui-monospace, Menlo, monospace',
+    display:
+      '"IBM Plex Sans Condensed", "Arial Narrow", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
+    body: '"IBM Plex Mono", ui-monospace, Menlo, monospace, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
   },
   typeScale: { hero: 184, body: 28 },
   radius: 2,
@@ -532,7 +533,7 @@ const Header = ({ fn }: { fn?: Fn }) => {
         >
           MRLW
         </span>
-        <span style={{ marginLeft: 14 }}>US Equity</span>
+        <span style={{ marginLeft: 14 }}>美股</span>
         <span style={{ marginLeft: 12, color: MUTED }}>&lt;GO&gt;</span>
         <span style={{ width: 1, height: 24, background: LINE, margin: '0 20px' }} />
         <FnKey k="DES" on={fn} />
@@ -566,7 +567,7 @@ const Header = ({ fn }: { fn?: Fn }) => {
               className="mx-blink"
               style={{ width: 10, height: 10, background: 'var(--osd-accent)' }}
             />
-            LIVE
+            即時
           </span>
         </div>
       </div>
@@ -594,7 +595,7 @@ const Footer = ({ source }: { source: string }) => {
         <span style={{ color: 'var(--osd-accent)', fontWeight: 600 }}>
           PG {pad2(current)}/{pad2(total)}
         </span>
-        <span>Marlow Exchange Inc. · Investor Day 2026 · New York</span>
+        <span>Marlow Exchange Inc. · 2026 投資人日 · New York</span>
         <span style={{ marginLeft: 'auto', textTransform: 'none', letterSpacing: '0.02em' }}>
           {source}
         </span>
@@ -683,7 +684,7 @@ const Tape = () => (
       }}
     >
       <span style={{ width: 8, height: 8, background: 'var(--osd-accent)' }} />
-      Marlow tape
+      Marlow 行情跑馬燈
     </div>
   </div>
 );
@@ -914,13 +915,13 @@ const Cover: Page = () => (
       h={64}
       size={30}
       text="MRLW <GO>"
-      status="Investor Day 2026 · session loaded"
+      status="2026 投資人日 · 場次已載入"
     />
     <div style={abs(M, 292, { ...LABEL, color: MUTED, display: 'flex', gap: 26 })}>
-      <span style={{ color: 'var(--osd-accent)' }}>Event</span>
-      <span>14 Oct 2026</span>
+      <span style={{ color: 'var(--osd-accent)' }}>活動</span>
+      <span>2026/10/14</span>
       <span>55 Water Street, New York</span>
-      <span>Webcast + replay</span>
+      <span>網路直播 + 重播</span>
     </div>
     <h1
       style={abs(M - 6, 330, {
@@ -933,7 +934,7 @@ const Cover: Page = () => (
       })}
     >
       <span style={{ display: 'block' }}>
-        <Type text="Investor Day" dl={1050} iv={42} />
+        <Type text="投資人日" dl={1050} iv={42} />
       </span>
       <span style={{ display: 'block', color: 'var(--osd-accent)' }}>
         <Odo value="2026" dl={1500} du={1600} stagger={110} />
@@ -953,13 +954,13 @@ const Cover: Page = () => (
         }),
       )}
     >
-      Fewer microseconds. <span style={{ color: MUTED }}>More recurring revenue.</span>
+      更少的微秒。<span style={{ color: MUTED }}>更多的經常性營收。</span>
     </p>
-    <Credit x={M} title="Chair & CEO" name="Helen Achterberg" />
-    <Credit x={M + 380} title="Chief Financial Officer" name="Daniel Okafor" />
-    <Credit x={M + 760} title="President, Data" name="Mira Castell" />
+    <Credit x={M} title="董事長暨執行長" name="Helen Achterberg" />
+    <Credit x={M + 380} title="財務長" name="Daniel Okafor" />
+    <Credit x={M + 760} title="數據事業總裁" name="Mira Castell" />
 
-    <Panel x={1264} y={164} w={560} h={730} title="MRLW US · last close" meta="13 Oct" dl={300}>
+    <Panel x={1264} y={164} w={560} h={730} title="MRLW US · 前一日收盤" meta="10/13" dl={300}>
       <div style={abs(24, 22, { fontFamily: COND, fontWeight: 700, fontSize: 112, lineHeight: 1 })}>
         <Odo value="184.62" dl={700} du={1500} stagger={70} />
       </div>
@@ -995,7 +996,7 @@ const Cover: Page = () => (
             color: MUTED,
           })}
         >
-          Prev 182.31
+          前收 182.31
         </div>
       </div>
       <div
@@ -1013,12 +1014,12 @@ const Cover: Page = () => (
         <span>16:00</span>
       </div>
       <div style={abs(24, 492, { width: 510, height: 1, background: LINE })} />
-      <QuoteStat x={24} y={516} label="Open" value="182.40" />
-      <QuoteStat x={204} y={516} label="High" value={INTRA_HI.toFixed(2)} />
-      <QuoteStat x={384} y={516} label="Low" value={INTRA_LO.toFixed(2)} />
-      <QuoteStat x={24} y={596} label="Volume" value="2.84M" />
-      <QuoteStat x={204} y={596} label="Mkt cap" value="$34.3B" />
-      <QuoteStat x={384} y={596} label="P/E 26E" value="31.2×" />
+      <QuoteStat x={24} y={516} label="開盤" value="182.40" />
+      <QuoteStat x={204} y={516} label="最高" value={INTRA_HI.toFixed(2)} />
+      <QuoteStat x={384} y={516} label="最低" value={INTRA_LO.toFixed(2)} />
+      <QuoteStat x={24} y={596} label="成交量" value="2.84M" />
+      <QuoteStat x={204} y={596} label="市值" value="$34.3B" />
+      <QuoteStat x={384} y={596} label="本益比 26E" value="31.2×" />
     </Panel>
   </Stage>
 );
@@ -1064,7 +1065,7 @@ const QuarterBars = () => {
           fontSize={17}
           letterSpacing="0.06em"
         >
-          FY26E AVG 41.2
+          FY26E 平均 41.2
         </text>
         <line
           x1={8 * slot + 4}
@@ -1154,31 +1155,27 @@ const KpiTile = ({
 };
 
 const Snapshot: Page = () => (
-  <Stage fn="DES" source="FY26E = Jan–Sep actual + Q4 guidance midpoint. Unaudited.">
-    <Heading
-      code="DES"
-      fn="Company snapshot · FY2026E"
-      title="Record revenue, and more than half of it recurs."
-    />
-    <Panel x={M} y={264} w={706} h={688} title="Average daily volume" meta="Notional · USD">
+  <Stage fn="DES" source="FY26E = 1–9月實際值 + 第四季財測中位數。未經查核。">
+    <Heading code="DES" fn="公司概況 · FY2026E" title="營收創新高，且超過一半屬於經常性營收。" />
+    <Panel x={M} y={264} w={706} h={688} title="日均成交量" meta="名目金額 · 美元">
       <div style={abs(32, 30)}>
-        <Cap>FY26E · all asset classes</Cap>
+        <Cap>FY26E · 全部資產類別</Cap>
       </div>
       <div style={abs(26, 62, { fontFamily: COND, fontWeight: 700, fontSize: 200, lineHeight: 1 })}>
         <Odo value="$41.2B" dl={250} du={1700} stagger={110} />
       </div>
       <div style={abs(32, 290, { display: 'flex', alignItems: 'baseline', gap: 22 })}>
-        <span style={{ fontSize: 26, color: UP, fontWeight: 500 }}>▲ 18.4% Y/Y</span>
-        <span style={{ ...LABEL, color: MUTED }}>vs $34.8B in FY25</span>
+        <span style={{ fontSize: 26, color: UP, fontWeight: 500 }}>▲ 年增 18.4%</span>
+        <span style={{ ...LABEL, color: MUTED }}>FY25 為 $34.8B</span>
       </div>
       <QuarterBars />
     </Panel>
     <KpiTile
       x={826}
       y={264}
-      title="Net revenue"
+      title="淨營收"
       value="$2.84B"
-      delta="▲ 14.2% Y/Y"
+      delta="▲ 年增 14.2%"
       note="FY25 $2.49B"
       series={bridge(3, 12, 0.56, 0.76, 0.012)}
       dl={250}
@@ -1186,9 +1183,9 @@ const Snapshot: Page = () => (
     <KpiTile
       x={1337}
       y={264}
-      title="Adj. EBITDA margin"
+      title="調整後 EBITDA 利潤率"
       value="61%"
-      delta="▲ 2.1 PTS"
+      delta="▲ 2.1 個百分點"
       note="EBITDA $1.73B"
       series={bridge(5, 12, 56.5, 61.4, 0.5)}
       dl={380}
@@ -1196,20 +1193,20 @@ const Snapshot: Page = () => (
     <KpiTile
       x={826}
       y={620}
-      title="Recurring revenue"
+      title="經常性營收"
       value="54%"
-      delta="▲ 5.0 PTS"
-      note="$1.53B of $2.84B"
+      delta="▲ 5.0 個百分點"
+      note="$2.84B 中的 $1.53B"
       series={bridge(8, 12, 46, 54.6, 0.45)}
       dl={510}
     />
     <KpiTile
       x={1337}
       y={620}
-      title="Listed companies"
+      title="上市公司"
       value="1,312"
-      delta="▲ 64 NET"
-      note="112 IPOs · 38 transfers"
+      delta="▲ 淨增 64"
+      note="112 件 IPO · 38 家轉上市"
       series={bridge(13, 12, 1190, 1312, 6)}
       dl={640}
     />
@@ -1311,7 +1308,7 @@ const PriceChart = () => {
         25
       </text>
       <text x={G.x0} y={gv(50) - 12} fill={MUTED} fontSize={17} letterSpacing="0.08em">
-        ADV · USD BN
+        ADV · 十億美元
       </text>
       {GP.candles.map((c, i) => {
         const up = c.c >= c.o;
@@ -1505,18 +1502,18 @@ const CompareBar = ({
 );
 
 const Graph: Page = () => (
-  <Stage fn="GP" source="Monthly OHLC, Oct 2021 – Sep 2026. TSR assumes dividends reinvested.">
+  <Stage fn="GP" source="月 K 線（OHLC），2021年10月至2026年9月。股東總報酬假設股利再投入。">
     <Heading
       code="GP"
-      fn="Price & volume graph · monthly"
-      title="Five years: the stock up 3.1×, volume up 2.4×."
+      fn="價量走勢圖 · 月線"
+      title="五年來：股價成長 3.1 倍，成交量成長 2.4 倍。"
     />
-    <Panel x={M} y={264} w={1290} h={688} title="MRLW US · monthly OHLC + ADV" meta="USD · 12M MA">
+    <Panel x={M} y={264} w={1290} h={688} title="MRLW US · 月 K 線 + ADV" meta="美元 · 12 個月均線">
       <PriceChart />
     </Panel>
-    <Panel x={1410} y={264} w={414} h={688} title="Returns · 5Y" dl={200}>
+    <Panel x={1410} y={264} w={414} h={688} title="報酬 · 5年" dl={200}>
       <div style={abs(24, 26)}>
-        <Cap>Total shareholder return</Cap>
+        <Cap>股東總報酬</Cap>
       </div>
       <div
         style={abs(20, 56, {
@@ -1530,10 +1527,10 @@ const Graph: Page = () => (
         <Odo value="+231%" dl={500} du={1600} />
       </div>
       <CompareBar y={176} label="MRLW" value="231%" w={170} hot dl={900} />
-      <CompareBar y={212} label="S&P Fin." value="71%" w={52} dl={1000} />
+      <CompareBar y={212} label="S&P 金融" value="71%" w={52} dl={1000} />
       <div style={abs(24, 266, { width: 364, height: 1, background: LINE })} />
       <div style={abs(24, 290)}>
-        <Cap>Price CAGR</Cap>
+        <Cap>股價 CAGR</Cap>
         <div style={{ fontFamily: COND, fontWeight: 600, fontSize: 56, lineHeight: 1.1 }}>
           <Odo value="25.6%" dl={1100} />
         </div>
@@ -1546,13 +1543,13 @@ const Graph: Page = () => (
       </div>
       <div style={abs(24, 404, { width: 364, height: 1, background: LINE })} />
       <div style={abs(24, 426)}>
-        <Cap>Events</Cap>
+        <Cap>重大事件</Cap>
       </div>
-      <EventRow y={460} letter="A" date="JUN 22" text="Kestrel Clearing" />
-      <EventRow y={494} letter="B" date="MAR 23" text="LD4 engine live" />
-      <EventRow y={528} letter="C" date="JUL 24" text="Data Cloud launch" />
-      <EventRow y={562} letter="D" date="JUN 25" text="Crypto ETPs listed" />
-      <EventRow y={596} letter="E" date="MAR 26" text="38 µs median" />
+      <EventRow y={460} letter="A" date="2022/6" text="Kestrel Clearing" />
+      <EventRow y={494} letter="B" date="2023/3" text="LD4 撮合引擎上線" />
+      <EventRow y={528} letter="C" date="2024/7" text="Data Cloud 推出" />
+      <EventRow y={562} letter="D" date="2025/6" text="加密貨幣 ETP 上市" />
+      <EventRow y={596} letter="E" date="2026/3" text="中位數 38 µs" />
     </Panel>
   </Stage>
 );
@@ -1725,16 +1722,9 @@ const GroupLabel = ({
 );
 
 const Mix: Page = () => (
-  <Stage
-    fn="FA"
-    source="Net revenue = revenue less transaction-based expenses. FY21 restated for Kestrel."
-  >
-    <Heading
-      code="FA"
-      fn="Financial analysis · net revenue by segment"
-      title="Recurring revenue went from 38% to 54% of the mix."
-    />
-    <Panel x={M} y={264} w={1728} h={340} title="Mix · share of net revenue" meta="FY21 → FY26E">
+  <Stage fn="FA" source="淨營收 = 營收減去交易相關費用。FY21 已追溯重編以納入 Kestrel。">
+    <Heading code="FA" fn="財務分析 · 各業務別淨營收" title="經常性營收占比，從 38% 升至 54%。" />
+    <Panel x={M} y={264} w={1728} h={340} title="營收組成 · 占淨營收比重" meta="FY21 → FY26E">
       <div style={abs(32, 24, { display: 'flex', gap: 5 })}>
         <Flap to="F" from="F" w={46} h={66} size={40} />
         <Flap to="Y" from="Y" w={46} h={66} size={40} />
@@ -1753,7 +1743,7 @@ const Mix: Page = () => (
         />
       </div>
       <div style={abs(276, 22)}>
-        <Cap>Net revenue</Cap>
+        <Cap>淨營收</Cap>
         <div
           style={{
             fontFamily: COND,
@@ -1767,7 +1757,7 @@ const Mix: Page = () => (
         </div>
       </div>
       <div style={abs(536, 22)}>
-        <Cap>5Y CAGR</Cap>
+        <Cap>5年 CAGR</Cap>
         <div
           style={{
             fontFamily: COND,
@@ -1796,13 +1786,13 @@ const Mix: Page = () => (
             }),
           )}
         >
-          <GroupLabel label="Recurring" value="54%" from="38%" />
+          <GroupLabel label="經常性" value="54%" from="38%" />
           <Seg
             from="58.1%"
             to="61.4%"
             fill="var(--osd-accent)"
             ink="var(--osd-bg)"
-            name="Market data"
+            name="市場數據"
             pct="33.1%"
             dl={600}
           />
@@ -1811,7 +1801,7 @@ const Mix: Page = () => (
             to="19.0%"
             fill="rgba(255,178,26,0.66)"
             ink="var(--osd-bg)"
-            name="Listings"
+            name="上市服務"
             pct="10.2%"
             dl={600}
           />
@@ -1820,19 +1810,19 @@ const Mix: Page = () => (
             to="19.6%"
             fill="rgba(255,178,26,0.38)"
             ink="var(--osd-text)"
-            name="Connectivity"
+            name="連線服務"
             pct="10.6%"
             dl={600}
           />
         </div>
         <div style={{ flex: 1, display: 'flex', position: 'relative' }}>
-          <GroupLabel label="Transactional" value="46%" from="62%" right />
+          <GroupLabel label="交易型" value="46%" from="62%" right />
           <Seg
             from="71%"
             to="65.6%"
             fill={HATCH}
             ink="var(--osd-text)"
-            name="Trading"
+            name="交易"
             pct="30.3%"
             dl={600}
           />
@@ -1841,27 +1831,27 @@ const Mix: Page = () => (
             to="34.4%"
             fill={HATCH_LIGHT}
             ink="var(--osd-text)"
-            name="Clearing"
+            name="結算"
             pct="15.8%"
             dl={600}
           />
         </div>
       </div>
     </Panel>
-    <Panel x={M} y={628} w={1728} h={324} title="Segments · USD BN" meta="CAGR FY21–26E" dl={150}>
+    <Panel x={M} y={628} w={1728} h={324} title="業務別 · 十億美元" meta="FY21–26E CAGR" dl={150}>
       <div style={abs(0, 10, { ...LABEL, width: 1726, height: 24, color: MUTED })}>
-        <span style={abs(72, 0)}>Segment</span>
-        <span style={abs(440, 0)}>Type</span>
+        <span style={abs(72, 0)}>業務別</span>
+        <span style={abs(440, 0)}>類型</span>
         <span style={abs(700, 0, { width: 160, textAlign: 'right' })}>FY21</span>
         <span style={abs(900, 0, { width: 160, textAlign: 'right' })}>FY26E</span>
-        <span style={abs(1140, 0)}>Growth</span>
+        <span style={abs(1140, 0)}>成長</span>
         <span style={abs(1534, 0, { width: 160, textAlign: 'right' })}>CAGR</span>
       </div>
       <SegRow
         y={44}
         fill="var(--osd-accent)"
-        name="Market data & analytics"
-        kind="Recurring"
+        name="市場數據與分析"
+        kind="經常性"
         a="0.36"
         b="0.94"
         cagr="21.2%"
@@ -1871,8 +1861,8 @@ const Mix: Page = () => (
       <SegRow
         y={90}
         fill="rgba(255,178,26,0.66)"
-        name="Listings & index"
-        kind="Recurring"
+        name="上市與指數"
+        kind="經常性"
         a="0.15"
         b="0.29"
         cagr="14.1%"
@@ -1882,8 +1872,8 @@ const Mix: Page = () => (
       <SegRow
         y={136}
         fill="rgba(255,178,26,0.38)"
-        name="Connectivity & colocation"
-        kind="Recurring"
+        name="連線與主機代管"
+        kind="經常性"
         a="0.11"
         b="0.30"
         cagr="22.2%"
@@ -1893,8 +1883,8 @@ const Mix: Page = () => (
       <SegRow
         y={182}
         fill={HATCH}
-        name="Trading"
-        kind="Transactional"
+        name="交易"
+        kind="交易型"
         a="0.71"
         b="0.86"
         cagr="3.9%"
@@ -1904,8 +1894,8 @@ const Mix: Page = () => (
       <SegRow
         y={228}
         fill={HATCH_LIGHT}
-        name="Clearing"
-        kind="Transactional"
+        name="結算"
+        kind="交易型"
         a="0.29"
         b="0.45"
         cagr="9.2%"
@@ -2052,10 +2042,10 @@ const OrderPath = () => {
   const live = useIsActivePage();
   return (
     <>
-      <StageLabel a={0} b={6} name="Gateway" />
-      <StageLabel a={6} b={15} name="Risk" />
-      <StageLabel a={15} b={26} name="Match" />
-      <StageLabel a={26} b={38} name="Publish" />
+      <StageLabel a={0} b={6} name="閘道" />
+      <StageLabel a={6} b={15} name="風控" />
+      <StageLabel a={15} b={26} name="撮合" />
+      <StageLabel a={26} b={38} name="發布" />
       <svg width={704} height={286} style={{ position: 'absolute', inset: 0, overflow: 'visible' }}>
         <path
           d={`M${W_X0} 132 H${W_X1}`}
@@ -2115,7 +2105,7 @@ const OrderPath = () => {
           />
         ))}
       </svg>
-      <div style={abs(24, 166, { ...LABEL, color: MUTED })}>Order in · t=0</div>
+      <div style={abs(24, 166, { ...LABEL, color: MUTED })}>委託進入 · t=0</div>
       <div
         style={abs(456, 166, {
           ...LABEL,
@@ -2124,7 +2114,7 @@ const OrderPath = () => {
           color: 'var(--osd-accent)',
         })}
       >
-        {keep('Ack out · t=38 µs')}
+        {keep('回報送出 · t=38 µs')}
       </div>
       <div style={abs(24, 226, { width: 656, height: 1, background: LINE })} />
       <div
@@ -2135,7 +2125,7 @@ const OrderPath = () => {
           letterSpacing: '0.02em',
         })}
       >
-        Measured at the NY4 cross-connect, 10 GbE, Sep 2026.
+        於 NY4 交叉連接點量測，10 GbE，2026年9月。
       </div>
     </>
   );
@@ -2179,18 +2169,15 @@ const PeerBar = ({
 );
 
 const Latency: Page = () => (
-  <Stage
-    fn="LAT"
-    source="Peers: published venue latency statistics, Q3 2026. Marlow: internal capture."
-  >
+  <Stage fn="LAT" source="同業：各交易所公布的延遲統計，2026年第三季。Marlow：內部擷取數據。">
     <Heading
       code="LAT"
-      fn="Latency monitor · order entry, round-trip"
-      title="38 µs from order in to acknowledgement out."
+      fn="延遲監控 · 委託輸入，來回往返"
+      title="從委託進入到回報送出，只需 38 µs。"
     />
-    <Panel x={M} y={264} w={998} h={688} title="Distribution · 4.1bn orders" meta="µs · 2 µs bins">
+    <Panel x={M} y={264} w={998} h={688} title="分布 · 41 億筆委託" meta="µs · 每 2 µs 一組">
       <div style={abs(32, 28)}>
-        <Cap>Median round-trip</Cap>
+        <Cap>往返延遲中位數</Cap>
       </div>
       <div
         style={abs(24, 56, {
@@ -2210,10 +2197,10 @@ const Latency: Page = () => (
       <LatStat y={44} label="P50" value="38 µs" />
       <LatStat y={98} label="P99" value="61 µs" />
       <LatStat y={152} label="P99.9" value="84 µs" />
-      <LatStat y={206} label="Jitter σ" value="4.2 µs" />
+      <LatStat y={206} label="抖動 σ" value="4.2 µs" />
       <Histogram />
     </Panel>
-    <Panel x={1118} y={264} w={706} h={332} title="Path · median stage times" meta="µs" dl={200}>
+    <Panel x={1118} y={264} w={706} h={332} title="路徑 · 各階段延遲中位數" meta="µs" dl={200}>
       <OrderPath />
     </Panel>
     <Panel
@@ -2221,14 +2208,14 @@ const Latency: Page = () => (
       y={620}
       w={706}
       h={332}
-      title="Peers · median order-to-ack"
-      meta="µs · Q3 2026"
+      title="同業 · 委託到回報延遲中位數"
+      meta="µs · 2026 Q3"
       dl={350}
     >
       <PeerBar y={34} name="Marlow" us={38} hot dl={900} />
-      <PeerBar y={94} name="Venue A" us={52} dl={1000} />
-      <PeerBar y={154} name="Venue B" us={71} dl={1100} />
-      <PeerBar y={214} name="Venue C" us={94} dl={1200} />
+      <PeerBar y={94} name="交易所 A" us={52} dl={1000} />
+      <PeerBar y={154} name="交易所 B" us={71} dl={1100} />
+      <PeerBar y={214} name="交易所 C" us={94} dl={1200} />
     </Panel>
   </Stage>
 );
@@ -2297,7 +2284,7 @@ const DepthChart = ({ t }: { t: number }) => {
         fontWeight={600}
         fill="var(--osd-bg)"
       >
-        MID 62.14 · SPRD 0.02
+        中間價 62.14 · 價差 0.02
       </text>
       {[61.9, 62.0, 62.1, 62.2, 62.3].map((p) => (
         <text key={p} x={px(p)} y={Y1 + 30} fill={MUTED} fontSize={17} textAnchor="middle">
@@ -2305,7 +2292,7 @@ const DepthChart = ({ t }: { t: number }) => {
         </text>
       ))}
       <text x={X0 + 8} y={Y0 + 30} fill="var(--osd-accent)" fontSize={17} letterSpacing="0.08em">
-        BIDS
+        買盤
       </text>
       <text
         x={X1 - 8}
@@ -2315,7 +2302,7 @@ const DepthChart = ({ t }: { t: number }) => {
         letterSpacing="0.08em"
         textAnchor="end"
       >
-        ASKS
+        賣盤
       </text>
     </svg>
   );
@@ -2426,35 +2413,32 @@ const OrderBook: Page = () => {
   const live = useIsActivePage();
   const t = useTick(live, 240);
   return (
-    <Stage
-      fn="MBO"
-      source="Data Cloud metrics as of 30 Sep 2026. ARR = annualised Sep recurring billings."
-    >
+    <Stage fn="MBO" source="Data Cloud 指標截至2026年9月30日。ARR = 9月經常性帳單年化金額。">
       <Heading
         code="MBO"
-        fn="Market-by-order depth · Marlow Data Cloud"
-        title="Market data is our fastest-growing line: +21% a year."
+        fn="逐筆委託深度 · Marlow Data Cloud"
+        title="市場數據是成長最快的業務：每年成長 21%。"
       />
       <Panel
         x={M}
         y={264}
         w={998}
         h={688}
-        title="Depth · HXN US — Hexon Corp"
-        meta="±0.25 from mid · live"
+        title="深度 · HXN US — Hexon Corp"
+        meta="中間價 ±0.25 · 即時"
       >
         <DepthChart t={t} />
         <div style={abs(32, 446, { width: 932, height: 1, background: LINE })} />
-        <DataStat x={32} value="3,140" label="Subscribing firms" note="▲ 19% Y/Y" />
-        <DataStat x={272} value="116%" label="Net rev. retention" note="▲ 4 PTS" />
+        <DataStat x={32} value="3,140" label="訂閱機構數" note="▲ 年增 19%" />
+        <DataStat x={272} value="116%" label="淨營收留存率" note="▲ 4 個百分點" />
         <DataStat x={512} value="$612M" label="Data Cloud ARR" note="▲ 31% Y/Y" />
-        <DataStat x={752} value="482B" label="Msgs, peak day" note="▲ 2.3× FY24" />
+        <DataStat x={752} value="482B" label="尖峰日訊息量" note="▲ 為 FY24 的 2.3 倍" />
       </Panel>
-      <Panel x={1118} y={264} w={706} h={414} title="Ladder · top 5" meta="Shares" dl={200}>
+      <Panel x={1118} y={264} w={706} h={414} title="委託簿 · 前 5 檔" meta="股數" dl={200}>
         <div style={abs(0, 12, { ...LABEL, width: 704, height: 22, color: MUTED })}>
-          <span style={abs(162, 0, { width: 120, textAlign: 'right' })}>Bid size</span>
-          <span style={abs(292, 0, { width: 120, textAlign: 'center' })}>Price</span>
-          <span style={abs(422, 0)}>Ask size</span>
+          <span style={abs(162, 0, { width: 120, textAlign: 'right' })}>委買量</span>
+          <span style={abs(292, 0, { width: 120, textAlign: 'center' })}>價格</span>
+          <span style={abs(422, 0)}>委賣量</span>
         </div>
         <LadderRow y={44} i={4} side="ask" t={t} />
         <LadderRow y={74} i={3} side="ask" t={t} />
@@ -2473,21 +2457,21 @@ const OrderBook: Page = () => {
         y={702}
         w={706}
         h={250}
-        title="Usage · msgs/s by region"
-        meta="Millions"
+        title="使用量 · 各地區每秒訊息數"
+        meta="百萬"
         dl={350}
       >
         <div style={abs(0, 8, { ...LABEL, width: 704, color: MUTED })}>
-          <span style={abs(110, 0, { width: 92, textAlign: 'center' })}>EQ</span>
-          <span style={abs(206, 0, { width: 92, textAlign: 'center' })}>OPT</span>
-          <span style={abs(302, 0, { width: 92, textAlign: 'center' })}>FUT</span>
-          <span style={abs(398, 0, { width: 92, textAlign: 'center' })}>FX</span>
-          <span style={abs(494, 0, { width: 92, textAlign: 'center' })}>Rates</span>
-          <span style={abs(590, 0, { width: 92, textAlign: 'center' })}>Crypto</span>
+          <span style={abs(110, 0, { width: 92, textAlign: 'center' })}>股票</span>
+          <span style={abs(206, 0, { width: 92, textAlign: 'center' })}>選擇權</span>
+          <span style={abs(302, 0, { width: 92, textAlign: 'center' })}>期貨</span>
+          <span style={abs(398, 0, { width: 92, textAlign: 'center' })}>外匯</span>
+          <span style={abs(494, 0, { width: 92, textAlign: 'center' })}>利率</span>
+          <span style={abs(590, 0, { width: 92, textAlign: 'center' })}>加密貨幣</span>
         </div>
-        <div style={abs(24, 46, { ...LABEL, color: MUTED })}>AMER</div>
-        <div style={abs(24, 96, { ...LABEL, color: MUTED })}>EMEA</div>
-        <div style={abs(24, 146, { ...LABEL, color: MUTED })}>APAC</div>
+        <div style={abs(24, 46, { ...LABEL, color: MUTED })}>美洲</div>
+        <div style={abs(24, 96, { ...LABEL, color: MUTED })}>歐非中東</div>
+        <div style={abs(24, 146, { ...LABEL, color: MUTED })}>亞太</div>
         <HeatTile r={0} c={0} t={t} />
         <HeatTile r={0} c={1} t={t} />
         <HeatTile r={0} c={2} t={t} />
@@ -2597,13 +2581,13 @@ const DepRow = ({
 );
 
 const Divider: Page = () => (
-  <Stage fn="GRW" source="Session board · times Eastern.">
+  <Stage fn="GRW" source="議程看板 · 時間為美東時間。">
     <div style={abs(M, 286, { ...LABEL, display: 'flex', gap: 18 })}>
-      <span style={{ color: 'var(--osd-accent)' }}>Section 02 of 03</span>
-      <span style={{ color: MUTED }}>Departing 10:45 ET</span>
+      <span style={{ color: 'var(--osd-accent)' }}>第 02 節，共 03 節</span>
+      <span style={{ color: MUTED }}>10:45 ET 發車</span>
     </div>
-    <BoardRow y={330} text="02 WHERE" row={0} amber={2} />
-    <BoardRow y={496} text="WE GROW " row={1} />
+    <BoardRow y={330} text="02 成長版圖" row={0} amber={2} />
+    <BoardRow y={496} text="在哪裡？" row={1} />
     <p
       className="mx-pop"
       style={tm(
@@ -2620,18 +2604,17 @@ const Divider: Page = () => (
         }),
       )}
     >
-      Where the next <span style={{ color: 'var(--osd-text)' }}>$1.1B of net revenue</span> comes
-      from:
+      下一個 <span style={{ color: 'var(--osd-text)' }}>$1.1B 的淨營收</span>從哪裡來：
       <br />
-      data, clearing and listings.
+      數據、結算與上市服務。
     </p>
-    <Panel x={1264} y={330} w={560} h={450} title="Session board" meta="Today" dl={400}>
-      <DepRow y={0} time="09:30" code="01" name="The franchise" status="Done" state="done" />
-      <DepRow y={54} time="10:45" code="02" name="Where we grow" status="Now" state="now" />
-      <DepRow y={108} time="11:25" code="03" name="Targets & capital" status="11:25" state="next" />
-      <DepRow y={162} time="12:00" code="Q&A" name="Open floor" status="12:00" state="next" />
+    <Panel x={1264} y={330} w={560} h={450} title="議程看板" meta="今日" dl={400}>
+      <DepRow y={0} time="09:30" code="01" name="核心事業" status="已結束" state="done" />
+      <DepRow y={54} time="10:45" code="02" name="成長動能" status="進行中" state="now" />
+      <DepRow y={108} time="11:25" code="03" name="目標與資本配置" status="11:25" state="next" />
+      <DepRow y={162} time="12:00" code="Q&A" name="開放提問" status="12:00" state="next" />
       <div style={abs(24, 246)}>
-        <Cap>Session progress</Cap>
+        <Cap>議程進度</Cap>
       </div>
       <div style={abs(24, 282, { width: 510, height: 12, background: CELL })}>
         <span
@@ -2668,7 +2651,7 @@ const Divider: Page = () => (
           letterSpacing: '0.02em',
         })}
       >
-        Lunch on 41 follows Q&amp;A.
+        午餐於 41 樓，Q&amp;A 結束後開始。
       </div>
     </Panel>
   </Stage>
@@ -2890,7 +2873,7 @@ const Vector = ({
   facts: [string, string, string];
   children: ReactNode;
 }) => (
-  <Panel x={x} y={264} w={560} h={688} title={`Vector ${code}`} meta="FY26E → FY29T" anim="mx-fold">
+  <Panel x={x} y={264} w={560} h={688} title={`動能 ${code}`} meta="FY26E → FY29T" anim="mx-fold">
     <div style={abs(28, 26, { ...LABEL, color: 'var(--osd-accent)' })}>{code} / 3</div>
     <div style={abs(28, 54, { fontFamily: COND, fontWeight: 600, fontSize: 44, lineHeight: 1.1 })}>
       {title}
@@ -2900,7 +2883,7 @@ const Vector = ({
       <Odo value={add} dl={200} du={1300} />
     </div>
     <div style={abs(28, 240)}>
-      <Cap>Incremental net revenue by FY29</Cap>
+      <Cap>至 FY29 的增量淨營收</Cap>
     </div>
     {children}
     <div style={abs(28, 524, { width: 504 })}>
@@ -2945,23 +2928,23 @@ const Vector = ({
 );
 
 const Growth: Page = () => (
-  <Stage fn="GRW" source="FY29T = management targets, not guidance. Incremental vs FY26E run-rate.">
+  <Stage fn="GRW" source="FY29T = 管理階層目標，非財測。增量相對於 FY26E 年化基準。">
     <Heading
       code="GRW"
-      fn="Growth vectors · incremental net revenue, FY26E → FY29T"
-      title="Three vectors add $1.1B of net revenue by 2029."
+      fn="成長動能 · 增量淨營收，FY26E → FY29T"
+      title="三大成長動能，2029年前增加 $1.1B 淨營收。"
     />
     <Steps>
       <Step>
         <Vector
           x={M}
           code="V1"
-          title="Data & analytics"
+          title="數據與分析"
           add="$520M"
           facts={[
-            'Subscribers 3,140 → 6,000 firms',
-            'Cloud delivery in three regions',
-            'Priced per feed, not per screen',
+            '訂閱機構 3,140 → 6,000 家',
+            '雲端交付涵蓋三大區域',
+            '依資料串流計價，而非依螢幕',
           ]}
         >
           <SubscriberLine />
@@ -2971,12 +2954,12 @@ const Growth: Page = () => (
         <Vector
           x={680}
           code="V2"
-          title="Multi-asset clearing"
+          title="多資產結算"
           add="$330M"
           facts={[
-            'Treasury clearing mandate, 2027',
-            'Crypto futures under our DCO',
-            'Cross-margin across four assets',
+            '2027年美國公債結算強制規定',
+            '加密貨幣期貨納入自家 DCO',
+            '四種資產間的交叉保證金',
           ]}
         >
           <ClearingBars />
@@ -2986,12 +2969,12 @@ const Growth: Page = () => (
         <Vector
           x={1264}
           code="V3"
-          title="Listings & indices"
+          title="上市與指數"
           add="$250M"
           facts={[
-            'ETP listings 412 → 650',
-            'MX index licences to $90B AUM',
-            '38 transfers in, zero out, FY26',
+            'ETP 上市檔數 412 → 650',
+            'MX 指數授權規模達 $90B AUM',
+            'FY26：38 家轉入，零家轉出',
           ]}
         >
           <EtpDots />
@@ -3956,33 +3939,33 @@ const FootStat = ({
 );
 
 const Footprint: Page = () => (
-  <Stage fn="MAP" source="Round-trip times on Marlow private routes, Sep 2026 median.">
+  <Stage fn="MAP" source="Marlow 專線來回延遲，2026年9月中位數。">
     <Heading
       code="MAP"
-      fn="Network map · colocation sites and private routes"
-      title="14 data centres, 61 countries, one matching fabric."
+      fn="網路地圖 · 主機代管據點與專線"
+      title="14 座資料中心、61 個國家、一個撮合網路。"
     />
-    <Panel x={M} y={264} w={1290} h={688} title="Network · sites & routes" meta="Dot = 2.5°">
+    <Panel x={M} y={264} w={1290} h={688} title="網路 · 據點與路由" meta="一點 = 2.5°">
       <WorldMap />
       <Legend
         x={24}
         swatch={<span style={{ width: 14, height: 14, background: 'var(--osd-accent)' }} />}
-        label="Matching engine"
+        label="撮合引擎"
       />
       <Legend
         x={300}
         swatch={<span style={{ width: 9, height: 9, background: 'var(--osd-text)' }} />}
-        label="Colocation site"
+        label="主機代管據點"
       />
       <Legend
         x={570}
         swatch={<span style={{ width: 34, height: 2, background: AMBER_SOFT }} />}
-        label="Private route"
+        label="專線"
       />
       <Legend
         x={840}
         swatch={<span style={{ width: 14, height: 4, background: 'var(--osd-accent)' }} />}
-        label="Live packet"
+        label="即時封包"
       />
       <div style={abs(24, 552, { width: 1240, height: 1, background: LINE })} />
       <RouteStat x={24} pair="NY4 ↔ LD4" ms="59.6 ms" />
@@ -3990,12 +3973,12 @@ const Footprint: Page = () => (
       <RouteStat x={644} pair="NY4 ↔ CH2" ms="7.9 ms" />
       <RouteStat x={954} pair="SG1 ↔ HK1" ms="31.8 ms" />
     </Panel>
-    <Panel x={1410} y={264} w={414} h={688} title="Footprint · FY26" dl={200}>
-      <FootStat y={28} value="3" label="Matching engines" dl={500} />
-      <FootStat y={150} value="14" label="Colocation sites" dl={600} />
-      <FootStat y={272} value="61" label="Countries, direct access" dl={700} />
-      <FootStat y={394} value="2,480" label="Cross-connects" dl={800} />
-      <FootStat y={516} value="99.998%" label="Matching uptime" dl={900} />
+    <Panel x={1410} y={264} w={414} h={688} title="版圖 · FY26" dl={200}>
+      <FootStat y={28} value="3" label="撮合引擎" dl={500} />
+      <FootStat y={150} value="14" label="主機代管據點" dl={600} />
+      <FootStat y={272} value="61" label="可直連的國家數" dl={700} />
+      <FootStat y={394} value="2,480" label="交叉連接數" dl={800} />
+      <FootStat y={516} value="99.998%" label="撮合系統可用率" dl={900} />
     </Panel>
   </Stage>
 );
@@ -4111,45 +4094,36 @@ const Assume = ({ y, children, dl }: { y: number; children: string; dl: number }
 );
 
 const Targets: Page = () => (
-  <Stage
-    fn="TGT"
-    source="FY29 targets assume no M&A and constant FY26 FX. Adj. EPS excludes amortisation."
-  >
+  <Stage fn="TGT" source="FY29 目標假設無併購且匯率維持 FY26 水準。調整後 EPS 不含攤銷。">
     <Heading
       code="TGT"
-      fn="Medium-term targets · FY2026E → FY2029"
-      title="By 2029: $4.1B of net revenue, 62% recurring."
+      fn="中期目標 · FY2026E → FY2029"
+      title="2029年：淨營收 $4.1B，經常性占 62%。"
     />
-    <Panel x={M} y={264} w={1144} h={688} title="Targets · FY29" meta="Management targets">
+    <Panel x={M} y={264} w={1144} h={688} title="目標 · FY29" meta="管理階層目標">
       <div style={abs(0, 14, { ...LABEL, width: 1142, color: MUTED })}>
         <span style={abs(24, 0)}>#</span>
-        <span style={abs(76, 0)}>Metric</span>
+        <span style={abs(76, 0)}>指標</span>
         <span style={abs(420, 0, { width: 220, textAlign: 'right' })}>FY26E</span>
-        <span style={abs(700, 0, { width: 248, textAlign: 'right' })}>FY29 target</span>
-        <span style={abs(982, 0)}>Change</span>
+        <span style={abs(700, 0, { width: 248, textAlign: 'right' })}>FY29 目標</span>
+        <span style={abs(982, 0)}>變動</span>
       </div>
       <div style={abs(0, 50, { width: 1142, height: 1, background: LINE })} />
-      <TargetRow y={52} code="01" metric="Net revenue" sub="USD" actual="$2.84B" />
-      <TargetRow y={148} code="02" metric="Recurring share" sub="Of net revenue" actual="54%" />
-      <TargetRow y={244} code="03" metric="Adj. EBITDA margin" sub="Of net revenue" actual="61%" />
-      <TargetRow y={340} code="04" metric="Adj. EPS" sub="USD, diluted" actual="$5.92" />
-      <TargetRow
-        y={436}
-        code="05"
-        metric="Average daily volume"
-        sub="Notional, USD"
-        actual="$41.2B"
-      />
-      <TargetRow y={532} code="06" metric="Median latency" sub="Order-to-ack" actual="38µs" />
+      <TargetRow y={52} code="01" metric="淨營收" sub="美元" actual="$2.84B" />
+      <TargetRow y={148} code="02" metric="經常性占比" sub="占淨營收" actual="54%" />
+      <TargetRow y={244} code="03" metric="調整後 EBITDA 利潤率" sub="占淨營收" actual="61%" />
+      <TargetRow y={340} code="04" metric="調整後 EPS" sub="美元，稀釋後" actual="$5.92" />
+      <TargetRow y={436} code="05" metric="日均成交量" sub="名目金額，美元" actual="$41.2B" />
+      <TargetRow y={532} code="06" metric="延遲中位數" sub="委託到回報" actual="38µs" />
       <Steps>
         <Step>
           <TargetValue y={52} from="$2.84B" to="$4.10B" change="+13%" note="CAGR" seed={1} />
         </Step>
         <Step>
-          <TargetValue y={148} from="54%" to="62%" change="+8 pts" note="Mix shift" seed={2} />
+          <TargetValue y={148} from="54%" to="62%" change="+8 pts" note="結構轉變" seed={2} />
         </Step>
         <Step>
-          <TargetValue y={244} from="61%" to="64%" change="+3 pts" note="Op. leverage" seed={3} />
+          <TargetValue y={244} from="61%" to="64%" change="+3 pts" note="營運槓桿" seed={3} />
         </Step>
         <Step>
           <TargetValue y={340} from="$5.92" to="$9.40" change="+17%" note="CAGR" seed={4} />
@@ -4158,32 +4132,32 @@ const Targets: Page = () => (
           <TargetValue y={436} from="$41.2B" to="$58.0B" change="+12%" note="CAGR" seed={5} />
         </Step>
         <Step>
-          <TargetValue y={532} from="38µs" to="25µs" change="−34%" note="New engine" seed={6} />
+          <TargetValue y={532} from="38µs" to="25µs" change="−34%" note="新撮合引擎" seed={6} />
         </Step>
       </Steps>
     </Panel>
-    <Panel x={1264} y={264} w={560} h={688} title="Assumptions" meta="Plan basis" dl={200}>
+    <Panel x={1264} y={264} w={560} h={688} title="假設" meta="計畫基礎" dl={200}>
       <Assume y={32} dl={500}>
-        US equity volumes +4% a year
+        美股成交量每年成長 4%
       </Assume>
       <Assume y={96} dl={580}>
-        No acquisitions in the plan
+        計畫中不含任何併購
       </Assume>
       <Assume y={160} dl={660}>
-        FX held at FY26 average rates
+        匯率維持 FY26 平均水準
       </Assume>
       <Assume y={224} dl={740}>
-        Capex 6–7% of net revenue
+        資本支出占淨營收 6–7%
       </Assume>
       <Assume y={288} dl={820}>
-        Adjusted tax rate 23–24%
+        調整後稅率 23–24%
       </Assume>
       <Assume y={352} dl={900}>
-        Buybacks executed at $185
+        以 $185 執行庫藏股買回
       </Assume>
       <div style={abs(28, 448, { width: 502, height: 1, background: LINE })} />
       <div style={abs(28, 472)}>
-        <Cap>Next checkpoint</Cap>
+        <Cap>下個檢核點</Cap>
         <div
           style={{
             fontFamily: COND,
@@ -4193,7 +4167,7 @@ const Targets: Page = () => (
             marginTop: 10,
           }}
         >
-          FY26 results · 28 Jan 2027
+          FY26 財報 · 2027/1/28
         </div>
         <div
           style={{
@@ -4204,7 +4178,7 @@ const Targets: Page = () => (
             letterSpacing: '0.02em',
           }}
         >
-          Targets re-based annually, never mid-year.
+          目標每年重新校準，絕不在年中調整。
         </div>
       </div>
     </Panel>
@@ -4320,23 +4294,13 @@ const Policy = ({
 );
 
 const Capital: Page = () => (
-  <Stage
-    fn="CAP"
-    source="FCF = operating cash flow less capex. FY27E–29E cumulative, management estimates."
-  >
+  <Stage fn="CAP" source="FCF = 營業現金流減資本支出。FY27E–29E 累計，管理階層估計。">
     <Heading
       code="CAP"
-      fn="Capital allocation · cumulative FY2027E–FY2029E"
-      title="$5.4B of free cash flow; $3.6B goes back to owners."
+      fn="資本配置 · FY2027E–FY2029E 累計"
+      title="$5.4B 自由現金流，其中 $3.6B 回饋股東。"
     />
-    <Panel
-      x={M}
-      y={264}
-      w={1144}
-      h={688}
-      title="FCF deployment · USD BN"
-      meta="FY27E–29E cumulative"
-    >
+    <Panel x={M} y={264} w={1144} h={688} title="FCF 運用 · 十億美元" meta="FY27E–29E 累計">
       <div style={abs(24, WF_BASE, { width: 1094, height: 1, background: LINE })} />
       <div style={abs(24, WF_BASE - 5 * WF_K, { width: 1094, height: 1, background: GRID })} />
       <div style={abs(24, WF_BASE - 5 * WF_K - 26, { ...LABEL, color: MUTED })}>5.0</div>
@@ -4346,7 +4310,7 @@ const Capital: Page = () => (
         bottom={0}
         fill="var(--osd-accent)"
         value="5.4"
-        name="Free cash flow"
+        name="自由現金流"
         note="FY27E–29E"
         dl={300}
       />
@@ -4359,8 +4323,8 @@ const Capital: Page = () => (
         outline
         down
         value="−1.6"
-        name="Dividends"
-        note="+10% a year"
+        name="股利"
+        note="每年 +10%"
         dl={1100}
       />
       <WfLink i={1} level={3.8} dl={1700} />
@@ -4372,8 +4336,8 @@ const Capital: Page = () => (
         outline
         down
         value="−2.0"
-        name="Buybacks"
-        note="$2.5B authorised"
+        name="庫藏股買回"
+        note="已授權 $2.5B"
         dl={1900}
       />
       <WfLink i={2} level={1.8} dl={2500} />
@@ -4385,8 +4349,8 @@ const Capital: Page = () => (
         outline
         down
         value="−0.5"
-        name="Deleveraging"
-        note="To ≤1.0× net"
+        name="降低槓桿"
+        note="淨槓桿降至 ≤1.0×"
         dl={2700}
       />
       <WfLink i={3} level={1.3} dl={3300} />
@@ -4396,28 +4360,16 @@ const Capital: Page = () => (
         bottom={0}
         fill="var(--osd-text)"
         value="1.3"
-        name="M&A capacity"
-        note="Bolt-ons, data"
+        name="併購空間"
+        note="小型併購、數據"
         dl={3500}
       />
     </Panel>
-    <Panel x={1264} y={264} w={560} h={688} title="Policy" meta="Board approved" dl={200}>
-      <Policy
-        y={28}
-        label="Dividend per share"
-        value="$2.40"
-        note="FY26 · grow ~10% a year"
-        dl={500}
-      />
-      <Policy
-        y={186}
-        label="Buyback authorisation"
-        value="$2.5B"
-        note="New programme, 9 Oct 2026"
-        dl={600}
-      />
-      <Policy y={344} label="Net leverage" value="1.4× → 1.0×" note="Target by end FY28" dl={700} />
-      <Policy y={502} label="Payout ratio" value="40–45%" note="Of adjusted net income" dl={800} />
+    <Panel x={1264} y={264} w={560} h={688} title="政策" meta="董事會核准" dl={200}>
+      <Policy y={28} label="每股股利" value="$2.40" note="FY26 · 每年約成長 10%" dl={500} />
+      <Policy y={186} label="庫藏股授權額度" value="$2.5B" note="新計畫，2026/10/9" dl={600} />
+      <Policy y={344} label="淨槓桿" value="1.4× → 1.0×" note="目標：FY28年底達成" dl={700} />
+      <Policy y={502} label="配發率" value="40–45%" note="占調整後淨利" dl={800} />
     </Panel>
   </Stage>
 );
@@ -4439,7 +4391,7 @@ const Close: Page = () => (
       h={92}
       size={48}
       text="MRLW <GO>"
-      status="End of presentation · Q&A open"
+      status="簡報結束 · 開放提問"
     />
     <h2
       style={abs(M - 6, 352, {
@@ -4452,80 +4404,76 @@ const Close: Page = () => (
       })}
     >
       <span style={{ display: 'block' }}>
-        <Type text="Same exchange." dl={1000} iv={36} />
+        <Type text="同一家交易所。" dl={1000} iv={36} />
       </span>
       <span style={{ display: 'block', color: 'var(--osd-accent)' }}>
-        <Type text="A different business." dl={1560} iv={30} />
+        <Type text="全新的事業。" dl={1560} iv={30} />
       </span>
     </h2>
     <div style={abs(M, 728, { width: 1728, height: 1, background: LINE })} />
     <Contact
       x={M}
-      label="Investor relations"
-      lines={['Priya Raman, Head of IR', 'ir@marlow.exchange']}
+      label="投資人關係"
+      lines={['Priya Raman，投資人關係主管', 'ir@marlow.exchange']}
     />
-    <Contact
-      x={M + 600}
-      label="Materials"
-      lines={['Slides, replay, model', 'ir.marlow.exchange/2026']}
-    />
-    <Contact x={M + 1200} label="Next" lines={['Q3 FY26 results', '29 Oct 2026 · 08:00 ET']} />
+    <Contact x={M + 600} label="資料" lines={['簡報、重播、財務模型', 'ir.marlow.exchange/2026']} />
+    <Contact x={M + 1200} label="下一場" lines={['FY26 第三季財報', '2026/10/29 · 08:00 ET']} />
   </Stage>
 );
 
 export const meta: SlideMeta = {
-  title: 'Marlow Exchange — Investor Day 2026',
+  title: 'Marlow Exchange — 2026 投資人日',
   createdAt: '2026-10-11T12:56:58.354Z',
 };
 
 export const notes: (string | undefined)[] = [
-  `Let the command line type and the tape start moving before you speak.
-"Good morning, and welcome to Marlow's first investor day since 2022. I'm Helen Achterberg."
-"The quote on the right is yesterday's close: one eighty-four sixty-two, up one and a quarter percent."
-"If you remember one line today, make it the one under the title: fewer microseconds, more recurring revenue." Click.`,
-  `"Here's 2026 on one screen."
-Point at the hero: "Average daily volume of forty-one point two billion dollars, up eighteen percent."
-Walk the four tiles left to right, top to bottom: "Net revenue two eighty-four, up fourteen. Sixty-one percent adjusted EBITDA margin. Fifty-four percent recurring. And thirteen hundred and twelve listed companies."
-"The tile that matters most is bottom left. More than half of what we earn no longer depends on how busy the market is." Click.`,
-  `Wait for the cursor to finish the sweep.
-"Five years, sixty candles. The stock is up three point one times, volume two point four."
-Use the flags: "A, Kestrel Clearing in June 2022. B, the London engine. C, Data Cloud. D, crypto ETPs. E, thirty-eight microseconds."
-"Total shareholder return, two hundred thirty-one percent, against seventy-one for the financials index." Click.`,
-  `"This is the slide I'd frame."
-Let the bar repartition before speaking. "In 2021, thirty-eight cents of every dollar recurred. Today it's fifty-four."
-"Market data compounded at twenty-one percent a year, connectivity at twenty-two. Trading still grew, but at four."
-"Same revenue line, very different quality of earnings." Click.`,
-  `Hand to Kenji Arakawa, CTO, or deliver yourself.
-"Thirty-eight microseconds, median, from an order hitting our gateway to the acknowledgement leaving."
-Trace the wire: "Six in the gateway, nine in risk, eleven to match, twelve to publish market data."
-"P99 is sixty-one. The nearest of the large US venues is at fifty-two median. Speed is why the volume comes, and volume is why the data sells." Click.`,
-  `Mira Castell presents.
-"This is a live depth view, the product our clients pay for. Every order, every level, every venue."
-"Three thousand one hundred forty firms subscribe. Net revenue retention is one sixteen. ARR six hundred twelve million, up thirty-one."
-"The heat map underneath is usage by region and asset class. Options in the Americas is the hottest square, and APAC is where it's growing fastest." Click.`,
-  `Let the board finish flipping. Pause.
-"That was the franchise. Section two: where the next billion comes from."
-"We'll be done with this section by eleven twenty-five." Click.`,
-  `Three clicks, one per vector.
-Click one: "Data and analytics, five hundred twenty million of incremental revenue. Subscribers from three thousand to six thousand."
-Click two: "Clearing. The Treasury clearing mandate starts in 2027, and crypto futures run through our own DCO. Three hundred thirty million."
-Click three: "Listings and indices, two hundred fifty. ETPs from four hundred twelve to six fifty, and index licensing."
-"One point one billion in total. None of it requires an acquisition." Click.`,
-  `"Fourteen data centres, sixty-one countries with direct access, three matching engines: New York, London, Singapore."
-Let the packets run. "Every route you see is ours or leased dark fibre. New York to London, fifty-nine point six milliseconds round trip."
-"This footprint is why a London fund and a Singapore bank can buy one Data Cloud contract instead of three." Click.`,
-  `Daniel Okafor presents. Six clicks, one per row.
-"Net revenue to four point one billion, thirteen percent CAGR."
-"Recurring to sixty-two percent. Margin to sixty-four. Adjusted EPS to nine forty, seventeen percent a year."
-"ADV to fifty-eight billion. And latency from thirty-eight microseconds to twenty-five with the new engine in 2028."
-Point at the assumptions: "No M&A, constant currency, modest market growth." Click.`,
-  `"Five point four billion of free cash flow over three years."
-Let each bar drop before you name it. "One point six in dividends, growing ten percent a year. Two billion in buybacks under the new authorisation. Half a billion to get leverage to one times."
-"That leaves one point three for bolt-ons. Three point six billion goes straight back to you." Click.`,
-  `Back to Helen.
-"Same exchange. A different business: faster, more recurring, and returning more cash."
-"Priya and the IR team have the model and the replay on the site this afternoon."
-Open the floor for questions.`,
+  `先讓指令列打完字、跑馬燈開始跑動，再開口。
+「各位早安，歡迎來到 Marlow 自2022年以來的第一場投資人日。我是 Helen Achterberg。」
+「右邊的報價是昨天的收盤：一八四點六二，上漲百分之一點二七。」
+「如果今天只記得一句話，請記得標題下面這一句：更少的微秒，更多的經常性營收。」點擊換頁。`,
+  `「這是2026年的全貌，一個畫面看完。」
+指向主視覺：「日均成交量 412 億美元，年增百分之十八。」
+由左到右、由上到下帶過四個方塊：「淨營收 28.4 億，成長百分之十四。調整後 EBITDA 利潤率百分之六十一。經常性營收占百分之五十四。上市公司一千三百一十二家。」
+「最重要的是左下角這一格：我們賺的錢，有一半以上不再取決於市場的熱度。」點擊換頁。`,
+  `等游標掃完整張圖。
+「五年，六十根 K 棒。股價成長三點一倍，成交量成長二點四倍。」
+搭配旗標說明：「A，2022年6月的 Kestrel Clearing。B，倫敦撮合引擎。C，Data Cloud。D，加密貨幣 ETP。E，三十八微秒。」
+「股東總報酬百分之兩百三十一，同期金融類指數是百分之七十一。」點擊換頁。`,
+  `「這是我會裱框掛起來的一張投影片。」
+等長條重新分配完再開口。「2021年，每一塊錢裡有三十八分錢是經常性的；今天是五十四分。」
+「市場數據每年複合成長百分之二十一，連線服務百分之二十二。交易業務仍在成長，但只有百分之四。」
+「同樣的營收，獲利品質已經完全不同。」點擊換頁。`,
+  `交給技術長 Kenji Arakawa，或由你自己講。
+「從委託進到我們的閘道，到回報送出，中位數是三十八微秒。」
+沿著路徑帶過：「閘道六、風控九、撮合十一、發布行情十二。」
+「P99 是六十一。美國大型交易所裡最接近的，中位數是五十二。速度帶來成交量，成交量讓數據賣得出去。」點擊換頁。`,
+  `由 Mira Castell 報告。
+「這是即時的深度畫面，也是客戶付費買的產品：每一筆委託、每一檔價位、每一個交易所。」
+「有三千一百四十家機構訂閱，淨營收留存率百分之一百一十六。ARR 六點一二億美元，成長百分之三十一。」
+「下面的熱力圖是各地區與資產類別的使用量。美洲的選擇權是最熱的一格，亞太則是成長最快的地方。」點擊換頁。`,
+  `讓看板翻完，停頓一下。
+「剛剛談的是核心事業。第二部分：下一個十億美元從哪裡來。」
+「這一段我們會在十一點二十五分前結束。」點擊換頁。`,
+  `三次點擊，一次一個動能。
+第一次：「數據與分析，增量營收五點二億美元。訂閱機構從三千家成長到六千家。」
+第二次：「結算。美國公債結算強制規定2027年開始，加密貨幣期貨走我們自己的 DCO。三點三億美元。」
+第三次：「上市與指數，兩點五億。ETP 從四百一十二檔成長到六百五十檔，再加上指數授權。」
+「合計十一億美元，而且沒有一項需要併購。」點擊換頁。`,
+  `「十四座資料中心、六十一個國家可直連、三個撮合引擎：紐約、倫敦、新加坡。」
+讓封包動畫跑一下。「你看到的每條路由，不是我們自己的，就是租來的暗光纖。紐約到倫敦，來回五十九點六毫秒。」
+「有了這個版圖，倫敦的基金和新加坡的銀行，才能簽一份 Data Cloud 合約，而不是三份。」點擊換頁。`,
+  `由 Daniel Okafor 報告。六次點擊，一次一列。
+「淨營收到四十一億美元，年複合成長率百分之十三。」
+「經常性占比到百分之六十二，利潤率到百分之六十四，調整後 EPS 到九點四〇美元，每年成長百分之十七。」
+「日均成交量到五百八十億美元。延遲則在2028年隨新引擎上線，從三十八微秒降到二十五微秒。」
+指向假設：「沒有併購、匯率不變、市場溫和成長。」點擊換頁。`,
+  `「三年累計五十四億美元的自由現金流。」
+每根長條落下後再講名稱。「十六億是股利，每年成長百分之十。二十億是依新授權執行的庫藏股買回。五億用來把槓桿降到一倍。」
+「剩下十三億留給小型併購。三十六億美元直接回到各位手上。」點擊換頁。`,
+  `回到 Helen。
+「同一家交易所，全新的事業：更快、更多經常性營收、回饋更多現金。」
+「Priya 和投資人關係團隊今天下午會把財務模型和重播放上網站。」
+開放現場提問。`,
 ];
 
 export default [

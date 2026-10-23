@@ -14,8 +14,8 @@ export const design: DesignSystem = {
   palette: { bg: '#FFFFFF', text: '#1D1D1F', accent: '#0071E3' },
   fonts: {
     display:
-      '"SF Pro Display", -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", sans-serif',
-    body: '"SF Pro Text", -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", sans-serif',
+      '"SF Pro Display", -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", sans-serif, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei"',
+    body: '"SF Pro Text", -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", sans-serif, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei"',
   },
   typeScale: { hero: 200, body: 36 },
   radius: 32,
@@ -29,8 +29,10 @@ const HAIR = '#D2D2D7';
 const EMBER = '#B6531C';
 const PAPER = '#EFEDE7';
 const PEN_INK = '#29292B';
-const HAND = '"Caveat", "Bradley Hand", cursive';
-const SERIF = '"Iowan Old Style", Charter, Georgia, serif';
+const HAND =
+  '"Caveat", "Bradley Hand", cursive, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif';
+const SERIF =
+  '"Iowan Old Style", Charter, Georgia, serif, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif';
 
 const SLIDE_ID = 'quire-slate-keynote';
 const FONT_HREF =
@@ -208,7 +210,7 @@ type Finish = {
 };
 
 const GRAPHITE: Finish = {
-  name: 'Graphite',
+  name: '石墨灰',
   rim: 'linear-gradient(135deg, #A4A5A9 0%, #4A4B4F 14%, #77787C 34%, #2D2E31 58%, #5B5C60 80%, #2A2B2E 100%)',
   bezel: '#1E1F21',
   bezelSheen: 0.07,
@@ -236,7 +238,7 @@ const GRAPHITE: Finish = {
 };
 
 const CHALK: Finish = {
-  name: 'Chalk',
+  name: '粉筆白',
   rim: 'linear-gradient(135deg, #FFFFFF 0%, #CFCECB 16%, #F4F3F0 36%, #ADACA8 60%, #E2E1DD 82%, #B9B8B4 100%)',
   bezel: '#ECEAE5',
   bezelSheen: 0.18,
@@ -264,7 +266,7 @@ const CHALK: Finish = {
 };
 
 const SAGE: Finish = {
-  name: 'Sage',
+  name: '鼠尾草綠',
   rim: 'linear-gradient(135deg, #EEF2EA 0%, #95A08F 16%, #C7CFC1 36%, #76816F 60%, #B0B9A9 82%, #838E7D 100%)',
   bezel: '#AEB8A7',
   bezelSheen: 0.14,
@@ -710,14 +712,14 @@ const LampSketch = ({ x, y, w }: { x: number; y: number; w: number }) => (
       y="492"
       style={{ fontFamily: HAND, fontWeight: 500, fontSize: 52, fill: PEN_INK }}
     >
-      brass pivot
+      黃銅轉軸
     </text>
     <text
       x="470"
       y="606"
       style={{ fontFamily: HAND, fontWeight: 500, fontSize: 52, fill: PEN_INK }}
     >
-      2700 K, warm
+      2700 K，暖光
     </text>
   </svg>
 );
@@ -787,45 +789,45 @@ const NotesScreen = ({ search = false }: { search?: boolean }) => (
           <circle cx="17" cy="17" r="12" fill="none" stroke="#2A2A2A" strokeWidth="4" />
           <path d="M26 26 L36 36" stroke="#2A2A2A" strokeWidth="4" strokeLinecap="round" />
         </svg>
-        <span style={{ fontWeight: 500 }}>hinge</span>
+        <span style={{ fontWeight: 500 }}>鉸鏈</span>
         <span style={{ marginLeft: 'auto', fontSize: 34, color: '#6A6A6A' }}>
-          4 results · 3 notebooks
+          4 筆結果 · 3 本筆記本
         </span>
       </div>
     )}
     <Hand x={140} y={176} size={120}>
-      Desk lamp, v3
+      桌燈 v3
     </Hand>
     <svg width={700} height={40} viewBox="0 0 700 40" style={abs(136, 318)} aria-hidden="true">
       <path d="M6 22 C150 12 380 10 640 18" style={{ ...INK_STROKE, strokeWidth: 5 }} />
     </svg>
     <Hand x={1130} y={204} size={64}>
-      Thu, Oct 8
+      10/8
     </Hand>
-    <Hand x={140} y={318}>
-      Fewer parts. One <Mark on={search}>hinge</Mark>, not two.
+    <Hand x={140} y={336}>
+      零件更少，只用一個<Mark on={search}>鉸鏈</Mark>。
     </Hand>
-    <Hand x={140} y={418}>
-      Arm folds flat, fits in a drawer.
+    <Hand x={140} y={434}>
+      燈臂可摺平，收進抽屜。
     </Hand>
     <LampSketch x={110} y={500} w={760} />
     <Hand x={140} y={1318} size={84}>
-      To do
+      待辦
     </Hand>
     <svg width={260} height={30} viewBox="0 0 260 30" style={abs(136, 1414)} aria-hidden="true">
       <path d="M6 16 C80 10 160 10 210 14" style={{ ...INK_STROKE, strokeWidth: 4.5 }} />
     </svg>
     <CheckBox x={150} y={1446} done={false} />
     <Hand x={240} y={1418}>
-      Call Mira about the <Mark on={search}>hinge</Mark>
+      打給 Mira 談<Mark on={search}>鉸鏈</Mark>
     </Hand>
     <CheckBox x={150} y={1546} done />
     <Hand x={240} y={1518}>
-      Walnut samples
+      胡桃木樣品
     </Hand>
     <CheckBox x={150} y={1646} done={false} />
     <Hand x={240} y={1618}>
-      Light test at dusk
+      黃昏測試光線
     </Hand>
     <svg width={560} height={220} viewBox="0 0 560 220" style={abs(860, 1722)} aria-hidden="true">
       <path
@@ -834,7 +836,7 @@ const NotesScreen = ({ search = false }: { search?: boolean }) => (
       />
     </svg>
     <Hand x={940} y={1770} size={80}>
-      Prototype Fri!
+      週五試作！
     </Hand>
     <svg width={200} height={200} viewBox="0 0 200 200" style={abs(700, 1540)} aria-hidden="true">
       <path d="M20 30 C70 40 130 90 160 170" style={{ ...INK_STROKE, strokeWidth: 4 }} />
@@ -850,34 +852,34 @@ const SketchLandscape = () => (
     </svg>
     <ScreenChrome w={SCREEN_H} h={SCREEN_W} page="12 / 40" />
     <Hand x={150} y={150} size={124}>
-      Desk lamp, v3
+      桌燈 v3
     </Hand>
     <svg width={720} height={40} viewBox="0 0 700 40" style={abs(146, 298)} aria-hidden="true">
       <path d="M6 22 C150 12 380 10 640 18" style={{ ...INK_STROKE, strokeWidth: 5 }} />
     </svg>
     <Hand x={150} y={336}>
-      Fewer parts. One hinge, not two.
+      零件更少，只用一個鉸鏈。
     </Hand>
     <Hand x={150} y={436}>
-      Arm folds flat, fits in a drawer.
+      燈臂可摺平，收進抽屜。
     </Hand>
     <Hand x={150} y={536}>
-      Shade: spun aluminum, matte.
+      燈罩：旋壓鋁，霧面。
     </Hand>
     <Hand x={150} y={736} size={84}>
-      To do
+      待辦
     </Hand>
     <CheckBox x={160} y={864} done={false} />
     <Hand x={250} y={836}>
-      Call Mira about the hinge
+      打給 Mira 談鉸鏈
     </Hand>
     <CheckBox x={160} y={964} done />
     <Hand x={250} y={936}>
-      Walnut samples
+      胡桃木樣品
     </Hand>
     <LampSketch x={1180} y={130} w={820} />
     <Hand x={1560} y={150} size={64}>
-      Thu, Oct 8
+      10/8
     </Hand>
   </div>
 );
@@ -900,7 +902,7 @@ const BookScreen = () => (
         color: '#5C5C5C',
       }}
     >
-      CHAPTER THREE
+      第三章
     </div>
     <div
       style={{
@@ -911,7 +913,7 @@ const BookScreen = () => (
         letterSpacing: '-0.01em',
       }}
     >
-      Low Tide
+      退潮
     </div>
     <p
       style={{
@@ -924,11 +926,9 @@ const BookScreen = () => (
       }}
     >
       <span style={{ fontSize: 150, float: 'left', lineHeight: 0.84, margin: '12px 18px 0 0' }}>
-        T
+        港
       </span>
-      he harbour emptied twice a day, and twice a day the town walked out across it. Children went
-      first, then the dogs, then the old men with their buckets and their opinions about the
-      weather.{' '}
+      口一天退潮兩次，小鎮的人也一天兩次走到港灣中央。孩子們先跑出去，接著是狗，最後是提著水桶、對天氣各有高見的老人。
       <span
         style={{
           textDecoration: 'underline',
@@ -937,7 +937,7 @@ const BookScreen = () => (
           textUnderlineOffset: 12,
         }}
       >
-        Nobody hurried. The sea always came back, and everyone knew it.
+        沒有人匆忙。海水總會回來，大家都知道。
       </span>
     </p>
     <p
@@ -950,9 +950,8 @@ const BookScreen = () => (
         textIndent: 70,
       }}
     >
-      Nell kept a notebook in her coat for the things she found: a blue crab no bigger than a
-      thumbnail, a bottle with no message, a word her grandmother used for the smell of wet rope.
-      She wrote quickly and badly, and later, by the stove, she wrote it all again.
+      Nell
+      的外套裡總放著一本筆記本，用來記下她的發現：一隻不比指甲大的藍蟹、一只沒有留言的瓶子、外婆用來形容濕繩子氣味的一個詞。她寫得又快又潦草，之後在爐火旁，她又全部重寫了一遍。
     </p>
     <p
       style={{
@@ -964,9 +963,7 @@ const BookScreen = () => (
         textIndent: 70,
       }}
     >
-      The second copy was always better. It knew where it was going. But she kept the first one too,
-      folded inside the cover, because it still smelled faintly of salt and because the handwriting
-      reminded her how cold her fingers had been.
+      第二份總是比較好，它知道自己要去哪裡。但她也留著第一份，折起來夾在封面裡，因為它還隱約帶著鹽的味道，也因為那些字跡讓她想起當時手指有多冷。
     </p>
     <div
       style={abs(0, SCREEN_H - 120, {
@@ -985,14 +982,14 @@ const SketchScreen = () => (
   <div style={SCREEN_BOX(SCREEN_W, SCREEN_H)}>
     <ScreenChrome w={SCREEN_W} h={SCREEN_H} page="3 / 18" />
     <Hand x={150} y={190} size={110}>
-      Elevation, side
+      側視圖
     </Hand>
     <svg width={600} height={40} viewBox="0 0 700 40" style={abs(146, 324)} aria-hidden="true">
       <path d="M6 22 C150 12 380 10 640 18" style={{ ...INK_STROKE, strokeWidth: 6 }} />
     </svg>
     <LampSketch x={150} y={520} w={1260} />
     <Hand x={150} y={1760} size={70}>
-      Base weight: 1.2 kg
+      底座重量：1.2 kg
     </Hand>
   </div>
 );
@@ -1100,15 +1097,15 @@ const Statement: Page = () => {
         })}
       >
         <h2 style={{ ...HEAD, fontSize: 132, textAlign: 'center', position: 'relative' }}>
-          We think better on{' '}
+          我們在
           <span style={{ position: 'relative', display: 'inline-block' }}>
-            paper.
+            紙上
             <svg
-              width={372}
+              width={280}
               height={40}
               viewBox="0 0 420 44"
               preserveAspectRatio="none"
-              style={abs(-4, 132, { overflow: 'visible' })}
+              style={abs(-6, 132, { overflow: 'visible' })}
               aria-hidden="true"
             >
               <path
@@ -1126,11 +1123,11 @@ const Statement: Page = () => {
               />
             </svg>
           </span>
+          想得更清楚。
         </h2>
         <p style={{ ...COPY, fontSize: 40, maxWidth: 1260, textAlign: 'center', marginTop: 96 }}>
-          Paper never pings. It never asks for a password, a charge, or your attention.{' '}
-          <Em>It simply holds the thought.</Em> So we set out to make something that feels exactly
-          like paper — <Em>and remembers everything you put on it.</Em>
+          紙不會跳通知，也從不要求密碼、充電，或是你的注意力。<Em>它只是靜靜地承載你的想法。</Em>
+          所以我們著手打造一個手感和紙一模一樣的產品——<Em>而且記得你寫下的每一件事。</Em>
         </p>
       </div>
     </Stage>
@@ -1168,7 +1165,7 @@ const Introducing: Page = () => {
           alignItems: 'center',
         })}
       >
-        <p style={EYEBROW}>New</p>
+        <p style={EYEBROW}>全新登場</p>
         <h1 style={{ ...HEAD, fontSize: 120, marginTop: 14 }}>Quire Slate</h1>
         <p
           style={{
@@ -1180,7 +1177,7 @@ const Introducing: Page = () => {
             letterSpacing: '-0.015em',
           }}
         >
-          Paper, with a memory.
+          有記憶的紙。
         </p>
       </div>
       <MorphSlate u={INTRO_U} x={INTRO_POS.x} y={INTRO_POS.y} />
@@ -1278,15 +1275,15 @@ const Display: Page = () => {
       <MorphSlate u={DISPLAY_U} x={DISPLAY_POS.x} y={DISPLAY_POS.y} />
       <Loupe live={live} />
       <div style={abs(140, 170, { width: 680, ...after(-0.3) })}>
-        <p style={EYEBROW}>Canvas display</p>
+        <p style={EYEBROW}>Canvas 螢幕</p>
         <h2 style={{ ...HEAD, fontSize: 88, marginTop: 20 }}>
-          Crisp as print.
+          如印刷般清晰。
           <br />
-          Calm as paper.
+          如紙張般沉靜。
         </h2>
         <p style={{ ...COPY, marginTop: 44 }}>
-          A 10.3-inch e-paper display at <Em>300 pixels per inch.</Em> Etched glass gives every
-          stroke <Em>the gentle drag of paper.</Em> No glare. No flicker.
+          10.3 吋電子紙螢幕，解析度達<Em>每吋 300 像素。</Em>蝕刻玻璃讓每一筆都帶有
+          <Em>紙張般的輕微阻尼。</Em>不眩光，不閃爍。
         </p>
         <div style={{ display: 'flex', gap: 72, marginTop: 64, alignItems: 'flex-end' }}>
           <div>
@@ -1304,7 +1301,7 @@ const Display: Page = () => {
               <span style={{ fontSize: 112 }}>300</span>
               <span style={{ fontSize: 40, letterSpacing: '-0.01em' }}>ppi</span>
             </div>
-            <div style={{ ...CAPTION, marginTop: 14 }}>Pixel density</div>
+            <div style={{ ...CAPTION, marginTop: 14 }}>像素密度</div>
           </div>
           <div style={{ paddingBottom: 4 }}>
             <div
@@ -1331,7 +1328,7 @@ const Display: Page = () => {
                 }}
               />
             </div>
-            <div style={{ ...CAPTION, marginTop: 30 }}>Warm front light</div>
+            <div style={{ ...CAPTION, marginTop: 30 }}>暖色前光</div>
           </div>
         </div>
       </div>
@@ -1425,7 +1422,7 @@ const Thin: Page = () => {
   return (
     <Stage bg={MIST}>
       <div style={abs(210, 140, { width: 1100 })}>
-        <p style={EYEBROW}>Design</p>
+        <p style={EYEBROW}>設計</p>
         <h2
           style={{
             ...HEAD,
@@ -1440,8 +1437,8 @@ const Thin: Page = () => {
         </h2>
       </div>
       <p style={{ ...COPY, ...abs(1080, 236, { width: 720 }) }}>
-        <Em>Thinner than a pencil.</Em> At 340 grams, lighter than most notebooks. Machined from a
-        single block of <Em>recycled aluminum.</Em>
+        <Em>比鉛筆還薄。</Em>重量僅 340 公克，比多數筆記本還輕。由單一整塊<Em>再生鋁材</Em>
+        切削而成。
       </p>
       <Steps>
         <Step duration={420}>
@@ -1454,7 +1451,7 @@ const Thin: Page = () => {
               fontSize: 26,
             })}
           >
-            Pencil, 7 mm
+            鉛筆，7 mm
           </div>
         </Step>
       </Steps>
@@ -1496,7 +1493,7 @@ const Thin: Page = () => {
         4.9 mm
       </div>
       <div style={abs(THIN_EDGE.x, THIN_EDGE.y + t + 56, { ...CAPTION, fontSize: 26 })}>
-        Quire Slate, shown at actual proportion
+        Quire Slate，依實際比例呈現
       </div>
     </Stage>
   );
@@ -1650,15 +1647,15 @@ const Ink: Page = () => {
       </svg>
       <WritingPen live={live} />
       <div style={abs(140, 170, { width: 740 })}>
-        <p style={EYEBROW}>Latency</p>
+        <p style={EYEBROW}>延遲</p>
         <h2 style={{ ...HEAD, fontSize: 88, marginTop: 20 }}>
-          Ink that
+          墨水跟得上
           <br />
-          keeps up.
+          你的筆速。
         </h2>
         <p style={{ ...COPY, marginTop: 44, width: 700 }}>
-          Every stroke lands in <Em>9 milliseconds</Em>, less than half the wait on Quire Folio.
-          Fast enough that ink seems to <Em>flow straight from the tip.</Em>
+          每一筆都在 <Em>9 毫秒</Em>內落下，不到 Quire Folio 等待時間的一半。快到彷彿墨水
+          <Em>直接從筆尖流出。</Em>
         </p>
         <div
           style={{
@@ -1758,7 +1755,7 @@ const PenPage: Page = () => (
       })}
     >
       <p style={EYEBROW}>Quire Pen</p>
-      <h2 style={{ ...HEAD, fontSize: 88, marginTop: 14 }}>Balanced. Weighted. Ready.</h2>
+      <h2 style={{ ...HEAD, fontSize: 88, marginTop: 14 }}>平衡。有分量。隨時就緒。</h2>
     </div>
     <div
       style={abs(PEN_HERO.x + 20, PEN_HERO.y + penDiameter(PEN_HERO.length) + 26, {
@@ -1774,28 +1771,23 @@ const PenPage: Page = () => (
     </div>
     <Steps>
       <Step duration={320}>
-        <Callout
-          x={PEN_HERO.x + 70}
-          above
-          title="Eraser end"
-          body="Flip it over to erase, like a pencil."
-        />
+        <Callout x={PEN_HERO.x + 70} above title="橡皮擦端" body="像鉛筆一樣，翻面就能擦除。" />
       </Step>
       <Step duration={320}>
         <Callout
           x={PEN_HERO.x + 520}
           above
           at={0.12}
-          title="Flat side"
-          body="Snaps to Slate. Never rolls away."
+          title="平面側邊"
+          body="吸附在 Slate 上，不會滾走。"
         />
       </Step>
       <Step duration={320}>
         <Callout
           x={PEN_HERO.x + 860}
           above={false}
-          title="No charging. Ever."
-          body="Powered by the display beneath it."
+          title="永遠不用充電。"
+          body="由下方的螢幕供電。"
         />
       </Step>
       <Step duration={320}>
@@ -1803,8 +1795,8 @@ const PenPage: Page = () => (
           x={PEN_HERO.x + 1330}
           above={false}
           at={0.56}
-          title="4,096 pressure levels"
-          body="With tilt, for shading like graphite."
+          title="4,096 階壓力感應"
+          body="支援傾斜偵測，能像石墨一樣上陰影。"
         />
       </Step>
     </Steps>
@@ -1821,13 +1813,13 @@ const Software: Page = () => {
       <div style={abs(140, 250, { width: 760 })}>
         <p style={EYEBROW}>Quire OS</p>
         <h2 style={{ ...HEAD, fontSize: 88, marginTop: 20 }}>
-          Your handwriting.
+          你的手寫字，
           <br />
-          Searchable.
+          也能搜尋。
         </h2>
         <p style={{ ...COPY, marginTop: 44, width: 720 }}>
-          Slate reads your handwriting as you write, in <Em>{'34\u00a0languages.'}</Em> Find any
-          note in an instant, or <Em>turn a page into typed text</Em> with a tap.
+          Slate 能在你書寫的同時辨識手寫字，支援 <Em>{'34\u00a0種語言。'}</Em>
+          瞬間找到任何一則筆記，或輕點一下就能<Em>把整頁轉成可編輯的文字。</Em>
         </p>
         <p
           style={{
@@ -1838,7 +1830,7 @@ const Software: Page = () => {
             fontWeight: 500,
           }}
         >
-          Learn more about Quire OS ›
+          進一步了解 Quire OS ›
         </p>
       </div>
       <div style={abs(SEARCH_POS.x, SEARCH_POS.y, { width: w, height: h })}>
@@ -1869,7 +1861,7 @@ const Software: Page = () => {
             textTransform: 'uppercase',
           }}
         >
-          Converted to text
+          已轉成文字
         </div>
         <div
           style={{
@@ -1881,9 +1873,9 @@ const Software: Page = () => {
             letterSpacing: '-0.01em',
           }}
         >
-          Fewer parts. One hinge, not two.
+          零件更少，只用一個鉸鏈。
           <br />
-          Arm folds flat, fits in a drawer.
+          燈臂可摺平，收進抽屜。
         </div>
       </div>
     </Stage>
@@ -1922,7 +1914,7 @@ const Battery: Page = () => {
           alignItems: 'center',
         })}
       >
-        <p style={EYEBROW}>Battery</p>
+        <p style={EYEBROW}>電池續航</p>
         <h2
           style={{
             ...HEAD,
@@ -1933,11 +1925,10 @@ const Battery: Page = () => {
             lineHeight: 1,
           }}
         >
-          Six weeks.
+          六週。
         </h2>
         <p style={{ ...COPY, fontSize: 40, marginTop: 40, textAlign: 'center', maxWidth: 1180 }}>
-          <Em>Up to six weeks on a single charge.¹</Em> And when you do plug in, fifteen minutes
-          over USB‑C gives you another week.
+          <Em>單次充電最長可用六週。¹</Em>需要充電時，透過 USB‑C 充 15 分鐘，就能再多用一週。
         </p>
       </div>
       <div style={abs(BATTERY.x, BATTERY.y, { width: total, height: 120 })}>
@@ -1980,12 +1971,12 @@ const Battery: Page = () => {
           </div>
         </div>
         <div style={abs(0, 64, { width: total, height: 40 })}>
-          <WeekLabel x={0} label="Week 1" />
-          <WeekLabel x={s + g} label="Week 2" />
-          <WeekLabel x={2 * (s + g)} label="Week 3" />
-          <WeekLabel x={3 * (s + g)} label="Week 4" />
-          <WeekLabel x={4 * (s + g)} label="Week 5" />
-          <WeekLabel x={5 * (s + g)} label="Week 6" />
+          <WeekLabel x={0} label="第 1 週" />
+          <WeekLabel x={s + g} label="第 2 週" />
+          <WeekLabel x={2 * (s + g)} label="第 3 週" />
+          <WeekLabel x={3 * (s + g)} label="第 4 週" />
+          <WeekLabel x={4 * (s + g)} label="第 5 週" />
+          <WeekLabel x={5 * (s + g)} label="第 6 週" />
         </div>
       </div>
       <p
@@ -1997,8 +1988,7 @@ const Battery: Page = () => {
           margin: 0,
         }}
       >
-        1. Tested with 30 minutes of writing a day, front light off and wireless off. Battery life
-        varies with use and settings.
+        1. 測試條件為每天書寫 30 分鐘，前光與無線功能皆關閉。電池續航力會因使用方式與設定而異。
       </p>
     </Stage>
   );
@@ -2081,8 +2071,8 @@ const Finishes: Page = () => {
           alignItems: 'center',
         })}
       >
-        <p style={EYEBROW}>Finishes</p>
-        <h2 style={{ ...HEAD, fontSize: 96, marginTop: 14 }}>Chalk. Graphite. Sage.</h2>
+        <p style={EYEBROW}>外殼顏色</p>
+        <h2 style={{ ...HEAD, fontSize: 96, marginTop: 14 }}>粉筆白。石墨灰。鼠尾草綠。</h2>
       </div>
       <FinishCard x={x0} finish={CHALK}>
         <BookScreen />
@@ -2182,7 +2172,7 @@ const Bento: Page = () => {
   const penLen = 162 * pu;
   return (
     <Stage bg={MIST}>
-      <h2 style={{ ...HEAD, ...abs(120, 108), fontSize: 72 }}>Quire Slate. At a glance.</h2>
+      <h2 style={{ ...HEAD, ...abs(120, 108), fontSize: 72 }}>Quire Slate，一覽無遺。</h2>
       <Tile x={BENTO.x} y={BENTO.y} w={bigW} h={BENTO.h}>
         <div style={abs(56, 52)}>
           <div
@@ -2197,7 +2187,7 @@ const Bento: Page = () => {
             Quire Slate
           </div>
           <div style={{ ...CAPTION, fontSize: 26, marginTop: 8 }}>
-            10.3-inch Canvas display. 340 grams.
+            10.3 吋 Canvas 螢幕。340 公克。
           </div>
         </div>
         <div style={abs((bigW - ps.w - 60) / 2, BENTO.h - ps.h - 56)}>
@@ -2216,7 +2206,7 @@ const Bento: Page = () => {
         <div style={abs(44, 92)}>
           <SlateEdge length={cw - 88} finish={GRAPHITE} />
         </div>
-        <BigStat value="4.9" unit="mm" label="Thinner than a pencil" />
+        <BigStat value="4.9" unit="mm" label="比鉛筆還薄" />
       </Tile>
       <Tile x={c4} y={BENTO.y} w={cw} h={rh}>
         <div
@@ -2237,7 +2227,7 @@ const Bento: Page = () => {
         >
           Aa
         </div>
-        <BigStat value="300" unit="ppi" label="Canvas display" />
+        <BigStat value="300" unit="ppi" label="Canvas 螢幕" />
       </Tile>
       <Tile x={c3} y={r2} w={cw} h={rh}>
         <svg width={260} height={110} viewBox="0 0 260 110" style={abs(40, 34)} aria-hidden="true">
@@ -2252,7 +2242,7 @@ const Bento: Page = () => {
             }}
           />
         </svg>
-        <BigStat value="9" unit="ms" label="Pen latency" />
+        <BigStat value="9" unit="ms" label="筆尖延遲" />
       </Tile>
       <Tile x={c4} y={r2} w={cw} h={rh}>
         <div
@@ -2263,7 +2253,7 @@ const Bento: Page = () => {
             background: 'linear-gradient(90deg, #9C3F12 0%, #C8652A 50%, #D99A61 100%)',
           })}
         />
-        <BigStat pre="Up to" value="6" unit="weeks" label="Battery life" />
+        <BigStat pre="最長" value="6" unit="週" label="電池續航力" />
       </Tile>
     </Stage>
   );
@@ -2295,12 +2285,12 @@ const Price: Page = () => {
           Quire Slate
         </p>
         <h2 style={{ ...HEAD, fontSize: 140, letterSpacing: '-0.035em', marginTop: 18 }}>
-          From $499.
+          $499 起。
         </h2>
         <p style={{ ...COPY, marginTop: 30, fontSize: 36 }}>
-          <Em>Quire Pen included.</Em> Order today.
+          <Em>隨附 Quire Pen。</Em>即日起開放訂購。
           <br />
-          Available Friday, November 6.²
+          11 月 6 日（週五）開賣。²
         </p>
         <div style={{ display: 'flex', alignItems: 'center', gap: 44, marginTop: 56 }}>
           <div
@@ -2314,7 +2304,7 @@ const Price: Page = () => {
               borderRadius: 999,
             }}
           >
-            Buy
+            購買
           </div>
           <div
             style={{
@@ -2324,12 +2314,12 @@ const Price: Page = () => {
               letterSpacing: '-0.01em',
             }}
           >
-            Learn more ›
+            進一步了解 ›
           </div>
         </div>
       </div>
       <p style={{ ...abs(1080, 980, { width: 720 }), ...CAPTION, fontSize: 20, margin: 0 }}>
-        2. In the U.S., Canada, the U.K., Germany, France and Japan.
+        2. 於美國、加拿大、英國、德國、法國與日本開賣。
       </p>
     </Stage>
   );
@@ -2340,62 +2330,62 @@ Introducing.transition = morphTransition;
 Display.transition = morphTransition;
 
 export const meta: SlideMeta = {
-  title: 'Quire Slate — Keynote',
+  title: 'Quire Slate — 發表會',
   createdAt: '2026-10-12T05:14:59.412Z',
 };
 
 export const notes: (string | undefined)[] = [
-  `Walk out to a white stage. Let "Slate" settle before you say anything.
-"Good morning. Thank you for being here."
-"Today we want to talk about something very old, and something very new."
-Click.`,
-  `Read the headline slowly. "We think better on paper."
-"Paper never pings. It never needs a password or a charger. It just holds the thought."
-"So two years ago we asked a simple question: what if paper could remember everything you put on it?"
-Pause. Click.`,
-  `"This is Quire Slate."
-Let it sit for a beat — don't fill the silence.
-"Paper, with a memory. A ten-point-three-inch e-paper tablet you write on with Quire Pen, and it's in the box."
-Click — the Slate glides forward into the next page.`,
-  `"Let's start with the display."
-"Three hundred pixels per inch. That's sharper than most printed books."
-Point at the loupe: "Look at the edges of the ink. No jaggies, no shimmer."
-"And the glass is etched, so the pen has a little bite, just like paper."
-"There's a warm front light too, from daylight white all the way down to candlelight." Click.`,
-  `"Now pick it up."
-Pause for the number. "Four point nine millimetres."
-Click to bring in the pencil. "That's thinner than a pencil. And at three hundred and forty grams, it weighs less than most paper notebooks."
-"One piece of recycled aluminum." Click.`,
-  `"Of course, a writing tablet is only as good as its ink."
-Let the stroke draw itself.
-"Nine milliseconds from the tip to the screen. On Quire Folio it was twenty-one."
-"At nine, your brain stops noticing. It just feels like ink." Click.`,
-  `"And this is Quire Pen."
-Click through the four callouts, left to right:
-"An eraser on the end — flip it, like a pencil."
-"A flat side that snaps to Slate, so it never rolls away."
-"No battery. It's powered by the display itself, so it's always ready."
-"And four thousand ninety-six levels of pressure, with tilt, for shading." Click.`,
-  `"Writing it down is half the job. Finding it again is the other half."
-"Slate reads your handwriting as you write — thirty-four languages."
-"Search 'hinge' and it finds every page, across every notebook."
-"And when you need to send it, one tap turns your page into typed text." Click.`,
-  `"Battery."
-Let the bar fill. "Up to six weeks on a single charge."
-"Six weeks. You'll forget where you put the cable."
-"And fifteen minutes on USB-C buys you another week."
-Point to the footnote only if asked: thirty minutes of writing a day, light and wireless off. Click.`,
-  `"Slate comes in three finishes."
-Left to right: "Chalk. Graphite. And Sage."
-"Each one with a matching Quire Pen, which snaps right to the side."
-Beat. Click.`,
-  `"So here it is, at a glance."
-Tap the tiles in order: "Four point nine millimetres. Three hundred ppi. Nine milliseconds. Up to six weeks."
-"All in three hundred and forty grams." Click.`,
-  `"Quire Slate starts at four hundred and ninety-nine dollars, with Quire Pen included."
-"You can order it today, and it's in stores Friday, November sixth, in six countries."
-Pause. "We can't wait to see what you write on it."
-"Thank you." Hold here for Q&A.`,
+  `走上一片純白的舞台。先讓「Slate」安靜地落定，再開口。
+「大家早安，謝謝各位蒞臨。」
+「今天我們想談一個非常古老的東西，和一個非常新的東西。」
+點擊。`,
+  `慢慢念出標題。「我們在紙上想得更清楚。」
+「紙不會跳通知，不需要密碼，也不需要充電器。它只是靜靜地承載你的想法。」
+「所以兩年前，我們問了一個很簡單的問題：如果紙能記得你寫下的一切，會是什麼樣子？」
+停頓。點擊。`,
+  `「這就是 Quire Slate。」
+讓它停留一拍——不要急著填滿沉默。
+「有記憶的紙。一台 10.3 吋的電子紙平板，用 Quire Pen 書寫，而且筆就在盒子裡。」
+點擊——Slate 會滑向前方，進入下一頁。`,
+  `「先從螢幕說起。」
+「每吋 300 像素，比大多數印刷書籍還要銳利。」
+指向放大鏡：「看看筆跡的邊緣。沒有鋸齒，沒有閃爍。」
+「玻璃經過蝕刻，所以筆尖會有一點抓感，就像在紙上寫字。」
+「還有暖色前光，從日光白一路調到燭光。」點擊。`,
+  `「現在，把它拿起來。」
+停一下，讓數字說話。「4.9 公釐。」
+點擊讓鉛筆進場。「比鉛筆還薄。重量只有 340 公克，比大多數紙本筆記本還輕。」
+「由一整塊再生鋁材製成。」點擊。`,
+  `「當然，書寫平板的好壞，取決於筆跡。」
+讓線條自己畫出來。
+「從筆尖到螢幕，只要 9 毫秒。Quire Folio 是 21 毫秒。」
+「到了 9 毫秒，你的大腦就不會再察覺延遲，感覺就只是墨水。」點擊。`,
+  `「接著是 Quire Pen。」
+由左到右，依序點擊四個標註：
+「尾端是橡皮擦——翻過來就能擦，像鉛筆一樣。」
+「平面側邊可以吸附在 Slate 上，所以不會滾走。」
+「沒有電池。它由螢幕供電，所以隨時都能用。」
+「還有 4,096 階壓力感應，加上傾斜偵測，可以用來上陰影。」點擊。`,
+  `「寫下來只是一半的工作，再找到它，才是另一半。」
+「Slate 會在你書寫的同時辨識手寫字——支援 34 種語言。」
+「搜尋『鉸鏈』，它會找出每一本筆記本裡的每一頁。」
+「需要傳給別人的時候，輕點一下，整頁就變成可編輯的文字。」點擊。`,
+  `「電池。」
+讓進度條填滿。「單次充電最長可用六週。」
+「六週。你會忘記充電線放在哪裡。」
+「而且用 USB-C 充 15 分鐘，就能再多用一週。」
+腳註只有被問到才指出來：每天書寫 30 分鐘，前光與無線功能關閉。點擊。`,
+  `「Slate 有三種外殼顏色。」
+由左到右：「粉筆白、石墨灰，和鼠尾草綠。」
+「每一款都搭配同色的 Quire Pen，直接吸附在側邊。」
+停一拍。點擊。`,
+  `「所以，這就是一覽表。」
+依序點擊各個方塊：「4.9 公釐。300 ppi。9 毫秒。最長六週。」
+「全部只有 340 公克。」點擊。`,
+  `「Quire Slate 售價 499 美元起，並隨附 Quire Pen。」
+「今天就能訂購，11 月 6 日星期五在六個國家上市。」
+停頓。「我們等不及想看看你會在上面寫些什麼。」
+「謝謝大家。」停在這一頁，進入問答。`,
 ];
 
 export default [

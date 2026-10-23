@@ -13,8 +13,9 @@ import type { CSSProperties, ReactNode } from 'react';
 export const design: DesignSystem = {
   palette: { bg: '#FBF3E2', text: '#0B0B0B', accent: '#FFE14D' },
   fonts: {
-    display: '"Space Grotesk", "Helvetica Neue", Arial, sans-serif',
-    body: '"Space Grotesk", "Helvetica Neue", Arial, sans-serif',
+    display:
+      '"Space Grotesk", "Helvetica Neue", Arial, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
+    body: '"Space Grotesk", "Helvetica Neue", Arial, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
   },
   typeScale: { hero: 220, body: 30 },
   radius: 14,
@@ -32,7 +33,8 @@ const CREAM = '#F7F0DF';
 const DIM = '#6B6559';
 const TDIM = '#8F897A';
 const CODE_PINK = '#C8187A';
-const MONO = '"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace';
+const MONO =
+  '"JetBrains Mono", ui-monospace, Menlo, Consolas, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", monospace';
 const DISPLAY = 'var(--osd-font-display)';
 const B = 5;
 
@@ -172,9 +174,7 @@ const Footer = () => {
     >
       <LogoMark size={34} />
       <span style={{ fontSize: 24, fontWeight: 700, letterSpacing: '-0.02em' }}>Stackyard</span>
-      <span style={{ ...LABEL, fontSize: 18, color: DIM, marginLeft: 6 }}>
-        CLI 2.0 · Launch week
-      </span>
+      <span style={{ ...LABEL, fontSize: 18, color: DIM, marginLeft: 6 }}>CLI 2.0 · 發表週</span>
       <span
         style={{
           marginLeft: 'auto',
@@ -494,7 +494,7 @@ const Head = ({ tag, children }: { tag: string; children: ReactNode }) => (
         fontWeight: 700,
         fontSize: 84,
         lineHeight: 1.08,
-        letterSpacing: '-0.035em',
+        letterSpacing: '-0.01em',
       }}
     >
       {children}
@@ -661,7 +661,7 @@ const StackBlock = ({
 const Cover: Page = () => (
   <Stage footer={false}>
     <Sticker x={120} y={118} rot={-3} fill={PINK} delay={560}>
-      Launch week · Day 1
+      發表週 · 第 1 天
     </Sticker>
     <h1
       style={{
@@ -705,8 +705,8 @@ const Cover: Page = () => (
         letterSpacing: '-0.01em',
       }}
     >
-      Full-stack preview environments on your laptop. Cold boot in{' '}
-      <b style={{ fontWeight: 700, background: MINT, padding: '0 6px' }}>2.8 seconds</b>.
+      在你的筆電上跑全端預覽環境，冷啟動只要{' '}
+      <b style={{ fontWeight: 700, background: MINT, padding: '0 6px' }}>2.8 秒</b>。
     </p>
     <Box
       x={120}
@@ -732,7 +732,7 @@ const Cover: Page = () => (
       y={790}
       fill={YELLOW}
       name="redis"
-      meta="asleep · lazy"
+      meta="休眠 · 延遲啟動"
       port=":6379"
       delay={0}
     />
@@ -741,7 +741,7 @@ const Cover: Page = () => (
       y={620}
       fill={MINT}
       name="postgres"
-      meta="seeded · 0.4s"
+      meta="資料已就緒 · 0.4s"
       port=":5432"
       delay={110}
     />
@@ -751,7 +751,7 @@ const Cover: Page = () => (
       fill={BLUE}
       color={WHITE}
       name="api"
-      meta="healthy · 1.1s"
+      meta="健康 · 1.1s"
       port=":8080"
       delay={220}
     />
@@ -760,7 +760,7 @@ const Cover: Page = () => (
       y={280}
       fill={PINK}
       name="web"
-      meta="ready · 0.5s"
+      meta="就緒 · 0.5s"
       port=":3000"
       delay={330}
     />
@@ -776,7 +776,7 @@ const Cover: Page = () => (
       >
         2.8s
       </span>
-      <span style={{ ...LABEL, fontSize: 18, marginTop: 8 }}>cold boot</span>
+      <span style={{ ...LABEL, fontSize: 18, marginTop: 8 }}>冷啟動</span>
     </Burst>
   </Stage>
 );
@@ -836,12 +836,12 @@ const Tick = ({ x, label }: { x: number; label: string }) => (
 
 const Problem: Page = () => (
   <Stage>
-    <Head tag="01 · The problem">
-      Your preview env takes{' '}
+    <Head tag="01 · 問題">
+      預覽環境要花{' '}
       <Mark fill={PINK} mono>
         4m 12s
       </Mark>{' '}
-      to boot.
+      才能啟動。
     </Head>
     <Win
       x={120}
@@ -850,12 +850,12 @@ const Problem: Page = () => (
       h={460}
       bar={PINK}
       title="~/shop-api — yard up (v1.9)"
-      right="cold boot"
+      right="冷啟動"
       pad="28px 40px"
     >
       <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
-        <span style={{ fontSize: 36, fontWeight: 700, letterSpacing: '-0.02em' }}>
-          Where the four minutes actually go
+        <span style={{ fontSize: 36, fontWeight: 700, letterSpacing: '0' }}>
+          這四分鐘到底花在哪
         </span>
         <span style={{ fontFamily: MONO, fontSize: 56, fontWeight: 700, lineHeight: 1 }}>
           04:12
@@ -874,9 +874,9 @@ const Problem: Page = () => (
           background: WHITE,
         }}
       >
-        <Seg w={602} fill={PINK} secs="96s" label="Pull images" delay={120} round="l" />
-        <Seg w={445} fill={YELLOW} secs="71s" label="Install deps" delay={420} />
-        <Seg w={364} fill={BLUE} color={WHITE} secs="58s" label="Seed database" delay={720} />
+        <Seg w={602} fill={PINK} secs="96s" label="拉取映像檔" delay={120} round="l" />
+        <Seg w={445} fill={YELLOW} secs="71s" label="安裝相依套件" delay={420} />
+        <Seg w={364} fill={BLUE} color={WHITE} secs="58s" label="灌入資料庫" delay={720} />
         <Seg w={169} fill={MINT} secs="27s" label="DNS + TLS" delay={1020} round="r" />
       </div>
       <div style={{ position: 'relative', height: 44, marginTop: 14 }}>
@@ -889,7 +889,7 @@ const Problem: Page = () => (
       <div
         style={{ ...LABEL, fontWeight: 500, color: DIM, marginTop: 20, letterSpacing: '0.04em' }}
       >
-        median of 1,240 cold boots · 6 services · Stackyard 1.9 opt-in telemetry, Q2 2026
+        1,240 次冷啟動的中位數 · 6 個服務 · Stackyard 1.9 自願回報遙測資料，2026年 Q2
       </div>
     </Win>
   </Stage>
@@ -958,14 +958,14 @@ const Op = ({ x, children }: { x: number; children: string }) => (
 
 const TheMath: Page = () => (
   <Stage>
-    <Head tag="02 · The math">
-      An hour a day, per developer, <Mark fill={MINT}>spent waiting.</Mark>
+    <Head tag="02 · 算一算">
+      每位開發者每天一小時，<Mark fill={MINT}>都花在等待。</Mark>
     </Head>
-    <EqBox x={120} fill={YELLOW} big="14" cap="boots per dev, per day" delay={0} />
+    <EqBox x={120} fill={YELLOW} big="14" cap="每位開發者每天的啟動次數" delay={0} />
     <Op x={600}>×</Op>
-    <EqBox x={720} fill={PINK} big="4:12" cap="minutes per cold boot" delay={160} />
+    <EqBox x={720} fill={PINK} big="4:12" cap="每次冷啟動耗時" delay={160} />
     <Op x={1200}>=</Op>
-    <EqBox x={1320} fill={BLUE} color={WHITE} big="59m" cap="gone, every single day" delay={320} />
+    <EqBox x={1320} fill={BLUE} color={WHITE} big="59m" cap="每天就這樣不見了" delay={320} />
     <Box
       x={120}
       y={790}
@@ -975,11 +975,11 @@ const TheMath: Page = () => (
       sh={8}
       style={{ padding: '22px 36px', display: 'flex', flexDirection: 'column', gap: 14 }}
     >
-      <span style={{ fontSize: 40, fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.1 }}>
-        A 40-person team burns 39 hours a day watching spinners.
+      <span style={{ fontSize: 40, fontWeight: 700, letterSpacing: '0', lineHeight: 1.1 }}>
+        一支 40 人的團隊，每天要花 39 小時盯著轉圈圈。
       </span>
       <span style={{ ...LABEL, fontWeight: 500, color: DIM, letterSpacing: '0.04em' }}>
-        boot counts from 1,200 opted-in Stackyard 1.x teams · April–June 2026
+        啟動次數取自 1,200 個自願回報的 Stackyard 1.x 團隊 · 2026年4月至6月
       </span>
     </Box>
   </Stage>
@@ -1074,20 +1074,30 @@ const FeatureCard = ({
   delay: number;
   children: ReactNode;
 }) => (
-  <Win x={x} y={350} w={396} h={560} bar={bar} title={num} right="new" delay={delay} pad={28}>
+  <Win x={x} y={350} w={396} h={560} bar={bar} title={num} right="新" delay={delay} pad={28}>
     {icon}
     <div
       style={{
         marginTop: 24,
         fontSize: 42,
         fontWeight: 700,
-        letterSpacing: '-0.03em',
+        letterSpacing: '-0.01em',
         lineHeight: 1.05,
       }}
     >
       {title}
     </div>
-    <p style={{ margin: '12px 0 0', fontSize: 28, fontWeight: 500, lineHeight: 1.4 }}>{children}</p>
+    <p
+      style={{
+        margin: '12px 0 0',
+        fontSize: 28,
+        fontWeight: 500,
+        lineHeight: 1.4,
+        textWrap: 'balance',
+      }}
+    >
+      {children}
+    </p>
     <span
       style={{
         ...abs(28, 404),
@@ -1107,52 +1117,52 @@ const FeatureCard = ({
 
 const WhatsNew: Page = () => (
   <Stage>
-    <Head tag="03 · What's new">
-      2.0, in <Mark>four moves.</Mark>
+    <Head tag="03 · 新功能">
+      2.0，<Mark>四個重點。</Mark>
     </Head>
     <FeatureCard
       x={120}
       num="01 / snapshot"
       bar={YELLOW}
       icon={<IconSnap />}
-      title="Snapshot boot"
-      chip="2.8s cold boot"
+      title="快照啟動"
+      chip="冷啟動 2.8s"
       delay={0}
     >
-      Fork a warm, pre-seeded env instead of building a new one.
+      直接分叉一個已預熱、已灌好資料的環境，不用重新建置。
     </FeatureCard>
     <FeatureCard
       x={548}
       num="02 / lazy"
       bar={PINK}
       icon={<IconLazy />}
-      title="Lazy services"
-      chip="−61% idle RAM"
+      title="延遲啟動服務"
+      chip="閒置 RAM −61%"
       delay={110}
     >
-      Services sleep until the first request hits them. Idle costs nothing.
+      服務會休眠，直到第一個請求進來才啟動，閒置時零成本。
     </FeatureCard>
     <FeatureCard
       x={976}
       num="03 / cache"
       bar={MINT}
       icon={<IconCache />}
-      title="Shared cache"
-      chip="1.2 GB saved / repo"
+      title="共用快取"
+      chip="每個 repo 省 1.2 GB"
       delay={220}
     >
-      Images and layers dedupe across every repo you own.
+      映像檔與圖層會在你所有的 repo 之間去重複。
     </FeatureCard>
     <FeatureCard
       x={1404}
       num="04 / share"
       bar={BLUE}
       icon={<IconShare />}
-      title="Share links"
-      chip="1 command"
+      title="分享連結"
+      chip="1 行指令"
       delay={330}
     >
-      Put any local env on a public HTTPS URL. No deploy, no CI.
+      把任何本機環境放上公開 HTTPS 網址，不用部署，也不用 CI。
     </FeatureCard>
   </Stage>
 );
@@ -1188,7 +1198,7 @@ const SpeedRow = ({
         ...abs(34, 20),
         fontSize: 38,
         fontWeight: 700,
-        letterSpacing: '-0.02em',
+        letterSpacing: '0',
         lineHeight: '46px',
       }}
     >
@@ -1265,27 +1275,27 @@ const ColLabel = ({ x, children, right }: { x: number; children: string; right?:
 
 const BeforeAfter: Page = () => (
   <Stage>
-    <Head tag="04 · Before / after">
-      Same repo. Same laptop. <Mark fill={YELLOW}>90× faster.</Mark>
+    <Head tag="04 · 前後對照">
+      同樣的專案、同一台筆電，<Mark fill={YELLOW}>快 90 倍。</Mark>
     </Head>
-    <ColLabel x={159}>task</ColLabel>
+    <ColLabel x={159}>項目</ColLabel>
     <ColLabel x={125 + COL_OLD}>v1.9</ColLabel>
     <ColLabel x={125 + COL_NEW}>v2.0</ColLabel>
     <ColLabel x={0} right>
-      speedup
+      加速倍數
     </ColLabel>
     <Steps>
       <Step duration={60}>
-        <SpeedRow y={412} task="Cold boot" old="4m 12s" neu="2.8s" gain="90×" />
+        <SpeedRow y={412} task="冷啟動" old="4m 12s" neu="2.8s" gain="90×" />
       </Step>
       <Step duration={60}>
-        <SpeedRow y={532} task="Warm restart" old="48s" neu="0.9s" gain="53×" />
+        <SpeedRow y={532} task="熱重啟" old="48s" neu="0.9s" gain="53×" />
       </Step>
       <Step duration={60}>
-        <SpeedRow y={652} task="Reseed database" old="1m 11s" neu="1.4s" gain="51×" />
+        <SpeedRow y={652} task="重新灌入資料庫" old="1m 11s" neu="1.4s" gain="51×" />
       </Step>
       <Step duration={60}>
-        <SpeedRow y={772} task="Switch branch" old="2m 05s" neu="3.6s" gain="35×" />
+        <SpeedRow y={772} task="切換分支" old="2m 05s" neu="3.6s" gain="35×" />
       </Step>
     </Steps>
   </Stage>
@@ -1380,7 +1390,7 @@ const ForkBox = ({
         {time}
       </span>
     </div>
-    <span style={{ ...LABEL, fontWeight: 500 }}>copy-on-write · 38 MB own</span>
+    <span style={{ ...LABEL, fontWeight: 500 }}>寫入時複製 · 自有 38 MB</span>
   </Box>
 );
 
@@ -1390,8 +1400,8 @@ const TomlLine = ({ children }: { children: ReactNode }) => (
 
 const UnderTheHood: Page = () => (
   <Stage>
-    <Head tag="05 · Under the hood">
-      Build once. <Mark fill={MINT}>Fork forever.</Mark>
+    <Head tag="05 · 底層原理">
+      建置一次，<Mark fill={MINT}>無限分叉。</Mark>
     </Head>
     <svg
       width={1920}
@@ -1447,24 +1457,24 @@ const UnderTheHood: Page = () => (
       delay={420}
       style={{ padding: '26px 30px', zIndex: 2 }}
     >
-      <div style={{ ...LABEL, color: YELLOW }}>snapshot · main@a91f3c</div>
+      <div style={{ ...LABEL, color: YELLOW }}>快照 · main@a91f3c</div>
       <div
         style={{
           marginTop: 14,
           fontSize: 54,
           fontWeight: 700,
-          letterSpacing: '-0.03em',
+          letterSpacing: '-0.01em',
           lineHeight: 1,
         }}
       >
-        Built once, in CI
+        在 CI 建置一次
       </div>
-      <div style={{ marginTop: 10, fontSize: 28, fontWeight: 500 }}>nightly + on merge · 41s</div>
+      <div style={{ marginTop: 10, fontSize: 28, fontWeight: 500 }}>每晚 + 每次合併 · 41s</div>
       <div style={{ marginTop: 20, display: 'flex', flexDirection: 'column', gap: 8 }}>
-        <LayerBar fill={WHITE} label="app build" />
-        <LayerBar fill={PINK} label="seed data · 1.4 GB" />
-        <LayerBar fill={YELLOW} label="deps" />
-        <LayerBar fill={MINT} label="base images" />
+        <LayerBar fill={WHITE} label="應用程式建置" />
+        <LayerBar fill={PINK} label="種子資料 · 1.4 GB" />
+        <LayerBar fill={YELLOW} label="相依套件" />
+        <LayerBar fill={MINT} label="基礎映像檔" />
       </div>
     </Box>
     <ForkBox y={400} fill={YELLOW} name="main" time="2.8s" delay={900} />
@@ -1479,8 +1489,9 @@ const UnderTheHood: Page = () => (
         letterSpacing: '-0.01em',
       }}
     >
-      Forks share <b style={{ fontWeight: 700, background: YELLOW, padding: '0 6px' }}>94%</b> of
-      their disk with the snapshot. Ten envs cost about as much as one.
+      分叉出來的環境與快照共用{' '}
+      <b style={{ fontWeight: 700, background: YELLOW, padding: '0 6px' }}>94%</b>{' '}
+      的磁碟空間，十個環境的成本跟一個差不多。
     </p>
   </Stage>
 );
@@ -1524,7 +1535,9 @@ const Callout = ({
     >
       {n}
     </span>
-    <span style={{ fontSize: 29, fontWeight: 500, lineHeight: 1.32 }}>{children}</span>
+    <span style={{ fontSize: 29, fontWeight: 500, lineHeight: 1.32, textWrap: 'balance' }}>
+      {children}
+    </span>
   </Box>
 );
 
@@ -1545,11 +1558,11 @@ const Code = ({ children, bg = YELLOW }: { children: ReactNode; bg?: string }) =
 
 const WalkUp: Page = () => (
   <Stage>
-    <Head tag="06 · Walkthrough">
+    <Head tag="06 · 實機示範">
       <Mark mono fill={YELLOW}>
         yard up
       </Mark>{' '}
-      boots the whole stack.
+      啟動整套環境。
     </Head>
     <Win
       x={120}
@@ -1597,17 +1610,17 @@ const WalkUp: Page = () => (
     <Steps>
       <Step duration={60}>
         <Callout y={330} n="1" fill={YELLOW}>
-          Reads your existing <Code>compose.yml</Code>. Nothing to migrate.
+          讀取你現有的 <Code>compose.yml</Code>，不需要搬遷。
         </Callout>
       </Step>
       <Step duration={60}>
         <Callout y={527} n="2" fill={PINK}>
-          Services you never hit stay asleep and cost zero RAM.
+          沒被用到的服務會一直休眠，完全不佔 RAM。
         </Callout>
       </Step>
       <Step duration={60}>
         <Callout y={724} n="3" fill={MINT}>
-          Every env gets its own <Code bg={MINT}>.local</Code> hostname with TLS.
+          每個環境都有專屬的 <Code bg={MINT}>.local</Code> 主機名稱，並附 TLS。
         </Callout>
       </Step>
     </Steps>
@@ -1689,8 +1702,8 @@ const MiniStat = ({
 
 const WalkShare: Page = () => (
   <Stage>
-    <Head tag="07 · Walkthrough">
-      Send a preview, <Mark fill={PINK}>not a screenshot.</Mark>
+    <Head tag="07 · 實機示範">
+      傳預覽連結，<Mark fill={PINK}>不是傳截圖。</Mark>
     </Head>
     <Win
       x={120}
@@ -1716,8 +1729,8 @@ const WalkShare: Page = () => (
       />
       <TL g="" a="auth" aw={9} b="team only" c="expires in 24h" delay={1000} />
     </Win>
-    <MiniStat x={120} value="31ms" label={'median tunnel\nlatency'} fill={WHITE} delay={1200} />
-    <MiniStat x={580} value="0" label={'deploys or\nCI runs needed'} fill={YELLOW} delay={1300} />
+    <MiniStat x={120} value="31ms" label={'通道延遲\n中位數'} fill={WHITE} delay={1200} />
+    <MiniStat x={580} value="0" label={'不需要部署\n或 CI 執行'} fill={YELLOW} delay={1300} />
 
     <Win
       x={1080}
@@ -1725,7 +1738,7 @@ const WalkShare: Page = () => (
       w={720}
       h={520}
       bar={BLUE}
-      title="Preview — shop"
+      title="預覽 — shop"
       delay={300}
       pad={0}
       sh={14}
@@ -1807,7 +1820,7 @@ const WalkShare: Page = () => (
       />
     </svg>
     <Sticker x={1390} y={346} rot={5} fill={YELLOW} size={22} delay={900}>
-      "Ship it!" — Priya, design
+      「直接上線！」— Priya，設計師
     </Sticker>
   </Stage>
 );
@@ -1869,8 +1882,8 @@ const PluginTile = ({
 
 const Plugins: Page = () => (
   <Stage>
-    <Head tag="08 · Ecosystem">
-      140 plugins. <Mark fill={PINK}>Zero glue code.</Mark>
+    <Head tag="08 · 生態系">
+      140 個外掛，<Mark fill={PINK}>零膠水程式碼。</Mark>
     </Head>
     <p
       style={{
@@ -1881,7 +1894,7 @@ const Plugins: Page = () => (
         letterSpacing: '-0.01em',
       }}
     >
-      <Code>yard add kafka</Code> wires config, ports and health checks for you.
+      <Code>yard add kafka</Code> 會自動幫你串好設定、連接埠和健康檢查。
     </p>
     <PluginTile
       x={120}
@@ -1889,8 +1902,8 @@ const Plugins: Page = () => (
       fill={BLUE}
       color={WHITE}
       name="postgres"
-      cat="data"
-      installs="212k installs · official"
+      cat="資料"
+      installs="212k 次安裝 · 官方"
       delay={0}
     />
     <PluginTile
@@ -1898,8 +1911,8 @@ const Plugins: Page = () => (
       y={380}
       fill={PINK}
       name="kafka"
-      cat="queue"
-      installs="96k installs · official"
+      cat="佇列"
+      installs="96k 次安裝 · 官方"
       delay={70}
     />
     <PluginTile
@@ -1907,8 +1920,8 @@ const Plugins: Page = () => (
       y={380}
       fill={MINT}
       name="s3-local"
-      cat="mock"
-      installs="121k installs"
+      cat="模擬"
+      installs="121k 次安裝"
       delay={140}
     />
     <PluginTile
@@ -1916,8 +1929,8 @@ const Plugins: Page = () => (
       y={380}
       fill={YELLOW}
       name="tls-local"
-      cat="infra"
-      installs="140k installs · official"
+      cat="基礎設施"
+      installs="140k 次安裝 · 官方"
       delay={210}
     />
     <PluginTile
@@ -1925,8 +1938,8 @@ const Plugins: Page = () => (
       y={548}
       fill={MINT}
       name="mail-catch"
-      cat="mock"
-      installs="87k installs"
+      cat="模擬"
+      installs="87k 次安裝"
       delay={70}
     />
     <PluginTile
@@ -1935,8 +1948,8 @@ const Plugins: Page = () => (
       fill={BLUE}
       color={WHITE}
       name="redis"
-      cat="data"
-      installs="188k installs · official"
+      cat="資料"
+      installs="188k 次安裝 · 官方"
       delay={140}
     />
     <PluginTile
@@ -1944,8 +1957,8 @@ const Plugins: Page = () => (
       y={548}
       fill={YELLOW}
       name="cron"
-      cat="infra"
-      installs="52k installs"
+      cat="基礎設施"
+      installs="52k 次安裝"
       delay={210}
     />
     <PluginTile
@@ -1953,8 +1966,8 @@ const Plugins: Page = () => (
       y={548}
       fill={PINK}
       name="nats"
-      cat="queue"
-      installs="33k installs"
+      cat="佇列"
+      installs="33k 次安裝"
       delay={280}
     />
     <PluginTile
@@ -1962,8 +1975,8 @@ const Plugins: Page = () => (
       y={716}
       fill={YELLOW}
       name="temporal"
-      cat="infra"
-      installs="29k installs"
+      cat="基礎設施"
+      installs="29k 次安裝"
       delay={140}
     />
     <PluginTile
@@ -1971,8 +1984,8 @@ const Plugins: Page = () => (
       y={716}
       fill={MINT}
       name="oauth-mock"
-      cat="mock"
-      installs="64k installs"
+      cat="模擬"
+      installs="64k 次安裝"
       delay={210}
     />
     <PluginTile
@@ -1980,8 +1993,8 @@ const Plugins: Page = () => (
       y={716}
       fill={PINK}
       name="rabbitmq"
-      cat="queue"
-      installs="58k installs"
+      cat="佇列"
+      installs="58k 次安裝"
       delay={280}
     />
     <PluginTile
@@ -1990,15 +2003,15 @@ const Plugins: Page = () => (
       fill={BLUE}
       color={WHITE}
       name="clickhouse"
-      cat="data"
-      installs="41k installs"
+      cat="資料"
+      installs="41k 次安裝"
       delay={350}
     />
     <Sticker x={600} y={686} rot={-5} fill={YELLOW} size={20} delay={700}>
-      New in 2.0
+      2.0 新增
     </Sticker>
     <Sticker x={1560} y={884} rot={3} fill={WHITE} size={20} delay={800}>
-      + 128 more
+      + 另有 128 個
     </Sticker>
   </Stage>
 );
@@ -2031,7 +2044,7 @@ const BenchRow = ({
   return (
     <>
       <div style={{ ...abs(120, y + 10), width: 450 }}>
-        <div style={{ fontSize: 36, fontWeight: 700, letterSpacing: '-0.02em', lineHeight: 1.1 }}>
+        <div style={{ fontSize: 36, fontWeight: 700, letterSpacing: '0', lineHeight: 1.1 }}>
           {name}
         </div>
         <div style={{ ...LABEL, fontWeight: 500, color: DIM, marginTop: 10 }}>{meta}</div>
@@ -2126,8 +2139,8 @@ const GridLine = ({ min }: { min: number }) => (
 
 const Benchmark: Page = () => (
   <Stage>
-    <Head tag="09 · Benchmark">
-      Cold boot, <Mark fill={YELLOW}>head to head.</Mark>
+    <Head tag="09 · 效能測試">
+      冷啟動，<Mark fill={YELLOW}>正面對決。</Mark>
     </Head>
     <p
       style={{
@@ -2139,7 +2152,7 @@ const Benchmark: Page = () => (
         letterSpacing: '0.04em',
       }}
     >
-      shop-demo · 6 services · 2.1 GB of images · M3 Pro, 36 GB · cache cold · median of 50 runs
+      shop-demo · 6 個服務 · 2.1 GB 映像檔 · M3 Pro，36 GB · 快取冷 · 50 次中位數
     </p>
     <GridLine min={0} />
     <GridLine min={1} />
@@ -2151,8 +2164,8 @@ const Benchmark: Page = () => (
     <div style={{ ...abs(CHART_X, 850), width: 1180, height: 5, background: INK }} />
     <BenchRow
       y={370}
-      name="Hosted PR previews"
-      meta="avg of 3 vendors"
+      name="託管式 PR 預覽"
+      meta="3 家廠商平均"
       secs={400}
       value="6m 40s"
       fill={HATCH}
@@ -2160,8 +2173,8 @@ const Benchmark: Page = () => (
     />
     <BenchRow
       y={490}
-      name="Raw containers"
-      meta="compose up, no cache"
+      name="純容器"
+      meta="compose up，無快取"
       secs={291}
       value="4m 51s"
       fill={HATCH}
@@ -2170,7 +2183,7 @@ const Benchmark: Page = () => (
     <BenchRow
       y={610}
       name="Stackyard 1.9"
-      meta="last year's release"
+      meta="去年的版本"
       secs={252}
       value="4m 12s"
       fill={PINK}
@@ -2179,7 +2192,7 @@ const Benchmark: Page = () => (
     <BenchRow
       y={730}
       name="Stackyard 2.0"
-      meta="snapshot boot"
+      meta="快照啟動"
       secs={2.8}
       value="2.8s"
       fill={YELLOW}
@@ -2189,7 +2202,7 @@ const Benchmark: Page = () => (
       <span style={{ fontSize: 62, fontWeight: 700, lineHeight: 0.9, letterSpacing: '-0.04em' }}>
         90×
       </span>
-      <span style={{ ...LABEL, fontSize: 18, marginTop: 6 }}>vs 1.9</span>
+      <span style={{ ...LABEL, fontSize: 18, marginTop: 6 }}>對比 1.9</span>
     </Burst>
   </Stage>
 );
@@ -2281,8 +2294,8 @@ const PriceCard = ({
 
 const Pricing: Page = () => (
   <Stage>
-    <Head tag="10 · Pricing">
-      Free for you. <Mark fill={MINT}>Fair for teams.</Mark>
+    <Head tag="10 · 價格">
+      個人免費，<Mark fill={MINT}>團隊價格公道。</Mark>
     </Head>
     <PriceCard
       x={120}
@@ -2290,15 +2303,15 @@ const Pricing: Page = () => (
       tier="hobby"
       bar={WHITE}
       price="$0"
-      per="forever"
+      per="永久"
       cta="brew install yard"
       ctaFill={WHITE}
       delay={0}
     >
-      <Feature>Unlimited local envs</Feature>
-      <Feature>All 140 plugins</Feature>
-      <Feature>Share links up to 2 hours</Feature>
-      <Feature>Community Discord</Feature>
+      <Feature>無限本機環境</Feature>
+      <Feature>全部 140 個外掛</Feature>
+      <Feature>分享連結效期最長 2 小時</Feature>
+      <Feature>社群 Discord</Feature>
     </PriceCard>
     <PriceCard
       x={700}
@@ -2306,36 +2319,36 @@ const Pricing: Page = () => (
       tier="team"
       bar={PINK}
       price="$18"
-      per="seat / month"
-      cta="Start a 30-day trial"
+      per="每人 / 每月"
+      cta="開始 30 天試用"
       ctaFill={INK}
       ctaColor={YELLOW}
       sh={18}
       delay={140}
     >
-      <Feature>Everything in Hobby</Feature>
-      <Feature>Shared snapshot cache</Feature>
-      <Feature>Share links up to 30 days</Feature>
-      <Feature>SSO, roles &amp; audit log</Feature>
+      <Feature>包含 Hobby 的所有功能</Feature>
+      <Feature>共用快照快取</Feature>
+      <Feature>分享連結效期最長 30 天</Feature>
+      <Feature>SSO、角色權限與稽核記錄</Feature>
     </PriceCard>
     <PriceCard
       x={1280}
       y={330}
       tier="enterprise"
       bar={BLUE}
-      price="Custom"
-      per="annual"
-      cta="Book a call"
+      price="客製報價"
+      per="年約"
+      cta="預約通話"
       ctaFill={WHITE}
       delay={280}
     >
-      <Feature>Private plugin registry</Feature>
-      <Feature>Self-hosted share relay</Feature>
-      <Feature>99.9% uptime SLA</Feature>
-      <Feature>Named support engineer</Feature>
+      <Feature>私有外掛登錄庫</Feature>
+      <Feature>自行代管的分享中繼</Feature>
+      <Feature>99.9% 可用性 SLA</Feature>
+      <Feature>專屬支援工程師</Feature>
     </PriceCard>
     <Sticker x={1036} y={284} rot={7} fill={YELLOW} delay={520}>
-      Most picked
+      最多人選
     </Sticker>
   </Stage>
 );
@@ -2417,11 +2430,19 @@ const RoadCard = ({
         >
           {title}
         </span>
-        <span style={{ marginTop: 16, fontSize: 28, fontWeight: 500, lineHeight: 1.4 }}>
+        <span
+          style={{
+            marginTop: 16,
+            fontSize: 28,
+            fontWeight: 500,
+            lineHeight: 1.4,
+            textWrap: 'balance',
+          }}
+        >
           {children}
         </span>
         <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'space-between' }}>
-          <span style={{ ...LABEL, fontSize: 18, color: DIM }}>progress</span>
+          <span style={{ ...LABEL, fontSize: 18, color: DIM }}>進度</span>
           <span style={{ ...LABEL, fontSize: 18 }}>{pct}%</span>
         </div>
         <div
@@ -2452,8 +2473,8 @@ const RoadCard = ({
 
 const Roadmap: Page = () => (
   <Stage>
-    <Head tag="11 · Roadmap">
-      What ships <Mark fill={YELLOW}>next.</Mark>
+    <Head tag="11 · 路線圖">
+      接下來要推出<Mark fill={YELLOW}>這些。</Mark>
     </Head>
     <div
       style={{
@@ -2470,28 +2491,21 @@ const Roadmap: Page = () => (
           x={120}
           q="Q4 '26"
           fill={YELLOW}
-          status="beta · Nov 18"
-          title="Native Windows"
+          status="測試版 · 11月18日"
+          title="原生 Windows"
           pct={80}
         >
-          Snapshot boot without WSL. Same 2.8s, same yard.toml.
+          不需要 WSL 也能快照啟動。一樣 2.8s，一樣用 yard.toml。
         </RoadCard>
       </Step>
       <Step duration={60}>
-        <RoadCard
-          x={552}
-          q="Q1 '27"
-          fill={PINK}
-          status="building"
-          title="Multi-repo stacks"
-          pct={45}
-        >
-          Boot frontend, API and workers from three repos as one env.
+        <RoadCard x={552} q="Q1 '27" fill={PINK} status="開發中" title="多 repo 堆疊" pct={45}>
+          把三個 repo 的前端、API 與背景工作程式，一起啟動成單一環境。
         </RoadCard>
       </Step>
       <Step duration={60}>
-        <RoadCard x={984} q="Q2 '27" fill={MINT} status="in design" title="GPU previews" pct={20}>
-          Attach a local or remote GPU to any service for ML features.
+        <RoadCard x={984} q="Q2 '27" fill={MINT} status="設計中" title="GPU 預覽" pct={20}>
+          為任何服務掛上本機或遠端 GPU，支援機器學習功能。
         </RoadCard>
       </Step>
       <Step duration={60}>
@@ -2500,11 +2514,11 @@ const Roadmap: Page = () => (
           q="Q3 '27"
           fill={BLUE}
           color={WHITE}
-          status="exploring"
-          title="Snapshot sync"
+          status="探索中"
+          title="快照同步"
           pct={5}
         >
-          Pull a teammate's exact env state, data included.
+          直接拉取同事環境的完整狀態，連資料一起。
         </RoadCard>
       </Step>
     </Steps>
@@ -2563,8 +2577,8 @@ const BigStat = ({ value, label, size = 110 }: { value: string; label: string; s
 
 const Community: Page = () => (
   <Stage>
-    <Head tag="12 · Community">
-      Built <Mark fill={PINK}>in the open.</Mark>
+    <Head tag="12 · 社群">
+      開發過程，<Mark fill={PINK}>完全公開。</Mark>
     </Head>
     <Box
       x={120}
@@ -2576,9 +2590,9 @@ const Community: Page = () => (
       delay={0}
       style={{ padding: '36px 40px' }}
     >
-      <div style={{ ...LABEL }}>github stars</div>
+      <div style={{ ...LABEL }}>GitHub 星數</div>
       <div style={{ marginTop: 26 }}>
-        <BigStat value="48.2k" label="+11.4k since 1.0 shipped in March." size={180} />
+        <BigStat value="48.2k" label="自 3 月發表 1.0 以來增加 11.4k。" size={180} />
       </div>
       <div style={{ ...abs(370, 290), transform: 'rotate(14deg)' }}>
         <StarShape />
@@ -2594,7 +2608,7 @@ const Community: Page = () => (
       delay={120}
       style={{ padding: '30px 34px' }}
     >
-      <BigStat value="1,940" label="contributors in 61 countries" />
+      <BigStat value="1,940" label="來自 61 個國家的貢獻者" />
     </Box>
     <Box
       x={1320}
@@ -2606,7 +2620,7 @@ const Community: Page = () => (
       delay={200}
       style={{ padding: '30px 34px' }}
     >
-      <BigStat value="31k" label="builders on Discord" />
+      <BigStat value="31k" label="Discord 上的開發者" />
     </Box>
     <Box
       x={800}
@@ -2620,10 +2634,10 @@ const Community: Page = () => (
       style={{ padding: '30px 34px' }}
     >
       <div style={{ width: 430 }}>
-        <BigStat value="2.1M" label="envs booted last week" size={120} />
+        <BigStat value="2.1M" label="上週啟動的環境數" size={120} />
       </div>
       <div style={{ ...abs(500, 20), width: 450, height: 200 }}>
-        <span style={{ ...abs(0, -2), ...LABEL, fontSize: 18, color: YELLOW }}>12 weeks</span>
+        <span style={{ ...abs(0, -2), ...LABEL, fontSize: 18, color: YELLOW }}>12 週</span>
         <MiniBar x={0} h={46} delay={420} />
         <MiniBar x={38} h={52} delay={450} />
         <MiniBar x={76} h={50} delay={480} />
@@ -2639,7 +2653,7 @@ const Community: Page = () => (
       </div>
     </Box>
     <Sticker x={470} y={312} rot={-6} fill={WHITE} delay={600}>
-      Thank you!
+      謝謝大家！
     </Sticker>
   </Stage>
 );
@@ -2713,7 +2727,7 @@ const InstallRow = ({
           padding: '8px 12px',
         }}
       >
-        copy
+        複製
       </span>
     </Box>
   </>
@@ -2721,8 +2735,8 @@ const InstallRow = ({
 
 const Install: Page = () => (
   <Stage>
-    <Head tag="13 · Get it">
-      Install in <Mark fill={YELLOW}>one line.</Mark>
+    <Head tag="13 · 取得">
+      安裝只要<Mark fill={YELLOW}>一行指令。</Mark>
     </Head>
     <Sticker x={1500} y={196} rot={4} fill={MINT} size={24} delay={500}>
       v2.0.0 · MIT
@@ -2736,7 +2750,7 @@ const Install: Page = () => (
       delay={100}
     />
     <InstallRow y={570} os="Node" fill={PINK} cmd="npm i -g @stackyard/cli" delay={200} />
-    <InstallRow y={720} os="then →" fill={WHITE} cmd="yard init && yard up" delay={360} />
+    <InstallRow y={720} os="接著 →" fill={WHITE} cmd="yard init && yard up" delay={360} />
     <p
       style={{
         ...abs(120, 866),
@@ -2746,7 +2760,7 @@ const Install: Page = () => (
         letterSpacing: '-0.01em',
       }}
     >
-      Already on 1.x? <Code>yard migrate</Code> converts your config in place.
+      已經在用 1.x？<Code>yard migrate</Code> 會就地轉換你的設定。
     </p>
   </Stage>
 );
@@ -2789,7 +2803,7 @@ const LinkBox = ({
 const Close: Page = () => (
   <Stage footer={false}>
     <Sticker x={120} y={118} rot={-3} fill={PINK} delay={600}>
-      Thanks, launch week
+      謝謝，發表週
     </Sticker>
     <Box
       x={120}
@@ -2817,7 +2831,7 @@ const Close: Page = () => (
       <span style={{ fontSize: 100, fontWeight: 700, lineHeight: 0.9, letterSpacing: '-0.05em' }}>
         2.0
       </span>
-      <span style={{ ...LABEL, fontSize: 22, marginTop: 10, color: YELLOW }}>out now</span>
+      <span style={{ ...LABEL, fontSize: 22, marginTop: 10, color: YELLOW }}>現已推出</span>
     </Burst>
     <h2
       style={{
@@ -2827,71 +2841,71 @@ const Close: Page = () => (
         fontSize: 96,
         fontWeight: 700,
         lineHeight: 1.08,
-        letterSpacing: '-0.04em',
+        letterSpacing: '-0.01em',
         whiteSpace: 'nowrap',
       }}
     >
-      Stop waiting. <Mark fill={MINT}>Start shipping.</Mark>
+      別再等了，<Mark fill={MINT}>開始出貨。</Mark>
     </h2>
-    <LinkBox x={120} fill={MINT} label="docs" value="stackyard.dev/2" delay={300} />
-    <LinkBox x={700} fill={WHITE} label="source" value="gh: stackyard/yard" delay={380} />
-    <LinkBox x={1280} fill={PINK} label="find us" value="Booth B12 · stickers" delay={460} />
+    <LinkBox x={120} fill={MINT} label="文件" value="stackyard.dev/2" delay={300} />
+    <LinkBox x={700} fill={WHITE} label="原始碼" value="gh: stackyard/yard" delay={380} />
+    <LinkBox x={1280} fill={PINK} label="找到我們" value="B12 攤位 · 有貼紙" delay={460} />
   </Stage>
 );
 
 export const notes: (string | undefined)[] = [
-  `Hi everyone. I'm going to spend twelve minutes on one number: two point eight seconds.
-That's how long it now takes Stackyard to boot a full preview environment on your laptop, cold.
-Stackyard CLI 2.0 is out today — you can install it before I finish talking.`,
-  `Let's start with where we were. On a real six-service app, our own 1.9 took four minutes and twelve seconds to cold boot.
-Walk the bar left to right: ninety-six seconds pulling images, seventy-one installing deps, almost a minute seeding the database, and the rest on DNS and certificates.
-None of that is your code. It's all ceremony.`,
-  `Here's why that matters. Our opted-in teams cold-boot about fourteen times a day per developer — new branches, broken states, reviewing someone's PR.
-Fourteen times four-twelve is fifty-nine minutes. An hour a day.
-Pause here. Then: for a forty-person team, that's thirty-nine hours a day of people watching spinners.`,
-  `So 2.0 makes four moves. Quick tour, one breath each.
-Snapshot boot: we fork a warm environment instead of building one.
-Lazy services: nothing runs until something calls it.
-Shared cache: layers dedupe across every repo on your machine.
-Share links: your local env, on a public URL, in one command.`,
-  `Same repo, same laptop — before and after. Click through each row.
-Cold boot: four-twelve to two-point-eight. Warm restart: under a second.
-Reseeding the database used to be a coffee break; it's now one point four seconds.
-Switching branches is the one people feel most — two minutes down to three and a half seconds.`,
-  `How is this possible? Build once, fork forever.
-Your yard.toml points at the compose file you already have. CI builds a snapshot — base images, deps, seed data — once a night and on every merge. Forty-one seconds, but you never wait for it.
-Your laptop just forks that snapshot copy-on-write. Each fork only owns the bytes it changes, which is why ten environments cost about as much disk as one.`,
-  `Let me show you what it feels like. One command: yard up.
-It reads your config, forks the snapshot, and services come up in parallel. Notice redis says "asleep" — it hasn't been called yet, so it isn't running.
-Click: it reads your existing compose file. Click: idle services cost nothing. Click: every env gets a real hostname with TLS, so cookies and OAuth redirects just work.`,
-  `Second command: yard share.
-You get a public HTTPS URL that tunnels straight to the env on your laptop. Thirty-one milliseconds median from our EU edge.
-No deploy, no CI run. Your designer opens the link, clicks around, and tells you to ship it — which is exactly what Priya did on this PR.`,
-  `None of this works if you have to hand-wire every service, so 2.0 ships with a hundred and forty plugins.
-yard add kafka gives you the broker, the ports, the health check and the env vars.
-Postgres and redis are the big ones, but the mocks are the sleeper hits — s3-local and the new oauth-mock save people from real cloud credentials in dev.`,
-  `Now the head-to-head. Same app, same machine, cache cold, median of fifty runs.
-Hosted PR previews average six minutes forty. Raw containers, nearly five minutes. Our own 1.9, four-twelve.
-And 2.0 is that sliver at the bottom. I had to put a sticker on it because the bar is barely visible.`,
-  `Pricing stays simple. Hobby is free forever — everything local, every plugin.
-Team is eighteen dollars a seat and adds the shared snapshot cache, which is where the two-second boots really pay off across a team, plus SSO and audit log.
-Enterprise is for people who need a private plugin registry or want to run the share relay themselves.`,
-  `What's next. Click through.
-Native Windows goes to beta on November eighteenth — no WSL.
-Then multi-repo stacks in Q1, GPU previews in Q2, and in Q3 we're exploring snapshot sync — pulling a teammate's exact environment, data and all.
-Tell us at the booth which of these you want first.`,
-  `And none of this happens alone. Forty-eight thousand stars, nearly two thousand contributors in sixty-one countries.
-The number I care about most is the blue one: two point one million environments booted last week — and that chart is the last twelve weeks of beta.
-Thank you, genuinely.`,
-  `Getting it is one line. brew, curl, or npm.
-Then yard init and yard up. If you're on 1.x, yard migrate converts your config in place — you don't lose anything.`,
-  `That's it. Two words: yard up.
-Docs are at stackyard.dev slash two, the source is on GitHub, and we're at booth B12 with stickers until they run out.
-Stop waiting. Start shipping. Thank you.`,
+  `大家好。接下來十二分鐘，我只想講一個數字：兩點八秒。
+這就是 Stackyard 現在在你的筆電上，冷啟動一整套完整預覽環境所需的時間。
+Stackyard CLI 2.0 今天正式推出，我還沒講完，你就可以先裝起來。`,
+  `先看看我們過去的狀況。在一個真實的六服務應用上，我們自己的 1.9 版冷啟動要花四分十二秒。
+由左到右看這條長條：九十六秒在拉取映像檔、七十一秒在安裝相依套件、將近一分鐘在灌入資料庫，其餘時間花在 DNS 和憑證。
+這些沒有一項是你的程式碼，全是繁瑣的前置作業。`,
+  `這為什麼重要？根據自願回報的團隊數據，每位開發者一天大約冷啟動十四次：開新分支、環境壞掉、幫別人看 PR。
+十四次乘以四分十二秒，是五十九分鐘，也就是每天一小時。
+在這裡停一下，然後說：對一個四十人的團隊來說，就是每天三十九小時，大家都在盯著轉圈圈。`,
+  `所以 2.0 做了四件事。快速導覽，每項一口氣講完。
+快照啟動：我們直接分叉一個預熱好的環境，而不是重新建置。
+延遲啟動服務：沒人呼叫，就什麼都不跑。
+共用快取：圖層會在你機器上所有的 repo 之間去重複。
+分享連結：你的本機環境，一行指令就能放上公開網址。`,
+  `同樣的專案、同一台筆電，改版前和改版後。逐列點擊展開。
+冷啟動：從四分十二秒降到兩點八秒。熱重啟：不到一秒。
+重新灌入資料庫以前夠你去泡杯咖啡，現在只要一點四秒。
+切換分支是大家感受最深的，從兩分鐘縮短到三點六秒。`,
+  `怎麼做到的？建置一次，無限分叉。
+你的 yard.toml 指向你原本就有的 compose 檔。CI 每晚以及每次合併，都會建好一份快照：基礎映像檔、相依套件、種子資料。花四十一秒，但你永遠不用等它。
+你的筆電只是以寫入時複製的方式分叉那份快照。每個分叉只擁有它改過的位元組，所以十個環境的磁碟用量，跟一個差不多。`,
+  `讓我示範實際用起來的感覺。一行指令：yard up。
+它會讀取你的設定、分叉快照，服務同時並行啟動。注意 redis 顯示「asleep」：它還沒被呼叫，所以根本沒在跑。
+點擊：它讀取你現有的 compose 檔。點擊：閒置的服務零成本。點擊：每個環境都有真正的主機名稱和 TLS，所以 cookie 和 OAuth 轉址都能直接運作。`,
+  `第二個指令：yard share。
+你會得到一個公開的 HTTPS 網址，直接通到你筆電上的環境。從我們的歐洲節點，中位數延遲三十一毫秒。
+不用部署，也不用跑 CI。你的設計師打開連結、點一點，然後叫你直接上線，Priya 在這個 PR 上就是這麼做的。`,
+  `如果每個服務都要手動串接，這一切就行不通，所以 2.0 內建一百四十個外掛。
+yard add kafka 會幫你處理 broker、連接埠、健康檢查和環境變數。
+Postgres 和 redis 是最大宗，但真正的黑馬是各種模擬服務：s3-local 和新的 oauth-mock，讓大家在開發時不必用真的雲端憑證。`,
+  `現在來正面對決。同一個應用、同一台機器、快取是冷的、五十次的中位數。
+託管式 PR 預覽平均六分四十秒。純容器，將近五分鐘。我們自己的 1.9，四分十二秒。
+而 2.0 就是最下面那一小條。我得在上面貼個貼紙，因為那條長條幾乎看不見。`,
+  `價格維持簡單。Hobby 永久免費，所有本機功能、所有外掛都包含。
+Team 每人十八美元，加上共用快照快取，這正是團隊用起來兩秒啟動最划算的地方，另外還有 SSO 和稽核記錄。
+Enterprise 給需要私有外掛登錄庫，或想自己代管分享中繼的人。`,
+  `接下來要做什麼。逐張點擊展開。
+原生 Windows 在十一月十八日進入測試版，不需要 WSL。
+接著是第一季的多 repo 堆疊、第二季的 GPU 預覽，第三季我們在探索快照同步，也就是拉取同事的完整環境，連資料一起。
+歡迎到攤位告訴我們，你最想先看到哪一個。`,
+  `這一切都不是單打獨鬥。四萬八千顆星、來自六十一個國家的將近兩千位貢獻者。
+我最在意的數字是藍色那個：上週啟動了兩百一十萬個環境，而那張圖是測試期間最近十二週的數據。
+真心感謝大家。`,
+  `取得方式只要一行。brew、curl 或 npm 都可以。
+然後 yard init 和 yard up。如果你還在 1.x，yard migrate 會就地轉換你的設定，什麼都不會遺失。`,
+  `就這樣。兩個字：yard up。
+文件在 stackyard.dev 斜線 2，原始碼在 GitHub，我們在 B12 攤位，貼紙送完為止。
+別再等了，開始出貨。謝謝大家。`,
 ];
 
 export const meta: SlideMeta = {
-  title: 'Stackyard CLI 2.0 — Launch',
+  title: 'Stackyard CLI 2.0 — 發表',
   createdAt: '2026-10-12T12:14:24.167Z',
 };
 

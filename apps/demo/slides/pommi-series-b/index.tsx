@@ -14,8 +14,9 @@ import { type CSSProperties, type ReactNode, useEffect, useId, useState } from '
 export const design: DesignSystem = {
   palette: { bg: '#FFF3DF', text: '#151313', accent: '#FF5A2C' },
   fonts: {
-    display: '"Gabarito", system-ui, sans-serif',
-    body: '"Gabarito", system-ui, sans-serif',
+    display:
+      '"Gabarito", system-ui, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
+    body: '"Gabarito", system-ui, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
   },
   typeScale: { hero: 300, body: 30 },
   radius: 28,
@@ -233,7 +234,8 @@ const DISPLAY: CSSProperties = {
 };
 
 const MONO: CSSProperties = {
-  fontFamily: '"DM Mono", ui-monospace, monospace',
+  fontFamily:
+    '"DM Mono", ui-monospace, monospace, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
   fontWeight: 500,
   fontSize: 17,
   letterSpacing: '0.06em',
@@ -458,10 +460,8 @@ const Footer = () => {
     >
       <Mark size={34} />
       <span style={{ ...DISPLAY, fontSize: 30, letterSpacing: '-0.04em' }}>pommi</span>
-      <span style={{ ...MONO, color: MUTED, marginLeft: 18 }}>Series B · October 2026</span>
-      <span style={{ ...MONO, color: MUTED, marginLeft: 'auto', marginRight: 10 }}>
-        Confidential
-      </span>
+      <span style={{ ...MONO, color: MUTED, marginLeft: 18 }}>B 輪募資 · 2026 年 10 月</span>
+      <span style={{ ...MONO, color: MUTED, marginLeft: 'auto', marginRight: 10 }}>機密</span>
       <span
         style={{
           ...MONO,
@@ -919,9 +919,9 @@ const HomeScreen = ({ live }: { live: boolean }) => (
     <StatusBar />
     <div style={abs(24, 70, { display: 'flex', alignItems: 'center', width: SCREEN_W - 48 })}>
       <div>
-        <div style={{ ...DISPLAY, fontSize: 34 }}>Flat 3B</div>
+        <div style={{ ...DISPLAY, fontSize: 34 }}>3B 號公寓</div>
         <div style={{ fontSize: 16, fontWeight: 500, color: MUTED, marginTop: 4 }}>
-          Weserstraße 14 · 4 people
+          Weserstraße 14 · 4 位成員
         </div>
       </div>
       <div style={{ marginLeft: 'auto', display: 'flex' }}>
@@ -944,7 +944,7 @@ const HomeScreen = ({ live }: { live: boolean }) => (
       })}
     >
       <div>
-        <div style={{ ...MONO, fontSize: 16 }}>You're owed</div>
+        <div style={{ ...MONO, fontSize: 16 }}>別人欠你</div>
         <div style={{ ...NUM, fontSize: 54, marginTop: 6 }}>
           <Money v="€42.50" />
         </div>
@@ -963,27 +963,27 @@ const HomeScreen = ({ live }: { live: boolean }) => (
           fontWeight: 800,
         }}
       >
-        Settle up
+        結清
       </div>
     </div>
-    <div style={{ ...MONO, fontSize: 16, ...abs(24, 304), color: MUTED }}>This week</div>
-    <HomeRow y={334} icon={MINT} title="Rewe groceries" sub="Split 3 ways" right="€63.20" />
-    <HomeRow y={410} icon={PERI} title="Internet, October" sub="Sami paid" right="€39.99" />
-    <HomeRow y={486} icon={PINK} title="Bathroom" sub="Jonas · due Sunday" right="Chore" />
+    <div style={{ ...MONO, fontSize: 16, ...abs(24, 304), color: MUTED }}>本週</div>
+    <HomeRow y={334} icon={MINT} title="Rewe 採買" sub="3 人分攤" right="€63.20" />
+    <HomeRow y={410} icon={PERI} title="網路費，10 月" sub="Sami 先付" right="€39.99" />
+    <HomeRow y={486} icon={PINK} title="浴室" sub="Jonas · 週日前" right="家事" />
     <Toast who="M" color={MINT} live={live} delay={2200}>
-      Mira added oat milk
+      Mira 把燕麥奶
       <br />
-      to the shared list
+      加進了共用清單
     </Toast>
     <Toast who="J" color={PERI} live={live} delay={6200}>
-      Jonas finished
+      Jonas 完成了
       <br />
-      Kitchen, week 41
+      廚房清潔（第 41 週）
     </Toast>
     <Toast who="S" color={PINK} live={live} delay={10200}>
-      Sami paid you back
+      Sami 還你了
       <br />
-      €13.00 for internet
+      €13.00 網路費
     </Toast>
   </>
 );
@@ -1001,7 +1001,7 @@ const Cover: Page = () => {
         })}
       >
         <Mark size={50} />
-        <span style={{ ...MONO, fontSize: 18 }}>Investor presentation · October 2026</span>
+        <span style={{ ...MONO, fontSize: 18 }}>投資人簡報 · 2026 年 10 月</span>
       </div>
 
       <div
@@ -1049,9 +1049,9 @@ const Cover: Page = () => {
           ...rise(live, 900, 30),
         }}
       >
-        The app for everyone
+        為所有合住的人
         <br />
-        who shares a home.
+        打造的 App。
       </p>
       <div
         style={abs(120, 800, {
@@ -1060,26 +1060,26 @@ const Cover: Page = () => {
           ...rise(live, 1040, 24),
         })}
       >
-        <CoverChip>412,000 households</CoverChip>
-        <CoverChip>9 markets</CoverChip>
-        <CoverChip>Est. 2022</CoverChip>
+        <CoverChip>412,000 個家庭</CoverChip>
+        <CoverChip>9 個市場</CoverChip>
+        <CoverChip>2022 年成立</CoverChip>
       </div>
       <div style={{ ...MONO, ...abs(120, 984), color: MUTED, ...rise(live, 1160, 12) }}>
-        Confidential · Prepared for Series B investors
+        機密 · 專為 B 輪投資人準備
       </div>
 
       <Sticker x={1440} y={226} r={7} live={live} delay={1250} bg={BUTTER}>
-        <span style={{ ...DISPLAY, fontSize: 52, letterSpacing: '-0.03em' }}>Series B</span>
+        <span style={{ ...DISPLAY, fontSize: 52, letterSpacing: '-0.03em' }}>B 輪</span>
       </Sticker>
       <Sticker x={1092} y={372} r={-10} live={live} delay={1450} bg={TOMATO} round={232}>
-        <span style={{ ...MONO, fontSize: 18 }}>Raising</span>
+        <span style={{ ...MONO, fontSize: 18 }}>募資</span>
         <span style={{ ...NUM, fontSize: 74, marginTop: 4 }}>
           <Money v="€38M" />
         </span>
       </Sticker>
       <Sticker x={1560} y={760} r={-6} live={live} delay={1650} bg={MINT} pad="12px 24px">
         <span style={{ ...DISPLAY, fontSize: 34, fontWeight: 800, letterSpacing: '-0.02em' }}>
-          Made in Berlin
+          Berlin 製造
         </span>
       </Sticker>
       <Sparkle x={1360} y={170} size={46} live={live} delay={1800} />
@@ -1292,8 +1292,8 @@ const ChatScreen = ({ live }: { live: boolean }) => {
           <Avatar initial="S" color={PINK} size={34} border={2.5} style={{ marginLeft: -12 }} />
         </div>
         <div style={{ marginLeft: 4 }}>
-          <div style={{ fontSize: 22, fontWeight: 800, lineHeight: 1.15 }}>Flat 3B</div>
-          <div style={{ fontSize: 16, fontWeight: 500, color: MUTED }}>Mira, Jonas, Sami, you</div>
+          <div style={{ fontSize: 22, fontWeight: 800, lineHeight: 1.15 }}>3B 號公寓</div>
+          <div style={{ fontSize: 16, fontWeight: 500, color: MUTED }}>Mira、Jonas、Sami 和你</div>
         </div>
       </div>
       <div
@@ -1307,22 +1307,22 @@ const ChatScreen = ({ live }: { live: boolean }) => {
         })}
       >
         <Bubble who="J" color={PERI} name="Jonas" i={0} live={live}>
-          Who bought six oat milks? We now own nine.
+          誰買了六瓶燕麥奶？我們現在有九瓶了。
         </Bubble>
         <Bubble who="M" color={MINT} name="Mira" i={1} live={live}>
-          Me. They were on offer.
+          我啦，特價嘛。
         </Bubble>
         <Bubble who="S" color={PINK} name="Sami" i={2} live={live}>
-          Also, who owes who for internet? I paid September and October.
+          還有，網路費到底誰欠誰？9 月和 10 月都是我付的。
         </Bubble>
         <Bubble who="M" color={MINT} name="Mira" i={3} live={live}>
-          I sent you €13 in August?
+          我 8 月不是轉了 €13 給你？
         </Bubble>
         <Bubble who="S" color={PINK} name="Sami" i={4} live={live}>
-          That was for the plunger.
+          那是馬桶搋子的錢。
         </Bubble>
         <MyBubble i={5} live={live}>
-          Fine. Spreadsheet tonight. Again.
+          好啦。今晚又要做試算表了。
         </MyBubble>
         <div
           style={{
@@ -1360,7 +1360,7 @@ const ChatScreen = ({ live }: { live: boolean }) => {
             boxSizing: 'border-box',
           }}
         >
-          Message
+          輸入訊息
         </div>
         <div
           style={{
@@ -1398,24 +1398,24 @@ const Problem: Page = () => {
   return (
     <Stage>
       <Tag n="01" live={live}>
-        The problem
+        問題
       </Tag>
       <Title live={live} size={96} width={1100}>
-        Living together is
-        <br />a group project.
+        同住一個屋簷，
+        <br />
+        就是一場團體專案。
       </Title>
       <PainStat y={420} n="3.4" color={TOMATO} live={live} delay={260}>
-        apps the average shared home uses for money, shopping lists and chores
+        款 App：合租家庭用來管錢、列清單、排家事
       </PainStat>
       <PainStat y={576} n="61%" color={BUTTER} live={live} delay={380}>
-        of flatmates argued about money with each other in the last twelve months
+        的室友在過去 12 個月內曾為了錢起過爭執
       </PainStat>
       <PainStat y={732} n="€318" color={PERI} live={live} delay={500}>
-        owed between flatmates at any given moment, on average
+        平均而言，室友之間隨時掛在帳上的欠款
       </PainStat>
       <Footnote y={898} width={1000}>
-        Source: Pommi Shared Living Survey, n = 4,212 adults in shared homes, DE · FR · NL · ES,
-        June 2026.
+        資料來源：Pommi 共居生活調查，n = 4,212 位合租成年人，DE · FR · NL · ES，2026 年 6 月。
       </Footnote>
       <PhoneShell x={1268} y={100}>
         <ChatScreen live={live} />
@@ -1527,7 +1527,7 @@ const ExpenseScreen = ({ beat, live }: { beat: number; live: boolean }) => {
         })}
       >
         <span style={{ fontSize: 40, fontWeight: 700, lineHeight: 1, marginTop: -6 }}>‹</span>
-        <span style={{ fontSize: 26, fontWeight: 800 }}>New expense</span>
+        <span style={{ fontSize: 26, fontWeight: 800 }}>新增支出</span>
         <span
           style={{
             ...MONO,
@@ -1541,7 +1541,7 @@ const ExpenseScreen = ({ beat, live }: { beat: number; live: boolean }) => {
             alignItems: 'center',
           }}
         >
-          Flat 3B
+          3B 號公寓
         </span>
       </div>
       <div
@@ -1582,12 +1582,12 @@ const ExpenseScreen = ({ beat, live }: { beat: number; live: boolean }) => {
         <div>
           <div style={{ fontSize: 21, fontWeight: 800 }}>Rewe, Weserstraße</div>
           <div style={{ fontSize: 16, fontWeight: 500, color: MUTED, marginTop: 2 }}>
-            Today 18:42 · 14 items scanned
+            今天 18:42 · 已掃描 14 項商品
           </div>
         </div>
       </div>
       <div style={abs(0, 266, { width: SCREEN_W, textAlign: 'center' })}>
-        <div style={{ ...MONO, fontSize: 16, color: MUTED }}>Total</div>
+        <div style={{ ...MONO, fontSize: 16, color: MUTED }}>總額</div>
         <div style={{ ...NUM, fontSize: 84, marginTop: 4, letterSpacing: '-0.045em' }}>
           <Money v="€63.20" />
         </div>
@@ -1605,13 +1605,11 @@ const ExpenseScreen = ({ beat, live }: { beat: number; live: boolean }) => {
             fontWeight: 700,
           }}
         >
-          Groceries
+          生鮮雜貨
         </span>
       </div>
-      <div style={{ ...MONO, fontSize: 16, color: MUTED, ...abs(24, 444) }}>
-        Split between · {n}
-      </div>
-      <SplitRow y={474} who="Y" color={TOMATO} name="You" on amount={shares[0]} live={live} />
+      <div style={{ ...MONO, fontSize: 16, color: MUTED, ...abs(24, 444) }}>分攤對象 · {n}</div>
+      <SplitRow y={474} who="Y" color={TOMATO} name="你" on amount={shares[0]} live={live} />
       <SplitRow
         y={538}
         who="M"
@@ -1649,7 +1647,7 @@ const ExpenseScreen = ({ beat, live }: { beat: number; live: boolean }) => {
           ...anim(live && sent, `pm-thunk 520ms ease-out both`),
         })}
       >
-        {sent ? 'Requests sent' : 'Split €63.20'}
+        {sent ? '已送出請款' : '分攤 €63.20'}
       </div>
       <div
         style={abs(0, 798, {
@@ -1660,7 +1658,7 @@ const ExpenseScreen = ({ beat, live }: { beat: number; live: boolean }) => {
           color: MUTED,
         })}
       >
-        Mira and Jonas can pay back by SEPA.
+        Mira 和 Jonas 可透過 SEPA 還款。
       </div>
       {live && sent && (
         <div
@@ -1681,9 +1679,9 @@ const ExpenseScreen = ({ beat, live }: { beat: number; live: boolean }) => {
         >
           <Avatar initial="M" color={MINT} size={40} border={2.5} />
           <div style={{ fontSize: 19, fontWeight: 700, lineHeight: 1.25 }}>
-            Mira paid €21.07
+            Mira 已付 €21.07
             <br />
-            Settled in 38 seconds
+            38 秒內結清
           </div>
         </div>
       )}
@@ -1813,48 +1811,47 @@ const Product: Page = () => {
         <ExpenseScreen beat={beat} live={live} />
       </ScreenLayer>
       <Tag n="02" live={live} x={790}>
-        The product
+        產品
       </Tag>
       <Title live={live} x={790} width={1010} size={80}>
-        A shared expense,
-        <br />
-        logged in 4 seconds.
+        一筆共同支出，
+        <br />4 秒就記好。
       </Title>
       <Callout
         y={384}
         n="1"
-        title="Scan"
+        title="掃描"
         color={BUTTER}
         live={live}
         delay={MORPH_MS + 420}
         stat="98.6%"
-        statLabel="Read accuracy"
+        statLabel="辨識準確率"
       >
-        Snap the receipt. Total, shop and items fill in on their own.
+        拍下收據，總額、店家和品項自動帶入。
       </Callout>
       <Callout
         y={616}
         n="2"
-        title="Split"
+        title="分攤"
         color={MINT}
         live={live}
         delay={MORPH_MS + 1250}
         stat="2.8"
-        statLabel="Avg. flatmates"
+        statLabel="平均室友數"
       >
-        Toggle who's in. Pommi splits it down to the cent.
+        勾選誰有參與，Pommi 幫你精算到分毫不差。
       </Callout>
       <Callout
         y={792}
         n="3"
-        title="Settle"
+        title="結清"
         color={PERI}
         live={live}
         delay={MORPH_MS + 2950}
         stat="71%"
-        statLabel="Paid in 24 h"
+        statLabel="24 小時內付款"
       >
-        Requests go out at once. Flatmates pay back in one tap.
+        請款立即送出，室友一鍵就能還錢。
       </Callout>
     </Stage>
   );
@@ -1871,7 +1868,7 @@ const SplitIllus = ({ live }: { live: boolean }) => (
     }}
   >
     <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
-      <span style={{ fontSize: 22, fontWeight: 800 }}>Rent, October</span>
+      <span style={{ fontSize: 22, fontWeight: 800 }}>房租，10 月</span>
       <span style={{ ...NUM, fontSize: 30 }}>
         <Money v="€1,650" />
       </span>
@@ -1896,7 +1893,7 @@ const SplitIllus = ({ live }: { live: boolean }) => (
         ...anim(live, 'pm-stamp 5s ease-out 400ms infinite'),
       }}
     >
-      Settled
+      已結清
     </div>
   </div>
 );
@@ -2023,17 +2020,17 @@ const ListItem = ({
 const ShopIllus = ({ live }: { live: boolean }) => (
   <div style={{ width: '100%', height: '100%', padding: '18px 22px', boxSizing: 'border-box' }}>
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-      <span style={{ fontSize: 22, fontWeight: 800 }}>Rewe run</span>
+      <span style={{ fontSize: 22, fontWeight: 800 }}>Rewe 採買</span>
       <span style={{ display: 'flex', alignItems: 'center', gap: 8, ...MONO, fontSize: 16 }}>
         <Avatar initial="M" color={MINT} size={28} border={2.5} />
-        Mira is shopping
+        Mira 正在採買
       </span>
     </div>
     <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 14 }}>
-      <ListItem label="Oat milk ×2" live={live} delay={0} checked />
-      <ListItem label="Dish soap" live={live} delay={700} checked />
-      <ListItem label="Basmati rice" live={live} delay={1400} checked={false} />
-      <ListItem label="Bin bags, 60 L" live={live} delay={2100} checked={false} />
+      <ListItem label="燕麥奶 ×2" live={live} delay={0} checked />
+      <ListItem label="洗碗精" live={live} delay={700} checked />
+      <ListItem label="印度香米" live={live} delay={1400} checked={false} />
+      <ListItem label="垃圾袋 60 L" live={live} delay={2100} checked={false} />
     </div>
   </div>
 );
@@ -2141,9 +2138,9 @@ const RotateIllus = ({ live }: { live: boolean }) => (
       </div>
     </div>
     <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-      <ChoreLine chore="Kitchen" who="M" color={MINT} live={live} delay={0} />
-      <ChoreLine chore="Bins" who="J" color={PERI} live={live} delay={2000} />
-      <ChoreLine chore="Bathroom" who="Y" color={TOMATO} live={live} delay={4000} />
+      <ChoreLine chore="廚房" who="M" color={MINT} live={live} delay={0} />
+      <ChoreLine chore="倒垃圾" who="J" color={PERI} live={live} delay={2000} />
+      <ChoreLine chore="浴室" who="Y" color={TOMATO} live={live} delay={4000} />
     </div>
   </div>
 );
@@ -2242,9 +2239,9 @@ const How: Page = () => {
   return (
     <Stage>
       <Tag n="03" live={live}>
-        How it works
+        運作方式
       </Tag>
-      <Title live={live}>Three jobs every shared home has.</Title>
+      <Title live={live}>每個合租家庭都有的三件事。</Title>
       <Steps>
         <Step duration={120}>
           <DealCard
@@ -2253,11 +2250,11 @@ const How: Page = () => {
             r={-4}
             color={TOMATO}
             n="01"
-            title="Split"
-            stat="Used weekly by 91% of homes"
+            title="分攤"
+            stat="91% 的家庭每週使用"
             illus={<SplitIllus live={live} />}
           >
-            Rent, bills and receipts split by who's in. Settle in one tap.
+            房租、帳單和收據，依參與者自動分攤，一鍵結清。
           </DealCard>
         </Step>
         <Step duration={120}>
@@ -2267,11 +2264,11 @@ const How: Page = () => {
             r={1}
             color={BUTTER}
             n="02"
-            title="Shop"
-            stat="Used weekly by 74% of homes"
+            title="採買"
+            stat="74% 的家庭每週使用"
             illus={<ShopIllus live={live} />}
           >
-            One live list, sorted by aisle, for whoever is at the shop.
+            一份即時同步的清單，依賣場走道排序，誰去採買都好用。
           </DealCard>
         </Step>
         <Step duration={120}>
@@ -2281,11 +2278,11 @@ const How: Page = () => {
             r={4}
             color={MINT}
             n="03"
-            title="Rotate"
-            stat="Used weekly by 52% of homes"
+            title="輪值"
+            stat="52% 的家庭每週使用"
             illus={<RotateIllus live={live} />}
           >
-            Chores rotate fairly, with a nudge before anything slips.
+            家事公平輪流，快漏掉前還會提醒一聲。
           </DealCard>
         </Step>
       </Steps>
@@ -2369,7 +2366,7 @@ const Traction: Page = () => {
   return (
     <Stage>
       <Tag n="04" live={live}>
-        Traction
+        成長動能
       </Tag>
       <div
         style={{
@@ -2395,18 +2392,16 @@ const Traction: Page = () => {
             textWrap: 'balance',
           }}
         >
-          homes use Pommi every month.
+          個家庭每月都在使用 Pommi。
         </div>
-        <div style={{ ...MONO, color: MUTED, marginTop: 18 }}>
-          Monthly active households · Sep 2026
-        </div>
+        <div style={{ ...MONO, color: MUTED, marginTop: 18 }}>月活躍家庭數 · 2026 年 9 月</div>
       </div>
       <Sticker x={1590} y={150} r={6} live={live} delay={2300} bg={BUTTER} pad="12px 22px">
         <span style={{ ...NUM, fontSize: 44 }}>3.1×</span>
-        <span style={{ ...MONO, fontSize: 16, marginTop: 4 }}>Year on year</span>
+        <span style={{ ...MONO, fontSize: 16, marginTop: 4 }}>年成長</span>
       </Sticker>
       <Sticker x={1574} y={292} r={-4} live={live} delay={2450} bg={MINT} pad="10px 20px">
-        <span style={{ fontSize: 24, fontWeight: 800 }}>64% organic</span>
+        <span style={{ fontSize: 24, fontWeight: 800 }}>64% 自然成長</span>
       </Sticker>
 
       <GridLine v={100} />
@@ -2448,14 +2443,14 @@ const Traction: Page = () => {
       <BarLabel i={0} v={46} text="46k" live={live} />
       <BarLabel i={11} v={133} text="133k" live={live} />
       <BarLabel i={23} v={412} text="412k" live={live} />
-      <AxisLabel i={0}>Oct '24</AxisLabel>
-      <AxisLabel i={6}>Apr '25</AxisLabel>
-      <AxisLabel i={12}>Oct '25</AxisLabel>
-      <AxisLabel i={18}>Apr '26</AxisLabel>
-      <AxisLabel i={23}>Sep '26</AxisLabel>
+      <AxisLabel i={0}>2024/10</AxisLabel>
+      <AxisLabel i={6}>2025/04</AxisLabel>
+      <AxisLabel i={12}>2025/10</AxisLabel>
+      <AxisLabel i={18}>2026/04</AxisLabel>
+      <AxisLabel i={23}>2026/09</AxisLabel>
       <Footnote y={950} width={1680}>
-        A monthly active household logged at least one shared expense, list item or chore that
-        month. Source: Pommi internal data.
+        月活躍家庭：當月至少記錄過一筆共同支出、一項清單品項或一件家事的家庭。資料來源：Pommi
+        內部數據。
       </Footnote>
     </Stage>
   );
@@ -2541,9 +2536,9 @@ const Retention: Page = () => {
   return (
     <Stage>
       <Tag n="05" live={live}>
-        Retention
+        留存率
       </Tag>
-      <Title live={live}>They move in, and they stay.</Title>
+      <Title live={live}>他們搬進來，就不走了。</Title>
       <HeatHead m={0} />
       <HeatHead m={1} />
       <HeatHead m={2} />
@@ -2557,18 +2552,18 @@ const Retention: Page = () => {
       <HeatHead m={10} />
       <HeatHead m={11} />
       <HeatHead m={12} />
-      <CohortRow c={0} label="Sep '25" live={live} />
-      <CohortRow c={1} label="Oct '25" live={live} />
-      <CohortRow c={2} label="Nov '25" live={live} />
-      <CohortRow c={3} label="Dec '25" live={live} />
-      <CohortRow c={4} label="Jan '26" live={live} />
-      <CohortRow c={5} label="Feb '26" live={live} />
-      <CohortRow c={6} label="Mar '26" live={live} />
-      <CohortRow c={7} label="Apr '26" live={live} />
-      <CohortRow c={8} label="May '26" live={live} />
-      <CohortRow c={9} label="Jun '26" live={live} />
-      <CohortRow c={10} label="Jul '26" live={live} />
-      <CohortRow c={11} label="Aug '26" live={live} />
+      <CohortRow c={0} label="2025/09" live={live} />
+      <CohortRow c={1} label="2025/10" live={live} />
+      <CohortRow c={2} label="2025/11" live={live} />
+      <CohortRow c={3} label="2025/12" live={live} />
+      <CohortRow c={4} label="2026/01" live={live} />
+      <CohortRow c={5} label="2026/02" live={live} />
+      <CohortRow c={6} label="2026/03" live={live} />
+      <CohortRow c={7} label="2026/04" live={live} />
+      <CohortRow c={8} label="2026/05" live={live} />
+      <CohortRow c={9} label="2026/06" live={live} />
+      <CohortRow c={10} label="2026/07" live={live} />
+      <CohortRow c={11} label="2026/08" live={live} />
       <svg
         width={110}
         height={20}
@@ -2613,7 +2608,7 @@ const Retention: Page = () => {
             ...rise(live, 2300, 20),
           }}
         >
-          of households are still active twelve months after they join.
+          的家庭在加入 12 個月後仍持續活躍。
         </p>
         <div
           style={{
@@ -2626,7 +2621,7 @@ const Retention: Page = () => {
             ...rise(live, 2500, 20),
           }}
         >
-          <span style={{ ...NUM, fontSize: 72, letterSpacing: '-0.04em' }}>+4 pts</span>
+          <span style={{ ...NUM, fontSize: 72, letterSpacing: '-0.04em' }}>+4 個百分點</span>
         </div>
         <p
           style={{
@@ -2637,12 +2632,11 @@ const Retention: Page = () => {
             ...rise(live, 2560, 20),
           }}
         >
-          higher month-3 retention, Jun '26 cohort vs Sep '25.
+          第 3 個月留存率更高：2026/06 世代對比 2025/09 世代。
         </p>
       </div>
       <Footnote y={936} width={1100}>
-        Share of each monthly sign-up cohort still active, by month since joining. Source: Pommi
-        internal data, Sep 2026.
+        各月註冊世代在加入後的各個月份仍持續活躍的比例。資料來源：Pommi 內部數據，2026 年 9 月。
       </Footnote>
     </Stage>
   );
@@ -2732,14 +2726,14 @@ const Model: Page = () => {
   return (
     <Stage>
       <Tag n="06" live={live}>
-        Business model
+        商業模式
       </Tag>
       <Title live={live} width={1400}>
-        <Money v="€9.7M" /> ARR, 64% of it subscription.
+        <Money v="€9.7M" /> ARR，其中 64% 來自訂閱。
       </Title>
       <Sticker x={1600} y={180} r={7} live={live} delay={700} bg={BUTTER} pad="12px 22px">
         <span style={{ ...NUM, fontSize: 44 }}>2.8×</span>
-        <span style={{ ...MONO, fontSize: 16, marginTop: 4 }}>ARR year on year</span>
+        <span style={{ ...MONO, fontSize: 16, marginTop: 4 }}>ARR 年成長</span>
       </Sticker>
       <div
         style={abs(120, 324, {
@@ -2758,42 +2752,41 @@ const Model: Page = () => {
             color={TOMATO}
             name="Pommi Plus"
             metric="€5.99"
-            unit="per home / month"
-            stat="86,400 paying homes · €6.2M ARR"
+            unit="每戶／每月"
+            stat="86,400 戶付費家庭 · €6.2M ARR"
           >
-            Unlimited splits, receipt scan and rent autopay, shared by the whole flat.
+            無限次分攤、收據掃描與房租自動扣款，全體室友共用。
           </RevColumn>
         </Step>
         <Step duration={120}>
-          <RevSegment x={1191} w={290} color={PERI} name="Card" pct="17%" />
+          <RevSegment x={1191} w={290} color={PERI} name="卡片" pct="17%" />
           <RevColumn
             x={710}
             color={PERI}
             name="Pommi Card"
             metric="€852M"
-            unit="yearly spend"
-            stat="96,000 active cards · €1.7M ARR"
+            unit="年消費額"
+            stat="96,000 張活躍卡片 · €1.7M ARR"
           >
-            One shared card for groceries and bills. We keep the interchange.
+            一張共用卡搞定採買與帳單，我們賺取交換費。
           </RevColumn>
         </Step>
         <Step duration={120}>
-          <RevSegment x={1477} w={323} color={MINT} name="Partners" pct="19%" last />
+          <RevSegment x={1477} w={323} color={MINT} name="合作夥伴" pct="19%" last />
           <RevColumn
             x={1300}
             color={MINT}
-            name="Partner offers"
+            name="合作夥伴優惠"
             metric="€58"
-            unit="per switch"
-            stat="31,200 switches · €1.8M ARR"
+            unit="每次換約"
+            stat="31,200 次換約 · €1.8M ARR"
           >
-            Energy, internet and insurance, switched once for the whole home.
+            電力、網路與保險，全家一次換約。
           </RevColumn>
         </Step>
       </Steps>
       <Footnote y={936}>
-        ARR = September 2026 revenue × 12. Card revenue shown net of the issuing bank's share.
-        Source: Pommi finance.
+        ARR = 2026 年 9 月營收 × 12。卡片營收為扣除發卡銀行分潤後的淨額。資料來源：Pommi 財務部。
       </Footnote>
     </Stage>
   );
@@ -2849,12 +2842,11 @@ const Unit: Page = () => {
   return (
     <Stage>
       <Tag n="07" live={live}>
-        Unit economics
+        單位經濟
       </Tag>
       <Title live={live} width={1200}>
-        Every paying home
-        <br />
-        pays back in 4 months.
+        每個付費家庭
+        <br />4 個月就回本。
       </Title>
 
       <div style={abs(170, 940, { width: 1240, height: 4, background: INK, borderRadius: 2 })} />
@@ -2930,7 +2922,7 @@ const Unit: Page = () => {
                 ...anim(live, `pm-squash 520ms ease-out ${ltvLand}ms both`),
               }}
             >
-              <span style={{ ...MONO, fontSize: 18 }}>Lifetime value</span>
+              <span style={{ ...MONO, fontSize: 18 }}>生命週期價值</span>
               <span style={{ ...NUM, fontSize: 124, letterSpacing: '-0.05em' }}>
                 <Money v="€148" />
               </span>
@@ -2996,22 +2988,22 @@ const Unit: Page = () => {
       >
         <UnitStat
           value="3.9"
-          label="months to pay back CAC"
+          label="個月回收 CAC"
           color={BUTTER}
           live={live}
           delay={CAC_DROP + 1300}
         />
         <UnitStat
           value="78%"
-          label="gross margin per home"
+          label="每戶毛利率"
           color={PAPER}
           live={live}
           delay={CAC_DROP + 1450}
         />
       </div>
       <Footnote y={956} width={1300}>
-        Paying homes, Q3 2026. LTV = monthly gross profit (€6.08) ÷ monthly churn (4.1%). CAC is
-        blended across paid and organic.
+        付費家庭，2026 年第 3 季。LTV = 每月毛利（€6.08）÷ 每月流失率（4.1%）。CAC
+        為付費與自然流量的混合平均。
       </Footnote>
     </Stage>
   );
@@ -3190,30 +3182,30 @@ const Market: Page = () => {
   return (
     <Stage>
       <Tag n="08" live={live}>
-        Market
+        市場
       </Tag>
       <Title live={live} width={820}>
-        Nine markets.
+        九個市場，
         <br />
-        One playbook.
+        同一套打法。
       </Title>
       <div style={abs(120, 410, { display: 'flex', flexDirection: 'column', gap: 44 })}>
         <MarketStat value="21M" live={live} delay={300}>
-          renters sharing a home across our nine live markets
+          在我們九個上線市場中合租的租客人數
         </MarketStat>
         <MarketStat value="2.0%" live={live} delay={430}>
-          of them use Pommi today. Plenty of room before we go wide.
+          的人目前使用 Pommi，大舉擴張前還有很大的空間。
         </MarketStat>
-        <MarketStat value="11 wks" live={live} delay={560}>
-          median time to 10,000 homes in a new market, down from 30
+        <MarketStat value="11 週" live={live} delay={560}>
+          新市場達到 10,000 個家庭所需時間的中位數，原本是 30 週
         </MarketStat>
       </div>
       <div style={abs(MAP_X, MAP_Y + 6, { width: 380, ...rise(live, 200, 12) })}>
-        <div style={{ ...MONO, color: MUTED }}>Monthly active homes</div>
+        <div style={{ ...MONO, color: MUTED }}>月活躍家庭</div>
         <div style={{ display: 'flex', gap: 22, marginTop: 14 }}>
-          <MapKey color={TOMATO} label="HQ" />
-          <MapKey color={MINT} label="Live" />
-          <MapKey color="transparent" label="Next" faint />
+          <MapKey color={TOMATO} label="總部" />
+          <MapKey color={MINT} label="已上線" />
+          <MapKey color="transparent" label="下一站" faint />
         </div>
       </div>
 
@@ -3254,7 +3246,7 @@ const Market: Page = () => {
       <Pin c={3} r={5} live={live} order={8} />
 
       <Footnote y={936} width={860}>
-        Shared homes: 2+ adults renting together. Source: Eurostat EU-SILC 2025, Pommi analysis.
+        合租家庭：2 位以上成年人共同承租。資料來源：Eurostat EU-SILC 2025、Pommi 分析。
       </Footnote>
     </Stage>
   );
@@ -3386,9 +3378,9 @@ const Roadmap: Page = () => {
   return (
     <Stage>
       <Tag n="09" live={live}>
-        Roadmap
+        路線圖
       </Tag>
-      <Title live={live}>2027: from 412k to 1M homes.</Title>
+      <Title live={live}>2027 年：從 412k 成長到 1M 個家庭。</Title>
       <svg
         width={1920}
         height={1080}
@@ -3442,26 +3434,26 @@ const Roadmap: Page = () => {
           ...rise(live, 500, 16),
         })}
       >
-        <div style={{ ...MONO, fontSize: 16, color: MUTED }}>Today · Oct 2026</div>
+        <div style={{ ...MONO, fontSize: 16, color: MUTED }}>現在 · 2026 年 10 月</div>
         <div style={{ fontSize: 30, fontWeight: 800, marginTop: 8, lineHeight: 1.12 }}>
-          412k homes,
-          <br />9 markets
+          412k 個家庭，
+          <br />9 個市場
         </div>
       </div>
       <Milestone
         i={1}
         above
         q="Q1 2027"
-        title="Pommi Card in all 9 markets"
-        sub="Live today in DE, NL and FR"
+        title="Pommi Card 擴及全部 9 個市場"
+        sub="目前已在 DE、NL、FR 上線"
         color={BUTTER}
         live={live}
       />
       <Milestone
         i={2}
         q="Q2 2027"
-        title="Direct landlord payouts"
-        sub="Pilot with 40 Berlin landlords"
+        title="房租直接撥款給房東"
+        sub="與 40 位 Berlin 房東試辦"
         color={PERI}
         live={live}
       />
@@ -3469,16 +3461,16 @@ const Roadmap: Page = () => {
         i={3}
         above
         q="Q3 2027"
-        title="Launch UK, Sweden, Denmark"
-        sub="+9.4M renters in shared homes"
+        title="進軍英國、瑞典、丹麥"
+        sub="新增 9.4M 合租租客"
         color={PINK}
         live={live}
       />
       <Milestone
         i={4}
         q="Q4 2027"
-        title="1M monthly active homes"
-        sub="€18M ARR run-rate"
+        title="1M 月活躍家庭"
+        sub="€18M ARR 年化營收"
         color={TOMATO}
         live={live}
         align="right"
@@ -3625,7 +3617,7 @@ const Ask: Page = () => {
   return (
     <Stage>
       <Tag n="10" live={live} color={TOMATO}>
-        The ask
+        募資需求
       </Tag>
       <div
         style={{
@@ -3652,7 +3644,9 @@ const Ask: Page = () => {
           ...rise(live, 300, 24),
         }}
       >
-        Series B to take Pommi to one million homes and profitability.
+        B 輪募資，帶 Pommi 邁向
+        <br />
+        100 萬個家庭並達成獲利。
       </p>
       <div
         style={abs(120, 640, {
@@ -3662,12 +3656,12 @@ const Ask: Page = () => {
           ...rise(live, 450, 24),
         })}
       >
-        <AskPoint color={BUTTER}>30 months of runway</AskPoint>
-        <AskPoint color={MINT}>1M monthly active homes by Q4 2027</AskPoint>
-        <AskPoint color={PERI}>EBITDA positive in Q3 2028</AskPoint>
+        <AskPoint color={BUTTER}>30 個月的資金跑道</AskPoint>
+        <AskPoint color={MINT}>2027 Q4 前達成 1M 月活躍家庭</AskPoint>
+        <AskPoint color={PERI}>2028 Q3 EBITDA 轉正</AskPoint>
       </div>
 
-      <div style={{ ...MONO, ...abs(1080, 252), color: MUTED }}>Use of funds</div>
+      <div style={{ ...MONO, ...abs(1080, 252), color: MUTED }}>資金用途</div>
       <div style={abs(1040, 944, { width: 760, height: 4, background: INK, borderRadius: 2 })} />
       <Steps>
         <Step duration={100}>
@@ -3679,7 +3673,7 @@ const Ask: Page = () => {
             r={0}
             r0={-8}
             color={TOMATO}
-            name="Product & engineering"
+            name="產品與工程"
             amount="€15.2M"
             pct="40%"
             big
@@ -3694,7 +3688,7 @@ const Ask: Page = () => {
             r={-0.8}
             r0={7}
             color={BUTTER}
-            name="Growth & brand"
+            name="成長與品牌"
             amount="€13.3M"
             pct="35%"
             big
@@ -3709,7 +3703,7 @@ const Ask: Page = () => {
             r={1}
             r0={-9}
             color={MINT}
-            name="New markets"
+            name="新市場"
             amount="€5.7M"
             pct="15%"
           />
@@ -3723,7 +3717,7 @@ const Ask: Page = () => {
             r={-1.4}
             r0={10}
             color={PERI}
-            name="Ops & G&A"
+            name="營運與行政"
             amount="€3.8M"
             pct="10%"
           />
@@ -3804,16 +3798,16 @@ const Close: Page = () => {
           ...rise(live, 800, 30),
         }}
       >
-        Sharing a home should be
+        合住一個家，
         <br />
-        the easy part.
+        本該是最輕鬆的部分。
       </p>
       <div style={abs(120, 720, { display: 'flex', gap: 32 })}>
         <Founder
           initial="A"
           color={BUTTER}
           name="Anouk de Vries"
-          jobTitle="Co-founder & CEO"
+          jobTitle="共同創辦人暨執行長"
           email="anouk@pommi.app"
           live={live}
           delay={1100}
@@ -3822,7 +3816,7 @@ const Close: Page = () => {
           initial="F"
           color={PERI}
           name="Felix Brandt"
-          jobTitle="Co-founder & CTO"
+          jobTitle="共同創辦人暨技術長"
           email="felix@pommi.app"
           live={live}
           delay={1240}
@@ -3861,16 +3855,16 @@ const Close: Page = () => {
           ...rise(live, 900, 20),
         })}
       >
-        <div style={{ ...MONO, fontSize: 18 }}>Data room</div>
+        <div style={{ ...MONO, fontSize: 18 }}>資料室</div>
         <div style={{ ...DISPLAY, fontSize: 54, marginTop: 10, letterSpacing: '-0.03em' }}>
           pommi.app/investors
         </div>
       </div>
       <Sticker x={1110} y={150} r={-9} live={live} delay={1500} bg={TOMATO} pad="12px 26px">
-        <span style={{ ...DISPLAY, fontSize: 50, letterSpacing: '-0.03em' }}>Danke!</span>
+        <span style={{ ...DISPLAY, fontSize: 50, letterSpacing: '-0.03em' }}>謝謝！</span>
       </Sticker>
       <Sticker x={1560} y={600} r={8} live={live} delay={1700} bg={MINT} pad="10px 22px">
-        <span style={{ fontSize: 28, fontWeight: 800 }}>€38M Series B</span>
+        <span style={{ fontSize: 28, fontWeight: 800 }}>€38M B 輪募資</span>
       </Sticker>
       <Sparkle x={1700} y={170} size={44} color={PAPER} live={live} delay={1850} />
       <Sparkle x={1250} y={620} size={32} color={PINK} live={live} delay={1950} />
@@ -3883,50 +3877,50 @@ Problem.transition = morphTransition;
 Product.transition = morphTransition;
 
 export const meta: SlideMeta = {
-  title: 'Pommi — Series B',
+  title: 'Pommi — B 輪募資簡報',
   createdAt: '2026-10-11T12:54:25.584Z',
 };
 
 export const notes: (string | undefined)[] = [
-  `Let the wordmark land and the stickers slap on before you speak.
-"Hi, I'm Anouk, co-founder and CEO of Pommi. Pommi is the app for everyone who shares a home."
-"We're in Berlin, we're live in nine markets, and today we're raising a thirty-eight million euro Series B." Click.`,
-  `Let the phone rise and the group chat play out. Don't talk over the first three messages.
-"Every shared home has this chat. Oat milk, internet, the plunger."
-"In our survey of four thousand two hundred people: three point four apps per home, sixty-one percent argued about money last year, and three hundred eighteen euros floating between flatmates at any moment." Click.`,
-  `The phone glides over and the expense splits itself. Point at the toggles as they flip.
-"This is Pommi. Snap the receipt, toggle who's in, and the cents are handled."
-"Median time to log a shared expense is four seconds. Requests go out instantly, and people pay back by SEPA in one tap." Click.`,
-  `Three clicks, one card per click.
-"Split: rent, bills and receipts. Ninety-one percent of homes use it every week."
-"Shop: one live list. Seventy-four percent weekly."
-"Rotate: chores on a fair rotation. Fifty-two percent weekly, and it's the feature people tell their friends about." Click.`,
-  `Let the number count up and the bars spring in.
-"Four hundred twelve thousand homes use Pommi every month. That's three point one times a year ago."
-"Sixty-four percent of new homes come in organically, mostly a flatmate inviting the others. Note the September jumps: moving season is our Black Friday." Click.`,
-  `Watch the wave fill in, then land on the yellow tile.
-"Sixty-eight percent of households are still active twelve months after they join."
-"And it's getting better: month-three retention is four points higher for our June cohort than for last September's." Click.`,
-  `Three clicks: subscription, card, partners.
-"Nine point seven million ARR, two point eight times last year."
-"Sixty-four percent is Pommi Plus at five ninety-nine per home per month, shared by the whole flat."
-"The card adds seventeen percent from eight hundred fifty million euros of yearly spend, and partner switching adds nineteen." Click.`,
-  `Let the blocks drop and the seesaw tip.
-"For a paying home, lifetime value is one hundred forty-eight euros. Blended CAC is twenty-four. That's six point two to one."
-"Payback in three point nine months, at seventy-eight percent gross margin." Click.`,
-  `Pins drop in launch order, Berlin first.
-"Nine markets, one playbook. Twenty-one million renters share a home across them, and we have two percent."
-"We now reach ten thousand homes in a new market in eleven weeks, down from thirty in Germany." Click.`,
-  `Let the token hop all four stops before you sum up.
-"Q1: the card in all nine markets. Q2: rent split with direct landlord payout, piloting with forty Berlin landlords."
-"Q3: UK, Sweden and Denmark. Q4: one million monthly active homes and an eighteen million euro run-rate." Click.`,
-  `Four clicks, one block per click, bottom up.
-"We're raising thirty-eight million euros."
-"Forty percent into product and engineering, thirty-five into growth, fifteen into new markets, ten into operations."
-"Thirty months of runway, one million homes by end of 2027, EBITDA positive in Q3 2028." Click.`,
-  `"Sharing a home should be the easy part. That's the whole company."
-"I'm Anouk, this is my co-founder Felix. The data room is at pommi.app slash investors."
-"Danke. Happy to take questions."`,
+  `等 wordmark 落定、貼紙一張張拍上畫面，再開口。
+「大家好，我是 Anouk，Pommi 的共同創辦人暨執行長。Pommi 是給所有合住的人用的 App。」
+「我們在 Berlin，目前在九個市場上線，今天我們要募集三千八百萬歐元的 B 輪。」點擊。`,
+  `讓手機升起，群組聊天自己播放。前三則訊息不要搶著講。
+「每個合租的家都有這樣一個群組。燕麥奶、網路費、馬桶搋子。」
+「我們調查了四千二百位受訪者：每個家庭平均用 3.4 款 App，61% 去年曾為了錢起爭執，室友之間隨時掛著 318 歐元的欠款。」點擊。`,
+  `手機滑進來，支出自己完成分攤。開關翻動時用手指一下。
+「這就是 Pommi。拍下收據、勾選誰有參與，剩下的零頭交給我們處理。」
+「記一筆共同支出的時間中位數是四秒。請款立刻送出，大家用 SEPA 一鍵還錢。」點擊。`,
+  `三次點擊，一次一張卡片。
+「分攤：房租、帳單和收據。91% 的家庭每週都在用。」
+「採買：一份即時同步的清單，每週 74% 使用。」
+「輪值：家事公平輪流。每週 52% 使用，也是大家最常推薦給朋友的功能。」點擊。`,
+  `讓數字往上跳，長條一根根彈出來。
+「每個月有四十一萬兩千個家庭在使用 Pommi，是一年前的 3.1 倍。」
+「新增家庭中有 64% 是自然進來的，多半是某位室友邀請其他人。留意 9 月的跳升：搬家旺季就是我們的黑色星期五。」點擊。`,
+  `看著這片波浪逐格填滿，最後停在黃色那一格。
+「68% 的家庭在加入十二個月後仍然活躍。」
+「而且還在變好：2026 年 6 月世代的第三個月留存率，比去年 9 月世代高了四個百分點。」點擊。`,
+  `三次點擊：訂閱、卡片、合作夥伴。
+「ARR 九百七十萬歐元，是去年的 2.8 倍。」
+「其中 64% 來自 Pommi Plus，每戶每月 5.99 歐元，全體室友共用。」
+「卡片靠八億五千二百萬歐元的年消費額貢獻 17%，合作夥伴換約再貢獻 19%。」點擊。`,
+  `讓方塊落下，蹺蹺板傾斜。
+「一個付費家庭的生命週期價值是 148 歐元，混合 CAC 是 24 歐元，比例是 6.2 比 1。」
+「回收期 3.9 個月，毛利率 78%。」點擊。`,
+  `圖釘依上線順序落下，Berlin 第一個。
+「九個市場，同一套打法。這些市場裡有兩千一百萬名租客與人合住，而我們目前只有 2%。」
+「現在在新市場達到一萬個家庭只要十一週，在德國當年要三十週。」點擊。`,
+  `讓棋子跳完四個站點，再做總結。
+「第一季：Card 進駐全部九個市場。第二季：房租分攤加上直接撥款給房東，正與四十位 Berlin 房東試辦。」
+「第三季：英國、瑞典、丹麥。第四季：一百萬月活躍家庭，年化營收一千八百萬歐元。」點擊。`,
+  `四次點擊，一次一個方塊，由下往上。
+「我們要募集三千八百萬歐元。」
+「40% 投入產品與工程，35% 投入成長，15% 投入新市場，10% 投入營運。」
+「30 個月的資金跑道，2027 年底前達到一百萬個家庭，2028 年第三季 EBITDA 轉正。」點擊。`,
+  `「合住一個家，本該是最輕鬆的部分。這就是我們整間公司在做的事。」
+「我是 Anouk，這位是我的共同創辦人 Felix。資料室在 pommi.app/investors。」
+「謝謝大家。歡迎提問。」`,
 ];
 
 export default [

@@ -13,8 +13,9 @@ import type { CSSProperties, ReactNode } from 'react';
 export const design: DesignSystem = {
   palette: { bg: '#1A1C2C', text: '#F4F4F4', accent: '#FFCD75' },
   fonts: {
-    display: '"Press Start 2P", "Courier New", monospace',
-    body: '"Jersey 15", system-ui, sans-serif',
+    display:
+      '"Press Start 2P", "Courier New", monospace, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
+    body: '"Jersey 15", system-ui, sans-serif, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
   },
   typeScale: { hero: 112, body: 36 },
   radius: 0,
@@ -143,7 +144,8 @@ const DISPLAY: CSSProperties = {
 };
 
 const LABEL: CSSProperties = {
-  fontFamily: '"Silkscreen", "Courier New", monospace',
+  fontFamily:
+    '"Silkscreen", "Courier New", monospace, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
   fontSize: 20,
   lineHeight: 1,
   letterSpacing: '0.04em',
@@ -713,10 +715,10 @@ const Hud = () => {
     <>
       <div style={abs(120, 1016, { ...LABEL, color: C.slate, display: 'flex', gap: 16 })}>
         <span style={{ color: C.red }}>♥♥♥</span>
-        <span>Mossbyte / Lanternfall postmortem</span>
+        <span>Mossbyte / Lanternfall 事後檢討</span>
       </div>
       <div style={{ ...LABEL, position: 'absolute', right: 120, top: 1016, color: C.slate }}>
-        Stage{' '}
+        關卡{' '}
         <span style={{ color: C.silver }}>
           {String(current).padStart(2, '0')}/{String(total).padStart(2, '0')}
         </span>
@@ -737,7 +739,7 @@ const Kicker = ({ world, children }: { world: string; children: ReactNode }) => 
     })}
   >
     <span style={{ background: 'var(--osd-accent)', color: C.navy, padding: '5px 10px' }}>
-      World {world}
+      世界 {world}
     </span>
     <span>{children}</span>
   </div>
@@ -757,8 +759,9 @@ const Title = ({
       ...DISPLAY,
       ...abs(120, 152),
       fontSize: 56,
+      fontWeight: 700,
       color,
-      textShadow: `8px 8px 0 ${shadow}`,
+      textShadow: `4px 4px 0 ${shadow}`,
     }}
   >
     {children}
@@ -976,11 +979,11 @@ const ScoreBar = () => (
       <span style={{ marginLeft: 20 }}>000000</span>
     </span>
     <span>
-      <span style={{ color: C.red }}>Hi-score</span>
+      <span style={{ color: C.red }}>最高分</span>
       <span style={{ marginLeft: 20 }}>142000</span>
     </span>
     <span>
-      <span style={{ color: C.red }}>Credit</span>
+      <span style={{ color: C.red }}>投幣</span>
       <span style={{ marginLeft: 20 }}>04</span>
     </span>
   </div>
@@ -1010,10 +1013,11 @@ const Cover: Page = () => {
           ...abs(0, 376, { width: 1920, textAlign: 'center' }),
           fontSize: 40,
           color: C.cyan,
-          textShadow: `6px 6px 0 ${C.deep}`,
+          fontWeight: 700,
+          textShadow: `3px 3px 0 ${C.deep}`,
         }}
       >
-        A POSTMORTEM
+        事後檢討
       </div>
       <div
         className="lf-m"
@@ -1029,7 +1033,7 @@ const Cover: Page = () => {
         }}
       >
         <Sprite art={ARROW_RIGHT} px={4} swap={{ c: C.white }} />
-        <span style={{ ...DISPLAY, fontSize: 32, color: C.white }}>PRESS START</span>
+        <span style={{ ...DISPLAY, fontSize: 32, fontWeight: 700, color: C.white }}>按下開始</span>
       </div>
       <Bob x={848} y={GROUND - 320}>
         <Sprite art={HERO} px={16} />
@@ -1053,7 +1057,7 @@ const Cover: Page = () => {
           color: C.slate,
         }}
       >
-        © 2026 Mossbyte · 4 players
+        © 2026 Mossbyte · 4 位玩家
       </div>
     </Screen>
   );
@@ -1081,18 +1085,18 @@ const Pitch: Page = () => {
   const m = useMotion();
   return (
     <Screen>
-      <Kicker world="1-1">The pitch</Kicker>
-      <Title>THE PITCH</Title>
-      <InfoSlot x={120} label="Genre" value="Roguelite">
+      <Kicker world="1-1">提案</Kicker>
+      <Title>遊戲提案</Title>
+      <InfoSlot x={120} label="類型" value="Roguelite">
         <Sprite art={SKULL} px={8} />
       </InfoSlot>
-      <InfoSlot x={548} label="Platforms" value="Steam · Switch">
+      <InfoSlot x={548} label="平台" value="Steam · Switch">
         <Sprite art={GAMEPAD} px={8} />
       </InfoSlot>
-      <InfoSlot x={976} label="Price" value="$17.99">
+      <InfoSlot x={976} label="售價" value="$17.99">
         <Sprite art={COIN} px={8} />
       </InfoSlot>
-      <InfoSlot x={1404} label="One run" value="25 minutes">
+      <InfoSlot x={1404} label="單局時間" value="25 分鐘">
         <Sprite art={HOURGLASS} px={8} />
       </InfoSlot>
       <PixelBox x={120} y={616} w={1680} h={304} fill={C.deep}>
@@ -1109,7 +1113,7 @@ const Pitch: Page = () => {
         >
           <Typewriter
             start={400}
-            text="Your lantern is your health bar. Every hit dims the light, and the dark is full of teeth."
+            text="你的提燈就是你的血條。每挨一下，光就暗一分，而黑暗裡滿是尖牙。"
           />
         </div>
         <div
@@ -1180,8 +1184,8 @@ const Lurker = ({ x, y }: { x: number; y: number }) => (
 
 const Hook: Page = () => (
   <Screen>
-    <Kicker world="1-2">The hook</Kicker>
-    <Title>OIL IS EVERYTHING</Title>
+    <Kicker world="1-2">核心賣點</Kicker>
+    <Title>燈油就是一切</Title>
     <PixelBox x={120} y={296} w={784} h={624} fill={DARK} edge={C.slate}>
       <LightPool cx={392} cy={312} radii={[264, 184, 112]} alphas={[0.07, 0.1, 0.16]} />
       <Lurker x={624} y={248} />
@@ -1191,31 +1195,31 @@ const Hook: Page = () => (
       <Bob x={256} y={200}>
         <Sprite art={HERO} px={8} />
       </Bob>
-      <div style={abs(360, 40, { ...LABEL, fontSize: 18, color: C.slate })}>Dark</div>
-      <div style={abs(368, 120, { ...LABEL, fontSize: 18, color: C.silver })}>Dim</div>
-      <div style={abs(368, 192, { ...LABEL, fontSize: 18, color: C.yellow })}>Lit</div>
+      <div style={abs(360, 40, { ...LABEL, fontSize: 18, color: C.slate })}>黑暗</div>
+      <div style={abs(368, 120, { ...LABEL, fontSize: 18, color: C.silver })}>昏暗</div>
+      <div style={abs(368, 192, { ...LABEL, fontSize: 18, color: C.yellow })}>明亮</div>
     </PixelBox>
     <OilRow
       y={304}
-      label="OIL = HEALTH"
+      label="燈油 = 血量"
       color={C.red}
-      body="Each hit drains oil. At zero, you're dead."
+      body="每次受擊都會消耗燈油。歸零就死亡。"
       icon={<Sprite art={HEART} px={10} />}
       delay={300}
     />
     <OilRow
       y={520}
-      label="OIL = LIGHT"
+      label="燈油 = 光亮"
       color={C.yellow}
-      body="Less oil, smaller circle, later warning."
+      body="燈油越少，光圈越小，預警越晚。"
       icon={<Sprite art={LANTERN} px={8} />}
       delay={500}
     />
     <OilRow
       y={736}
-      label="OIL = MONEY"
+      label="燈油 = 金錢"
       color={C.lime}
-      body="Upgrades cost oil. Every buy is a bet."
+      body="升級要花燈油。每次購買都是一場賭注。"
       icon={<Sprite art={COIN} px={10} />}
       delay={700}
     />
@@ -1303,8 +1307,8 @@ const PartyCard = ({
 
 const Party: Page = () => (
   <Screen>
-    <Kicker world="1-3">The party</Kicker>
-    <Title>THE PARTY</Title>
+    <Kicker world="1-3">隊伍</Kicker>
+    <Title>冒險小隊</Title>
     <div
       style={{
         ...LABEL,
@@ -1315,65 +1319,65 @@ const Party: Page = () => (
         color: C.silver,
       }}
     >
-      4 players · 0 producers · 3 years
+      4 位玩家 · 0 位製作人 · 3 年
     </div>
     <PartyCard
       x={120}
       name="Priya Raman"
-      job="Design + direction"
-      klass="Lv 31 · Tactician"
+      job="設計 + 總監"
+      klass="Lv 31 · 戰術家"
       slot={C.red}
       art={AV_PRIYA}
       swap={{ h: C.navy, s: '#AB5236', t: C.yellow }}
-      statA="Vision"
+      statA="願景"
       valA={9}
       barA={C.yellow}
-      statB="Marketing"
+      statB="行銷"
       valB={2}
       barB={C.red}
     />
     <PartyCard
       x={548}
       name="Tom Wójcik"
-      job="Engine + tools"
-      klass="Lv 34 · Artificer"
+      job="引擎 + 工具"
+      klass="Lv 34 · 機匠"
       slot={C.blue}
       art={AV_TOM}
       swap={{ h: C.yellow, s: '#FFCCAA', t: C.cyan, g: C.slate }}
       statA="C#"
       valA={10}
       barA={C.cyan}
-      statB="Sleep"
+      statB="睡眠"
       valB={3}
       barB={C.red}
     />
     <PartyCard
       x={976}
       name="Ade Okafor"
-      job="Art + animation"
-      klass="Lv 29 · Illusionist"
+      job="美術 + 動畫"
+      klass="Lv 29 · 幻術師"
       slot={C.green}
       art={AV_ADE}
       swap={{ n: C.orange, u: C.red, s: '#7A3F2C', h: C.navy, t: C.white }}
-      statA="Pixels"
+      statA="像素"
       valA={10}
       barA={C.lime}
-      statB="Restraint"
+      statB="節制"
       valB={2}
       barB={C.red}
     />
     <PartyCard
       x={1404}
       name="Hanna Lind"
-      job="Music + sound"
-      klass="Lv 27 · Bard"
+      job="音樂 + 音效"
+      klass="Lv 27 · 吟遊詩人"
       slot={C.plum}
       art={AV_HANNA}
       swap={{ h: C.orange, p: C.white, s: '#FFCCAA', t: C.silver }}
-      statA="Tunes"
+      statA="旋律"
       valA={9}
       barA={C.sky}
-      statB="Socials"
+      statB="社群"
       valB={4}
       barB={C.orange}
     />
@@ -1466,8 +1470,8 @@ const RoadMap: Page = () => {
   const m = useMotion();
   return (
     <Screen>
-      <Kicker world="2-1">The road</Kicker>
-      <Title>THE ROAD TO 1.0</Title>
+      <Kicker world="2-1">旅程</Kicker>
+      <Title>通往1.0之路</Title>
       <div
         style={{
           ...LABEL,
@@ -1478,7 +1482,7 @@ const RoadMap: Page = () => {
           color: C.silver,
         }}
       >
-        Apr 2023 → Apr 2026 · 37 months
+        2023 年 4 月 → 2026 年 4 月 · 37 個月
       </div>
       <Pine x={120} y={600} tone="far" />
       <Pine x={208} y={760} />
@@ -1495,67 +1499,67 @@ const RoadMap: Page = () => {
         x={160}
         y={488}
         above
-        date="Apr 2023"
-        title="Game jam"
-        body="48-hour prototype places 2nd of 212."
+        date="2023 年 4 月"
+        title="Game Jam"
+        body="48 小時做出原型，在 212 組中拿下第 2 名。"
       />
       <MapLabel
         x={368}
         y={712}
         above={false}
-        date="Nov 2023"
-        title="All in"
-        body="Vertical slice done. Four day jobs quit."
+        date="2023 年 11 月"
+        title="全力投入"
+        body="垂直切片完成。四人全數辭去正職。"
       />
       <MapLabel
         x={576}
         y={488}
         above
-        date="Mar 2024"
-        title="Funded"
-        body="$180K regional games grant, plus savings."
+        date="2024 年 3 月"
+        title="拿到資金"
+        body="$180K 地方遊戲補助，加上存款。"
       />
       <MapLabel
         x={784}
         y={712}
         above={false}
-        date="Jun 2024"
-        title="Steam page"
-        body="2,100 wishlists in the first week."
+        date="2024 年 6 月"
+        title="Steam 商店頁"
+        body="第一週累積 2,100 個願望清單。"
       />
       <MapLabel
         x={992}
         y={488}
         above
-        date="Feb 2025"
-        title="Next Fest"
-        body="Demo adds 41,200 wishlists in 7 days."
+        date="2025 年 2 月"
+        title="新品節"
+        body="試玩版 7 天內新增 41,200 個願望清單。"
       />
       <MapLabel
         x={1200}
         y={712}
         above={false}
         warn
-        date="Sep 2025"
-        title="Delayed"
-        body="Launch slips seven months."
+        date="2025 年 9 月"
+        title="延期"
+        body="上市時間延後七個月。"
       />
       <MapLabel
         x={1408}
         y={488}
         above
-        date="Jan 2026"
-        title="Switch cert"
-        body="Passes on the second submission."
+        date="2026 年 1 月"
+        title="Switch 認證"
+        body="第二次送審才通過。"
       />
       <MapLabel
         x={1416}
         y={760}
         above={false}
         right
-        date="14 Apr 2026"
-        title="Launch"
-        body="Steam + Switch, $17.99."
+        date="2026 年 4 月 14 日"
+        title="上市"
+        body="Steam + Switch，$17.99。"
       />
       <MapNode x={216} y={488} code="1-1" delay={150} />
       <MapNode x={424} y={712} code="1-2" delay={350} />
@@ -1612,7 +1616,7 @@ const Toast = ({
         </div>
       </PixelBox>
       <div style={abs(184, 36, { ...LABEL, color: bad ? C.orange : C.lime })}>
-        {bad ? 'Debuff applied' : 'Achievement unlocked'}
+        {bad ? '減益已套用' : '成就解鎖'}
       </div>
       <div style={abs(184, 66, { fontSize: 48, lineHeight: 1.1 })}>{title}</div>
       <div
@@ -1647,7 +1651,7 @@ const Toast = ({
           color: C.slate,
         }}
       >
-        {bad ? 'Penalty' : 'Reward'}
+        {bad ? '懲罰' : '獎勵'}
       </div>
     </PixelBox>
   </div>
@@ -1655,33 +1659,33 @@ const Toast = ({
 
 const Right: Page = () => (
   <Screen>
-    <Kicker world="2-2">Buffs</Kicker>
+    <Kicker world="2-2">增益</Kicker>
     <Title color={C.lime} shadow={C.teal}>
-      WHAT WENT RIGHT
+      做對的事
     </Title>
     <div style={abs(120, 288, { display: 'flex', flexDirection: 'column', gap: 24 })}>
       <Steps>
         <Step>
           <Toast
             icon={<Sprite art={TROPHY} px={8} />}
-            title="Find the fun in 48 hours"
-            body="The jam build already had oil-as-health. No hook-hunting later."
-            score="48 HRS"
+            title="48 小時內找到樂趣"
+            body="Jam 版本就有燈油即血量的設計，後來不必再找賣點。"
+            score="48小時"
           />
         </Step>
         <Step>
           <Toast
             icon={<Sprite art={LANTERN} px={8} />}
-            title="A two-second GIF"
-            body="A shrinking circle of light reads instantly. One clip: 2.3M views."
+            title="兩秒鐘的 GIF"
+            body="縮小的光圈一眼就懂。一支短片：2.3M 次觀看。"
             score="+9K"
           />
         </Step>
         <Step>
           <Toast
             icon={<Sprite art={FLAG} px={10} />}
-            title="A demo with an ending"
-            body="25 minutes, then a hard stop at the first boss. Players wanted more."
+            title="有結局的試玩版"
+            body="玩 25 分鐘，在第一隻 Boss 前硬性結束。玩家意猶未盡。"
             score="+41K"
           />
         </Step>
@@ -1692,9 +1696,9 @@ const Right: Page = () => (
 
 const Wrong: Page = () => (
   <Screen>
-    <Kicker world="2-3">Debuffs</Kicker>
+    <Kicker world="2-3">減益</Kicker>
     <Title color={C.orange} shadow={C.red}>
-      WHAT WENT WRONG
+      做錯的事
     </Title>
     <div style={abs(120, 288, { display: 'flex', flexDirection: 'column', gap: 24 })}>
       <Steps>
@@ -1702,27 +1706,27 @@ const Wrong: Page = () => (
           <Toast
             bad
             icon={<Sprite art={SKULL} px={10} />}
-            title="Biome hoarding"
-            body="We built six biomes and shipped four. Two died art-complete."
-            score="-14 WK"
+            title="囤積生態區"
+            body="我們做了六個生態區，只上線四個。兩個在美術完成後被砍掉。"
+            score="-14週"
           />
         </Step>
         <Step>
           <Toast
             bad
             icon={<Sprite art={BROKEN_HEART} px={10} />}
-            title="Nobody owned marketing"
-            body="Until month 26 it was 'whoever has time'. Nobody had time."
-            score="26 MO"
+            title="沒人負責行銷"
+            body="直到第 26 個月，行銷都是「誰有空誰做」。沒有人有空。"
+            score="26個月"
           />
         </Step>
         <Step>
           <Toast
             bad
             icon={<Sprite art={HOURGLASS} px={8} />}
-            title="A late Switch port"
-            body="Started after content lock. Ate five months and one failed cert."
-            score="-5 MO"
+            title="太晚才做的 Switch 移植"
+            body="內容鎖定後才開工。吃掉五個月，還送審失敗一次。"
+            score="-5個月"
           />
         </Step>
       </Steps>
@@ -1810,11 +1814,11 @@ const Scope: Page = () => {
   const line = stepPath(SCOPE, 88, y);
   return (
     <Screen>
-      <Kicker world="3-1">Scope</Kicker>
+      <Kicker world="3-1">範圍</Kicker>
       <Title color={C.orange} shadow={C.plum}>
-        SCOPE CREEP
+        範圍蔓延
       </Title>
-      <Sub>Planned content pieces (rooms + enemies + items), by quarter</Sub>
+      <Sub>規劃的內容數量（房間 + 敵人 + 道具），依季度統計</Sub>
       <YTick y={880} label="0" />
       <YTick y={740} label="100" />
       <YTick y={600} label="200" />
@@ -1843,24 +1847,24 @@ const Scope: Page = () => {
         </svg>
       </div>
       <Tag x={216} y={664} bg={C.cyan} delay={300}>
-        Original plan · 120
+        原始規劃 · 120
       </Tag>
       <Tag x={384} y={448} stem={80} stemX={204} delay={900}>
-        Grant: +2 biomes
+        補助到手：+2 個生態區
       </Tag>
       <Tag x={1000} y={336} bg={C.orange} delay={1400}>
-        Peak 380 · 3.2x plan
+        高峰 380 · 規劃的 3.2 倍
       </Tag>
       <Tag x={1008} y={600} bg={C.white} delay={1600}>
-        Cut 2 biomes
+        砍掉 2 個生態區
       </Tag>
       <XTick x={244} label="Q2 '23" />
       <XTick x={508} label="Q1 '24" />
       <XTick x={860} label="Q1 '25" />
       <XTick x={1212} label="Q1 '26" />
-      <StatBox y={320} label="Planned launch" value="OCT 2024" color={C.silver} strike />
-      <StatBox y={520} label="Actual launch" value="APR 2026" color={C.yellow} />
-      <StatBox y={720} label="Shipped vs plan" value="2.1X" color={C.orange} />
+      <StatBox y={320} label="規劃上市" value="2024/10" color={C.silver} strike />
+      <StatBox y={520} label="實際上市" value="2026/04" color={C.yellow} />
+      <StatBox y={720} label="實際量 vs 規劃" value="2.1X" color={C.orange} />
     </Screen>
   );
 };
@@ -1878,11 +1882,11 @@ const Wishlists: Page = () => {
   const sold = stepPath(SOLD, 40, y, 880);
   return (
     <Screen>
-      <Kicker world="3-2">Wishlists</Kicker>
+      <Kicker world="3-2">願望清單</Kicker>
       <Title color={C.cyan} shadow={C.deep}>
-        WISHLIST TO WALLET
+        從願望清單到下單
       </Title>
-      <Sub>Cumulative wishlists vs. units sold, in thousands</Sub>
+      <Sub>累計願望清單 vs. 銷售數量（單位：千）</Sub>
       <YTick y={880} label="0" />
       <YTick y={740} label="40K" />
       <YTick y={600} label="80K" />
@@ -1918,33 +1922,33 @@ const Wishlists: Page = () => {
       </div>
       <Sprite art={FLAG} px={8} x={1076} y={256} swap={{ d: C.red, '2': C.yellow }} />
       <Tag x={1136} y={328} bg={C.red} color={C.white} delay={1500}>
-        Launch · 14 Apr
+        上市 · 4 月 14 日
       </Tag>
       <Tag x={408} y={616} bg={C.cyan} delay={800}>
-        Next Fest +41K
+        新品節 +41K
       </Tag>
       <Tag x={824} y={344} bg={C.cyan} delay={1400}>
-        142K wishlists
+        142K 願望清單
       </Tag>
       <Tag x={1192} y={440} delay={1800}>
-        104K sold
+        已售 104K
       </Tag>
-      <XTick x={220} label="Jun '24" />
-      <XTick x={500} label="Jan '25" />
-      <XTick x={980} label="Jan '26" />
-      <XTick x={1340} label="Oct '26" />
+      <XTick x={220} label="2024/6" />
+      <XTick x={500} label="2025/1" />
+      <XTick x={980} label="2026/1" />
+      <XTick x={1340} label="2026/10" />
       <PixelBox x={1440} y={320} w={360} h={168} fill={C.ink} edge={C.slate}>
         <div style={abs(32, 40, { display: 'flex', alignItems: 'center', gap: 16 })}>
           <span style={{ width: 24, height: 24, background: C.cyan }} />
-          <span style={{ ...LABEL, color: C.white }}>Wishlists</span>
+          <span style={{ ...LABEL, color: C.white }}>願望清單</span>
         </div>
         <div style={abs(32, 96, { display: 'flex', alignItems: 'center', gap: 16 })}>
           <span style={{ width: 24, height: 24, background: C.yellow }} />
-          <span style={{ ...LABEL, color: C.white }}>Units sold</span>
+          <span style={{ ...LABEL, color: C.white }}>銷售數量</span>
         </div>
       </PixelBox>
-      <StatBox y={520} label="Week-1 conversion" value="15%" color={C.yellow} />
-      <StatBox y={720} label="Sold per wishlist" value="0.73" color={C.cyan} />
+      <StatBox y={520} label="首週轉換率" value="15%" color={C.yellow} />
+      <StatBox y={720} label="每個願望清單的銷量" value="0.73" color={C.cyan} />
     </Screen>
   );
 };
@@ -2007,11 +2011,11 @@ const DayBar = ({
 
 const LaunchWeek: Page = () => (
   <Screen>
-    <Kicker world="3-3">Launch</Kicker>
+    <Kicker world="3-3">上市</Kicker>
     <Title color="var(--osd-accent)" shadow={C.red}>
-      LAUNCH WEEK
+      上市首週
     </Title>
-    <Sub>Units sold per day, Steam + Switch, first 14 days</Sub>
+    <Sub>每日銷售數量，Steam + Switch，前 14 天</Sub>
     <YTick y={880} label="0" w={1208} />
     <YTick y={720} label="2K" w={1208} />
     <YTick y={560} label="4K" w={1208} />
@@ -2031,15 +2035,15 @@ const LaunchWeek: Page = () => (
     <DayBar d={13} units={680} color={C.orange} />
     <DayBar d={14} units={610} color={C.orange} />
     <Tag x={920} y={576} bg={C.cyan} delay={1400}>
-      Day 9: one streamer, 41K viewers
+      第 9 天：一位實況主，41K 觀眾
     </Tag>
     <div style={abs(200, 944, { width: 600, height: 8, background: C.yellow, opacity: 0.6 })} />
     <div style={abs(808, 944, { width: 600, height: 8, background: C.orange, opacity: 0.6 })} />
-    <div style={abs(200, 964, { ...LABEL, fontSize: 18, color: C.yellow })}>Week 1</div>
-    <div style={abs(808, 964, { ...LABEL, fontSize: 18, color: C.orange })}>Week 2</div>
-    <StatBox x={1488} w={312} y={320} label="Day one" value="6,940" color={C.yellow} />
-    <StatBox x={1488} w={312} y={520} label="Week one" value="21,460" color={C.yellow} />
-    <StatBox x={1488} w={312} y={720} label="Peak players" value="4,812" color={C.cyan} />
+    <div style={abs(200, 964, { ...LABEL, fontSize: 18, color: C.yellow })}>第 1 週</div>
+    <div style={abs(808, 964, { ...LABEL, fontSize: 18, color: C.orange })}>第 2 週</div>
+    <StatBox x={1488} w={312} y={320} label="首日" value="6,940" color={C.yellow} />
+    <StatBox x={1488} w={312} y={520} label="首週" value="21,460" color={C.yellow} />
+    <StatBox x={1488} w={312} y={720} label="同時在線高峰" value="4,812" color={C.cyan} />
   </Screen>
 );
 
@@ -2063,12 +2067,10 @@ const Review = ({
       <Sprite art={SLIME} px={6} x={20} y={21} swap={swap} />
     </PixelBox>
     <div style={abs(168, 44, { fontSize: 38, lineHeight: 1.1 })}>{name}</div>
-    <div style={abs(168, 92, { ...LABEL, fontSize: 18, color: C.silver })}>{hours} on record</div>
+    <div style={abs(168, 92, { ...LABEL, fontSize: 18, color: C.silver })}>累計遊玩 {hours}</div>
     <div style={abs(32, 160, { display: 'flex', alignItems: 'center', gap: 12 })}>
       <Sprite art={up ? ARROW_UP : ARROW_DOWN} px={4} swap={{ c: up ? C.lime : C.orange }} />
-      <span style={{ ...LABEL, color: up ? C.lime : C.orange }}>
-        {up ? 'Recommended' : 'Not recommended'}
-      </span>
+      <span style={{ ...LABEL, color: up ? C.lime : C.orange }}>{up ? '推薦' : '不推薦'}</span>
     </div>
     <div style={abs(32, 208, { width: 464, fontSize: 38, lineHeight: 1.4 })}>{quote}</div>
   </PixelBox>
@@ -2078,12 +2080,12 @@ const Reviews: Page = () => {
   const m = useMotion();
   return (
     <Screen>
-      <Kicker world="4-1">Reviews</Kicker>
+      <Kicker world="4-1">評價</Kicker>
       <Title color={C.lime} shadow={C.teal}>
-        WHAT PLAYERS SAID
+        玩家怎麼說
       </Title>
       <div style={abs(120, 256, { ...LABEL, fontSize: 22, color: C.lime })}>
-        Very positive · 93% of 4,107 Steam reviews
+        特別好評 · 4,107 則 Steam 評價中有 93% 好評
       </div>
       <div
         style={{
@@ -2095,8 +2097,8 @@ const Reviews: Page = () => {
           color: C.silver,
         }}
       >
-        <span style={{ color: C.lime }}>3,820 up</span> /{' '}
-        <span style={{ color: C.orange }}>287 down</span>
+        <span style={{ color: C.lime }}>3,820 推薦</span> /{' '}
+        <span style={{ color: C.orange }}>287 不推薦</span>
       </div>
       <PixelBox x={120} y={296} w={1680} h={72} fill={DARK} edge={C.white} shade={false}>
         <div style={abs(16, 16, { width: 1648, height: 40, background: C.red })} />
@@ -2123,25 +2125,25 @@ const Reviews: Page = () => {
       <Review
         x={120}
         name="wickfan_88"
-        hours="61.4 hrs"
+        hours="61.4 小時"
         up
-        quote="Oil as HP is genius. Every upgrade feels like betting against myself."
+        quote="把燈油當血量真是天才。每次升級都像在跟自己對賭。"
       />
       <Review
         x={696}
         name="mothlight"
-        hours="94.0 hrs"
+        hours="94.0 小時"
         up
         swap={{ '5': C.cyan, '6': C.sky, '7': C.blue }}
-        quote="Died 212 times. Came back 213. The Sunken Choir music lives in my head."
+        quote="死了 212 次，第 213 次又回來了。Sunken Choir 的配樂在我腦中揮之不去。"
       />
       <Review
         x={1272}
         name="grumbleberry"
-        hours="23.2 hrs"
+        hours="23.2 小時"
         up={false}
         swap={{ '5': C.orange, '6': C.red, '7': C.plum }}
-        quote="Act three drags. The Hollows is act-one enemies in new colors."
+        quote="第三幕很拖。The Hollows 就是第一幕敵人換個顏色。"
       />
     </Screen>
   );
@@ -2245,20 +2247,20 @@ const LootRow = ({
 
 const Revenue: Page = () => (
   <Screen>
-    <Kicker world="4-2">Loot</Kicker>
+    <Kicker world="4-2">戰利品</Kicker>
     <Title color="var(--osd-accent)" shadow={C.plum}>
-      WHERE $1.47M WENT
+      $1.47M花到哪去了
     </Title>
-    <Sub>Lifetime gross to Oct 2026, after discounts and regional pricing</Sub>
+    <Sub>截至 2026 年 10 月的累計毛營收，已計入折扣與區域定價</Sub>
     <PixelBox x={120} y={304} w={616} h={616} fill={C.ink} edge={C.silver}>
       <LootGrid />
     </PixelBox>
-    <LootRow y={296} color={C.red} label="Platform fees" pct="30%" amount="$441K" />
-    <LootRow y={384} color={C.blue} label="Taxes" pct="9%" amount="$132K" />
-    <LootRow y={472} color={C.sky} label="Porting partner" pct="6%" amount="$88K" />
-    <LootRow y={560} color={C.slate} label="Refunds + chargebacks" pct="5%" amount="$74K" />
-    <LootRow y={648} color={C.yellow} label="Team back-pay" pct="38%" amount="$559K" />
-    <LootRow y={736} color={C.green} label="Runway for game two" pct="12%" amount="$176K" />
+    <LootRow y={296} color={C.red} label="平台抽成" pct="30%" amount="$441K" />
+    <LootRow y={384} color={C.blue} label="稅金" pct="9%" amount="$132K" />
+    <LootRow y={472} color={C.sky} label="移植合作夥伴" pct="6%" amount="$88K" />
+    <LootRow y={560} color={C.slate} label="退款 + 拒付" pct="5%" amount="$74K" />
+    <LootRow y={648} color={C.yellow} label="團隊補發薪資" pct="38%" amount="$559K" />
+    <LootRow y={736} color={C.green} label="第二款遊戲的資金" pct="12%" amount="$176K" />
     <PixelBox x={808} y={840} w={992} h={80} fill={C.deep} edge={C.yellow} shade={false}>
       <div
         style={abs(32, 16, {
@@ -2271,8 +2273,8 @@ const Revenue: Page = () => (
           gap: 16,
         })}
       >
-        <span>Team back-pay ÷ 4 people ÷ 3 years ≈</span>
-        <span style={{ ...DISPLAY, fontSize: 24, color: C.yellow }}>$46K/YR EACH</span>
+        <span>團隊補發薪資 ÷ 4 人 ÷ 3 年 ≈</span>
+        <span style={{ ...DISPLAY, fontSize: 24, color: C.yellow }}>每人每年 $46K</span>
       </div>
     </PixelBox>
   </Screen>
@@ -2306,8 +2308,8 @@ const Lessons: Page = () => {
   const m = useMotion();
   return (
     <Screen>
-      <Kicker world="4-3">Save point</Kicker>
-      <Title>LESSONS LEARNED</Title>
+      <Kicker world="4-3">存檔點</Kicker>
+      <Title>學到的教訓</Title>
       <LightPool cx={344} cy={560} radii={[224, 160, 96]} alphas={[0.05, 0.08, 0.12]} />
       <div style={abs(336, 640, { width: 16, height: 240, background: C.slate })} />
       <div style={abs(288, 864, { width: 112, height: 16, background: C.slate })} />
@@ -2321,28 +2323,26 @@ const Lessons: Page = () => {
           ...m('lf-blink 1.2s steps(1, end) infinite'),
         }}
       >
-        Game saved
+        遊戲已存檔
       </div>
       <PixelBox x={640} y={296} w={1160} h={632} fill={C.deep}>
-        <div style={abs(40, 36, { ...LABEL, color: C.silver })}>
-          Quest log · completed the hard way
-        </div>
+        <div style={abs(40, 36, { ...LABEL, color: C.silver })}>任務日誌 · 用最辛苦的方式完成</div>
         <div style={abs(0, 80, { width: 1160 })}>
           <Steps>
             <Step>
-              <Lesson n="01" text="Market from week one, not year three." />
+              <Lesson n="01" text="從第一週就開始行銷，不要等到第三年。" />
             </Step>
             <Step>
-              <Lesson n="02" text="Cut whole biomes early. Never cut polish." />
+              <Lesson n="02" text="要砍就早點砍整個生態區，但絕不砍打磨。" />
             </Step>
             <Step>
-              <Lesson n="03" text="Prototype the GIF before the feature." />
+              <Lesson n="03" text="先做出那支 GIF 的原型，再做功能。" />
             </Step>
             <Step>
-              <Lesson n="04" text="Port alongside, or don't launch on it." />
+              <Lesson n="04" text="要嘛同步移植，要嘛別在該平台上市。" />
             </Step>
             <Step>
-              <Lesson n="05" text="Budget six months of life after launch." />
+              <Lesson n="05" text="預留上市後六個月的生活費。" />
             </Step>
           </Steps>
         </div>
@@ -2422,7 +2422,7 @@ const NextCard = ({
         justifyContent: 'space-between',
       })}
     >
-      <span>Progress</span>
+      <span>進度</span>
       <span style={{ color: C.white }}>{progress * 10}%</span>
     </div>
     <SegBar x={32} y={532} value={progress} w={464} color={bar} />
@@ -2431,17 +2431,17 @@ const NextCard = ({
 
 const Next: Page = () => (
   <Screen>
-    <Kicker world="5-1">New game+</Kicker>
+    <Kicker world="5-1">二周目</Kicker>
     <Title color={C.cyan} shadow={C.deep}>
-      WHAT'S NEXT
+      接下來
     </Title>
     <NextCard
       x={120}
-      status="In progress"
+      status="進行中"
       statusBg={C.lime}
       title="EMBERS"
-      when="Free update · Dec 2026"
-      body="One cut biome comes home, plus daily seeded runs."
+      when="免費更新 · 2026 年 12 月"
+      body="被砍掉的一個生態區回歸，外加每日固定種子挑戰。"
       progress={7}
       bar={C.lime}
     >
@@ -2449,11 +2449,11 @@ const Next: Page = () => (
     </NextCard>
     <NextCard
       x={696}
-      status="Signed"
+      status="已簽約"
       statusBg={C.sky}
-      title="CONSOLE PORTS"
-      when="PS5 + Xbox · Q2 2027"
-      body="With a porting partner this time, from day one."
+      title="主機移植"
+      when="PS5 + Xbox · 2027 Q2"
+      body="這次從第一天就找移植夥伴合作。"
       progress={3}
       bar={C.sky}
     >
@@ -2461,11 +2461,11 @@ const Next: Page = () => (
     </NextCard>
     <NextCard
       x={1272}
-      status="Locked"
+      status="鎖定中"
       statusBg={C.slate}
-      title="GAME TWO"
-      when="Prototype · 2027"
-      body={'Starts the way Lanternfall did: 48\u00a0hours, one idea.'}
+      title="第二款遊戲"
+      when="原型 · 2027"
+      body={'起手式和 Lanternfall 一樣：48\u00a0小\u2060時，一個點子。'}
       progress={1}
       bar={C.silver}
       locked
@@ -2494,10 +2494,8 @@ const Close: Page = () => {
       >
         <PixelBox w={520} h={112} fill={C.deep} edge={C.lime}>
           <Sprite art={TROPHY} px={6} x={32} y={26} />
-          <div style={abs(120, 28, { ...LABEL, fontSize: 18, color: C.lime })}>
-            Achievement unlocked
-          </div>
-          <div style={abs(120, 54, { fontSize: 36, lineHeight: 1.1 })}>Survived a postmortem</div>
+          <div style={abs(120, 28, { ...LABEL, fontSize: 18, color: C.lime })}>成就解鎖</div>
+          <div style={abs(120, 54, { fontSize: 36, lineHeight: 1.1 })}>撐過一場事後檢討</div>
         </PixelBox>
       </div>
       <h2
@@ -2505,11 +2503,12 @@ const Close: Page = () => {
           ...DISPLAY,
           ...abs(0, 248, { width: 1920, textAlign: 'center' }),
           fontSize: 96,
+          fontWeight: 700,
           color: 'var(--osd-accent)',
-          textShadow: `8px 8px 0 ${C.red}, 16px 16px 0 ${C.plum}`,
+          textShadow: `4px 4px 0 ${C.red}, 8px 8px 0 ${C.plum}`,
         }}
       >
-        CONTINUE?
+        是否繼續？
       </h2>
       <div
         style={abs(0, 400, {
@@ -2523,8 +2522,10 @@ const Close: Page = () => {
         <span className="lf-m" style={m('lf-blink 1s steps(1, end) infinite')}>
           <Sprite art={ARROW_RIGHT} px={6} swap={{ c: C.yellow }} />
         </span>
-        <span style={{ ...DISPLAY, fontSize: 40, color: C.white }}>YES</span>
-        <span style={{ ...DISPLAY, fontSize: 40, color: C.slate, marginLeft: 96 }}>NO</span>
+        <span style={{ ...DISPLAY, fontSize: 40, fontWeight: 700, color: C.white }}>是</span>
+        <span style={{ ...DISPLAY, fontSize: 40, fontWeight: 700, color: C.slate, marginLeft: 96 }}>
+          否
+        </span>
       </div>
       <div
         style={abs(0, 488, {
@@ -2535,7 +2536,7 @@ const Close: Page = () => {
           color: C.silver,
         })}
       >
-        Thanks for playing. Lanternfall is out now on Steam and Switch.
+        感謝遊玩。Lanternfall 現已在 Steam 與 Switch 上架。
       </div>
       <Bob x={848} y={GROUND - 320}>
         <Sprite art={HERO} px={16} />
@@ -2556,7 +2557,7 @@ const Close: Page = () => {
           color: C.yellow,
         })}
       >
-        Q&amp;A · insert questions
+        Q&amp;A · 請投入問題
       </div>
       <div
         style={{
@@ -2575,71 +2576,71 @@ const Close: Page = () => {
 };
 
 export const meta: SlideMeta = {
-  title: 'Lanternfall: A Postmortem',
+  title: 'Lanternfall：事後檢討',
   createdAt: '2026-10-12T12:19:16.161Z',
 };
 
 export const notes: (string | undefined)[] = [
-  `Let the title screen sit for a beat while the cursor blinks.
-"Hi, we're Mossbyte. Four people, one game, three years."
-"Lanternfall came out in April. This is the honest version of how it went, including the parts we'd rather not put on a slide."
-Point at the hi-score: "That number is our wishlist count on launch day. Remember it."`,
-  `"Here's the pitch we gave everyone, from the jam judges to the grant panel."
-Read the dialogue line out loud, slowly, as Wick.
-Then the four boxes quickly: "Roguelite. Steam and Switch. Seventeen ninety-nine. A run is about twenty-five minutes."
-"That one sentence did more work for us than any trailer."`,
-  `"The whole game is built on one number: lantern oil."
-Walk the three rows: "It's your health. It's how far you can see. And it's what you pay for upgrades."
-"So every shop visit is a real decision. Buy the better sword and walk home in the dark."
-Point at the bars: "Same number, three jobs. Players feel it in the first minute."`,
-  `"This is the whole studio."
-One line per person: Priya on design and direction, Tom on engine and tools, Ade on art, Hanna on music and sound.
-Then the joke, deadpan: "Notice what's missing. No producer. No marketer."
-"That's foreshadowing."`,
-  `"Thirty-seven months, start to launch."
-Walk the path left to right, one breath per node.
-Slow down at 2-2: "Next Fest was the moment the game became real. Forty-one thousand wishlists in a week."
-Then 2-3, the red one: "And seven months later we delayed. It was the right call, and it still hurt."`,
-  `"Three things we'd do exactly the same."
-Click through them. On the jam: "We found the hook in two days and never had to go looking for it again."
-On the GIF: "A shrinking circle of light is readable with the sound off, on a phone, in two seconds."
-On the demo: "We stopped it at the first boss on purpose. People wishlisted to see what came next."`,
-  `"And three we wouldn't."
-Biome hoarding: "Ade built six gorgeous biomes. We shipped four. That's fourteen weeks of work in a folder."
-Marketing: "For twenty-six months, marketing was whoever had time. Nobody had time."
-Switch: "We ported after content lock. It cost us five months and a failed cert."`,
-  `"This is what scope creep looks like when you actually chart it."
-Trace the line: "We planned a hundred and twenty pieces of content. The grant landed and we added two biomes."
-"At the peak we were at three hundred and eighty, three times the plan."
-"We cut back to two forty-eight. Still double. And launch moved from October 2024 to April 2026."`,
-  `"Wishlists are the only number that predicted anything for us."
-Point at the cliff: "Next Fest. Everything before it is noise."
-Then the launch line: "A hundred and forty-two thousand wishlists on launch day. Fifteen percent bought in week one."
-"Six months later, a hundred and four thousand units. Roughly three sales for every four wishlists."`,
-  `"Launch week, day by day."
-"Day one: six thousand nine hundred and forty. Then the usual decay curve."
-Point at day nine: "Then one streamer picked it up on a Tuesday night. Forty-one thousand viewers, and a second day one."
-"We didn't plan that. We just answered the email fast."`,
-  `"Ninety-three percent positive across four thousand reviews."
-Read the first two quotes aloud.
-Then the third: "And grumbleberry is right. Act three is where the cut biomes should have been. We reskinned to fill the gap."
-"Read your negative reviews. They're the cheapest design feedback you'll ever get."`,
-  `"Everyone asks about money, so here it is."
-"One point four seven million gross. Thirty percent to the platforms, before anything else."
-Point at the gold: "Thirty-eight percent is back-pay for the four of us."
-Land the last line: "That works out to about forty-six thousand a year each, for three years. Indie is viable. It is not glamorous."`,
-  `"If you take one page home, take this one."
-Click through the five, one sentence of story each.
-On number four: "If a platform isn't in your build by content lock, it's not a launch platform."
-On number five: "Launch isn't the end. Patches, ports, and support ate our first six months after release."`,
-  `"So what's next."
-"Embers is a free update in December. One of the cut biomes is coming back, which feels like justice."
-"Console ports are signed, with a partner, from day one this time."
-"And game two is locked. It'll start the way this one did: forty-eight hours and one idea."`,
-  `"That's our postmortem. Thanks for listening."
-"Lanternfall is out now on Steam and Switch."
-Point at the handles. "Come find us after, and yes, we'll talk numbers."
-Open for questions.`,
+  `讓標題畫面停留一拍，游標持續閃爍。
+「大家好，我們是 Mossbyte。四個人，一款遊戲，三年。」
+「Lanternfall 在四月上市。這是事情經過的誠實版本，包括那些我們寧可不放上投影片的部分。」
+指著最高分：「那個數字，是我們上市當天的願望清單數量。請記住它。」`,
+  `「這是我們給每個人的提案，從 Jam 的評審到補助審查委員都一樣。」
+用 Wick 的口吻，慢慢把對話框那一句唸出來。
+接著快速帶過四個方塊：「Roguelite。Steam 和 Switch。十七點九九美元。一局大約二十五分鐘。」
+「就這一句話，比任何預告片都更有用。」`,
+  `「整款遊戲都建立在一個數字上：提燈的燈油。」
+帶過這三列：「它是你的血量。它決定你能看多遠。它也是你買升級要付的錢。」
+「所以每次逛商店都是真正的抉擇。買了更好的劍，就得摸黑走回家。」
+指向那些長條：「同一個數字，三份工作。玩家在第一分鐘就能感受到。」`,
+  `「這就是整間工作室。」
+一人一句：Priya 負責設計與總監，Tom 負責引擎與工具，Ade 負責美術，Hanna 負責音樂與音效。
+然後冷面講笑話：「請注意少了什麼。沒有製作人。沒有行銷。」
+「這是伏筆。」`,
+  `「從開始到上市，三十七個月。」
+沿著路徑由左到右走，每個節點一口氣。
+在 2-2 放慢：「新品節是這款遊戲變得真實的那一刻。一週內多了四萬一千個願望清單。」
+再到 2-3，紅色那個：「然後七個月後，我們延期了。那是對的決定，但還是很痛。」`,
+  `「有三件事，我們會原封不動再做一次。」
+逐一點擊。談 Jam：「我們在兩天內找到核心賣點，之後再也不必回頭去找。」
+談 GIF：「縮小的光圈，關掉聲音、用手機看、兩秒內就看得懂。」
+談試玩版：「我們故意讓它在第一隻 Boss 就結束。大家為了想看後面的內容，加入了願望清單。」`,
+  `「還有三件事，我們不會再做。」
+囤積生態區：「Ade 做了六個漂亮的生態區，我們只上線四個。那是十四週的工作，躺在資料夾裡。」
+行銷：「二十六個月裡，行銷就是誰有空誰做。沒有人有空。」
+Switch：「我們在內容鎖定之後才移植。結果花了五個月，還有一次認證失敗。」`,
+  `「把範圍蔓延真的畫成圖表，就是這個樣子。」
+沿著曲線說明：「我們原本規劃一百二十個內容。補助下來之後，我們多加了兩個生態區。」
+「高峰時是三百八十個，是規劃的三倍。」
+「後來我們砍到兩百四十八個。還是兩倍。而上市時間從二〇二四年十月，拖到二〇二六年四月。」`,
+  `「願望清單是唯一能預測任何事情的數字。」
+指向那個陡升處：「新品節。在那之前的一切都是雜訊。」
+再到上市那條線：「上市當天有十四萬兩千個願望清單。百分之十五在第一週就買了。」
+「六個月後，賣出十萬四千套。大約每四個願望清單就有三筆銷售。」`,
+  `「上市首週，一天一天來看。」
+「第一天：六千九百四十套。接著就是常見的衰退曲線。」
+指向第九天：「然後有一位實況主在週二晚上玩了這款遊戲。四萬一千名觀眾，等於又來了一次第一天。」
+「這不是我們計畫的。我們只是很快回了那封信。」`,
+  `「四千多則評價中，有百分之九十三是好評。」
+把前兩則評論唸出來。
+再唸第三則：「grumbleberry 說得對。第三幕本來就是被砍掉的生態區該在的地方。我們用換皮來填補空缺。」
+「去看你的負評。那是你能拿到最便宜的設計回饋。」`,
+  `「大家都會問錢的事，所以在這裡。」
+「總營收一百四十七萬美元。在任何其他支出之前，百分之三十先給了平台。」
+指向金色那塊：「百分之三十八是我們四個人的補發薪資。」
+收尾那句話：「換算下來，每個人三年來每年大約四萬六千美元。獨立遊戲是可行的。但一點也不光鮮。」`,
+  `「如果你只能帶一頁回家，就帶這一頁。」
+五條依序點擊，每條用一句話講背後的故事。
+講第四條：「如果某個平台在內容鎖定時還沒進你的版本，它就不是你的上市平台。」
+講第五條：「上市不是終點。更新、移植和客服，吃掉了我們上市後的前六個月。」`,
+  `「那麼接下來呢。」
+「Embers 是十二月的免費更新。其中一個被砍掉的生態區會回來，感覺像是正義得到伸張。」
+「主機移植已經簽約，而且這次從第一天就有合作夥伴。」
+「至於第二款遊戲，已經鎖定。它會和這款一樣開始：四十八小時，一個點子。」`,
+  `「這就是我們的事後檢討。謝謝大家聆聽。」
+「Lanternfall 現已在 Steam 與 Switch 上架。」
+指向社群帳號。「結束後歡迎來找我們，沒錯，我們會聊數字。」
+開放提問。`,
 ];
 
 export default [

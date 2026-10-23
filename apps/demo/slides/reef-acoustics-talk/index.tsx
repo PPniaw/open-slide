@@ -13,8 +13,9 @@ import type { CSSProperties, ReactNode } from 'react';
 export const design: DesignSystem = {
   palette: { bg: '#FBFAF6', text: '#161514', accent: '#1A4B7A' },
   fonts: {
-    display: '"Spectral", "Iowan Old Style", Georgia, serif',
-    body: '"Spectral", "Iowan Old Style", Georgia, serif',
+    display:
+      '"Spectral", "Iowan Old Style", Georgia, serif, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
+    body: '"Spectral", "Iowan Old Style", Georgia, serif, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
   },
   typeScale: { hero: 116, body: 32 },
   radius: 3,
@@ -26,7 +27,8 @@ const ACCENT = 'var(--osd-accent)';
 const MUTED = '#5F5B54';
 const FAINT = '#A29D93';
 const TINT = '#ECE8DF';
-const SC_FONT = '"Spectral SC", "Spectral", Georgia, serif';
+const SC_FONT =
+  '"Spectral SC", "Spectral", Georgia, serif, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif';
 const MATH_FONT = '"STIX Two Math", "Cambria Math", serif';
 
 const SLIDE_ID = 'reef-acoustics-talk';
@@ -143,9 +145,9 @@ const Header = ({ section }: { section: string }) => (
       })}
     >
       <span>
-        <span style={{ fontStyle: 'italic' }}>Listening for Recovery</span>
+        <span style={{ fontStyle: 'italic' }}>聆聽復育</span>
         <span style={{ color: FAINT, margin: '0 16px' }}>·</span>
-        <span style={SC}>Okonkwo, Lindqvist, Raman &amp; Ahuna</span>
+        <span style={SC}>Okonkwo、Lindqvist、Raman 與 Ahuna</span>
       </span>
       <SectionLabel text={section} />
     </div>
@@ -179,7 +181,7 @@ const Footer = () => {
         color: MUTED,
       })}
     >
-      <span style={SC}>Ocean Soundscapes Symposium 2026 · Honolulu</span>
+      <span style={SC}>2026 海洋聲景研討會 · Honolulu</span>
       <span style={{ ...NUM, color: INK, fontSize: 22 }}>
         {current} / {total}
       </span>
@@ -392,7 +394,7 @@ const TitlePage: Page = () => {
           color: MUTED,
         })}
       >
-        Ocean Soundscapes Symposium 2026 · Session 4B, Restoration Acoustics
+        2026 海洋聲景研討會 · 4B 場次：復育聲學
       </div>
       <h1
         style={abs(0, 232, {
@@ -406,7 +408,7 @@ const TitlePage: Page = () => {
           letterSpacing: '-0.015em',
         })}
       >
-        Listening for Recovery
+        聆聽復育
       </h1>
       <div
         style={abs(0, 380, {
@@ -417,7 +419,7 @@ const TitlePage: Page = () => {
           lineHeight: 1.2,
         })}
       >
-        Passive Acoustic Monitoring of Restored Coral Reefs
+        復育珊瑚礁的被動式聲學監測
       </div>
       <svg
         width={760}
@@ -448,13 +450,13 @@ const TitlePage: Page = () => {
         })}
       >
         <div>
-          <Aff>1</Aff> School of Ocean &amp; Earth Science, Halloway University
+          <Aff>1</Aff> Halloway University 海洋與地球科學學院
         </div>
         <div>
-          <Aff>2</Aff> Marine Bioacoustics Group, Instituto Oceánico del Pacífico
+          <Aff>2</Aff> Instituto Oceánico del Pacífico 海洋生物聲學研究組
         </div>
         <div>
-          <Aff>3</Aff> Kalea Reef Restoration Programme, Flores Sea
+          <Aff>3</Aff> Kalea 珊瑚礁復育計畫，Flores 海
         </div>
       </div>
       <div style={abs(0, 860, { width: 1920, display: 'flex', justifyContent: 'center' })}>
@@ -469,7 +471,7 @@ const TitlePage: Page = () => {
           letterSpacing: '0.04em',
         })}
       >
-        Honolulu · 9 November 2026
+        Honolulu · 2026 年 11 月 9 日
       </div>
     </Sheet>
   );
@@ -506,22 +508,22 @@ const YearBar = ({ i, total, mon }: { i: number; total: number; mon: number }) =
 );
 
 const Motivation: Page = () => (
-  <Sheet section="§1 Introduction">
-    <SecHead n="1">Restoration is outpacing evaluation</SecHead>
+  <Sheet section="§1 前言">
+    <SecHead n="1">復育的腳步跑在評估前面</SecHead>
     <div style={abs(120, 268, { width: 790, display: 'flex', flexDirection: 'column', gap: 30 })}>
       <Item>
-        Reef restoration is scaling fast: 332 projects began in our region since 2010.
+        珊瑚礁復育正快速擴張：2010 年以來，本區域已啟動 332 個計畫。
         <Fn n="1" />
       </Item>
       <Item>
-        Success is judged by coral survival at hand-over, not by habitat function <Cite n="1, 2" />.
+        成功與否是看移交時的珊瑚存活率，而不是棲地功能 <Cite n="1, 2" />。
       </Item>
-      <Item>Diver surveys are costly, infrequent and grounded by weather.</Item>
+      <Item>潛水調查成本高、次數少，還常受天候影響。</Item>
       <Item>
-        Healthy reefs are loud, and their sound reflects who lives there <Cite n="5, 6" />.
+        健康的珊瑚礁很吵，而聲音反映了誰住在那裡 <Cite n="5, 6" />。
       </Item>
       <div style={{ fontSize: 36, fontStyle: 'italic', lineHeight: 1.35, marginTop: 18 }}>
-        Can we evaluate recovery by <span style={{ color: ACCENT }}>listening</span>?
+        我們能不能靠<span style={{ color: ACCENT }}>聆聽</span>來評估復育成效？
       </div>
     </div>
     <svg
@@ -529,7 +531,7 @@ const Motivation: Page = () => (
       height={500}
       viewBox="0 0 800 500"
       style={abs(1000, 252, { color: INK, overflow: 'visible' })}
-      aria-label="Bar chart of restoration projects per year"
+      aria-label="每年啟動之復育計畫數長條圖"
     >
       <PlotBox
         x0={FIG1.x0}
@@ -603,7 +605,7 @@ const Motivation: Page = () => (
         2024
       </XL>
       <AxisTitle x={22} y={234} rotate>
-        Projects started per year
+        每年啟動的計畫數
       </AxisTitle>
       <rect
         x={112}
@@ -613,7 +615,7 @@ const Motivation: Page = () => (
         style={{ ...fillAccent, stroke: INK, strokeWidth: 1.3 }}
       />
       <text x={144} y={67} fontSize={21} fill="currentColor">
-        monitored &gt; 12 months
+        監測超過 12 個月
       </text>
       <rect
         x={112}
@@ -623,15 +625,16 @@ const Motivation: Page = () => (
         style={{ fill: PAPER, stroke: INK, strokeWidth: 1.3 }}
       />
       <text x={144} y={101} fontSize={21} fill="currentColor">
-        not monitored after hand-over
+        移交後未持續監測
       </text>
     </svg>
-    <Caption label="Figure 1." style={abs(1000, 772, { width: 800 })}>
-      Restoration projects started per year in the regional registry (<i>n</i>&nbsp;=&nbsp;332).
-      Only 70 of them (21 %) report monitoring beyond the first year.
+    <Caption label="圖 1." style={abs(1000, 772, { width: 800 })}>
+      區域登記系統中每年啟動的復育計畫數（<i>n</i>&nbsp;=&nbsp;332）。其中僅 70
+      個（21%）回報在第一年之後仍持續監測。
     </Caption>
     <Footnote n="1">
-      Coral Triangle Restoration Registry, accessed March 2026; projects covering ≥ 100 m² of reef.
+      珊瑚三角區復育登記系統（Coral Triangle Restoration Registry），2026 年 3
+      月查閱；僅納入珊瑚礁面積 ≥ 100 m² 的計畫。
     </Footnote>
   </Sheet>
 );
@@ -651,15 +654,16 @@ const Tally = ({ kind, label, note }: { kind: Grp; label: string; note: string }
 
 const Hypothesis = ({ n, name, children }: { n: string; name: string; children: ReactNode }) => (
   <div style={{ width: 780, fontSize: 32, lineHeight: 1.5 }}>
-    <span style={{ ...SC, fontWeight: 600 }}>Hypothesis</span>{' '}
-    <span style={{ ...LINING, fontWeight: 600 }}>{n}</span>{' '}
-    <span style={{ fontStyle: 'italic' }}>({name}).</span> {children}
+    <span style={{ ...SC, fontWeight: 600 }}>假說</span>{' '}
+    <span style={{ ...LINING, fontWeight: 600 }}>{n}</span>
+    <span>（{name}）。</span>
+    {children}
   </div>
 );
 
 const Question: Page = () => (
-  <Sheet section="§1 Introduction">
-    <SecHead n="1.1">Research question</SecHead>
+  <Sheet section="§1 前言">
+    <SecHead n="1.1">研究問題</SecHead>
     <div
       style={abs(120, 278, {
         width: 1640,
@@ -669,30 +673,28 @@ const Question: Page = () => (
         lineHeight: 1.36,
       })}
     >
-      <span style={{ ...SC, fontWeight: 600, fontSize: 42 }}>Research Question.</span>{' '}
+      <span style={{ ...SC, fontWeight: 600, fontSize: 42 }}>研究問題。</span>{' '}
       <span style={{ fontStyle: 'italic' }}>
-        Does the soundscape of a restored reef converge on that of a healthy reference reef — and on
-        what timescale?
+        復育後珊瑚礁的聲景，是否會趨近於健康參照礁的聲景？若會，需要多長的時間？
       </span>
     </div>
     <div style={abs(120, 486, { width: 1680, display: 'flex', justifyContent: 'space-between' })}>
-      <Hypothesis n="1" name="convergence">
-        Restored sites become acoustically distinct from degraded sites within six months, then
-        approach healthy sites.
+      <Hypothesis n="1" name="趨近">
+        復育站位在六個月內，聲學特徵便與退化站位明顯不同，接著逐漸趨近健康站位。
       </Hypothesis>
-      <Hypothesis n="2" name="validity">
-        Acoustic indices track diver-survey fish density and coral cover with <i>r</i> &gt; 0.5.
+      <Hypothesis n="2" name="效度">
+        聲學指數能追蹤潛水調查所得的魚類密度與珊瑚覆蓋率（<i>r</i> &gt; 0.5）。
       </Hypothesis>
     </div>
     <div style={abs(120, 700, { width: 1680, height: 1, background: FAINT })} />
     <div style={abs(120, 732, { fontSize: 30, lineHeight: 1.4, width: 430 })}>
-      <span style={{ ...SC, fontWeight: 600 }}>Design.</span> Twelve sites in three conditions,
-      recorded for 18 months.
+      <span style={{ ...SC, fontWeight: 600 }}>設計。</span>三種狀態共十二個站位， 錄音長達 18
+      個月。
     </div>
     <div style={abs(640, 736, { display: 'flex', gap: 96 })}>
-      <Tally kind="h" label="Healthy reference" note="never damaged" />
-      <Tally kind="r" label="Restored" note="frames installed Feb 2024" />
-      <Tally kind="d" label="Degraded" note="unrestored rubble" />
+      <Tally kind="h" label="健康參照礁" note="從未受損" />
+      <Tally kind="r" label="已復育" note="2024 年 2 月架設礁框" />
+      <Tally kind="d" label="退化" note="未復育的碎石礁" />
     </div>
   </Sheet>
 );
@@ -907,14 +909,14 @@ const SpecRow = ({ k, v, last }: { k: string; v: ReactNode; last?: boolean }) =>
 );
 
 const Sites: Page = () => (
-  <Sheet section="§2 Methods">
-    <SecHead n="2.1">Study sites</SecHead>
+  <Sheet section="§2 研究方法">
+    <SecHead n="2.1">研究站位</SecHead>
     <svg
       width={1080}
       height={640}
       viewBox="0 0 1080 640"
       style={abs(120, 236, { color: INK, overflow: 'visible' })}
-      aria-label="Map of the Kalea Archipelago with twelve recording sites"
+      aria-label="Kalea 群島十二個錄音站位分布圖"
     >
       <rect x={90} y={20} width={980} height={570} style={{ fill: PAPER }} />
       <path
@@ -1017,7 +1019,7 @@ const Sites: Page = () => (
       <path d="M134 108 L134 56" style={{ stroke: INK, strokeWidth: 1.6 }} />
       <path d="M134 46 L142 72 L134 66 L126 72 Z" style={fillInk} />
       <text x={134} y={128} fontSize={20} textAnchor="middle" fill="currentColor" style={SC}>
-        n
+        北
       </text>
       <rect x={122} y={556} width={60} height={8} style={fillInk} />
       <rect
@@ -1056,18 +1058,18 @@ const Sites: Page = () => (
       </YL>
     </svg>
     <div style={abs(1300, 252, { width: 500, display: 'flex', flexDirection: 'column', gap: 30 })}>
-      <LegendRow kind="h" label="Healthy reference" note="H1–H4 · outer shoals, > 40 % coral" />
-      <LegendRow kind="r" label="Restored" note="R1–R4 · reef-star frames, Feb 2024" />
-      <LegendRow kind="d" label="Degraded" note="D1–D4 · blast-fishing rubble" />
+      <LegendRow kind="h" label="健康參照礁" note="H1–H4 · 外圍淺灘，珊瑚覆蓋率 > 40 %" />
+      <LegendRow kind="r" label="已復育" note="R1–R4 · Reef Star 礁框，2024 年 2 月" />
+      <LegendRow kind="d" label="退化" note="D1–D4 · 炸魚造成的碎石" />
     </div>
     <div style={abs(1300, 620, { width: 500, borderTop: `2px solid ${INK}` })}>
-      <SpecRow k="Depth" v="6–9 m" />
-      <SpecRow k="Nearest site" v="1.5–2.8 km" />
-      <SpecRow k="Recorders" v="1 per site" last />
+      <SpecRow k="水深" v="6–9 m" />
+      <SpecRow k="最近站位距離" v="1.5–2.8 km" />
+      <SpecRow k="錄音機" v="每站 1 台" last />
     </div>
-    <Caption label="Figure 2." style={abs(120, 888, { width: 1080 })}>
-      The Kalea Archipelago, Flores Sea. Dashed: reef-flat edge; dotted: 20 m isobath. Conditions
-      are interleaved so no single shoreline drives the contrast.
+    <Caption label="圖 2." style={abs(120, 888, { width: 1080 })}>
+      Flores 海的 Kalea 群島。虛線：礁坪邊緣；點線：20 m
+      等深線。各狀態的站位交錯分布，因此單一海岸線不會左右對比結果。
     </Caption>
   </Sheet>
 );
@@ -1145,18 +1147,18 @@ const DutyBlock = ({ m }: { m: number }) => (
 );
 
 const Deployment: Page = () => (
-  <Sheet section="§2 Methods">
-    <SecHead n="2.2">Hydrophone deployment</SecHead>
+  <Sheet section="§2 研究方法">
+    <SecHead n="2.2">水下麥克風布放</SecHead>
     <svg
       width={1040}
       height={570}
       viewBox="0 0 1040 570"
       style={abs(120, 240, { color: INK, overflow: 'visible' })}
-      aria-label="Cross-section of recorder deployment on a restored reef"
+      aria-label="復育珊瑚礁上錄音機布放的剖面示意圖"
     >
       <path d={SURFACE} style={{ fill: 'none', stroke: INK, strokeWidth: 1.6 }} />
       <text x={1000} y={40} fontSize={20} textAnchor="end" fontStyle="italic" fill={MUTED}>
-        sea surface
+        海面
       </text>
       <path d="M72 72 L72 476" style={{ stroke: INK, strokeWidth: 1.2 }} />
       <path d="M72 70 l-6 14 h12 z M72 478 l-6 -14 h12 z" style={fillInk} />
@@ -1233,23 +1235,23 @@ const Deployment: Page = () => (
         ≈ 100 m
       </text>
     </svg>
-    <Caption label="Figure 3." style={abs(120, 826, { width: 1040 })}>
-      Deployment at a restored site, not to scale. (a) hydrophone; (b) recorder housing; (c) steel
-      stake; (d) reef-star frames; (e) rubble. Arcs: nominal listening range.
+    <Caption label="圖 3." style={abs(120, 826, { width: 1040 })}>
+      復育站位的布放方式，未按比例繪製。(a) 水下麥克風；(b) 錄音機外殼；(c) 鋼樁；(d) Reef Star
+      礁框；(e) 碎石。弧線：標稱收音範圍。
       <Fn n="2" />
     </Caption>
-    <Caption label="Table 1." style={abs(1260, 248, { width: 540 })}>
-      Recording configuration.
+    <Caption label="表 1." style={abs(1260, 248, { width: 540 })}>
+      錄音設定。
     </Caption>
     <div style={abs(1260, 300, { width: 540, borderTop: `2px solid ${INK}` })}>
-      <SpecRow k="Sensitivity" v="−176 dB re 1 V/µPa" />
-      <SpecRow k="Sampling" v="48 kHz, 16 bit" />
-      <SpecRow k="Duty cycle" v="2 min every 10" />
-      <SpecRow k="Deployment" v="Mar 2024 – Sep 2025" />
-      <SpecRow k="Servicing" v="every 3 months" />
-      <SpecRow k="Recorder-days" v="6,480" last />
+      <SpecRow k="靈敏度" v="−176 dB re 1 V/µPa" />
+      <SpecRow k="取樣" v="48 kHz, 16 bit" />
+      <SpecRow k="工作週期" v="每 10 分鐘錄 2 分鐘" />
+      <SpecRow k="布放期間" v="2024/03 – 2025/09" />
+      <SpecRow k="維護" v="每 3 個月" />
+      <SpecRow k="錄音機日數" v="6,480" last />
     </div>
-    <div style={abs(1260, 720, { ...SC, fontSize: 22, color: MUTED })}>Duty cycle, one hour</div>
+    <div style={abs(1260, 720, { ...SC, fontSize: 22, color: MUTED })}>工作週期（一小時）</div>
     <svg
       width={540}
       height={84}
@@ -1277,12 +1279,11 @@ const Deployment: Page = () => (
         30
       </XL>
       <text x={540} y={70} fontSize={20} textAnchor="end" fill="currentColor" style={NUM}>
-        60 min
+        60 分鐘
       </text>
     </svg>
     <Footnote n="2">
-      For fish calls at R2, from playback trials assuming spherical spreading and 98 dB re 1 µPa
-      ambient noise.
+      針對 R2 站位的魚類叫聲；依回放試驗推算，假設為球面擴散，環境噪音為 98 dB re 1 µPa。
     </Footnote>
   </Sheet>
 );
@@ -1352,7 +1353,7 @@ const Stage = ({
         textAlign: 'center',
       }}
     >
-      <div style={{ ...SC, ...NUM, fontSize: 22, color: ACCENT, lineHeight: 1 }}>stage {n}</div>
+      <div style={{ ...SC, ...NUM, fontSize: 22, color: ACCENT, lineHeight: 1 }}>階段 {n}</div>
       <div style={{ fontSize: 31, fontWeight: 600, lineHeight: 1.2, marginTop: 12 }}>{title}</div>
       <Glyph>{children}</Glyph>
       <div style={{ fontSize: 21, lineHeight: 1.4, color: MUTED, fontStyle: 'italic' }}>
@@ -1373,20 +1374,42 @@ const Arrow = () => (
 );
 
 const Pipeline: Page = () => (
-  <Sheet section="§2 Methods">
-    <SecHead n="2.3">Signal-processing pipeline</SecHead>
+  <Sheet section="§2 研究方法">
+    <SecHead n="2.3">訊號處理流程</SecHead>
     <div
       style={abs(120, 238, { fontSize: 32, lineHeight: 1.45, fontStyle: 'italic', color: MUTED })}
     >
-      From 9.8 TB of raw audio to one number per site, per band, per day.
+      從 9.8 TB 的原始音檔，到每個站位、每個頻帶、每天各一個數值。
       <Fn n="3" />
     </div>
     <div style={abs(120, 330, { width: 1680, display: 'flex', alignItems: 'flex-start' })}>
-      <Stage n="1" title="Calibrate" detail="end-to-end gain, per recorder" volume="851,328 clips">
+      <Stage
+        n="1"
+        title="校正"
+        detail={
+          <>
+            端對端增益，
+            <br />
+            逐台錄音機
+          </>
+        }
+        volume="851,328 段音檔"
+      >
         <path d={GLYPH_WAVE} style={{ fill: 'none', stroke: INK, strokeWidth: 1.3 }} />
       </Stage>
       <Arrow />
-      <Stage n="2" title="Screen" detail="tonal-line vessel detector [10]" volume="− 8.8 % clips">
+      <Stage
+        n="2"
+        title="篩選"
+        detail={
+          <>
+            船舶音調線
+            <br />
+            偵測器 [10]
+          </>
+        }
+        volume="− 8.8 % 音檔"
+      >
         <path d={GLYPH_WAVE} style={{ fill: 'none', stroke: FAINT, strokeWidth: 1.3 }} />
         <rect
           x={98}
@@ -1401,8 +1424,14 @@ const Pipeline: Page = () => (
       <Stage
         n="3"
         title="STFT"
-        detail="Hann, N = 2048, 50 % overlap"
-        volume="1,025 bins × 5,624 frames"
+        detail={
+          <>
+            Hann 窗，N = 2048，
+            <br />
+            50 % 重疊
+          </>
+        }
+        volume="1,025 頻格 × 5,624 時框"
       >
         <path d={GLYPH_GRID[0]} style={{ fill: TINT }} />
         <path d={GLYPH_GRID[1]} style={{ fill: FAINT }} />
@@ -1412,9 +1441,15 @@ const Pipeline: Page = () => (
       <Arrow />
       <Stage
         n="4"
-        title="Band-split"
-        detail="fish 0.05–1 kHz; shrimp 2–20 kHz"
-        volume="41 + 769 bins"
+        title="頻帶分割"
+        detail={
+          <>
+            魚類 0.05–1 kHz；
+            <br />
+            槍蝦 2–20 kHz
+          </>
+        }
+        volume="41 + 769 頻格"
       >
         <rect
           x={10}
@@ -1438,14 +1473,25 @@ const Pipeline: Page = () => (
           fontStyle="italic"
           fill="currentColor"
         >
-          shrimp
+          槍蝦
         </text>
         <text x={90} y={60} fontSize={17} textAnchor="middle" fontStyle="italic" style={fillPaper}>
-          fish
+          魚類
         </text>
       </Stage>
       <Arrow />
-      <Stage n="5" title="Indices" detail="ACI, band SPL, snap rate" volume="776,411 × 3 values">
+      <Stage
+        n="5"
+        title="指數"
+        detail={
+          <>
+            ACI、頻帶 SPL、
+            <br />
+            爆音率
+          </>
+        }
+        volume="776,411 × 3 個數值"
+      >
         <text
           x={90}
           y={58}
@@ -1460,9 +1506,15 @@ const Pipeline: Page = () => (
       <Arrow />
       <Stage
         n="6"
-        title="Model"
-        detail="mixed effects, site as random [9]"
-        volume="5,912 site-days"
+        title="模型"
+        detail={
+          <>
+            混合效應模型，
+            <br />
+            站位設為隨機 [9]
+          </>
+        }
+        volume="5,912 站位日"
       >
         <path d="M6 64 H176 M6 64 V4" style={{ fill: 'none', stroke: INK, strokeWidth: 1.2 }} />
         <path
@@ -1475,13 +1527,13 @@ const Pipeline: Page = () => (
         />
       </Stage>
     </div>
-    <Caption label="Figure 4." style={abs(120, 760, { width: 1500 })}>
-      Processing chain. Numbers beneath each stage give the data volume leaving it; stages 1–5 run
-      per two-minute clip, stage 6 on daily site means.
+    <Caption label="圖 4." style={abs(120, 760, { width: 1500 })}>
+      處理流程。各階段下方的數字為該階段輸出的資料量；階段 1–5 以每段兩分鐘的音檔為單位執行，階段 6
+      則以各站位的每日平均值進行。
     </Caption>
     <Footnote n="3" top={900}>
-      Stages 1–5 in Python 3.12 (<i>scipy.signal</i>), 41 h on one 32-core workstation; stage 6 in R
-      4.4 with <i>lme4</i> <Cite n="9" />.
+      階段 1–5 以 Python 3.12（<i>scipy.signal</i>）執行，在一台 32 核心工作站上耗時 41 小時；階段 6
+      以 R 4.4 搭配 <i>lme4</i> <Cite n="9" /> 執行。
     </Footnote>
   </Sheet>
 );
@@ -1578,11 +1630,11 @@ const Where = ({ sym, children }: { sym: ReactNode; children: ReactNode }) => (
 );
 
 const Equation: Page = () => (
-  <Sheet section="§2 Methods">
-    <SecHead n="2.4">Acoustic indices</SecHead>
+  <Sheet section="§2 研究方法">
+    <SecHead n="2.4">聲學指數</SecHead>
     <div style={abs(120, 238, { fontSize: 32, lineHeight: 1.45 })}>
-      Each clip is summarised by the Acoustic Complexity Index <Cite n="3" />, computed separately
-      in each band <Var>b</Var>:
+      每段音檔以聲學複雜度指數（ACI）
+      <Cite n="3" /> 摘要，並在每個頻帶 <Var>b</Var> 中分別計算：
     </div>
     <div
       style={abs(120, 316, {
@@ -1661,7 +1713,7 @@ const Equation: Page = () => (
       <EqNo n="1" />
     </div>
     <div style={abs(120, 526, { display: 'flex', flexDirection: 'column', gap: 2 })}>
-      <div style={{ fontSize: 31, fontStyle: 'italic', marginBottom: 6 }}>where</div>
+      <div style={{ fontSize: 31, fontStyle: 'italic', marginBottom: 6 }}>其中</div>
       <Where
         sym={
           <span>
@@ -1672,16 +1724,16 @@ const Equation: Page = () => (
           </span>
         }
       >
-        is the STFT magnitude in frequency bin <Var>k</Var> at time step <Var>j</Var>
-        {';'}
+        為頻格 <Var>k</Var> 在時間步 <Var>j</Var> 的 STFT 振幅
+        {'；'}
       </Where>
       <Where sym={<Var>n</Var>}>
-        is the number of time steps in a clip (<Var>n</Var> = 5,624 for two minutes);
+        為一段音檔的時間步總數（兩分鐘時 <Var>n</Var> = 5,624）；
       </Where>
-      <Where sym={<Var>q</Var>}>is the number of bins in the band (41 fish, 769 shrimp).</Where>
+      <Where sym={<Var>q</Var>}>為該頻帶的頻格數（魚類 41、槍蝦 769）。</Where>
     </div>
     <div style={abs(120, 778, { width: 1680, height: 1, background: FAINT })} />
-    <div style={abs(120, 802, { ...SC, fontSize: 22, color: MUTED })}>Recovery fraction</div>
+    <div style={abs(120, 802, { ...SC, fontSize: 22, color: MUTED })}>復育比例</div>
     <div
       style={abs(120, 834, {
         width: 800,
@@ -1732,9 +1784,7 @@ const Equation: Page = () => (
       </span>
       <EqNo n="2" />
     </div>
-    <div style={abs(1000, 802, { ...SC, fontSize: 22, color: MUTED })}>
-      Saturating recovery model
-    </div>
+    <div style={abs(1000, 802, { ...SC, fontSize: 22, color: MUTED })}>飽和型復育模型</div>
     <div
       style={abs(1000, 834, {
         width: 800,
@@ -1912,14 +1962,14 @@ const Brace = ({ f0, f1, label }: { f0: number; f1: number; label: string }) => 
 };
 
 const Spectrogram: Page = () => (
-  <Sheet section="§3 Results">
-    <SecHead n="3.1">What a recovering reef sounds like</SecHead>
+  <Sheet section="§3 研究結果">
+    <SecHead n="3.1">復育中的珊瑚礁聽起來是什麼樣子</SecHead>
     <svg
       width={1680}
       height={640}
       viewBox="0 0 1680 640"
       style={abs(120, 232, { color: INK, overflow: 'visible' })}
-      aria-label="Spectrogram of one minute of reef sound at a restored site"
+      aria-label="復育站位一分鐘珊瑚礁聲音的頻譜圖"
     >
       <SpecLevel l={1} />
       <SpecLevel l={2} />
@@ -1950,8 +2000,8 @@ const Spectrogram: Page = () => (
       <Bracket t0={5.6} t1={15.8} y={fY(1500)} label="(a)" />
       <Bracket t0={17.8} t1={30.2} y={fY(1700)} label="(c)" />
       <Bracket t0={34} t1={59.4} y={fY(1250)} label="(d)" />
-      <Brace f0={50} f1={1000} label="fish" />
-      <Brace f0={2000} f1={20000} label="shrimp (b)" />
+      <Brace f0={50} f1={1000} label="魚類" />
+      <Brace f0={2000} f1={20000} label="槍蝦 (b)" />
       <YL x={SPEC_X - 12} y={fY(100)}>
         0.1
       </YL>
@@ -1998,10 +2048,10 @@ const Spectrogram: Page = () => (
         60
       </XL>
       <AxisTitle x={tX(30)} y={SPEC_Y + SPEC_H + 62}>
-        Time (s)
+        時間 (s)
       </AxisTitle>
       <AxisTitle x={22} y={SPEC_Y + SPEC_H / 2} rotate>
-        Frequency (kHz, log scale)
+        頻率 (kHz，對數刻度)
       </AxisTitle>
       <CbCell l={0} />
       <CbCell l={1} />
@@ -2033,13 +2083,13 @@ const Spectrogram: Page = () => (
         100
       </text>
       <AxisTitle x={1660} y={SPEC_Y + SPEC_H / 2} rotate>
-        PSD, dB re 1 µPa²/Hz
+        功率頻譜密度，dB re 1 µPa²/Hz
       </AxisTitle>
     </svg>
-    <Caption label="Figure 5." style={abs(120, 878, { width: 1680 })}>
-      One minute at R2, month 14, 18:42 local time. (a) grunt train, 205 Hz and harmonics; (b)
-      snapping-shrimp snaps, broadband above 2 kHz; (c) passing vessel, harmonics of 124 Hz — such
-      clips are screened out; (d) onset of the dusk chorus near 560 Hz.
+    <Caption label="圖 5." style={abs(120, 878, { width: 1680 })}>
+      R2 站位第 14 個月、當地時間 18:42 的一分鐘錄音。(a) 咕嚕聲序列，205 Hz 及其諧波；(b)
+      槍蝦的爆音，2 kHz 以上的寬頻聲響；(c) 船隻經過，124 Hz 的諧波 — 這類音檔會被篩除；(d)
+      黃昏合唱開始，約在 560 Hz。
     </Caption>
   </Sheet>
 );
@@ -2092,8 +2142,8 @@ const ResultLayer = ({ children }: { children: ReactNode }) => (
 );
 
 const Result: Page = () => (
-  <Sheet section="§3 Results">
-    <SecHead n="3.2">Restored reefs converge on the healthy soundscape</SecHead>
+  <Sheet section="§3 研究結果">
+    <SecHead n="3.2">復育後的珊瑚礁，聲景趨近健康珊瑚礁</SecHead>
     <ResultLayer>
       <rect
         x={100}
@@ -2118,7 +2168,7 @@ const Result: Page = () => (
         style={{ stroke: INK, strokeWidth: 1.4, strokeDasharray: '2 5' }}
       />
       <text x={118} y={RY(176.4) - 12} fontSize={22} fontStyle="italic" fill="currentColor">
-        Healthy reference, mean and 95 % CI
+        健康參照礁，平均值與 95 % 信賴區間
       </text>
       <text
         x={1114}
@@ -2128,7 +2178,7 @@ const Result: Page = () => (
         fill="currentColor"
         textAnchor="end"
       >
-        Degraded, mean and 95 % CI
+        退化礁，平均值與 95 % 信賴區間
       </text>
       <PlotBox
         x0={100}
@@ -2171,10 +2221,10 @@ const Result: Page = () => (
         180
       </YL>
       <AxisTitle x={615} y={590}>
-        Months since frame installation
+        架設礁框後的月數
       </AxisTitle>
       <AxisTitle x={24} y={270} rotate>
-        Fish-band ACI
+        魚類頻帶 ACI
       </AxisTitle>
     </ResultLayer>
     <Steps>
@@ -2199,7 +2249,9 @@ const Result: Page = () => (
             </>
           }
         >
-          restored ≠ degraded from month 4 onward (mixed model, Holm-adjusted)
+          自第 4 個月起，復育站位 ≠ 退化站位
+          <br />
+          （混合模型，Holm 校正）
         </Stat>
       </Step>
       <Step duration={160}>
@@ -2226,18 +2278,18 @@ const Result: Page = () => (
             fontStyle="italic"
             style={fillAccent}
           >
-            τ = 6.2 months
+            τ = 6.2 個月
           </text>
         </ResultLayer>
         <Stat
           top={470}
           value={
             <>
-              <Var>τ</Var> = 6.2 months
+              <Var>τ</Var> = 6.2 個月
             </>
           }
         >
-          time constant of Eq. (3); 95 % CI [4.9, 7.8]
+          式 (3) 的時間常數；95 % 信賴區間 [4.9, 7.8]
         </Stat>
       </Step>
       <Step duration={160}>
@@ -2269,14 +2321,16 @@ const Result: Page = () => (
             </>
           }
         >
-          of the healthy–degraded gap closed by month 18; asymptote <Var>ρ</Var>
+          第 18 個月時，健康與退化之間
+          <br />
+          差距已彌合的比例；漸近值 <Var>ρ</Var>
           <Sub>∞</Sub> = 0.81
         </Stat>
       </Step>
     </Steps>
-    <Caption label="Figure 6." style={abs(120, 862, { width: 1160 })}>
-      Restored sites (■, mean ± 95 % CI across four sites) against the reference conditions. Curve:
-      Eq. (3), fitted by nonlinear least squares.
+    <Caption label="圖 6." style={abs(120, 862, { width: 1160 })}>
+      復育站位（■，四個站位的平均值 ± 95 % 信賴區間）與參照狀態的比較。曲線：式
+      (3)，以非線性最小平方法擬合。
     </Caption>
   </Sheet>
 );
@@ -2391,10 +2445,10 @@ const ContrastRow = ({
 };
 
 const ResultsTable: Page = () => (
-  <Sheet section="§3 Results">
-    <SecHead n="3.3">Summary by condition</SecHead>
-    <Caption label="Table 2." style={abs(120, 240, { width: 1680 })}>
-      Acoustic indices by condition over months 13–18, and mixed-model contrasts.
+  <Sheet section="§3 研究結果">
+    <SecHead n="3.3">各狀態摘要</SecHead>
+    <Caption label="表 2." style={abs(120, 240, { width: 1680 })}>
+      第 13–18 個月各狀態的聲學指數，以及混合模型的對比。
     </Caption>
     <table
       style={abs(120, 298, {
@@ -2416,7 +2470,7 @@ const ResultsTable: Page = () => (
             <div
               style={{ ...SC, fontSize: 24, paddingBottom: 8, borderBottom: `1px solid ${INK}` }}
             >
-              Acoustic indices, mean ± s.e.
+              聲學指數，平均值 ± 標準誤
               <Fn n="a" />
             </div>
           </th>
@@ -2424,13 +2478,13 @@ const ResultsTable: Page = () => (
         </tr>
         <tr>
           <th style={{ ...TH, textAlign: 'left', borderBottom: MID_RULE }}>
-            <div style={{ fontSize: 28 }}>Condition</div>
+            <div style={{ fontSize: 28 }}>狀態</div>
           </th>
-          <ColHead name="Sites" unit="" />
-          <ColHead name="Rec.-days" unit="" />
-          <ColHead name="ACI, fish band" unit="dimensionless" />
+          <ColHead name="站位數" unit="" />
+          <ColHead name="錄音機日數" unit="" />
+          <ColHead name="ACI，魚類頻帶" unit="無因次" />
           <ColHead name="SPL, 0.05–1 kHz" unit="dB re 1 µPa" />
-          <ColHead name="Snap rate" unit="snaps per second" />
+          <ColHead name="爆音率" unit="次／秒" />
           <ColHead
             name={
               <span>
@@ -2438,14 +2492,14 @@ const ResultsTable: Page = () => (
                 <Fn n="b" />
               </span>
             }
-            unit="Eq. (2)"
+            unit="式 (2)"
           />
         </tr>
       </thead>
       <tbody>
         <TableRow
           kind="h"
-          label="Healthy"
+          label="健康"
           sites="4"
           days="1,986"
           aci={['181.7', '2.1']}
@@ -2455,7 +2509,7 @@ const ResultsTable: Page = () => (
         />
         <TableRow
           kind="r"
-          label="Restored"
+          label="已復育"
           sites="4"
           days="1,958"
           aci={['169.8', '2.6']}
@@ -2465,7 +2519,7 @@ const ResultsTable: Page = () => (
         />
         <TableRow
           kind="d"
-          label="Degraded"
+          label="退化"
           sites="4"
           days="1,968"
           aci={['131.2', '2.4']}
@@ -2486,19 +2540,19 @@ const ResultsTable: Page = () => (
               color: MUTED,
             }}
           >
-            Contrasts, estimate [95 % CI]
+            對比，估計值 [95 % 信賴區間]
             <Fn n="c" />
           </td>
         </tr>
         <ContrastRow
-          label="Restored − Degraded"
+          label="已復育 − 退化"
           aci="+38.6 [31.9, 45.3]"
           spl="+6.3 [4.1, 8.5]"
           snaps="+14.8 [9.6, 20.0]"
           p="p < 0.001"
         />
         <ContrastRow
-          label="Healthy − Restored"
+          label="健康 − 已復育"
           aci="+11.9 [5.0, 18.8]"
           spl="+3.5 [1.3, 5.7]"
           snaps="+7.5 [2.3, 12.7]"
@@ -2509,13 +2563,13 @@ const ResultsTable: Page = () => (
     </table>
     <div style={abs(120, 842, { width: 1680, fontSize: 21, lineHeight: 1.55, color: MUTED })}>
       <div>
-        <sup style={{ color: ACCENT, marginRight: 6 }}>a</sup>Across site-days, months 13–18 after
-        installation; vessel-screened clips only.
-        <sup style={{ color: ACCENT, margin: '0 6px 0 28px' }}>b</sup>Recovery fraction from ACI.
+        <sup style={{ color: ACCENT, marginRight: 6 }}>a</sup>跨站位日統計，架設後第 13–18
+        個月；僅含已篩除船舶噪音的音檔。
+        <sup style={{ color: ACCENT, margin: '0 6px 0 28px' }}>b</sup>由 ACI 計算的復育比例。
       </div>
       <div>
-        <sup style={{ color: ACCENT, marginRight: 6 }}>c</sup>Linear mixed model with site as random
-        intercept <Cite n="9" />; <Var>p</Var>-values Holm-adjusted over the three indices.
+        <sup style={{ color: ACCENT, marginRight: 6 }}>c</sup>以站位為隨機截距的線性混合模型{' '}
+        <Cite n="9" />；<Var>p</Var> 值已就三項指數進行 Holm 校正。
       </div>
     </div>
   </Sheet>
@@ -2681,14 +2735,14 @@ const EffortBar = ({
 );
 
 const Surveys: Page = () => (
-  <Sheet section="§3 Results">
-    <SecHead n="3.4">Listening agrees with looking</SecHead>
+  <Sheet section="§3 研究結果">
+    <SecHead n="3.4">聆聽與目視調查的結果一致</SecHead>
     <svg
       width={790}
       height={480}
       viewBox="0 0 790 480"
       style={abs(120, 236, { color: INK, overflow: 'visible' })}
-      aria-label="Scatter of fish-band ACI against diver-counted fish density"
+      aria-label="魚類頻帶 ACI 與潛水員計數魚類密度的散布圖"
     >
       <ScatterMarks s={SCAT_A} />
       <PlotBox
@@ -2737,10 +2791,10 @@ const Surveys: Page = () => (
         220
       </YL>
       <AxisTitle x={433} y={482}>
-        Fish density, ind. per 100 m² (diver UVC)
+        魚類密度，每 100 m² 個體數（潛水目視調查 UVC）
       </AxisTitle>
       <AxisTitle x={22} y={218} rotate>
-        Fish-band ACI
+        魚類頻帶 ACI
       </AxisTitle>
     </svg>
     <svg
@@ -2748,7 +2802,7 @@ const Surveys: Page = () => (
       height={480}
       viewBox="0 0 790 480"
       style={abs(1010, 236, { color: INK, overflow: 'visible' })}
-      aria-label="Scatter of snap rate against live coral cover"
+      aria-label="爆音率與活珊瑚覆蓋率的散布圖"
     >
       <ScatterMarks s={SCAT_B} />
       <PlotBox
@@ -2794,20 +2848,22 @@ const Surveys: Page = () => (
         60
       </YL>
       <AxisTitle x={433} y={482}>
-        Live coral cover, % (photo-quadrats)
+        活珊瑚覆蓋率，%（照片樣方）
       </AxisTitle>
       <AxisTitle x={22} y={218} rotate>
-        Snaps per second
+        每秒爆音次數
       </AxisTitle>
     </svg>
-    <Caption label="Figure 7." style={abs(120, 752, { width: 1680 })}>
-      Acoustic indices against diver surveys at 84 site-visits: <Mark kind="h" size={18} /> healthy,{' '}
-      <Mark kind="r" size={18} /> restored, <Mark kind="d" size={18} /> degraded. Line: OLS fit with
-      95 % band; <Var>r</Var> with Fisher-<Var>z</Var> interval.
+    <Caption label="圖 7." style={abs(120, 752, { width: 1680 })}>
+      聲學指數與潛水調查在 84 次站位造訪中的比較：
+      <Mark kind="h" size={18} /> 健康、
+      <Mark kind="r" size={18} /> 已復育、
+      <Mark kind="d" size={18} /> 退化。直線：OLS 擬合與 95 % 區間帶；
+      <Var>r</Var> 附 Fisher-<Var>z</Var> 區間。
     </Caption>
     <div style={abs(120, 846, { display: 'flex', flexDirection: 'column', gap: 18 })}>
-      <EffortBar label="Diver survey" hours="11.5 person-h per site-month" w={920} />
-      <EffortBar label="Acoustic" hours="0.4 person-h per site-month" w={32} accent />
+      <EffortBar label="潛水調查" hours="每站每月 11.5 人時" w={920} />
+      <EffortBar label="聲學監測" hours="每站每月 0.4 人時" w={32} accent />
     </div>
   </Sheet>
 );
@@ -2834,21 +2890,21 @@ const Limit = ({ n, title, children }: { n: string; title: string; children: Rea
 );
 
 const Limitations: Page = () => (
-  <Sheet section="§4 Discussion">
-    <SecHead n="4.1">Limitations</SecHead>
+  <Sheet section="§4 討論">
+    <SecHead n="4.1">研究限制</SecHead>
     <div style={abs(120, 262, { width: 1060, display: 'flex', flexDirection: 'column', gap: 40 })}>
-      <Limit n="i" title="Sites were not randomly assigned.">
-        Practitioners chose where to restore; we matched on depth and exposure.
+      <Limit n="i" title="站位並非隨機分派。">
+        復育地點是由實務工作者決定的；我們以水深與暴露程度進行配對。
       </Limit>
-      <Limit n="ii" title="Indices are aggregates.">
-        ACI and SPL do not identify species — louder is not always richer.
+      <Limit n="ii" title="指數是彙總值。">
+        ACI 與 SPL 無法辨識物種 — 越吵不一定越豐富。
       </Limit>
-      <Limit n="iii" title="Vessel noise is uneven.">
-        8.8 % of clips excluded, mostly at R1 and R3 near the ferry lane.
+      <Limit n="iii" title="船舶噪音分布不均。">
+        8.8 % 的音檔被排除，多數來自靠近渡輪航道的 R1 與 R3。
         <Fn n="4" />
       </Limit>
-      <Limit n="iv" title="One region, one method, 18 months.">
-        Steel frames in a sheltered archipelago; long-run trajectories unknown.
+      <Limit n="iv" title="一個區域、一種方法、18 個月。">
+        在受遮蔽群島架設的鋼製礁框；長期走向仍未知。
       </Limit>
     </div>
     <div
@@ -2860,17 +2916,16 @@ const Limitations: Page = () => (
       })}
     >
       <div style={{ fontSize: 30, lineHeight: 1.5 }}>
-        <span style={{ ...SC, fontWeight: 600 }}>Remark.</span>{' '}
-        <span style={{ fontStyle: 'italic' }}>What would falsify H1?</span>
+        <span style={{ ...SC, fontWeight: 600 }}>備註。</span>{' '}
+        <span style={{ fontStyle: 'italic' }}>什麼結果會推翻 H1？</span>
       </div>
       <div style={{ fontSize: 30, lineHeight: 1.5, marginTop: 14 }}>
-        A restored site that <i>sounds</i> healthy but <i>surveys</i> as degraded. Across 28
-        restored site-visits we found none; the largest standardised residual was 1.4.
+        一個<i>聽起來</i>健康、但<i>調查結果</i>卻顯示退化的復育站位。在 28
+        次復育站位的造訪中一個也沒發現；最大的標準化殘差為 1.4。
       </div>
     </div>
     <Footnote n="4">
-      Kalea–Bira ferry, about six crossings a day; detector and thresholds as in Lindqvist &amp;
-      Okonkwo <Cite n="10" />.
+      Kalea–Bira 渡輪，每天約六個航次；偵測器與閾值同 Lindqvist 與 Okonkwo <Cite n="10" />。
     </Footnote>
   </Sheet>
 );
@@ -2888,19 +2943,18 @@ const Claim = ({ n, title, children }: { n: string; title: ReactNode; children: 
 );
 
 const Conclusions: Page = () => (
-  <Sheet section="§5 Conclusions">
-    <SecHead n="5">Conclusions</SecHead>
+  <Sheet section="§5 結論">
+    <SecHead n="5">結論</SecHead>
     <div style={abs(120, 272, { width: 1500, display: 'flex', flexDirection: 'column', gap: 54 })}>
-      <Claim n="1" title="Restored reefs regain their voice — quickly.">
-        <Var>τ</Var> = 6.2 months; 76 % of the gap to healthy reefs closed within 18 months (H1
-        supported).
+      <Claim n="1" title="復育後的珊瑚礁很快就找回了聲音。">
+        <Var>τ</Var> = 6.2 個月；18 個月內已彌合與健康珊瑚礁之間 76 % 的差距（H1 獲得支持）。
       </Claim>
-      <Claim n="2" title="Listening agrees with looking.">
-        <Var>r</Var> = {fmtR(FIT_A.r)} with diver-counted fish density, at one-thirtieth of the
-        field effort (H2 supported).
+      <Claim n="2" title="聆聽與目視相符。">
+        與潛水員計數的魚類密度相比，<Var>r</Var> = {fmtR(FIT_A.r)}，而野外投入僅約三十分之一（H2
+        獲得支持）。
       </Claim>
-      <Claim n="3" title="Sound should be a standard hand-over metric.">
-        Cheap, continuous and auditable: one recorder per site, from the day the frames go in.
+      <Claim n="3" title="聲音應成為標準的移交指標。">
+        成本低、可連續監測、可供查核：每個站位一台錄音機，從礁框架設當天就開始。
       </Claim>
     </div>
     <div
@@ -2912,9 +2966,9 @@ const Conclusions: Page = () => (
         lineHeight: 1.45,
       })}
     >
-      <span style={{ ...SC, fontWeight: 600 }}>Next.</span>{' '}
+      <span style={{ ...SC, fontWeight: 600 }}>下一步。</span>{' '}
       <span style={{ fontStyle: 'italic' }}>
-        Species-level call detection, and a 40-site regional array from 2027.
+        物種層級的叫聲偵測，以及自 2027 年起建置的 40 站位區域監測陣列。
       </span>
     </div>
   </Sheet>
@@ -2930,7 +2984,7 @@ const Ref = ({ n, children }: { n: string; children: ReactNode }) => (
 const J = ({ children }: { children: ReactNode }) => <i>{children}</i>;
 
 const References: Page = () => (
-  <Sheet section="References">
+  <Sheet section="參考文獻">
     <h2
       style={abs(120, 136, {
         margin: 0,
@@ -2940,7 +2994,7 @@ const References: Page = () => (
         lineHeight: 1.2,
       })}
     >
-      References
+      參考文獻
     </h2>
     <div style={abs(120, 252, { width: 800, display: 'flex', flexDirection: 'column', gap: 22 })}>
       <Ref n="1">
@@ -2997,7 +3051,7 @@ const Colophon = ({ head, children }: { head: string; children: ReactNode }) => 
 );
 
 const Thanks: Page = () => (
-  <Sheet section="Questions">
+  <Sheet section="提問">
     <div
       style={abs(0, 214, {
         width: 1920,
@@ -3009,29 +3063,30 @@ const Thanks: Page = () => (
         letterSpacing: '-0.015em',
       })}
     >
-      Thank you
+      謝謝聆聽
     </div>
     <div
       style={abs(0, 368, { width: 1920, textAlign: 'center', fontSize: 44, fontStyle: 'italic' })}
     >
-      Questions, comments and corrections are very welcome.
+      歡迎提問、提供意見與指正。
     </div>
     <div style={abs(0, 476, { width: 1920, display: 'flex', justifyContent: 'center' })}>
       <div style={{ width: 120, height: 1, background: INK }} />
     </div>
     <div style={abs(120, 548, { width: 1680, display: 'flex', justifyContent: 'space-between' })}>
-      <Colophon head="Acknowledgements">
-        The Kalea Dive Cooperative, for 214 survey dives; the Blue Horizon Ocean Fund, grant
-        BH-2023-117.
+      <Colophon head="致謝">
+        感謝 Kalea 潛水合作社完成 214 次調查潛水；感謝 Blue Horizon Ocean Fund（計畫編號
+        BH-2023-117）。
       </Colophon>
-      <Colophon head="Data &amp; code">
-        Daily index tables, model code and 40 hours of example audio will be released with the
-        paper.
+      <Colophon head="資料與程式碼">
+        每日指數表、模型程式碼與 40 小時的範例音檔，將隨論文一併釋出。
       </Colophon>
-      <Colophon head="Contact">
+      <Colophon head="聯絡方式">
         Maya R. Okonkwo
         <br />
-        School of Ocean &amp; Earth Science, Halloway University
+        Halloway University
+        <br />
+        海洋與地球科學學院
       </Colophon>
     </div>
     <svg
@@ -3047,7 +3102,7 @@ const Thanks: Page = () => (
 );
 
 export const meta: SlideMeta = {
-  title: 'Listening for Recovery',
+  title: '聆聽復育',
   createdAt: '2026-10-12T12:15:24.833Z',
 };
 
@@ -3070,49 +3125,49 @@ export default [
 ] satisfies Page[];
 
 export const notes: (string | undefined)[] = [
-  `Thank the chair. Introduce yourself and say which group you are from.
-One sentence on the premise: we want to know whether a restored reef is working, and we think we can hear it.
-Fifteen minutes, four parts: why, how, what we found, what it does not show.`,
-  `Start with scale: 332 projects started in the region since 2010, and the curve is still climbing.
-Then the catch: only 70 of them — about one in five — report anything after the first year.
-Most evaluations stop at "did the coral fragments survive hand-over?" That is not the same as "is this a reef again?"
-Diver surveys answer the better question, but they are expensive and weather-bound.
-Land the last line slowly: healthy reefs are loud. Can we listen instead?`,
-  `Read the research question out loud, once, and let it sit.
-Two hypotheses. H1 is about timing — distinct from rubble within six months, then moving toward healthy.
-H2 is about validity — if the sound does not track what divers see, nobody should trust it. We set r above 0.5 in advance.
-Design: four sites in each of three conditions, 18 months of recordings.`,
-  `Orient the room: north is up, the village of Kalea is on the south shore of the main island.
-Black circles are healthy reference reefs, mostly on outer shoals. Blue squares are the restored sites. Open triangles are the degraded rubble fields, closer to the village — that is the blast-fishing legacy.
-Point out that conditions are interleaved around the island, so one coastline is not driving the result.`,
-  `Walk the diagram left to right. The recorder sits on a steel stake half a metre above the bottom, next to the reef-star frames.
-Mention the duty cycle — two minutes in every ten — which is how a battery lasts three months.
-The arcs are a nominal listening range for fish calls, about a hundred metres, from playback trials.
-6,480 recorder-days in total before any screening.`,
-  `This is the whole processing chain, so take it one stage at a time but keep moving.
-The stage worth pausing on is stage 2: vessel noise. A passing boat will make any reef look "complex", so we cut those clips — 8.8 percent.
-Then STFT, split into a fish band and a shrimp band, three indices per clip, and a mixed model on daily site means.`,
-  `Do not read the equation symbol by symbol. Say what it measures: how much the intensity in each frequency bin changes from one moment to the next, normalised by how loud that bin is.
-Steady noise like an engine scores low; lots of short calls score high.
-Then the two quantities we report: rho, the fraction of the healthy-minus-degraded gap a restored site has closed; and a saturating model with time constant tau.`,
-  `Let the room listen with their eyes for a moment before you speak.
-Point to (a), a grunt train; (b), the shrimp snaps that make the top half look like static; (c), a boat — note those harmonics, this clip would be excluded; and (d), the dusk chorus building at the right edge.
-This is fourteen months after the frames went in. Eighteen months earlier, this site sounded like the degraded ones.`,
-  `Build this in three clicks.
-First: the restored sites over time. Separate from degraded by month 4.
-Second: the fitted curve. Time constant about six months.
-Third: by month 18 they have closed about three-quarters of the gap — but not all of it. Say that clearly; we are not claiming full recovery.`,
-  `This is the table for people who want the numbers. Don't read it.
-Highlight two things: all three indices agree in direction; and the healthy-minus-restored contrast is still significant. Restored reefs are much closer, but not there yet.`,
-  `This is H2. Panel (a): fish-band ACI against fish density counted by divers. Panel (b): snap rate against coral cover — weaker, as expected.
-Then the effort comparison underneath: 11.5 person-hours of diving per site per month against 0.4 for swapping batteries and cards. That is the practical argument.`,
-  `Be honest and brisk. The biggest one is (i): we did not choose where to restore.
-Indices are not species lists. Vessel noise is uneven across sites. And this is one region, one method, eighteen months.
-Then the remark: the result that would have hurt us — a site that sounds healthy but looks degraded — never showed up.`,
-  `Three sentences, one per point. Slow down.
-Restored reefs regain their voice within months. Listening agrees with looking. So put a recorder at every restoration site, from day one.
-Mention the next step briefly, then go to questions.`,
-  `Leave this up only if someone asks for a citation. The key methods references are Pieretti for ACI and Lamont et al. for the closest prior study.`,
-  `Thank the dive cooperative by name.
-Take questions. Likely ones: site selection bias (refer back to limitation i), species identification, and cost per recorder — about 2,400 dollars each including housing.`,
+  `先感謝主持人。自我介紹，並說明你來自哪個研究團隊。
+用一句話講前提：我們想知道復育後的珊瑚礁是否真的有效，而我們認為這件事用「聽」的就能知道。
+十五分鐘，分成四個部分：為什麼做、怎麼做、發現了什麼，以及哪些是這份研究沒辦法證明的。`,
+  `先從規模講起：2010 年以來，本區域已啟動 332 個計畫，而且曲線還在往上爬。
+接著講問題：其中只有 70 個，大約五分之一，在第一年之後還有回報任何資料。
+多數評估只停在「珊瑚碎枝移交後有沒有活下來？」這不等於「這裡又變回一座珊瑚礁了嗎？」
+潛水調查可以回答比較好的問題，但成本高，又受天氣限制。
+最後一句要講得慢：健康的珊瑚礁很吵。那我們能不能改用聽的？`,
+  `把研究問題大聲念一遍，然後讓它停一下，讓聽眾消化。
+兩個假說。H1 講的是時間：六個月內就會與碎石礁明顯不同，接著逐漸趨近健康礁。
+H2 講的是效度：如果聲音追蹤不到潛水員看到的現象，就沒有人該相信它。我們事先就把 r 的門檻訂在 0.5 以上。
+設計：三種狀態各四個站位，錄音 18 個月。`,
+  `先讓全場掌握方位：上方是北，Kalea 村位於主島的南岸。
+黑色圓點是健康參照礁，多半在外圍淺灘。藍色方塊是復育站位。空心三角形是退化的碎石區，離村子比較近，那是炸魚留下的後果。
+要點出各種狀態在島的周圍是交錯分布的，所以結果不是由某一段海岸線造成的。`,
+  `由左到右帶著看這張圖。錄音機固定在鋼樁上，離海底半公尺，就在 Reef Star 礁框旁邊。
+提到工作週期：每十分鐘錄兩分鐘，這樣電池才撐得了三個月。
+弧線是魚類叫聲的標稱收音範圍，約一百公尺，是用回放試驗得出的。
+未經任何篩選前，錄音機日數合計 6,480。`,
+  `這是整個處理流程，所以一個階段一個階段講，但步調要保持。
+值得停一下的是階段 2：船舶噪音。一艘經過的船會讓任何珊瑚礁看起來都很「複雜」，所以我們把這些音檔剔除，比例是 8.8%。
+接著是 STFT，分成魚類頻帶與槍蝦頻帶，每段音檔算出三項指數，最後用混合模型處理各站位的每日平均值。`,
+  `不要一個符號一個符號地念這條公式。直接說它在量什麼：每個頻格的強度從一個時刻到下一個時刻變化多少，再除以該頻格本身有多大聲來標準化。
+引擎那種穩定的噪音分數低；很多短促的叫聲則分數高。
+然後是我們報告的兩個量：rho，也就是復育站位已經彌合了「健康減退化」差距的比例；還有一個帶時間常數 tau 的飽和模型。`,
+  `開口之前，先讓大家用眼睛「聽」一下。
+指出 (a) 咕嚕聲序列；(b) 槍蝦的爆音，讓上半部看起來像雜訊；(c) 一艘船，注意那些諧波，這段音檔會被排除；還有 (d) 右緣逐漸增強的黃昏合唱。
+這是礁框架設後的第十四個月。再往前十八個月，這個站位聽起來和退化站位沒有兩樣。`,
+  `分三次點擊來呈現。
+第一次：復育站位隨時間的變化。到第 4 個月就與退化站位分開了。
+第二次：擬合曲線。時間常數大約六個月。
+第三次：到第 18 個月，它們已經彌合約四分之三的差距，但還沒有全部補上。這點要講清楚，我們並不是宣稱已完全復育。`,
+  `這張表是給想看數字的人看的。不要照著念。
+強調兩件事：三項指數的方向一致；還有「健康減復育」的對比仍然顯著。復育後的珊瑚礁已經接近許多，但還沒到位。`,
+  `這是 H2。圖 (a)：魚類頻帶 ACI 對照潛水員計數的魚類密度。圖 (b)：爆音率對照珊瑚覆蓋率，相關較弱，符合預期。
+接著看下方的投入比較：每站每月潛水要 11.5 人時，而換電池和記憶卡只要 0.4 人時。這就是實務上的論點。`,
+  `要誠實、節奏明快。最大的一項是 (i)：復育地點不是我們選的。
+指數不等於物種名錄。船舶噪音在各站位之間分布不均。而且這只涵蓋一個區域、一種方法、十八個月。
+然後是備註：最可能讓我們難堪的結果，也就是聽起來健康、看起來卻退化的站位，從來沒有出現過。`,
+  `三句話，一點一句。放慢速度。
+復育後的珊瑚礁在幾個月內就找回了聲音。聆聽與目視的結果相符。所以每個復育站位從第一天起，就該放一台錄音機。
+簡短帶過下一步，然後進入提問。`,
+  `除非有人要引用資料，否則這頁不用一直開著。方法部分最關鍵的參考文獻是 ACI 的 Pieretti，以及最接近的前人研究 Lamont 等人。`,
+  `指名感謝潛水合作社。
+開放提問。可能的問題有：站位選擇偏誤（回頭指向限制 i）、物種辨識，還有每台錄音機的成本，含外殼約 2,400 美元。`,
 ];

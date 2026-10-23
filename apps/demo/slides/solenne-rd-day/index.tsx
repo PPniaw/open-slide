@@ -14,8 +14,9 @@ import type { CSSProperties, ReactNode } from 'react';
 export const design: DesignSystem = {
   palette: { bg: '#F2F5F4', text: '#0C1A24', accent: '#0A8F7F' },
   fonts: {
-    display: '"Red Hat Display", "Helvetica Neue", system-ui, sans-serif',
-    body: '"Red Hat Text", "Helvetica Neue", system-ui, sans-serif',
+    display:
+      '"Red Hat Display", "Helvetica Neue", system-ui, sans-serif, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
+    body: '"Red Hat Text", "Helvetica Neue", system-ui, sans-serif, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
   },
   typeScale: { hero: 168, body: 30 },
   radius: 20,
@@ -33,7 +34,8 @@ const ROSE = '#D9467F';
 const PLACEBO = '#9AA6AC';
 const DOSE30 = '#4F7BFF';
 const MINT = '#7CC7BC';
-const MONO = '"Red Hat Mono", ui-monospace, "SF Mono", monospace';
+const MONO =
+  '"Red Hat Mono", ui-monospace, "SF Mono", monospace, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif';
 
 const SLIDE_ID = 'solenne-rd-day';
 const FONT_HREF =
@@ -249,7 +251,7 @@ const Header = ({ section }: { section: string }) => (
   >
     <Wordmark />
     <div style={{ ...CAPS, display: 'flex', alignItems: 'center', gap: 14 }}>
-      <span>R&amp;D Day 2026</span>
+      <span>2026 研發日</span>
       <span style={{ width: 4, height: 4, borderRadius: 2, background: '#B5C1BF' }} />
       <span style={{ color: 'var(--osd-text)' }}>{section}</span>
     </div>
@@ -897,7 +899,7 @@ const Cover: Page = () => {
         <Wordmark size={28} />
       </div>
       <div style={abs(120, 300, { ...EYEBROW, ...a(live, 'sn-fade 1s ease-out 0.3s both') })}>
-        R&amp;D Day 2026
+        2026 研發日
       </div>
       <h1
         style={{
@@ -909,7 +911,7 @@ const Cover: Page = () => {
         }}
       >
         <span style={{ display: 'block', ...a(live, `sn-focus 1.6s ${FLUID} 0.4s both`) }}>
-          Breathing
+          呼吸
         </span>
         <span
           style={{
@@ -918,7 +920,7 @@ const Cover: Page = () => {
             ...a(live, `sn-focus 1.6s ${FLUID} 0.62s both`),
           }}
         >
-          room.
+          空間
         </span>
       </h1>
       <p
@@ -931,7 +933,7 @@ const Cover: Page = () => {
           ...a(live, `sn-rise 1.2s ${FLUID} 0.95s both`),
         }}
       >
-        Phase 2b results for SLN-214 in idiopathic pulmonary fibrosis, and our path to Phase 3.
+        SLN-214 治療特發性肺纖維化的第 2b 期試驗結果，以及邁向第 3 期的路徑。
       </p>
       <div
         style={abs(120, 922, {
@@ -943,11 +945,11 @@ const Cover: Page = () => {
           ...a(live, 'sn-fade 1s ease-out 1.3s both'),
         })}
       >
-        <span style={{ color: 'var(--osd-text)' }}>22 October 2026</span>
+        <span style={{ color: 'var(--osd-text)' }}>2026 年 10 月 22 日</span>
         <span style={{ width: 4, height: 4, borderRadius: 2, background: '#B5C1BF' }} />
         <span>New York</span>
         <span style={{ width: 4, height: 4, borderRadius: 2, background: '#B5C1BF' }} />
-        <span>Investor &amp; analyst event</span>
+        <span>投資人與分析師說明會</span>
       </div>
 
       <TickRing x={902} y={92} d={856} live={live} />
@@ -967,8 +969,8 @@ const Cover: Page = () => {
       >
         <Channel color={DAPI} label="DAPI" />
         <Channel color={GFP} label="α-SMA" />
-        <Channel color={MCH} label="Collagen I" />
-        <span>IPF donor fibroblasts · 20×</span>
+        <Channel color={MCH} label="膠原蛋白 I" />
+        <span>IPF 捐贈者纖維母細胞 · 20×</span>
       </div>
     </Stage>
   );
@@ -1056,11 +1058,11 @@ const Disease: Page = () => {
   }
   return (
     <Stage
-      section="The disease"
-      note="Survival and FVC figures are literature estimates for untreated IPF. Panel is a schematic."
+      section="疾病背景"
+      note="存活期與 FVC 數據為未經治療 IPF 的文獻估計值；右側圖示僅為示意。"
     >
-      <Title eyebrow="Idiopathic pulmonary fibrosis" live={live} width={720}>
-        IPF turns the lung’s lattice into scar.
+      <Title eyebrow="特發性肺纖維化" live={live} width={720}>
+        IPF 把肺泡變成疤痕。
       </Title>
       <p
         style={{
@@ -1070,23 +1072,12 @@ const Disease: Page = () => {
           ...a(live, `sn-rise 1.1s ${FLUID} 0.35s both`),
         }}
       >
-        Fibroblasts lay down collagen faster than the lung can clear it. Air sacs stiffen, then
-        collapse, and every breath takes more effort.
+        纖維母細胞堆積膠原蛋白的速度，比肺部清除的速度還快。肺泡變硬、接著塌陷，每一次呼吸都更費力。
       </p>
       <div style={abs(120, 604, { width: 720 })}>
-        <Stat value="3–5 yrs" label="median survival after diagnosis" live={live} delay={0.55} />
-        <Stat
-          value="~200 mL"
-          label="of lung capacity lost per year, untreated"
-          live={live}
-          delay={0.7}
-        />
-        <Stat
-          value="2"
-          label="approved therapies; both slow decline, neither stops it"
-          live={live}
-          delay={0.85}
-        />
+        <Stat value="3–5 年" label="確診後的中位存活期" live={live} delay={0.55} />
+        <Stat value="~200 mL" label="未治療時，每年流失的肺容量" live={live} delay={0.7} />
+        <Stat value="2" label="種已核准療法，都只能減緩惡化" live={live} delay={0.85} />
       </div>
 
       <div
@@ -1121,10 +1112,10 @@ const Disease: Page = () => {
           }}
         />
         <div style={abs(36, 32, { ...CAPS, color: 'rgba(255,255,255,0.6)' })}>
-          Alveolar lattice · schematic
+          肺泡網狀結構 · 示意圖
         </div>
         <div style={abs(700, 26, { width: 144, textAlign: 'right', color: '#fff' })}>
-          <div style={{ ...CAPS, color: 'rgba(255,255,255,0.6)' }}>Year</div>
+          <div style={{ ...CAPS, color: 'rgba(255,255,255,0.6)' }}>病程（年）</div>
           <div
             className="sn-yr"
             style={{
@@ -1147,17 +1138,17 @@ const Disease: Page = () => {
         >
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
             <Swatch color={CYAN} ring />
-            Compliant alveolus
+            具彈性的健康肺泡
           </span>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
             <Swatch color={MCH} />
-            Collagen-filled, collapsed
+            膠原蛋白堆積、已塌陷
           </span>
         </div>
         <div
           style={abs(600, 728, { ...CAPS, width: 244, textAlign: 'right', color: rgba(MCH, 0.9) })}
         >
-          Subpleural · basal
+          胸膜下 · 肺底部
         </div>
       </div>
     </Stage>
@@ -1269,14 +1260,14 @@ const Mechanism: Page = () => {
   const PY = 350;
   return (
     <Stage
-      section="Mechanism"
+      section="機轉"
       className="sn-mech"
-      note="FSK2, fibroblast stress kinase 2. Cellular data in TGF-β1-stimulated primary IPF fibroblasts; selectivity at 1 µM across 380 kinases."
+      note="FSK2：纖維母細胞壓力激酶 2。細胞數據來自經 TGF-β1 刺激的原代 IPF 纖維母細胞；選擇性為 1 µM 下對 380 種激酶的測試結果。"
     >
-      <Title eyebrow="Mechanism of action" live={live} width={1300}>
-        SLN-214 silences the signal that
+      <Title eyebrow="作用機轉" live={live} width={1300}>
+        SLN-214 讓指揮纖維母細胞
         <br />
-        tells fibroblasts to make scar.
+        製造疤痕的訊號靜音。
       </Title>
       <div
         style={abs(PX, PY, {
@@ -1474,8 +1465,8 @@ const Mechanism: Page = () => {
         >
           FRX
         </div>
-        <div style={abs(32, 28, { ...CAPS, color: 'rgba(255,255,255,0.5)' })}>Extracellular</div>
-        <div style={abs(470, 28, { ...CAPS, color: 'rgba(255,255,255,0.5)' })}>Cytoplasm</div>
+        <div style={abs(32, 28, { ...CAPS, color: 'rgba(255,255,255,0.5)' })}>細胞外</div>
+        <div style={abs(470, 28, { ...CAPS, color: 'rgba(255,255,255,0.5)' })}>細胞質</div>
         <div
           style={abs(1200, 138, {
             ...CAPS,
@@ -1484,7 +1475,7 @@ const Mechanism: Page = () => {
             color: rgba(DAPI, 0.95),
           })}
         >
-          Nucleus
+          細胞核
         </div>
         <div
           style={abs(1200, 286, {
@@ -1496,9 +1487,9 @@ const Mechanism: Page = () => {
         >
           COL1A1 · COL3A1 · ACTA2
         </div>
-        <NodeLabel x={330} y={316} title="Receptor" sub="ligand-bound" />
-        <NodeLabel x={760} y={322} title="Stress kinase" sub="phospho-relay" />
-        <NodeLabel x={1050} y={310} title="Transcription" sub="factor" />
+        <NodeLabel x={330} y={316} title="受體" sub="已結合配體" />
+        <NodeLabel x={760} y={322} title="壓力激酶" sub="磷酸化接力" />
+        <NodeLabel x={1050} y={310} title="轉錄" sub="因子" />
         <div
           style={abs(1440, 410, {
             ...LABEL,
@@ -1507,10 +1498,10 @@ const Mechanism: Page = () => {
             textAlign: 'right',
           })}
         >
-          Collagen secreted
+          分泌膠原蛋白
         </div>
         <div style={abs(32, 420, { ...LABEL, width: 260, color: rgba(MCH, 0.9) })}>
-          Pro-fibrotic ligand
+          促纖維化配體
         </div>
       </div>
 
@@ -1559,15 +1550,15 @@ const Mechanism: Page = () => {
             className="sn-srise"
             style={{ ...abs(PX + 880, PY + 136), '--d': '900ms' } as CSSProperties}
           >
-            <div style={{ ...CAPS, color: GFP, fontWeight: 500 }}>SLN-214 bound</div>
-            <div style={{ ...LABEL, color: 'rgba(255,255,255,0.6)' }}>allosteric pocket</div>
+            <div style={{ ...CAPS, color: GFP, fontWeight: 500 }}>SLN-214 已結合</div>
+            <div style={{ ...LABEL, color: 'rgba(255,255,255,0.6)' }}>異位口袋</div>
           </div>
         </Step>
         <Step duration={300}>
           <div style={abs(120, 890, { width: 1680, display: 'flex', gap: 96 })}>
-            <MechStat value="14 nM" label="cellular IC50, FSK2 phospho-relay" d={0} />
-            <MechStat value="−82%" label="COL1A1 transcription at 100 nM" d={160} />
-            <MechStat value=">400×" label="selectivity across 380 kinases" d={320} />
+            <MechStat value="14 nM" label="細胞 IC50，FSK2 磷酸化接力" d={0} />
+            <MechStat value="−82%" label="100 nM 下 COL1A1 轉錄量" d={160} />
+            <MechStat value=">400×" label="對 380 種激酶的選擇性" d={320} />
           </div>
         </Step>
       </Steps>
@@ -1670,13 +1661,13 @@ const Screen: Page = () => {
   const hy = wellCy(HIT_R);
   return (
     <Stage
-      section="Discovery"
-      note="Columns 1 and 12: stimulated and unstimulated controls. Representative plate, illustrative."
+      section="藥物探索"
+      note="第 1 欄與第 12 欄：受刺激與未受刺激的對照組。代表性培養盤，僅供說明。"
     >
-      <Title eyebrow="Phenotypic screen" live={live} width={760}>
-        One well in 2,416
+      <Title eyebrow="表型篩選" live={live} width={760}>
+        2,416 個孔裡，
         <br />
-        stopped the scar.
+        有一個擋下了疤痕。
       </Title>
       <p
         style={{
@@ -1686,8 +1677,7 @@ const Screen: Page = () => {
           ...a(live, `sn-rise 1.1s ${FLUID} 0.35s both`),
         }}
       >
-        We treated fibroblasts from 18 IPF donors with 2,416 compounds and imaged how much collagen
-        each well laid down.
+        我們用 2,416 種化合物處理來自 18 位 IPF 捐贈者的纖維母細胞，並拍攝每個孔製造了多少膠原蛋白。
       </p>
       <div
         style={abs(120, 600, {
@@ -1698,10 +1688,10 @@ const Screen: Page = () => {
           borderTop: `1px solid ${HAIR}`,
         })}
       >
-        <PlateFigure value="2,416" label="compounds screened" live={live} delay={0.55} />
-        <PlateFigure value="38" label="hits, collagen halved" live={live} delay={0.67} />
-        <PlateFigure value="7" label="confirmed in all 18 donors" live={live} delay={0.79} />
-        <PlateFigure value="1" label="lead series, FSK2" live={live} delay={0.91} />
+        <PlateFigure value="2,416" label="篩選的化合物" live={live} delay={0.55} />
+        <PlateFigure value="38" label="命中，膠原蛋白減半" live={live} delay={0.67} />
+        <PlateFigure value="7" label="18 位捐贈者皆驗證" live={live} delay={0.79} />
+        <PlateFigure value="1" label="先導系列：FSK2" live={live} delay={0.91} />
       </div>
 
       <div
@@ -1800,10 +1790,10 @@ const Screen: Page = () => {
           }}
         >
           <Swatch color="#0A8F7F" ring />
-          D7 · SLN-214 parent, 1 µM · collagen I −91%
+          D7 · SLN-214 母體化合物，1 µM · 膠原蛋白 I −91%
         </span>
         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
-          Collagen I
+          膠原蛋白 I
           <span
             style={{
               width: 110,
@@ -1831,7 +1821,7 @@ const ZoomFigure = ({ value, label }: { value: string; label: string }) => (
     >
       {value}
     </span>
-    <span style={{ ...LABEL, fontSize: 18, color: SOFT, width: 250 }}>{label}</span>
+    <span style={{ ...LABEL, fontSize: 18, color: SOFT, width: 320 }}>{label}</span>
   </div>
 );
 
@@ -1867,12 +1857,12 @@ const Zoom: Page = () => {
     a(live, `sn-fade 0.9s ease-out ${(MORPH_MS / 1000 + extra).toFixed(2)}s both`);
   return (
     <Stage
-      section="Discovery"
+      section="藥物探索"
       className="sn-zoom"
-      note="Primary IPF fibroblasts, TGF-β1 stimulated, 72 h. Mean of 6 donors × 3 fields; p < 0.01 vs vehicle (paired t-test). Micrographs illustrative."
+      note="原代 IPF 纖維母細胞，TGF-β1 刺激 72 小時。6 位捐贈者 × 3 個視野的平均值；相較溶媒對照 p < 0.01（成對 t 檢定）。顯微影像僅供說明。"
     >
-      <Title eyebrow="Inside well D7" live={live}>
-        In patient cells, the scar recedes.
+      <Title eyebrow="D7 孔內部" live={live}>
+        在病患細胞中，疤痕消退了。
       </Title>
       <MorphElement id="sn-zoom-well">
         <div
@@ -1940,7 +1930,7 @@ const Zoom: Page = () => {
         />
         <div style={abs(839, 0, { width: 2, height: 560, background: 'rgba(255,255,255,0.22)' })} />
         <div style={abs(36, 28)}>
-          <HalfLabel tag="a" title="Vehicle · 72 h" />
+          <HalfLabel tag="a" title="溶媒對照 · 72 小時" />
         </div>
         <div style={abs(876, 28)}>
           <HalfLabel tag="b" title="SLN-214 · 100 nM" />
@@ -1955,7 +1945,7 @@ const Zoom: Page = () => {
         >
           <Channel color={DAPI} label="DAPI" />
           <Channel color={GFP} label="α-SMA" />
-          <Channel color={MCH} label="Collagen I" />
+          <Channel color={MCH} label="膠原蛋白 I" />
         </div>
         <ScaleBar x={1548} y={486} />
       </div>
@@ -1969,13 +1959,13 @@ const Zoom: Page = () => {
           </div>
           <div style={abs(120, 896, { width: 1680, display: 'flex', gap: 110 })}>
             <div className="sn-srise" style={{ '--d': '900ms' } as CSSProperties}>
-              <ZoomFigure value="−58%" label="collagen I area vs vehicle" />
+              <ZoomFigure value="−58%" label="膠原蛋白 I 面積，相較溶媒對照" />
             </div>
             <div className="sn-srise" style={{ '--d': '1100ms' } as CSSProperties}>
-              <ZoomFigure value="−71%" label="α-SMA⁺ myofibroblasts" />
+              <ZoomFigure value="−71%" label="α-SMA⁺ 肌纖維母細胞" />
             </div>
             <div className="sn-srise" style={{ '--d': '1300ms' } as CSSProperties}>
-              <ZoomFigure value="6 / 6" label="donors responded" />
+              <ZoomFigure value="6 / 6" label="位捐贈者有反應" />
             </div>
           </div>
         </Step>
@@ -2180,8 +2170,8 @@ const Molecule3D: Page = () => {
   const live = useIsActivePage();
   return (
     <Stage
-      section="The molecule"
-      note="Lung and plasma exposure from rat inhalation toxicology study, 28 days. Structure shown is representative."
+      section="分子設計"
+      note="肺部與血漿暴露量來自大鼠 28 天吸入毒理試驗。所示結構為代表性結構。"
     >
       <Well x={200} y={180} d={760} live={live} delay={0.05}>
         <div
@@ -2231,15 +2221,15 @@ const Molecule3D: Page = () => {
           ...a(live, `sn-focus 1.3s ${FLUID} 0.12s both`),
         }}
       >
-        Built to stay in the lung.
+        專為留在肺裡而設計。
       </h2>
       <div style={abs(1060, 420, { width: 740 })}>
-        <PropRow label="Target" value="FSK2, allosteric" live={live} delay={0.4} />
-        <PropRow label="Molecular weight" value="398.4 Da" live={live} delay={0.5} />
-        <PropRow label="Formulation" value="Dry-powder inhaler" live={live} delay={0.6} />
-        <PropRow label="Dosing" value="Once daily" live={live} delay={0.7} />
-        <PropRow label="Lung : plasma AUC" value={<>38 : 1</>} live={live} delay={0.8} />
-        <PropRow label="Lung half-life" value="26 h" live={live} delay={0.9} />
+        <PropRow label="標靶" value="FSK2，異位抑制" live={live} delay={0.4} />
+        <PropRow label="分子量" value="398.4 Da" live={live} delay={0.5} />
+        <PropRow label="劑型" value="乾粉吸入器" live={live} delay={0.6} />
+        <PropRow label="給藥" value="每日一次" live={live} delay={0.7} />
+        <PropRow label="肺 : 血漿 AUC" value={<>38 : 1</>} live={live} delay={0.8} />
+        <PropRow label="肺內半衰期" value="26 h" live={live} delay={0.9} />
       </div>
     </Stage>
   );
@@ -2424,11 +2414,11 @@ const Delivery: Page = () => {
   const live = useIsActivePage();
   return (
     <Stage
-      section="Delivery"
-      note="Gamma scintigraphy, ⁹⁹ᵐTc-labelled SLN-214 dry powder, n = 12 healthy volunteers. MMAD 2.1 µm. Airway tree schematic."
+      section="藥物遞送"
+      note="加馬閃爍攝影，⁹⁹ᵐTc 標記的 SLN-214 乾粉，n = 12 位健康受試者。MMAD 2.1 µm。氣道樹為示意圖。"
     >
-      <Title eyebrow="Inhaled, once daily" live={live}>
-        Delivered to where the disease lives.
+      <Title eyebrow="吸入式，每日一次" live={live}>
+        直接送達疾病所在之處。
       </Title>
       <div
         style={abs(120, 300, {
@@ -2467,14 +2457,14 @@ const Delivery: Page = () => {
         <Particle leaf={62} i={13} live={live} />
         <Particle leaf={5} i={14} live={live} />
         <Particle leaf={38} i={15} live={live} />
-        <div style={abs(476, 40, { ...CAPS, color: 'rgba(255,255,255,0.55)' })}>Trachea</div>
+        <div style={abs(476, 40, { ...CAPS, color: 'rgba(255,255,255,0.55)' })}>氣管</div>
         <div style={abs(32, 592, { ...CAPS, color: 'rgba(255,255,255,0.55)' })}>
-          Bronchioles → alveoli
+          細支氣管 → 肺泡
         </div>
         <div
           style={abs(620, 592, { ...LABEL, width: 248, textAlign: 'right', color: rgba(GFP, 0.9) })}
         >
-          ● SLN-214 particles
+          ● SLN-214 顆粒
         </div>
       </div>
 
@@ -2507,7 +2497,7 @@ const Delivery: Page = () => {
             ...a(live, `sn-rise 1s ${FLUID} 0.7s both`),
           }}
         >
-          of the emitted dose deposits in the lungs, most of it in the periphery where IPF begins.
+          的釋出劑量沉積在肺部，其中大部分落在 IPF 起始的肺周邊。
         </p>
         <div
           style={{
@@ -2525,16 +2515,10 @@ const Delivery: Page = () => {
           <DepSeg w={56} color="#DCE3E2" live={live} delay={1.65} />
         </div>
         <div style={{ marginTop: 24 }}>
-          <DepRow
-            color="var(--osd-accent)"
-            label="Peripheral lung"
-            value="41%"
-            live={live}
-            delay={1.0}
-          />
-          <DepRow color={MINT} label="Central airways" value="17%" live={live} delay={1.12} />
-          <DepRow color="#B8C3C6" label="Oropharynx" value="34%" live={live} delay={1.24} />
-          <DepRow color="#DCE3E2" label="Exhaled" value="8%" live={live} delay={1.36} />
+          <DepRow color="var(--osd-accent)" label="肺周邊" value="41%" live={live} delay={1.0} />
+          <DepRow color={MINT} label="中央氣道" value="17%" live={live} delay={1.12} />
+          <DepRow color="#B8C3C6" label="口咽" value="34%" live={live} delay={1.24} />
+          <DepRow color="#DCE3E2" label="呼出" value="8%" live={live} delay={1.36} />
         </div>
       </div>
     </Stage>
@@ -2671,11 +2655,11 @@ const Design: Page = () => {
   }
   return (
     <Stage
-      section="Phase 2b"
-      note="FIBRA-2: randomised, double-blind, placebo-controlled; stratified by background antifibrotic use. QD, once daily; OLE, open-label extension."
+      section="第 2b 期"
+      note="FIBRA-2：隨機、雙盲、安慰劑對照；依是否併用抗纖維化藥物分層。QD：每日一次；OLE：開放標示延伸試驗。"
     >
-      <Title eyebrow="FIBRA-2 trial design" live={live}>
-        312 patients, three arms, 52 weeks.
+      <Title eyebrow="FIBRA-2 試驗設計" live={live}>
+        312 位病患、三組、52 週。
       </Title>
       <div
         style={abs(120, 510, {
@@ -2692,7 +2676,7 @@ const Design: Page = () => {
           ...a(live, `sn-rise 0.9s ${FLUID} 0.2s both`),
         })}
       >
-        <div style={CAPS}>Screened</div>
+        <div style={CAPS}>篩選</div>
         <div style={{ ...DISPLAY, fontSize: 36, marginTop: 4 }}>468</div>
       </div>
       <svg width={1920} height={1080} style={{ position: 'absolute', inset: 0 }} aria-hidden="true">
@@ -2783,10 +2767,10 @@ const Design: Page = () => {
           ...a(live, 'sn-fade 0.8s ease-out 0.9s both'),
         })}
       >
-        <div style={CAPS}>Randomised</div>
+        <div style={CAPS}>隨機分配</div>
         <div style={{ ...DISPLAY, fontSize: 36, marginTop: 4 }}>N = 312</div>
       </div>
-      <Arm y={420} color={PLACEBO} name="Placebo" n="n = 104" live={live} delay={0.9} />
+      <Arm y={420} color={PLACEBO} name="安慰劑" n="n = 104" live={live} delay={0.9} />
       <Arm y={560} color={DOSE30} name="SLN-214 30 mg QD" n="n = 104" live={live} delay={1.05} />
       <Arm
         y={700}
@@ -2803,32 +2787,27 @@ const Design: Page = () => {
           ...a(live, 'sn-fade 0.8s ease-out 2.6s both'),
         })}
       >
-        <div style={{ ...CAPS, color: 'var(--osd-accent)' }}>Primary endpoint</div>
+        <div style={{ ...CAPS, color: 'var(--osd-accent)' }}>主要終點</div>
       </div>
       <div style={abs(wkX(52) + 82, 532, { ...a(live, 'sn-fade 0.8s ease-out 3s both') })}>
         <div style={{ ...DISPLAY, fontSize: 30 }}>OLE</div>
-        <div style={LABEL}>94% rolled over</div>
+        <div style={LABEL}>94% 轉入延伸</div>
       </div>
       <div style={a(live, 'sn-fade 0.8s ease-out 0.8s both')}>
         {ticks}
-        <div style={abs(WK_X0 - 120, 772, { ...LABEL, width: 100, textAlign: 'right' })}>Week</div>
+        <div style={abs(WK_X0 - 120, 772, { ...LABEL, width: 100, textAlign: 'right' })}>週</div>
       </div>
       <div style={abs(120, 846, { width: 1680, display: 'flex', gap: 56 })}>
+        <Criterion label="族群" text="確診 IPF ≤ 5 年、年齡 ≥ 40 歲" live={live} delay={2.4} />
         <Criterion
-          label="Population"
-          text="IPF diagnosed ≤ 5 years, age ≥ 40"
-          live={live}
-          delay={2.4}
-        />
-        <Criterion
-          label="Lung function"
-          text="FVC ≥ 45% and DLco ≥ 25% predicted"
+          label="肺功能"
+          text="FVC ≥ 預測值 45% 且 DLco ≥ 預測值 25%"
           live={live}
           delay={2.55}
         />
         <Criterion
-          label="Background therapy"
-          text="Stable antifibrotic permitted (58%)"
+          label="背景治療"
+          text="允許併用穩定劑量的抗纖維化藥物（58%）"
           live={live}
           delay={2.7}
         />
@@ -2986,11 +2965,11 @@ const Endpoint: Page = () => {
   }
   return (
     <Stage
-      section="Phase 2b · efficacy"
-      note="mITT population, n = 309. MMRM; bands show 95% CI. 30 mg vs placebo: +93 mL (95% CI 45–141), p = 0.002."
+      section="第 2b 期 · 療效"
+      note="mITT 族群，n = 309。MMRM；色帶為 95% 信賴區間。30 mg 相較安慰劑：+93 mL（95% 信賴區間 45–141），p = 0.002。"
     >
-      <Title eyebrow="Primary endpoint · ΔFVC at week 52" live={live}>
-        60 mg cut the loss of lung function by 76%.
+      <Title eyebrow="主要終點 · 第 52 週 ΔFVC" live={live}>
+        60 mg 讓肺功能流失減少 76%。
       </Title>
       <div style={a(live, 'sn-fade 1s ease-out 0.3s both')}>
         <svg
@@ -3009,7 +2988,7 @@ const Endpoint: Page = () => {
             fill={MUTED}
             transform={`rotate(-90 150 ${fy(-125)})`}
           >
-            Change from baseline in FVC, mL
+            FVC 相較基線的變化（mL）
           </text>
           <text
             x={(FX0 + FX1) / 2}
@@ -3019,7 +2998,7 @@ const Endpoint: Page = () => {
             fontSize={16}
             fill={MUTED}
           >
-            Weeks since randomisation
+            隨機分配後週數
           </text>
         </svg>
       </div>
@@ -3029,10 +3008,10 @@ const Endpoint: Page = () => {
           <ResultRow
             y={340}
             color={PLACEBO}
-            arm="Placebo"
+            arm="安慰劑"
             n="n = 103"
             value="−214 mL"
-            ci="95% CI −248 to −180"
+            ci="95% 信賴區間 −248 至 −180"
           />
         </Step>
         <Step duration={300}>
@@ -3043,7 +3022,7 @@ const Endpoint: Page = () => {
             arm="SLN-214 30 mg"
             n="n = 104"
             value="−121 mL"
-            ci="95% CI −155 to −87"
+            ci="95% 信賴區間 −155 至 −87"
           />
         </Step>
         <Step duration={300}>
@@ -3054,7 +3033,7 @@ const Endpoint: Page = () => {
             arm="SLN-214 60 mg"
             n="n = 102"
             value="−52 mL"
-            ci="95% CI −86 to −18"
+            ci="95% 信賴區間 −86 至 −18"
           />
           <svg
             width={1920}
@@ -3101,14 +3080,14 @@ const Endpoint: Page = () => {
               } as CSSProperties
             }
           >
-            <div style={CAPS}>Difference vs placebo, 60 mg</div>
+            <div style={CAPS}>60 mg 相較安慰劑的差異</div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 18, marginTop: 8 }}>
               <span
                 style={{ ...DISPLAY, fontSize: 48, fontWeight: 700, color: 'var(--osd-accent)' }}
               >
                 +162 mL
               </span>
-              <span style={LABEL}>95% CI 114–210</span>
+              <span style={LABEL}>95% 信賴區間 114–210</span>
             </div>
           </div>
         </Step>
@@ -3276,13 +3255,13 @@ const Safety: Page = () => {
   const head: CSSProperties = { ...LABEL, fontSize: 18, width: 150, textAlign: 'right' };
   return (
     <Stage
-      section="Phase 2b · safety"
-      note="Safety population, N = 312. TEAE, treatment-emergent adverse event; AE, adverse event; ULN, upper limit of normal. No drug-related deaths."
+      section="第 2b 期 · 安全性"
+      note="安全性族群，N = 312。TEAE：治療後出現的不良事件；AE：不良事件；ULN：正常值上限。無藥物相關死亡。"
     >
-      <Title eyebrow="Safety and tolerability" live={live}>
-        Well tolerated through 52 weeks.
+      <Title eyebrow="安全性與耐受性" live={live}>
+        52 週內耐受良好。
       </Title>
-      <BlockLabel x={BLOCK_X[0]} name="Placebo" live={live} delay={0.3} />
+      <BlockLabel x={BLOCK_X[0]} name="安慰劑" live={live} delay={0.3} />
       <BlockLabel x={BLOCK_X[1]} name="30 mg" live={live} delay={0.45} />
       <BlockLabel x={BLOCK_X[2]} name="60 mg" live={live} delay={0.6} />
       <DotMatrix live={live} />
@@ -3298,13 +3277,13 @@ const Safety: Page = () => {
           ...a(live, 'sn-fade 1s ease-out 1.8s both'),
         })}
       >
-        <LegendItem color={AE_COLOR.serious} label="Serious AE" />
-        <LegendItem color={AE_COLOR.mild} label="Mild or moderate TEAE" />
-        <LegendItem color={AE_COLOR.none} label="No TEAE" />
-        <LegendItem color={ROSE} label="Discontinued due to AE" ring />
+        <LegendItem color={AE_COLOR.serious} label="嚴重 AE" />
+        <LegendItem color={AE_COLOR.mild} label="輕度或中度 TEAE" />
+        <LegendItem color={AE_COLOR.none} label="無 TEAE" />
+        <LegendItem color={ROSE} label="因 AE 中止" ring />
       </div>
       <div style={abs(120, 896, { ...LABEL, ...a(live, 'sn-fade 1s ease-out 2s both') })}>
-        Each dot is one patient.
+        每個點代表一位病患。
       </div>
 
       <div style={abs(980, 352, { width: 820 })}>
@@ -3315,18 +3294,18 @@ const Safety: Page = () => {
             ...a(live, 'sn-fade 0.8s ease-out 0.4s both'),
           }}
         >
-          <span style={{ ...LABEL, fontSize: 18, flex: 1 }}>Patients, n (%)</span>
-          <span style={head}>Placebo</span>
+          <span style={{ ...LABEL, fontSize: 18, flex: 1 }}>病患數 n（%）</span>
+          <span style={head}>安慰劑</span>
           <span style={head}>30 mg</span>
           <span style={head}>60 mg</span>
         </div>
-        <AeRow label="Any TEAE" p="74 (71)" d30="76 (73)" d60="79 (76)" live={live} delay={0.5} />
-        <AeRow label="Serious AE" p="11 (11)" d30="10 (10)" d60="9 (9)" live={live} delay={0.6} />
-        <AeRow label="Discontinued, AE" p="7 (7)" d30="6 (6)" d60="8 (8)" live={live} delay={0.7} />
-        <AeRow label="Cough" p="9 (9)" d30="11 (11)" d60="14 (13)" live={live} delay={0.8} />
-        <AeRow label="Diarrhoea" p="6 (6)" d30="5 (5)" d60="6 (6)" live={live} delay={0.9} />
+        <AeRow label="任何 TEAE" p="74 (71)" d30="76 (73)" d60="79 (76)" live={live} delay={0.5} />
+        <AeRow label="嚴重 AE" p="11 (11)" d30="10 (10)" d60="9 (9)" live={live} delay={0.6} />
+        <AeRow label="因 AE 中止" p="7 (7)" d30="6 (6)" d60="8 (8)" live={live} delay={0.7} />
+        <AeRow label="咳嗽" p="9 (9)" d30="11 (11)" d60="14 (13)" live={live} delay={0.8} />
+        <AeRow label="腹瀉" p="6 (6)" d30="5 (5)" d60="6 (6)" live={live} delay={0.9} />
         <AeRow
-          label="ALT or AST > 3× ULN"
+          label="ALT 或 AST > 3× ULN"
           p="1 (1)"
           d30="1 (1)"
           d60="1 (1)"
@@ -3344,7 +3323,7 @@ const Safety: Page = () => {
           ...a(live, `sn-rise 1s ${FLUID} 1.3s both`),
         }}
       >
-        No dose-related GI or liver signal. Cough was mild and transient.
+        未見與劑量相關的腸胃或肝臟訊號。咳嗽為輕度且短暫。
       </p>
     </Stage>
   );
@@ -3352,7 +3331,7 @@ const Safety: Page = () => {
 
 const LANE_X = 840;
 const LANE_W = 192;
-const PHASES = ['Discovery', 'IND-enabling', 'Phase 1', 'Phase 2', 'Phase 3'];
+const PHASES = ['藥物探索', 'IND 前期', '第 1 期', '第 2 期', '第 3 期'];
 
 const PipelineRow = ({
   y,
@@ -3486,26 +3465,26 @@ const Pipeline: Page = () => {
   });
   return (
     <Stage
-      section="Pipeline"
-      note="All programs wholly owned. Timelines are estimates and subject to regulatory feedback."
+      section="研發管線"
+      note="所有計畫皆由公司全資擁有。時程為預估，並可能依主管機關意見調整。"
     >
-      <Title eyebrow="One mechanism, five fibrotic diseases" live={live}>
-        FSK2 is a platform, not a single bet.
+      <Title eyebrow="一種機轉，五種纖維化疾病" live={live}>
+        FSK2 是一個平台，不是單一賭注。
       </Title>
       <div style={a(live, 'sn-fade 0.8s ease-out 0.2s both')}>
-        <div style={abs(120, 330, { ...CAPS })}>Program</div>
-        <div style={abs(380, 330, { ...CAPS })}>Indication</div>
+        <div style={abs(120, 330, { ...CAPS })}>計畫</div>
+        <div style={abs(380, 330, { ...CAPS })}>適應症</div>
         {lanes}
         <div style={abs(120, 368, { width: 1680, height: 1, background: HAIR })} />
       </div>
       <PipelineRow
         y={394}
         program="SLN-214"
-        modality="Inhaled · DPI"
-        indication="Idiopathic pulmonary fibrosis"
+        modality="吸入式 · DPI"
+        indication="特發性肺纖維化"
         end={LANE_W * 4}
         next={96}
-        status="Phase 3 start H1 2027"
+        status="2027 上半年啟動第 3 期"
         live={live}
         delay={0.3}
         lead
@@ -3513,40 +3492,40 @@ const Pipeline: Page = () => {
       <PipelineRow
         y={506}
         program="SLN-214"
-        modality="Inhaled · DPI"
-        indication="Progressive pulmonary fibrosis"
+        modality="吸入式 · DPI"
+        indication="進行性肺纖維化"
         end={LANE_W * 3.5}
-        status="Enrolling · n = 180"
+        status="收案中 · n = 180"
         live={live}
         delay={0.45}
       />
       <PipelineRow
         y={618}
         program="SLN-307"
-        modality="Oral"
-        indication="Systemic sclerosis–ILD"
+        modality="口服"
+        indication="全身性硬化症–ILD"
         end={LANE_W * 2.6}
-        status="Data H1 2027"
+        status="2027 上半年公布數據"
         live={live}
         delay={0.6}
       />
       <PipelineRow
         y={730}
         program="SLN-410"
-        modality="Inhaled"
-        indication="Pulmonary hypertension in ILD"
+        modality="吸入式"
+        indication="ILD 相關肺高壓"
         end={LANE_W * 1.75}
-        status="IND H1 2028"
+        status="2028 上半年送件 IND"
         live={live}
         delay={0.75}
       />
       <PipelineRow
         y={842}
         program="FSK2-D"
-        modality="Oral degrader"
-        indication="Fibrotic kidney disease"
+        modality="口服降解劑"
+        indication="纖維化腎臟疾病"
         end={LANE_W * 0.7}
-        status="Lead optimisation"
+        status="先導化合物優化"
         live={live}
         delay={0.9}
       />
@@ -3655,22 +3634,19 @@ const Milestones: Page = () => {
   });
   const today = TL_X0 + QW * 0.12;
   return (
-    <Stage
-      section="Catalysts"
-      note="Cash, cash equivalents and marketable securities, unaudited. Milestones are company estimates."
-    >
+    <Stage section="關鍵里程碑" note="現金、約當現金及有價證券，未經會計師查核。里程碑為公司預估。">
       <Title eyebrow="2026 – 2028" live={live} width={1100}>
-        Six catalysts through 2028.
+        到 2028 年的六大關鍵里程碑。
       </Title>
       <div
-        style={abs(1400, 156, {
-          width: 400,
+        style={abs(1100, 156, {
+          width: 700,
           textAlign: 'right',
           ...a(live, `sn-rise 1s ${FLUID} 0.4s both`),
         })}
       >
         <div style={{ ...DISPLAY, fontSize: 64, lineHeight: 1 }}>$612M</div>
-        <div style={{ ...LABEL, marginTop: 10 }}>cash at 30 Sep 2026 · runway into 2029</div>
+        <div style={{ ...LABEL, marginTop: 10 }}>2026 年 9 月 30 日現金 · 資金可支撐至 2029 年</div>
       </div>
       <svg width={1920} height={1080} style={{ position: 'absolute', inset: 0 }} aria-hidden="true">
         <line x1={TL_X0} y1={TL_Y} x2={TL_X1} y2={TL_Y} stroke={HAIR} strokeWidth={2} />
@@ -3716,37 +3692,37 @@ const Milestones: Page = () => {
           color: 'var(--osd-text)',
         })}
       >
-        Today
+        今天
       </div>
       <Milestone
         x={TL_X0 + QW * 0.6}
         above={false}
         date="Q4 2026"
-        title="End-of-Phase 2 meeting with FDA"
-        detail="Phase 3 design and dose"
+        title="FDA 第 2 期結束會議"
+        detail="第 3 期設計與劑量"
         live={live}
       />
       <Milestone
         x={TL_X0 + QW * 2}
         above
         date="H1 2027"
-        title="FIBRA-3 first patient dosed"
-        detail="Phase 3, IPF, n ≈ 900"
+        title="FIBRA-3 首位病患給藥"
+        detail="第 3 期，IPF，n ≈ 900"
         live={live}
       />
       <Milestone
         x={TL_X0 + QW * 2.9}
         above={false}
         date="H1 2027"
-        title="SLN-307 Phase 1 data"
-        detail="SSc-ILD, oral"
+        title="SLN-307 第 1 期數據"
+        detail="SSc-ILD，口服"
         live={live}
       />
       <Milestone
         x={TL_X0 + QW * 4.3}
         above
         date="H2 2027"
-        title="PPF Phase 2 interim"
+        title="PPF 第 2 期期中分析"
         detail="SLN-214, n = 180"
         live={live}
       />
@@ -3754,16 +3730,16 @@ const Milestones: Page = () => {
         x={TL_X0 + QW * 6}
         above={false}
         date="H1 2028"
-        title="SLN-410 IND submission"
-        detail="PH-ILD, inhaled"
+        title="SLN-410 送件 IND"
+        detail="PH-ILD，吸入式"
         live={live}
       />
       <Milestone
         x={TL_X0 + QW * 8.2}
         above
         date="H2 2028"
-        title="FIBRA-3 enrolment complete"
-        detail="Topline expected 2029"
+        title="FIBRA-3 收案完成"
+        detail="預計 2029 年公布主要結果"
         live={live}
         alignRight
       />
@@ -3804,7 +3780,7 @@ const Close: Page = () => {
         </Well>
       </div>
       <div style={abs(1060, 300, { ...EYEBROW, ...a(live, 'sn-fade 1s ease-out 0.3s both') })}>
-        Thank you
+        謝謝大家
       </div>
       <h2
         style={{
@@ -3817,10 +3793,10 @@ const Close: Page = () => {
         }}
       >
         <span style={{ display: 'block', ...a(live, `sn-focus 1.5s ${FLUID} 0.4s both`) }}>
-          162 mL of
+          162 mL 的
         </span>
         <span style={{ display: 'block', ...a(live, `sn-focus 1.5s ${FLUID} 0.58s both`) }}>
-          breathing
+          呼吸
         </span>
         <span
           style={{
@@ -3829,7 +3805,7 @@ const Close: Page = () => {
             ...a(live, `sn-focus 1.5s ${FLUID} 0.76s both`),
           }}
         >
-          room.
+          空間
         </span>
       </h2>
       <div
@@ -3839,8 +3815,8 @@ const Close: Page = () => {
           ...a(live, `sn-rise 1.1s ${FLUID} 1.1s both`),
         })}
       >
-        <Contact kind="Investor relations" name="Lena Moreau" line="ir@solenne.bio" />
-        <Contact kind="Media" name="Jonas Pereira" line="press@solenne.bio" />
+        <Contact kind="投資人關係" name="Lena Moreau" line="ir@solenne.bio" />
+        <Contact kind="媒體" name="Jonas Pereira" line="press@solenne.bio" />
       </div>
       <div
         style={abs(1060, 940, {
@@ -3849,8 +3825,7 @@ const Close: Page = () => {
           ...a(live, 'sn-fade 1s ease-out 1.5s both'),
         })}
       >
-        SLN-214 is investigational and not approved in any market. Forward-looking statements apply;
-        see solenne.bio/investors.
+        SLN-214 為試驗用藥，尚未在任何市場核准。本簡報含前瞻性陳述，詳見 solenne.bio/investors。
       </div>
     </Stage>
   );
@@ -3860,54 +3835,54 @@ Screen.transition = morphTransition;
 Zoom.transition = morphTransition;
 
 export const meta: SlideMeta = {
-  title: 'Solenne Bio — R&D Day 2026',
+  title: 'Solenne Bio — 2026 研發日',
   createdAt: '2026-10-11T12:54:22.619Z',
 };
 
 export const notes: (string | undefined)[] = [
-  `Let the well come into focus before you speak. What you are looking at is real biology from our lab: fibroblasts from an IPF patient, nuclei in blue, the scar-making machinery in green, collagen in magenta.
-"Good morning. I'm Mara Lindqvist, CEO of Solenne. Today is about one number: how much breathing room we can give patients with IPF."
-"We'll cover the disease, the biology, the Phase 2b data, and what comes next." Click.`,
-  `"IPF is a scarring disease of the lung's air sacs. Fibroblasts lay down collagen faster than the lung can clear it."
-Point at the panel: "Watch the lattice. The scar starts at the edge of the lung, under the pleura, and at the bases, and it creeps inward."
-"Median survival is three to five years from diagnosis. Untreated, patients lose around two hundred millilitres of lung capacity a year. Two drugs are approved. Both slow that decline. Neither stops it." Click.`,
-  `Hand over to Dr. Tomas Okafor, CSO.
-"In fibrotic tissue, a ligand binds its receptor and the signal runs through one kinase we call FSK2, then a transcription factor, into the nucleus, where it switches on the collagen genes."
-Click: "SLN-214 binds an allosteric pocket on FSK2. Signals still arrive at the receptor. They just stop there."
-Click: "Fourteen nanomolar in cells, an eighty-two percent drop in collagen transcription, and more than four hundred-fold selectivity across three hundred and eighty kinases." Click.`,
-  `"We didn't start from a target. We started from patients' cells."
-"Two thousand four hundred and sixteen compounds, on fibroblasts from eighteen IPF donors. Each well is imaged for collagen. Bright magenta means scar."
-"Column one is stimulated, column twelve unstimulated. And here, well D7, is the compound that became SLN-214." Pause, then click to zoom in.`,
-  `"This is inside that well. On the left, vehicle: dense collagen, fibroblasts locked in the myofibroblast state."
-"On the right, the same cells with SLN-214 at time zero." Click.
-"Seventy-two hours later. Collagen area down fifty-eight percent, myofibroblasts down seventy-one percent, and every one of the six donors responded." Click.`,
-  `"Then we built the molecule for the lung."
-"An allosteric FSK2 inhibitor, just under four hundred daltons, formulated as a dry powder you inhale once a day."
-"The key number is thirty-eight to one: lung exposure versus plasma. With a twenty-six hour lung half-life, once daily works, and the rest of the body sees very little drug." Click.`,
-  `"Inhaled only works if the drug reaches the deep lung."
-"In a scintigraphy study, fifty-eight percent of the emitted dose deposited in the lungs, forty-one percent in the periphery, exactly where IPF starts."
-"Particle size is two point one microns, small enough to travel past the large airways." Click.`,
-  `Hand over to Dr. Helen Achterberg, CMO.
-"FIBRA-2 randomised three hundred and twelve patients one to one to one: placebo, thirty milligrams, or sixty milligrams once daily, for fifty-two weeks."
-"Patients could stay on a stable background antifibrotic, and fifty-eight percent did. The primary endpoint is change in FVC at week fifty-two."
-"Ninety-four percent of completers rolled into the open-label extension." Click.`,
-  `Three clicks, one arm each.
-Click: "Placebo patients lost two hundred and fourteen millilitres over the year, in line with the natural history."
-Click: "Thirty milligrams: minus one hundred twenty-one."
-Click: "Sixty milligrams: minus fifty-two. That's a difference of one hundred sixty-two millilitres, p below zero point zero zero one. Seventy-six percent less lung function lost." Pause. Click.`,
-  `"Efficacy only matters if patients can stay on drug."
-"Each dot is one patient. Adverse event rates were similar across arms: seventy-one percent on placebo, seventy-six on sixty milligrams."
-"Discontinuations due to adverse events: seven, six, and eight patients. The most common event was cough, mild and transient. No dose-related GI or liver signal." Click.`,
-  `Back to Mara.
-"FSK2 drives fibrosis well beyond IPF, so this is a platform."
-"SLN-214 goes into Phase 3 in IPF in the first half of 2027, and is already enrolling in progressive pulmonary fibrosis."
-"SLN-307, an oral molecule, is in Phase 1 for scleroderma lung disease. SLN-410 targets pulmonary hypertension in ILD, and an FSK2 degrader is in lead optimisation for kidney fibrosis." Click.`,
-  `"Six catalysts over the next two years."
-Walk left to right: "End-of-Phase 2 meeting this quarter. FIBRA-3 starts in the first half of 2027, alongside SLN-307 data. PPF interim in the second half. SLN-410 IND in 2028, and FIBRA-3 fully enrolled by end of 2028."
-"We have six hundred and twelve million dollars in cash, which funds all of this into 2029." Click.`,
-  `"One hundred sixty-two millilitres. In a disease measured in what you lose, that's breathing room."
-"Thank you. Lena and Jonas will follow up on materials and one-on-ones."
-Open for questions.`,
+  `請先讓培養孔的畫面慢慢對焦，再開口。眼前是我們實驗室的真實生物現象：IPF 病患的纖維母細胞，藍色是細胞核，綠色是製造疤痕的機制，洋紅色是膠原蛋白。
+「大家早安，我是 Mara Lindqvist，Solenne 的執行長。今天只談一個數字：我們能為 IPF 病患多爭取多少呼吸空間。」
+「接下來會談疾病、背後的生物學、第 2b 期數據，以及後續規劃。」點擊。`,
+  `「IPF 是一種讓肺部氣囊結疤的疾病。纖維母細胞堆積膠原蛋白的速度，比肺部清除的速度還快。」
+指著右側圖示：「請看這片網狀結構。疤痕從肺的邊緣、胸膜下與肺底部開始，慢慢往內蔓延。」
+「確診後的中位存活期是三到五年。未經治療的病患，每年大約流失兩百毫升肺容量。目前有兩種藥物獲准，都只能減緩惡化，沒有一種能阻止它。」點擊。`,
+  `交棒給首席科學長 Dr. Tomas Okafor。
+「在纖維化的組織裡，配體結合受體後，訊號會經過一個我們稱為 FSK2 的激酶，再傳到轉錄因子，進入細胞核，啟動膠原蛋白基因。」
+點擊：「SLN-214 結合在 FSK2 的一個異位口袋上。訊號仍然會抵達受體，但就停在那裡。」
+點擊：「在細胞中是十四奈莫耳，膠原蛋白轉錄下降百分之八十二，而且在三百八十種激酶之間有超過四百倍的選擇性。」點擊。`,
+  `「我們不是從標靶出發，而是從病患的細胞出發。」
+「兩千四百一十六種化合物，測試在來自十八位 IPF 捐贈者的纖維母細胞上。每個孔都會拍照，看膠原蛋白的量。亮洋紅色就代表疤痕。」
+「第一欄是受刺激的對照，第十二欄是未受刺激的對照。而這裡的 D7 孔，就是後來成為 SLN-214 的化合物。」停頓一下，再點擊放大。`,
+  `「這就是那個孔的內部。左邊是溶媒對照：膠原蛋白密集，纖維母細胞被鎖在肌纖維母細胞的狀態。」
+「右邊是同樣的細胞，加入 SLN-214，時間為零。」點擊。
+「七十二小時後。膠原蛋白面積減少百分之五十八，肌纖維母細胞減少百分之七十一，六位捐贈者全部都有反應。」點擊。`,
+  `「接著，我們為肺打造了這個分子。」
+「一個異位的 FSK2 抑制劑，分子量不到四百道爾吞，做成每天吸入一次的乾粉。」
+「關鍵數字是三十八比一：肺部暴露量對血漿暴露量。加上二十六小時的肺內半衰期，每天一次就夠了，身體其他部位接觸到的藥物非常少。」點擊。`,
+  `「吸入式藥物要有效，前提是藥物要到達深部肺臟。」
+「在閃爍攝影研究中，釋出劑量有百分之五十八沉積在肺部，百分之四十一落在肺周邊，正是 IPF 開始的地方。」
+「顆粒大小是二點一微米，小到足以穿過大氣道。」點擊。`,
+  `交棒給醫務長 Dr. Helen Achterberg。
+「FIBRA-2 以一比一比一的比例，隨機分配三百一十二位病患：安慰劑、三十毫克，或六十毫克，每日一次，為期五十二週。」
+「病患可以繼續使用穩定劑量的背景抗纖維化藥物，有百分之五十八的人這麼做。主要終點是第五十二週時 FVC 的變化。」
+「完成試驗的病患中，有百分之九十四轉入開放標示延伸試驗。」點擊。`,
+  `三次點擊，每次一組。
+點擊：「安慰劑組病患一年內流失了兩百一十四毫升，符合疾病的自然病程。」
+點擊：「三十毫克：減少一百二十一。」
+點擊：「六十毫克：減少五十二。差距是一百六十二毫升，p 值小於零點零零一。肺功能流失少了百分之七十六。」停頓。點擊。`,
+  `「療效有意義，前提是病患能持續用藥。」
+「每個點代表一位病患。各組的不良事件發生率相近：安慰劑組百分之七十一，六十毫克組百分之七十六。」
+「因不良事件而中止的人數：七位、六位、八位。最常見的事件是咳嗽，輕度而且短暫。沒有與劑量相關的腸胃或肝臟訊號。」點擊。`,
+  `交回給 Mara。
+「FSK2 驅動的纖維化遠不只 IPF，所以這是一個平台。」
+「SLN-214 會在二〇二七年上半年進入 IPF 的第 3 期，進行性肺纖維化的試驗則已經在收案。」
+「SLN-307 是口服分子，正在進行硬皮症肺病的第 1 期。SLN-410 針對 ILD 相關的肺高壓，而 FSK2 降解劑則在針對腎臟纖維化進行先導化合物優化。」點擊。`,
+  `「未來兩年有六個關鍵里程碑。」
+由左到右說明：「本季召開第 2 期結束會議。FIBRA-3 在二〇二七年上半年啟動，同時公布 SLN-307 的數據。下半年有 PPF 的期中分析。二〇二八年送件 SLN-410 的 IND，FIBRA-3 在二〇二八年底前完成收案。」
+「我們手上有六億一千二百萬美元現金，足以支撐這一切到二〇二九年。」點擊。`,
+  `「一百六十二毫升。在一個以『失去多少』來衡量的疾病裡，這就是呼吸空間。」
+「謝謝大家。Lena 和 Jonas 會跟進後續資料與一對一會談。」
+開放提問。`,
 ];
 
 export default [

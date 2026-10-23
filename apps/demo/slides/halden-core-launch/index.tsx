@@ -14,8 +14,9 @@ import type { CSSProperties, ReactNode } from 'react';
 export const design: DesignSystem = {
   palette: { bg: '#08090B', text: '#F4F3EF', accent: '#FF7A2F' },
   fonts: {
-    display: '"Inter Tight", "Inter", system-ui, sans-serif',
-    body: '"Inter Tight", "Inter", system-ui, sans-serif',
+    display:
+      '"Inter Tight", "Inter", system-ui, sans-serif, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
+    body: '"Inter Tight", "Inter", system-ui, sans-serif, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
   },
   typeScale: { hero: 200, body: 34 },
   radius: 28,
@@ -25,7 +26,8 @@ const MUTED = '#8C8F96';
 const DIM = '#4A4D53';
 const HAIRLINE = 'rgba(255,255,255,0.10)';
 const DEEP = '#C2410C';
-const MONO = 'ui-monospace, "SF Mono", Menlo, Consolas, monospace';
+const MONO =
+  'ui-monospace, "SF Mono", Menlo, Consolas, monospace, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif';
 
 const SLIDE_ID = 'halden-core-launch';
 const FONT_HREF =
@@ -115,8 +117,8 @@ const morphTransition: SlideTransition = {
 const HEAD: CSSProperties = {
   fontFamily: 'var(--osd-font-display)',
   fontWeight: 600,
-  letterSpacing: '-0.045em',
-  lineHeight: 0.95,
+  letterSpacing: '-0.02em',
+  lineHeight: 1.08,
   margin: 0,
 };
 
@@ -525,7 +527,7 @@ const Cover: Page = () => {
     <Stage footer={false}>
       <CoreUnit x={1214} y={176} scale={1} charge={0.82} wash={1.15} intro />
       <div style={abs(120, 112, { ...LABEL, color: '#B4B2AC', letterSpacing: '0.16em' })}>
-        Launch event · October 2026
+        新品發表會 · 2026 年 10 月
       </div>
       <div style={abs(120, 408, { width: 1040 })}>
         <h1 style={{ ...HEAD, ...GRADIENT_TEXT, fontSize: 196, ...rise(0.15) }}>Halden Core</h1>
@@ -539,7 +541,7 @@ const Cover: Page = () => {
             ...rise(0.35),
           }}
         >
-          Your home, on its own power.
+          你的家，靠自己的電力運轉。
         </p>
       </div>
       <div
@@ -587,11 +589,11 @@ const Problem: Page = () => {
   const live = useIsActivePage();
   return (
     <Stage>
-      <div style={abs(120, 120, LABEL)}>The price of a day</div>
+      <div style={abs(120, 120, LABEL)}>一天的電價</div>
       <h2 style={{ ...HEAD, ...abs(120, 176), fontSize: 112, width: 1500 }}>
-        Electricity is cheapest
+        最便宜的電，
         <br />
-        <span style={{ color: MUTED }}>when you don't need it.</span>
+        <span style={{ color: MUTED }}>出現在你用不到的時候。</span>
       </h2>
       <svg
         width={1680}
@@ -599,7 +601,7 @@ const Problem: Page = () => {
         viewBox="0 0 1680 420"
         style={abs(120, 478, { overflow: 'visible' })}
         role="img"
-        aria-label="Relative electricity price over 24 hours"
+        aria-label="24 小時內的相對電價變化"
       >
         <defs>
           <linearGradient id="hc-p2-area" x1="0" y1="0" x2="0" y2="1">
@@ -670,7 +672,7 @@ const Problem: Page = () => {
             letterSpacing: '0.02em',
           }}
         >
-          Peak: 5–9 pm
+          尖峰：17:00–21:00
         </text>
         <line
           x1={P2.x0}
@@ -711,7 +713,7 @@ const Problem: Page = () => {
             fontFamily: 'var(--osd-font-body)',
           }}
         >
-          RELATIVE PRICE · TIME-OF-USE TARIFF
+          相對電價 · 時間電價
         </text>
         <path
           d={TARIFF_AREA}
@@ -787,7 +789,7 @@ const Reveal: Page = () => (
         fontSize: 120,
       }}
     >
-      Meet Core.
+      認識 Core。
     </h2>
     <MorphCore x={843} y={268} scale={0.78} wash={1.25} />
     <div
@@ -802,9 +804,9 @@ const Reveal: Page = () => (
         zIndex: 3,
       }}
     >
-      <RevealSpec value="14.2" unit="kWh" label="Capacity" />
-      <RevealSpec value="10" unit="kW" label="Continuous power" divider />
-      <RevealSpec value="14" unit="cm" label="Depth" divider />
+      <RevealSpec value="14.2" unit="kWh" label="容量" />
+      <RevealSpec value="10" unit="kW" label="連續功率" divider />
+      <RevealSpec value="14" unit="cm" label="厚度" divider />
     </div>
   </Stage>
 );
@@ -913,7 +915,7 @@ const SideDrawing = () => {
         animation: live ? `hc-fade 0.7s ease-out ${MORPH_MS / 1000 - 0.2}s both` : undefined,
       })}
       role="img"
-      aria-label="Side elevation of Halden Core compared with H1"
+      aria-label="Halden Core 與 H1 的側視比較圖"
     >
       <defs>
         <pattern
@@ -1094,19 +1096,19 @@ const SideDrawing = () => {
           style={{ stroke: 'rgba(244,243,239,0.2)', strokeWidth: 1 }}
         />
         <text x={914} y={493} style={{ fill: 'var(--osd-text)' }}>
-          HALDEN CORE · SIDE ELEVATION
+          HALDEN CORE · 側視圖
         </text>
         <text x={914} y={526} style={{ fill: MUTED }}>
-          DIMENSIONS CM
+          尺寸（CM）
         </text>
         <text x={1104} y={526} style={{ fill: MUTED }}>
-          DETAIL 2.5:1
+          細部 2.5:1
         </text>
         <text x={914} y={558} style={{ fill: MUTED }}>
-          DWG HC-104
+          圖號 HC-104
         </text>
         <text x={1104} y={558} style={{ fill: MUTED }}>
-          REV A
+          版次 A
         </text>
       </g>
     </svg>
@@ -1117,8 +1119,8 @@ const Thin: Page = () => {
   const live = useIsActivePage();
   return (
     <Stage>
-      <div style={abs(120, 120, LABEL)}>Design</div>
-      <h2 style={{ ...HEAD, ...abs(120, 168), fontSize: 104 }}>Fourteen centimetres.</h2>
+      <div style={abs(120, 120, LABEL)}>設計</div>
+      <h2 style={{ ...HEAD, ...abs(120, 168), fontSize: 104 }}>只有 14 公分。</h2>
       <p
         style={abs(122, 286, {
           margin: 0,
@@ -1128,7 +1130,7 @@ const Thin: Page = () => {
           animation: live ? `hc-fade 0.6s ease-out ${MORPH_MS / 1000 - 0.3}s both` : undefined,
         })}
       >
-        A third thinner than H1, with 38% more energy inside.
+        比 H1 薄三分之一，電量卻多了 38%。
       </p>
       <MorphCore x={210} y={440} scale={0.65} wash={0.7} />
       <SideDrawing />
@@ -1140,7 +1142,7 @@ const Thin: Page = () => {
       >
         <div style={{ ...HEAD, ...GRADIENT_TEXT, fontSize: 132 }}>−32%</div>
         <div style={{ marginTop: 18, fontSize: 28, color: MUTED, lineHeight: 1.35 }}>
-          depth versus
+          厚度相較於
           <br />
           Halden H1
         </div>
@@ -1283,11 +1285,11 @@ const Day: Page = () => {
     live ? { animation: `hc-fade 0.8s ease-out ${delay}s both` } : {};
   return (
     <Stage>
-      <div style={abs(120, 120, LABEL)}>A day with Core</div>
+      <div style={abs(120, 120, LABEL)}>與 Core 共度一天</div>
       <h2 style={{ ...HEAD, ...abs(120, 168), fontSize: 96, width: 1100 }}>
-        Sun by day.
+        白天靠太陽。
         <br />
-        <span style={{ color: MUTED }}>Core by night.</span>
+        <span style={{ color: MUTED }}>夜晚靠 Core。</span>
       </h2>
       <div style={abs(1380, 128, { width: 420, textAlign: 'right' })}>
         <div style={{ ...HEAD, fontSize: 168, color: 'var(--osd-accent)' }}>94%</div>
@@ -1299,9 +1301,9 @@ const Day: Page = () => {
             letterSpacing: '-0.01em',
           }}
         >
-          of the day off-grid
+          的時間不用靠電網
         </div>
-        <div style={{ ...LABEL, fontSize: 18, marginTop: 10, color: DIM }}>Typical spring day</div>
+        <div style={{ ...LABEL, fontSize: 18, marginTop: 10, color: DIM }}>春季的典型一天</div>
       </div>
       <svg
         width={1680}
@@ -1309,7 +1311,7 @@ const Day: Page = () => {
         viewBox="0 0 1680 530"
         style={abs(120, 410, { overflow: 'visible' })}
         role="img"
-        aria-label="Solar production, home consumption, battery charge and grid import over one day"
+        aria-label="一天之內的太陽能發電量、家庭用電量、電池電量與電網購電量"
       >
         <defs>
           <linearGradient id="hc-solar" x1="0" y1="0" x2="0" y2="1">
@@ -1396,12 +1398,12 @@ const Day: Page = () => {
         />
 
         <g style={fade(1.6)}>
-          <LegendKey x={P5.x0} y={p5y(4.5) - 22} label="Solar" kind="solar" />
-          <LegendKey x={P5.x0 + 128} y={p5y(4.5) - 22} label="Home" kind="home" />
-          <LegendKey x={P5.x0 + 262} y={p5y(4.5) - 22} label="Battery" kind="battery" />
-          <LegendKey x={P5.x0 + 412} y={p5y(4.5) - 22} label="Grid" kind="grid" />
-          <Bracket t0={9} t1={15} y={p5y(4.5)} label="Charges from solar 9:00–15:00" />
-          <Bracket t0={17} t1={21} y={p5y(4.5)} label="Runs the house through the evening peak" />
+          <LegendKey x={P5.x0} y={p5y(4.5) - 22} label="太陽能" kind="solar" />
+          <LegendKey x={P5.x0 + 128} y={p5y(4.5) - 22} label="家用" kind="home" />
+          <LegendKey x={P5.x0 + 262} y={p5y(4.5) - 22} label="電池" kind="battery" />
+          <LegendKey x={P5.x0 + 412} y={p5y(4.5) - 22} label="電網" kind="grid" />
+          <Bracket t0={9} t1={15} y={p5y(4.5)} label="9:00–15:00 以太陽能充電" />
+          <Bracket t0={17} t1={21} y={p5y(4.5)} label="撐過傍晚尖峰，供應全家用電" />
         </g>
 
         <AxisHour x={p5x(0)} y={P5.base + 42} label="00:00" />
@@ -1430,7 +1432,7 @@ const Switchover: Page = () => {
   const live = useIsActivePage();
   return (
     <Stage>
-      <div style={abs(120, 120, LABEL)}>Backup</div>
+      <div style={abs(120, 120, LABEL)}>備援</div>
       <div
         style={{
           ...HEAD,
@@ -1456,8 +1458,8 @@ const Switchover: Page = () => {
           color: 'var(--osd-text)',
         })}
       >
-        The lights don't flicker.
-        <span style={{ color: MUTED }}> The router stays up.</span>
+        燈不會閃。
+        <span style={{ color: MUTED }}>路由器不會斷線。</span>
       </p>
       <svg
         width={1680}
@@ -1465,7 +1467,7 @@ const Switchover: Page = () => {
         viewBox="0 0 1680 200"
         style={abs(120, 740, { overflow: 'visible' })}
         role="img"
-        aria-label="Grid waveform drops out and Core takes over within one cycle"
+        aria-label="電網波形中斷，Core 在一個週期內接手"
       >
         <path
           d={GRID_WAVE}
@@ -1503,10 +1505,10 @@ const Switchover: Page = () => {
           {'< 20 ms'}
         </ChartText>
         <ChartText x={0} y={WAVE.mid + 104} color={MUTED} size={22}>
-          Grid
+          電網
         </ChartText>
         <ChartText x={WAVE.gap0} y={WAVE.mid + 104} anchor="middle" color={MUTED} size={22}>
-          Outage
+          停電
         </ChartText>
         <ChartText
           x={WAVE.x1}
@@ -1672,7 +1674,7 @@ const AppScreen = () => {
         HALDEN · OAK STREET
       </div>
       <div style={abs(22, 90, { fontSize: 32, fontWeight: 600, letterSpacing: '-0.03em' })}>
-        Energy
+        能源
       </div>
       <div
         style={abs(270, 100, {
@@ -1696,7 +1698,7 @@ const AppScreen = () => {
             animation: live ? 'hc-dot 2.4s ease-in-out infinite' : undefined,
           }}
         />
-        Live
+        即時
       </div>
 
       <svg
@@ -1763,10 +1765,10 @@ const AppScreen = () => {
           <path d="M-6,11 L0,-11 L6,11 M-3.8,3 L3.8,3 M-2.4,-3 L2.4,-3 M-9,-6 L9,-6" />
         </FlowNode>
 
-        <NodeLabel x={hub.x + 42} y={36} label="SOLAR" value="4.2 kW" anchor="start" />
-        <NodeLabel x={306} y={hub.y + 50} label="HOME" value="1.8 kW" />
-        <NodeLabel x={hub.x + 42} y={292} label="BATTERY" value="+2.4 kW" anchor="start" accent />
-        <NodeLabel x={40} y={hub.y + 50} label="GRID" value="0.0 kW" />
+        <NodeLabel x={hub.x + 42} y={36} label="太陽能" value="4.2 kW" anchor="start" />
+        <NodeLabel x={306} y={hub.y + 50} label="家用" value="1.8 kW" />
+        <NodeLabel x={hub.x + 42} y={292} label="電池" value="+2.4 kW" anchor="start" accent />
+        <NodeLabel x={40} y={hub.y + 50} label="電網" value="0.0 kW" />
       </svg>
 
       <div
@@ -1797,7 +1799,7 @@ const AppScreen = () => {
             color: 'var(--osd-accent)',
           })}
         >
-          Charging
+          充電中
         </div>
         <div style={abs(18, 38, { fontSize: 44, fontWeight: 600, letterSpacing: '-0.04em' })}>
           76<span style={{ fontSize: 24, color: MUTED, marginLeft: 2 }}>%</span>
@@ -1829,9 +1831,9 @@ const AppScreen = () => {
             lineHeight: 1.35,
           })}
         >
-          10.8 of 14.2 kWh
+          10.8 / 14.2 kWh
           <br />
-          Full by 11:10 am
+          上午 11:10 充飽
         </div>
       </div>
 
@@ -1845,11 +1847,9 @@ const AppScreen = () => {
         })}
       >
         <div style={abs(20, 15, { fontSize: 16, fontWeight: 600, letterSpacing: '-0.01em' })}>
-          Storm Watch
+          風暴警戒
         </div>
-        <div style={abs(20, 38, { fontSize: 13, color: MUTED })}>
-          Charges to full before severe weather
-        </div>
+        <div style={abs(20, 38, { fontSize: 13, color: MUTED })}>惡劣天氣來臨前先充滿電</div>
         <div
           style={abs(292, 21, {
             width: 48,
@@ -1885,10 +1885,10 @@ const AppScreen = () => {
           letterSpacing: '0.02em',
         })}
       >
-        <TabItem label="Energy" active />
-        <TabItem label="Backup" />
-        <TabItem label="History" />
-        <TabItem label="Settings" />
+        <TabItem label="能源" active />
+        <TabItem label="備援" />
+        <TabItem label="紀錄" />
+        <TabItem label="設定" />
       </div>
       <div
         style={abs(128, 824, {
@@ -2016,22 +2016,16 @@ const App: Page = () => (
   <Stage>
     <Phone x={270} y={96} />
     <div style={abs(900, 196, { width: 860 })}>
-      <div style={LABEL}>The Halden app</div>
+      <div style={LABEL}>Halden App</div>
       <h2 style={{ ...HEAD, fontSize: 96, marginTop: 28 }}>
-        Every watt,
+        每一瓦電，
         <br />
-        <span style={{ color: MUTED }}>accounted for.</span>
+        <span style={{ color: MUTED }}>都清清楚楚。</span>
       </h2>
       <div style={{ marginTop: 64, borderBottom: `1px solid ${HAIRLINE}` }}>
-        <Feature title="Storm Watch" body="Charges to full before severe weather arrives." />
-        <Feature
-          title="Tariff-aware scheduling"
-          body="Stores cheap energy. Spends it when prices peak."
-        />
-        <Feature
-          title="Per-circuit backup priorities"
-          body="You choose what stays on in an outage."
-        />
+        <Feature title="風暴警戒" body="惡劣天氣來臨前，先把電充滿。" />
+        <Feature title="電價感知排程" body="電價低時存電，電價高時用電。" />
+        <Feature title="分迴路備援優先順序" body="停電時，由你決定哪些設備繼續供電。" />
       </div>
     </div>
   </Stage>
@@ -2091,12 +2085,12 @@ const UnitGroup = ({ count, kwh, caption }: { count: number; kwh: string; captio
 
 const Modular: Page = () => (
   <Stage>
-    <div style={abs(120, 120, LABEL)}>Expandable</div>
+    <div style={abs(120, 120, LABEL)}>可擴充</div>
     <h2 style={{ ...HEAD, ...abs(120, 168), fontSize: 104 }}>
-      Starts at one. <span style={{ color: MUTED }}>Grows to four.</span>
+      從一台開始，<span style={{ color: MUTED }}>最多擴充到四台。</span>
     </h2>
     <p style={abs(122, 300, { margin: 0, fontSize: 32, color: MUTED, letterSpacing: '-0.01em' })}>
-      Add a unit whenever your home needs more. Up to 56.8 kWh on one wall.
+      家裡需要更多電量時，再加一台就好。同一面牆最高可達 56.8 kWh。
     </p>
     <div
       style={abs(120, FLOOR_Y, {
@@ -2106,10 +2100,10 @@ const Modular: Page = () => (
         zIndex: 1,
       })}
     />
-    <UnitGroup count={1} kwh="14.2" caption="One unit" />
-    <UnitGroup count={2} kwh="28.4" caption="Two units" />
-    <UnitGroup count={3} kwh="42.6" caption="Three units" />
-    <UnitGroup count={4} kwh="56.8" caption="Four units" />
+    <UnitGroup count={1} kwh="14.2" caption="一台" />
+    <UnitGroup count={2} kwh="28.4" caption="兩台" />
+    <UnitGroup count={3} kwh="42.6" caption="三台" />
+    <UnitGroup count={4} kwh="56.8" caption="四台" />
   </Stage>
 );
 
@@ -2190,26 +2184,26 @@ const CompareColumn = ({
 
 const Generations: Page = () => (
   <Stage>
-    <div style={abs(120, 120, LABEL)}>Core versus Halden H1</div>
+    <div style={abs(120, 120, LABEL)}>Core 對比 Halden H1</div>
     <h2 style={{ ...HEAD, ...abs(120, 168), fontSize: 104 }}>
-      More inside. <span style={{ color: MUTED }}>Less on the wall.</span>
+      裡面裝更多，<span style={{ color: MUTED }}>牆上佔更少。</span>
     </h2>
     <div style={abs(120, 460, { width: 1680, display: 'flex' })}>
-      <CompareColumn big="+38%" caption="more capacity" first>
+      <CompareColumn big="+38%" caption="容量更大" first>
         <CompareBar label="Core" value="14.2 kWh" pct={1} core />
         <CompareBar label="H1" value="10.3 kWh" pct={10.3 / 14.2} />
       </CompareColumn>
-      <CompareColumn big="−32%" caption="less depth">
+      <CompareColumn big="−32%" caption="厚度更薄">
         <CompareBar label="Core" value="14 cm" pct={14 / 20.5} core />
         <CompareBar label="H1" value="20.5 cm" pct={1} />
       </CompareColumn>
-      <CompareColumn big="92%" caption="round-trip efficiency">
+      <CompareColumn big="92%" caption="往返效率">
         <CompareBar label="Core" value="92%" pct={0.92} core />
         <CompareBar label="H1" value="89%" pct={0.89} />
       </CompareColumn>
-      <CompareColumn big="15" caption="year warranty">
-        <CompareBar label="Core" value="15 years" pct={1} core />
-        <CompareBar label="H1" value="10 years" pct={10 / 15} />
+      <CompareColumn big="15" caption="年保固">
+        <CompareBar label="Core" value="15 年" pct={1} core />
+        <CompareBar label="H1" value="10 年" pct={10 / 15} />
       </CompareColumn>
     </div>
   </Stage>
@@ -2246,28 +2240,28 @@ const SpecRow = ({ label, value, note }: { label: string; value: string; note?: 
 
 const Specs: Page = () => (
   <Stage>
-    <div style={abs(120, 120, LABEL)}>Tech specs</div>
+    <div style={abs(120, 120, LABEL)}>技術規格</div>
     <h2 style={{ ...HEAD, ...abs(120, 168), fontSize: 96 }}>Halden Core</h2>
     <div style={abs(120, 330, { width: 790 })}>
-      <div style={{ ...LABEL, fontSize: 18, color: DIM, marginBottom: 18 }}>Electrical</div>
-      <SpecRow label="Capacity" value="14.2 kWh" />
-      <SpecRow label="Continuous power" value="10 kW" />
-      <SpecRow label="Peak power" value="18 kW" note="10 s" />
-      <SpecRow label="Round-trip efficiency" value="92%" />
-      <SpecRow label="Backup switchover" value="< 20 ms" />
-      <SpecRow label="Chemistry" value="LFP" note="lithium iron phosphate" />
-      <SpecRow label="Expandable" value="Up to 4 units" note="56.8 kWh" />
+      <div style={{ ...LABEL, fontSize: 18, color: DIM, marginBottom: 18 }}>電氣規格</div>
+      <SpecRow label="容量" value="14.2 kWh" />
+      <SpecRow label="連續功率" value="10 kW" />
+      <SpecRow label="峰值功率" value="18 kW" note="10 s" />
+      <SpecRow label="往返效率" value="92%" />
+      <SpecRow label="備援切換時間" value="< 20 ms" />
+      <SpecRow label="電池化學" value="LFP" note="磷酸鋰鐵" />
+      <SpecRow label="可擴充" value="最多 4 台" note="56.8 kWh" />
       <div style={{ borderTop: `1px solid ${HAIRLINE}` }} />
     </div>
     <div style={abs(1010, 330, { width: 790 })}>
-      <div style={{ ...LABEL, fontSize: 18, color: DIM, marginBottom: 18 }}>Physical</div>
-      <SpecRow label="Dimensions" value="168 × 70 × 14 cm" />
-      <SpecRow label="Weight" value="96 kg" />
-      <SpecRow label="Ingress protection" value="IP67" />
-      <SpecRow label="Operating temperature" value="−20 °C to 50 °C" />
-      <SpecRow label="Warranty" value="15 years" note="8,000 cycles" />
-      <SpecRow label="Installation" value="One day" />
-      <SpecRow label="Backup gateway" value="Optional" note="whole-home" />
+      <div style={{ ...LABEL, fontSize: 18, color: DIM, marginBottom: 18 }}>實體規格</div>
+      <SpecRow label="尺寸" value="168 × 70 × 14 cm" />
+      <SpecRow label="重量" value="96 kg" />
+      <SpecRow label="防護等級" value="IP67" />
+      <SpecRow label="操作溫度" value="−20 °C 至 50 °C" />
+      <SpecRow label="保固" value="15 年" note="8,000 次循環" />
+      <SpecRow label="安裝" value="一天" />
+      <SpecRow label="備援閘道器" value="選配" note="全屋" />
       <div style={{ borderTop: `1px solid ${HAIRLINE}` }} />
     </div>
   </Stage>
@@ -2353,17 +2347,17 @@ const PriceColumn = ({
 
 const Pricing: Page = () => (
   <Stage>
-    <div style={abs(120, 120, LABEL)}>Pricing</div>
-    <h2 style={{ ...HEAD, ...abs(120, 168), fontSize: 96 }}>Choose your Core.</h2>
+    <div style={abs(120, 120, LABEL)}>定價</div>
+    <h2 style={{ ...HEAD, ...abs(120, 168), fontSize: 96 }}>選擇適合你的 Core。</h2>
     <div style={abs(120, 336, { width: 1680 })}>
       <div style={{ display: 'flex' }}>
         <Steps>
           <Step duration={420}>
             <PriceColumn
               name="Core"
-              config="One unit · 14.2 kWh"
+              config="一台 · 14.2 kWh"
               price="$8,900"
-              body="Your solar, saved for the evening."
+              body="把白天的太陽能，存到晚上用。"
               first
             >
               <CoreUnit x={0} y={0} scale={0.24} charge={0.76} wash={0.3} floor={false} />
@@ -2372,9 +2366,9 @@ const Pricing: Page = () => (
           <Step duration={420}>
             <PriceColumn
               name="Core Duo"
-              config="Two units · 28.4 kWh"
+              config="兩台 · 28.4 kWh"
               price="$16,400"
-              body="Twice the storage, for larger homes."
+              body="儲電量加倍，適合較大的住家。"
             >
               <CoreUnit x={0} y={0} scale={0.24} charge={0.76} wash={0.3} floor={false} />
               <CoreUnit x={72 + 12} y={0} scale={0.24} charge={0.76} wash={0.3} floor={false} />
@@ -2383,9 +2377,9 @@ const Pricing: Page = () => (
           <Step duration={420}>
             <PriceColumn
               name="Core + Gateway"
-              config="One unit · whole-home backup"
+              config="一台 · 全屋備援"
               price="$10,600"
-              body="Every circuit stays on in an outage."
+              body="停電時，每一個迴路都不斷電。"
             >
               <CoreUnit x={0} y={0} scale={0.24} charge={0.76} wash={0.3} floor={false} />
               <Gateway x={72 + 22} y={91} />
@@ -2395,7 +2389,7 @@ const Pricing: Page = () => (
       </div>
     </div>
     <div style={abs(120, 942, { fontSize: 20, color: DIM, letterSpacing: '0.01em' })}>
-      Prices in USD. Eligible incentives vary by region.
+      價格以美元計。符合資格的補助方案依地區而異。
     </div>
   </Stage>
 );
@@ -2410,9 +2404,9 @@ const Close: Page = () => {
       <div style={abs(120, 120, { ...LABEL, color: '#B4B2AC' })}>Halden Core</div>
       <div style={abs(120, 360, { width: 1060 })}>
         <h2 style={{ ...HEAD, ...GRADIENT_TEXT, fontSize: 150, ...rise(0.1) }}>
-          Reservations
+          即日起
           <br />
-          open today.
+          開放預訂。
         </h2>
         <p
           style={{
@@ -2423,9 +2417,9 @@ const Close: Page = () => {
             ...rise(0.3),
           }}
         >
-          Deliveries from December 2026
+          2026 年 12 月起交貨
           <span style={{ color: DIM }}> · </span>
-          United States and Australia
+          美國與澳洲
         </p>
       </div>
       <div
@@ -2448,57 +2442,57 @@ Reveal.transition = morphTransition;
 Thin.transition = morphTransition;
 
 export const meta: SlideMeta = {
-  title: 'Halden Core — Launch keynote',
+  title: 'Halden Core — 新品發表會主題演講',
   createdAt: '2026-10-11T10:39:42.737Z',
 };
 
 export const notes: (string | undefined)[] = [
-  `Walk on in the dark. Let the light bar finish filling before you speak.
-"Good morning. For ten years Halden has built one thing: energy you keep at home."
-Pause. "Today we're showing you the most important thing we've made."
-Click.`,
-  `"Here's the problem with the grid. This is what a day of electricity costs."
-Trace the line with your hand: flat and cheap overnight, a bump in the morning, then the peak.
-"Between five and nine in the evening, the same kilowatt-hour costs three times as much. That's exactly when you get home, cook, and turn everything on."
-Beat. "Electricity is cheapest when you don't need it." Click.`,
-  `Say nothing for two seconds. Let the room see it.
-"Meet Core."
-"Fourteen point two kilowatt-hours. Ten kilowatts continuous. And it's fourteen centimetres deep."
-Click on the word "deep".`,
-  `The product glides left into the drawing. Wait for it to land.
-"Fourteen centimetres. H1 was twenty and a half. That's a third thinner."
-Point to the dashed outline. "That ghost is the battery you might already own. Core gives you thirty-eight percent more energy in less space."
-"It fits in a hallway. It fits beside the car." Click.`,
-  `"Let's spend a day with Core."
-Start left: "Overnight, Core runs the house. Around seven the grid tops it up for an hour or so. That grey sliver is the only grid power you buy."
-Middle: "From nine to three, the sun charges Core while it runs the house."
-Right: "Then the evening peak, when power is most expensive. Core carries the whole house through it."
-Land the number: "Ninety-four percent of the day, off the grid." Click.`,
-  `"And when the grid goes down?"
-Pause.
-"Core takes over in under twenty milliseconds. Faster than a single cycle of the power line."
-"The lights don't flicker. The router stays up. Your video call doesn't drop." Click.`,
-  `"All of it lives in the Halden app."
-"Live energy flow, to the watt. Right now: four point two kilowatts from the roof, one point eight into the house, two point four into Core."
-Then the three features, one breath each: Storm Watch, tariff-aware scheduling, per-circuit priorities.
-"You set it once. Core makes the decisions every hour after that." Click.`,
-  `"Core is modular."
-Move left to right across the row: "One unit, fourteen point two. Two, twenty-eight point four. Three. Four units, fifty-six point eight kilowatt-hours."
-"Start with what you need today. Add a unit when your home changes." Click.`,
-  `"For those of you with an H1 on the wall, here's what's changed."
-Read the four numbers, slowly: "Thirty-eight percent more capacity. Thirty-two percent thinner. Ninety-two percent round-trip efficiency, up from eighty-nine. And a fifteen-year warranty, up from ten." Click.`,
-  `Don't read this page. "Here's everything, for the spec sheet people."
-Call out two lines only: "IP67, so it lives outside. And it installs in one day."
-Click.`,
-  `"Three ways to bring Core home."
-Click: "Core, eight thousand nine hundred dollars."
-Click: "Core Duo, two units, sixteen thousand four hundred."
-Click: "Core with Gateway, for whole-home backup, ten thousand six hundred."
-Mention the footnote: "Incentives vary by region, and our team will walk you through yours." Click.`,
-  `Let the light bar fill to full.
-"Halden Core. Reservations open today."
-"Deliveries begin in December, in the United States and Australia."
-"Thank you." Hold on this page for questions.`,
+  `摸黑走上台。等光條完全充滿之後再開口。
+「大家早安。十年來，Halden 只做一件事：讓你把能源留在家裡。」
+停頓。「今天，我們要讓大家看到我們做過最重要的產品。」
+點擊。`,
+  `「電網的問題在這裡。這就是一天電費的樣子。」
+用手沿著曲線比劃：夜間平坦又便宜，早上有一個小凸起，然後是尖峰。
+「在傍晚五點到晚上九點之間，同樣一度電的價格是三倍。而那正好是你到家、煮飯、把所有電器都打開的時候。」
+停一拍。「最便宜的電，出現在你用不到的時候。」點擊。`,
+  `兩秒鐘什麼都不要說。讓全場好好看。
+「認識 Core。」
+「十四點二度電的容量，連續輸出十千瓦。而且厚度只有十四公分。」
+在「厚度」兩個字上點擊。`,
+  `產品往左滑進工程圖裡。等它停好。
+「十四公分。H1 是二十點五公分。薄了三分之一。」
+指向虛線輪廓。「那個虛影，就是你家可能已經有的電池。Core 在更小的空間裡，多給你百分之三十八的電量。」
+「走廊放得下，車子旁邊也放得下。」點擊。`,
+  `「我們來和 Core 過一天。」
+從左邊開始：「夜間，Core 負責供應全家用電。大約七點，電網會補充它一小時左右。那一小條灰色，就是你唯一需要向電網購買的電。」
+中間：「從九點到下午三點，太陽替 Core 充電，同時 Core 也在供應全家用電。」
+右邊：「接著是傍晚尖峰，電最貴的時候。Core 撐起整個家度過。」
+強調數字：「一天當中，有百分之九十四的時間不靠電網。」點擊。`,
+  `「那電網斷電的時候呢？」
+停頓。
+「Core 在二十毫秒內接手。比電力線的一個週期還快。」
+「燈不會閃，路由器不會斷線，你的視訊會議也不會掉。」點擊。`,
+  `「這一切都在 Halden App 裡。」
+「即時能源流向，精確到瓦。現在：屋頂送來四點二千瓦，一點八千瓦進到家裡，兩點四千瓦進到 Core。」
+接著三個功能，每個一口氣帶過：風暴警戒、電價感知排程、分迴路優先順序。
+「你只要設定一次。之後每個小時的決策，都由 Core 來做。」點擊。`,
+  `「Core 是模組化的。」
+沿著這一排由左到右：「一台，十四點二。兩台，二十八點四。三台。四台，五十六點八度電。」
+「先買今天需要的。等家裡有變化，再加一台。」點擊。`,
+  `「如果你家牆上已經掛著 H1，這是改變的地方。」
+慢慢念出這四個數字：「容量多了百分之三十八。厚度薄了百分之三十二。往返效率百分之九十二，從八十九提升上來。保固十五年，原本是十年。」點擊。`,
+  `這一頁不要照著念。「這裡是全部規格，給愛看規格表的朋友。」
+只點出兩行：「IP67，所以可以裝在戶外。而且一天就能裝好。」
+點擊。`,
+  `「把 Core 帶回家，有三種方式。」
+點擊：「Core，八千九百美元。」
+點擊：「Core Duo，兩台，一萬六千四百美元。」
+點擊：「Core 加 Gateway，提供全屋備援，一萬零六百美元。」
+提一下註腳：「補助方案依地區而異，我們的團隊會協助你了解適用的方案。」點擊。`,
+  `讓光條充滿到底。
+「Halden Core。即日起開放預訂。」
+「十二月開始出貨，地區是美國與澳洲。」
+「謝謝大家。」停在這一頁，開放提問。`,
 ];
 
 export default [

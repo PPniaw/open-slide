@@ -13,8 +13,9 @@ import { type CSSProperties, type ReactNode, useId } from 'react';
 export const design: DesignSystem = {
   palette: { bg: '#EFE6D2', text: '#3A2414', accent: '#D4601C' },
   fonts: {
-    display: '"Saira", "Eurostile Extended", "Microgramma D Extended", sans-serif',
-    body: '"Courier Prime", "Courier New", monospace',
+    display:
+      '"Saira", "Eurostile Extended", "Microgramma D Extended", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
+    body: '"Courier Prime", "Courier New", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", monospace',
   },
   typeScale: { hero: 176, body: 30 },
   radius: 6,
@@ -300,10 +301,10 @@ const Footer = () => {
         letterSpacing: '0.02em',
       })}
     >
-      <span>MERIDIAN LUNAR SYSTEMS · PROGRAM INTERNAL</span>
+      <span>MERIDIAN LUNAR SYSTEMS · 計畫內部文件</span>
       <span>MLS-S4-FRR-001 · REV C</span>
       <span>
-        SHEET {two(current)} OF {two(total)}
+        第 {two(current)} 頁，共 {two(total)} 頁
       </span>
     </div>
   );
@@ -549,7 +550,7 @@ const Cover: Page = () => {
         <SweepStripe r={166} color={BROWN} delay={370} live={live} cx={1440} cy={1010} />
       </svg>
       <div style={abs(120, 120, { fontSize: 24, letterSpacing: '0.06em', color: MUTED })}>
-        MERIDIAN LUNAR SYSTEMS — FLIGHT READINESS REVIEW
+        MERIDIAN LUNAR SYSTEMS — 飛行整備審查
       </div>
       <h1
         style={abs(112, 186, {
@@ -573,12 +574,12 @@ const Cover: Page = () => {
           color: ACCENT,
         })}
       >
-        Flight Readiness Briefing
+        飛行整備簡報
       </div>
       <div style={abs(120, 476, { fontSize: 'var(--osd-size-body)', lineHeight: 1.5 })}>
-        KESTREL lander to the lunar south pole.
+        KESTREL 登陸器前往月球南極。
         <br />
-        Launch 04 Nov 2026 · Perseus 2 · LC-2.
+        2026年11月4日發射 · Perseus 2 · LC-2。
       </div>
       <div
         className="se-m"
@@ -590,14 +591,14 @@ const Cover: Page = () => {
       >
         <Patch size={520} />
       </div>
-      <MetaItem x={120} label="Document">
+      <MetaItem x={120} label="文件編號">
         MLS-S4-FRR-001 Rev C
       </MetaItem>
-      <MetaItem x={560} label="Briefing">
-        12 Oct 2026 · 12:00 UTC
+      <MetaItem x={560} label="簡報時間">
+        2026年10月12日 · 12:00 UTC
       </MetaItem>
-      <MetaItem x={1000} label="Presented by">
-        R. Okafor, Mission Director
+      <MetaItem x={1000} label="報告人">
+        R. Okafor，任務總監
       </MetaItem>
     </Sheet>
   );
@@ -625,7 +626,7 @@ const Memo: Page = () => {
   const live = useIsActivePage();
   return (
     <Sheet>
-      <Header n="01" kicker="Purpose" title="One decision on the table." />
+      <Header n="01" kicker="目的" title="只需要一項決定。" />
       <div
         style={abs(120, 300, {
           width: 1040,
@@ -639,18 +640,16 @@ const Memo: Page = () => {
         })}
       >
         <div style={{ ...LABEL, fontSize: 18, color: MUTED, marginBottom: 18 }}>
-          Memorandum · MLS-S4-FRR-001
+          備忘錄 · MLS-S4-FRR-001
         </div>
-        <MemoLine k="TO:">SELENE-4 Flight Readiness Board</MemoLine>
-        <MemoLine k="FROM:">R. Okafor, Mission Director</MemoLine>
-        <MemoLine k="DATE:">12 October 2026</MemoLine>
-        <MemoLine k="SUBJ:">Launch readiness, 04 November 2026</MemoLine>
+        <MemoLine k="收文：">SELENE-4 飛行整備委員會</MemoLine>
+        <MemoLine k="發文：">R. Okafor，任務總監</MemoLine>
+        <MemoLine k="日期：">2026年10月12日</MemoLine>
+        <MemoLine k="主旨：">發射整備狀態（2026年11月4日）</MemoLine>
         <div style={{ height: 2, background: INK, opacity: 0.5, margin: '22px 0 24px' }} />
         <p style={{ margin: 0, fontSize: 'var(--osd-size-body)', lineHeight: 1.5 }}>
-          The board is asked for one decision: commit{' '}
-          <span style={{ whiteSpace: 'nowrap' }}>SELENE-4</span> to launch on 04 November. All
-          twelve consoles have closed their items. Two risks stay open, carried with mitigations,
-          not waivers.
+          請委員會做出一項決議：批准 <span style={{ whiteSpace: 'nowrap' }}>SELENE-4</span> 於
+          11月4日發射。十二個控制台的待辦項目均已結案；另有兩項風險仍未結案，以減緩措施因應，而非申請豁免。
         </p>
         <div style={{ fontSize: 28, marginTop: 22 }}>
           — R.O.
@@ -686,7 +685,7 @@ const Memo: Page = () => {
             ...anim(live, `se-stamp 520ms ${EASE_OUT} 700ms both`),
           }}
         >
-          FOR DECISION
+          待決議
         </div>
       </div>
       <div
@@ -697,10 +696,10 @@ const Memo: Page = () => {
           gap: 34,
         })}
       >
-        <MemoStat value="1,840" unit="kg" label="KESTREL wet mass at separation" />
-        <MemoStat value="4.6" unit="days" label="Earth–Moon transfer, direct" />
-        <MemoStat value="11.5" unit="min" label="Powered descent to touchdown" />
-        <MemoStat value="10" unit="days" label="Surface operations, minimum" />
+        <MemoStat value="1,840" unit="kg" label="KESTREL 分離時濕重" />
+        <MemoStat value="4.6" unit="天" label="地月轉移（直接航程）" />
+        <MemoStat value="11.5" unit="分鐘" label="動力下降至著陸" />
+        <MemoStat value="10" unit="天" label="月面作業（最低天數）" />
       </div>
     </Sheet>
   );
@@ -752,7 +751,7 @@ const Objective = ({
           color: tier === 'Primary' ? BG : INK,
         }}
       >
-        {tier}
+        {tier === 'Primary' ? '主要目標' : '次要目標'}
       </div>
       <div style={{ ...DISPLAY, fontWeight: 700, fontSize: 34, marginTop: 10, lineHeight: 1.15 }}>
         {title}
@@ -760,7 +759,7 @@ const Objective = ({
       <div style={{ fontSize: 28, marginTop: 6, lineHeight: 1.3, color: MUTED }}>{detail}</div>
     </div>
     <div style={{ width: 300, textAlign: 'right' }}>
-      <div style={{ ...LABEL, fontSize: 18, color: MUTED }}>Min. success</div>
+      <div style={{ ...LABEL, fontSize: 18, color: MUTED }}>最低成功標準</div>
       <div style={{ ...DISPLAY, fontWeight: 800, fontSize: 52, lineHeight: 1.1, marginTop: 4 }}>
         {metric}
       </div>
@@ -770,15 +769,15 @@ const Objective = ({
 
 const Objectives: Page = () => (
   <Sheet>
-    <Header n="02" kicker="Objectives" title="What success looks like." />
+    <Header n="02" kicker="任務目標" title="怎樣才算成功。" />
     <div style={abs(120, 300, { width: 1680, borderBottom: `2px solid ${RULE}` })}>
       <Steps>
         <Step>
           <Objective
             n="01"
             tier="Primary"
-            title="Precision soft landing at Site 04"
-            detail="Touchdown within 100 m of target, below 2 m/s vertical."
+            title="於著陸點 04 精準軟著陸"
+            detail="觸地點距目標 100 m 內，垂直速度低於 2 m/s。"
             metric="≤ 100 m"
           />
         </Step>
@@ -786,17 +785,17 @@ const Objectives: Page = () => (
           <Objective
             n="02"
             tier="Primary"
-            title="Deliver and power seven payloads"
-            detail="412 kg on the surface, powered through ten Earth days."
-            metric="10 days"
+            title="送達七項酬載並供電"
+            detail="412 kg 酬載送抵月面，供電持續十個地球日。"
+            metric="10 天"
           />
         </Step>
         <Step>
           <Objective
             n="03"
             tier="Secondary"
-            title="Measure ice in the top metre"
-            detail="PRISM drill samples regolith in 10 cm steps to 1 m depth."
+            title="量測表層一公尺內的水冰"
+            detail="PRISM 鑽具每隔 10 cm 取樣月壤，深達 1 m。"
             metric="1.0 m"
           />
         </Step>
@@ -804,8 +803,8 @@ const Objectives: Page = () => (
           <Objective
             n="04"
             tier="Secondary"
-            title="Drive PIKA into permanent shadow"
-            detail="A 400 m traverse from the ramp to the de Gerlache rim PSR."
+            title="驅動 PIKA 進入永久陰影區"
+            detail="由斜坡行駛 400 m，抵達 de Gerlache 邊緣永久陰影區。"
             metric="400 m"
           />
         </Step>
@@ -868,12 +867,13 @@ const Teams: Page = () => {
     <Sheet>
       <Header
         n="03"
-        kicker="Flight teams"
-        title="Eight consoles, one room."
+        kicker="飛行團隊"
+        title="八個控制台，同一間控制室。"
         aside={
           <>
-            Mission Operations Center, Tucson AZ
-            <br />3 shifts · 112 staff on rotation
+            任務營運中心，Tucson AZ
+            <br />
+            三班制 · 輪值人員 112 名
           </>
         }
       />
@@ -888,9 +888,9 @@ const Teams: Page = () => {
         <ConsoleCard
           pos="C-01"
           call="FLIGHT"
-          duty="Flight Director"
+          duty="飛行總監"
           lead="T. Ibarra"
-          staff="9 staff"
+          staff="9 人"
           stripe={ACCENT}
           live={live}
           delay={0}
@@ -898,9 +898,9 @@ const Teams: Page = () => {
         <ConsoleCard
           pos="C-02"
           call="FDO"
-          duty="Flight Dynamics"
+          duty="飛行動力"
           lead="K. Nakamura"
-          staff="14 staff"
+          staff="14 人"
           stripe={RUST}
           live={live}
           delay={90}
@@ -908,9 +908,9 @@ const Teams: Page = () => {
         <ConsoleCard
           pos="C-03"
           call="GNC"
-          duty="Guidance, Nav & Control"
+          duty="導引、導航與控制"
           lead="S. Adeyemi"
-          staff="18 staff"
+          staff="18 人"
           stripe={MUSTARD}
           live={live}
           delay={180}
@@ -918,9 +918,9 @@ const Teams: Page = () => {
         <ConsoleCard
           pos="C-04"
           call="PROP"
-          duty="Propulsion"
+          duty="推進系統"
           lead="L. Varga"
-          staff="12 staff"
+          staff="12 人"
           stripe={BROWN}
           live={live}
           delay={270}
@@ -928,9 +928,9 @@ const Teams: Page = () => {
         <ConsoleCard
           pos="C-05"
           call="POWER"
-          duty="Power & Thermal"
+          duty="電力與熱控"
           lead="M. Duarte"
-          staff="15 staff"
+          staff="15 人"
           stripe={MUSTARD}
           live={live}
           delay={360}
@@ -938,9 +938,9 @@ const Teams: Page = () => {
         <ConsoleCard
           pos="C-06"
           call="COMM"
-          duty="Comms & Ground Stations"
+          duty="通訊與地面站"
           lead="J. Whitfield"
-          staff="16 staff"
+          staff="16 人"
           stripe={BROWN}
           live={live}
           delay={450}
@@ -948,9 +948,9 @@ const Teams: Page = () => {
         <ConsoleCard
           pos="C-07"
           call="PAYLOAD"
-          duty="Payload Operations"
+          duty="酬載作業"
           lead="A. Rahimi"
-          staff="17 staff"
+          staff="17 人"
           stripe={ACCENT}
           live={live}
           delay={540}
@@ -958,9 +958,9 @@ const Teams: Page = () => {
         <ConsoleCard
           pos="C-08"
           call="SURFACE"
-          duty="Surface & Rover Ops"
+          duty="月面與月球車作業"
           lead="E. Lindqvist"
-          staff="11 staff"
+          staff="11 人"
           stripe={RUST}
           live={live}
           delay={630}
@@ -1066,13 +1066,13 @@ const Vehicle: Page = () => {
     <Sheet>
       <Header
         n="04"
-        kicker="Launch vehicle"
-        title="Perseus 2, block B."
+        kicker="運載火箭"
+        title="Perseus 2，Block B 型。"
         aside={
           <>
-            Side elevation, nose to the right
+            側視圖，箭頭朝右
             <br />
-            Scale 1 : 140 · flight 12 of the type
+            比例 1 : 140 · 此型第 12 次飛行
           </>
         }
       />
@@ -1152,7 +1152,7 @@ const Vehicle: Page = () => {
           x={640}
           y={440}
           toY={C - 49}
-          title="STAGE 1"
+          title="第一節"
           detail="7 × VR-1 · 4,120 kN"
           live={live}
           delay={500}
@@ -1161,8 +1161,8 @@ const Vehicle: Page = () => {
           x={1147}
           y={290}
           toY={C - 49}
-          title="INTERSTAGE"
-          detail="Separation ring"
+          title="級間段"
+          detail="分離環"
           live={live}
           delay={650}
         />
@@ -1170,7 +1170,7 @@ const Vehicle: Page = () => {
           x={1322}
           y={440}
           toY={C - 49}
-          title="STAGE 2"
+          title="第二節"
           detail="1 × VR-2 Vac · 118 kN"
           live={live}
           delay={800}
@@ -1179,8 +1179,8 @@ const Vehicle: Page = () => {
           x={1700}
           y={362}
           toY={C - 50}
-          title="FAIRING + KESTREL"
-          detail="5.0 m Ø · lander 1,840 kg"
+          title="整流罩 + KESTREL"
+          detail="5.0 m Ø · 登陸器 1,840 kg"
           align="right"
           live={live}
           delay={950}
@@ -1193,7 +1193,7 @@ const Vehicle: Page = () => {
         <DimSeg x1={1094} x2={1200} y={700} label="4.0" live={live} delay={1100} />
         <DimSeg x1={1200} x2={1445} y={700} label="9.2 m" live={live} delay={1250} />
         <DimSeg x1={1445} x2={1778} y={700} label="12.6 m" live={live} delay={1400} />
-        <DimSeg x1={140} x2={1778} y={770} label="61.8 m overall" live={live} delay={1600} />
+        <DimSeg x1={140} x2={1778} y={770} label="全長 61.8 m" live={live} delay={1600} />
       </svg>
       <div
         style={abs(120, 840, {
@@ -1203,10 +1203,10 @@ const Vehicle: Page = () => {
           gap: 40,
         })}
       >
-        <VehicleStat value="412 t" label="Liftoff mass" />
-        <VehicleStat value="8.6 t" label="Payload to LEO" />
-        <VehicleStat value="2.3 t" label="Payload to TLI" />
-        <VehicleStat value="11 / 11" label="Flights, all successful" />
+        <VehicleStat value="412 t" label="起飛質量" />
+        <VehicleStat value="8.6 t" label="低地球軌道酬載" />
+        <VehicleStat value="2.3 t" label="地月轉移軌道酬載" />
+        <VehicleStat value="11 / 11" label="歷次飛行，全數成功" />
       </div>
     </Sheet>
   );
@@ -1316,7 +1316,7 @@ const Lander: Page = () => {
   const uid = useUid();
   return (
     <Sheet>
-      <Header n="05" kicker="The lander" title="KESTREL, front elevation." />
+      <Header n="05" kicker="登陸器" title="KESTREL 正視圖。" />
       <svg
         width={1000}
         height={700}
@@ -1448,10 +1448,10 @@ const Lander: Page = () => {
             textAnchor="middle"
             style={svgMono(22, { fill: INK, fontWeight: 700 })}
           >
-            4.60 m footprint
+            4.60 m 著陸腳間距
           </text>
           <text x={0} y={694} style={svgMono(18, { fill: MUTED })}>
-            DWG KS-100-A · FRONT ELEVATION · SCALE 1:40 · DIMS IN METRES
+            圖號 DWG KS-100-A · 正視圖 · 比例 1:40 · 尺寸單位：公尺
           </text>
         </g>
         <Bubble n={1} bx={650} by={545} tx={528} ty={530} live={live} delay={1700} />
@@ -1471,14 +1471,14 @@ const Lander: Page = () => {
           gap: 18,
         })}
       >
-        <LegendItem n={1} name="Main engine" spec="VR-L, throttle 4.4–22 kN" />
-        <LegendItem n={2} name="Propellant tanks" spec="MMH / MON-3 · 1,230 kg" />
-        <LegendItem n={3} name="Vertical solar array" spec="1.6 kW at 1.5° sun" />
-        <LegendItem n={4} name="High-gain antenna" spec="Ka-band, 20 Mbps to Earth" />
-        <LegendItem n={5} name="PRISM drill" spec="Rotary-percussive, 1.0 m" />
-        <LegendItem n={6} name="PIKA rover" spec="22 kg, egress by ramp" />
-        <LegendItem n={7} name="Landing legs" spec="4 × crushable honeycomb" />
-        <LegendItem n={8} name="Hazard LIDAR" spec="40 cm hazards from 250 m" />
+        <LegendItem n={1} name="主引擎" spec="VR-L，節流範圍 4.4–22 kN" />
+        <LegendItem n={2} name="推進劑儲槽" spec="MMH / MON-3 · 1,230 kg" />
+        <LegendItem n={3} name="垂直式太陽能板" spec="1.6 kW（太陽仰角 1.5°）" />
+        <LegendItem n={4} name="高增益天線" spec="Ka 頻段，對地 20 Mbps" />
+        <LegendItem n={5} name="PRISM 鑽具" spec="旋轉衝擊式，深 1.0 m" />
+        <LegendItem n={6} name="PIKA 月球車" spec="22 kg，經斜坡駛出" />
+        <LegendItem n={7} name="著陸腳" spec="4 × 可壓潰蜂巢結構" />
+        <LegendItem n={8} name="障礙偵測 LIDAR" spec="250 m 外可辨識 40 cm 障礙" />
       </div>
     </Sheet>
   );
@@ -1597,7 +1597,7 @@ const Trajectory: Page = () => {
   });
   return (
     <Sheet>
-      <Header n="06" kicker="Flight profile" title="Four and a half days out." />
+      <Header n="06" kicker="飛行剖面" title="四天半的航程。" />
       <svg width={1920} height={1080} viewBox="0 0 1920 1080" style={abs(0, 0)} aria-hidden="true">
         <g className="se-m" style={anim(live, `se-fade 500ms ${EASE_OUT} 0ms both`)}>
           <path d="M360 318 H1540" style={{ stroke: INK, strokeWidth: 1.5 }} />
@@ -1608,7 +1608,7 @@ const Trajectory: Page = () => {
             textAnchor="middle"
             style={svgMono(22, { fill: INK, fontWeight: 700 })}
           >
-            384,400 km · 4.6 days coast
+            384,400 km · 滑行 4.6 天
           </text>
         </g>
         <circle cx={360} cy={560} r={78} style={{ fill: SHEET, stroke: INK, strokeWidth: 3 }} />
@@ -1678,20 +1678,20 @@ const Trajectory: Page = () => {
           dur={900}
         />
         <text x={360} y={410} textAnchor="middle" style={lab(24)}>
-          EARTH
+          地球
         </text>
         <text x={360} y={438} textAnchor="middle" style={mono(22)}>
-          185 km parking orbit
+          185 km 停泊軌道
         </text>
         <text x={1540} y={376} textAnchor="middle" style={lab(24)}>
-          MOON
+          月球
         </text>
         <text x={1540} y={404} textAnchor="middle" style={mono(22)}>
-          100 km polar orbit
+          100 km 極軌道
         </text>
         <Marker x={360} y={678} live={live} delay={650}>
           <text x={336} y={712} textAnchor="end" style={lab(20, { fill: ACCENT })}>
-            TLI BURN
+            TLI 點火
           </text>
           <text x={336} y={740} textAnchor="end" style={mono(22)}>
             Δv 3.15 km/s
@@ -1730,29 +1730,23 @@ const Trajectory: Page = () => {
           gap: 28,
         })}
       >
-        <EventTile t="L+00:00" title="Liftoff" detail="Perseus 2 · LC-2" live={live} delay={300} />
-        <EventTile t="L+00:42" title="TLI burn" detail="Stage 2 restart" live={live} delay={900} />
+        <EventTile t="L+00:00" title="升空" detail="Perseus 2 · LC-2" live={live} delay={300} />
+        <EventTile t="L+00:42" title="TLI 點火" detail="第二節重新點火" live={live} delay={900} />
         <EventTile
           t="L+1 d / 3 d"
-          title="Two TCMs"
-          detail="Under 4 m/s each"
+          title="兩次 TCM"
+          detail="各小於 4 m/s"
           live={live}
           delay={1700}
         />
         <EventTile
           t="L+4.6 d"
-          title="Lunar orbit"
-          detail="100 km, polar"
+          title="進入月球軌道"
+          detail="100 km 極軌道"
           live={live}
           delay={3100}
         />
-        <EventTile
-          t="L+7.2 d"
-          title="Descent"
-          detail="After 2.6 d checkout"
-          live={live}
-          delay={3600}
-        />
+        <EventTile t="L+7.2 d" title="下降" detail="檢測 2.6 d 後" live={live} delay={3600} />
       </div>
     </Sheet>
   );
@@ -1851,7 +1845,7 @@ const SiteMap: Page = () => {
   const clip = `${uid}c`;
   return (
     <Sheet>
-      <Header n="07" kicker="Landing site" title="Site 04, de Gerlache rim." />
+      <Header n="07" kicker="著陸點" title="著陸點 04，de Gerlache 邊緣。" />
       <svg
         width={640}
         height={640}
@@ -1913,7 +1907,7 @@ const SiteMap: Page = () => {
           textAnchor="middle"
           style={svgDisplay(21, 700, { fill: INK, letterSpacing: 2 })}
         >
-          0° · TO EARTH
+          0° · 朝向地球
         </text>
         <text
           x={360}
@@ -1951,7 +1945,7 @@ const SiteMap: Page = () => {
               strokeWidth: 6,
             }}
           >
-            SITE 07 · BACKUP
+            著陸點 07 · 備用
           </text>
         </g>
         <g>
@@ -1986,7 +1980,7 @@ const SiteMap: Page = () => {
             textAnchor="middle"
             style={{ ...svgDisplay(22, 800, { fill: ACCENT, letterSpacing: 2 }), ...KNOCK }}
           >
-            SITE 04
+            著陸點 04
           </text>
         </g>
         <g transform="translate(-150 300)">
@@ -2002,20 +1996,20 @@ const SiteMap: Page = () => {
         </g>
       </svg>
       <div style={abs(1060, 300, { width: 740 })}>
-        <div style={{ ...LABEL, fontSize: 19, color: ACCENT }}>Primary · connecting ridge</div>
+        <div style={{ ...LABEL, fontSize: 19, color: ACCENT }}>主要 · 連接山脊</div>
         <div style={{ ...DISPLAY, fontWeight: 800, fontSize: 46, marginTop: 10, lineHeight: 1.1 }}>
           89.03° S · 93.4° W
         </div>
         <div style={{ fontSize: 28, marginTop: 14, lineHeight: 1.4, color: MUTED }}>
-          A sunlit ridge on the de Gerlache rim,
+          de Gerlache 邊緣的向陽山脊，
           <br />
-          1.4 km from permanent shadow.
+          距永久陰影區 1.4 km。
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 22, marginTop: 34 }}>
-          <SiteMetric label="Sunlight, lunar year" value="81%" pct={81} live={live} delay={300} />
-          <SiteMetric label="Earth in view" value="54%" pct={54} live={live} delay={450} />
-          <SiteMetric label="Slope in ellipse" value="≤ 6°" live={live} delay={0} />
-          <SiteMetric label="Landing ellipse" value="100 × 60 m" live={live} delay={0} />
+          <SiteMetric label="一個月球年的日照率" value="81%" pct={81} live={live} delay={300} />
+          <SiteMetric label="可見地球時間" value="54%" pct={54} live={live} delay={450} />
+          <SiteMetric label="橢圓區內坡度" value="≤ 6°" live={live} delay={0} />
+          <SiteMetric label="著陸橢圓" value="100 × 60 m" live={live} delay={0} />
         </div>
       </div>
     </Sheet>
@@ -2093,7 +2087,7 @@ const Descent: Page = () => {
   const axisLab = (extra?: CSSProperties) => svgMono(20, { fill: MUTED, ...extra });
   return (
     <Sheet>
-      <Header n="08" kicker="Powered descent" title="Eleven minutes to the surface." />
+      <Header n="08" kicker="動力下降" title="十一分鐘抵達月面。" />
       <svg width={1920} height={1080} viewBox="0 0 1920 1080" style={abs(0, 0)} aria-hidden="true">
         <rect x={260} y={320} width={760} height={560} style={{ fill: MUSTARD, opacity: 0.13 }} />
         <rect x={1020} y={320} width={453} height={560} style={{ fill: ACCENT, opacity: 0.11 }} />
@@ -2151,7 +2145,7 @@ const Descent: Page = () => {
           textAnchor="middle"
           style={svgDisplay(19, 700, { fill: INK, letterSpacing: 3 })}
         >
-          BRAKING · 9 MIN
+          減速段 · 9 分鐘
         </text>
         <text
           x={1246}
@@ -2159,7 +2153,7 @@ const Descent: Page = () => {
           textAnchor="middle"
           style={svgDisplay(19, 700, { fill: INK, letterSpacing: 3 })}
         >
-          APPROACH · 100 S
+          接近段 · 100 秒
         </text>
         <text
           x={1586}
@@ -2167,7 +2161,7 @@ const Descent: Page = () => {
           textAnchor="middle"
           style={svgDisplay(19, 700, { fill: INK, letterSpacing: 3 })}
         >
-          TERMINAL · 50 S
+          終端段 · 50 秒
         </text>
         <text x={1030} y={940} style={svgMono(18, { fill: MUTED })}>
           ×3.6
@@ -2188,7 +2182,7 @@ const Descent: Page = () => {
           y={506}
           fx={823}
           fy={412}
-          name="THROTTLE DOWN"
+          name="降低推力"
           data="7.2 km · T+6:40"
           live={live}
           delay={1300}
@@ -2198,7 +2192,7 @@ const Descent: Page = () => {
           y={683}
           fx={1020}
           fy={560}
-          name="HIGH GATE"
+          name="高位檢查點"
           data="2.0 km · T+9:00"
           live={live}
           delay={1800}
@@ -2208,7 +2202,7 @@ const Descent: Page = () => {
           y={781}
           fx={1337}
           fy={664}
-          name="HAZARD SCAN"
+          name="障礙掃描"
           data="500 m · T+10:10"
           live={live}
           delay={2200}
@@ -2218,7 +2212,7 @@ const Descent: Page = () => {
           y={856}
           fx={1587}
           fy={752}
-          name="LOW GATE"
+          name="低位檢查點"
           data="30 m · T+11:05"
           align="end"
           live={live}
@@ -2229,7 +2223,7 @@ const Descent: Page = () => {
           y={880}
           fx={1700}
           fy={600}
-          name="TOUCHDOWN"
+          name="觸地"
           data="T+11:30 · 1.2 m/s"
           align="end"
           live={live}
@@ -2247,13 +2241,20 @@ const Descent: Page = () => {
           ...anim(live, `se-fade 500ms ${EASE_OUT} 3000ms both`),
         })}
       >
-        <div style={{ ...LABEL, fontSize: 18, color: MUTED }}>Descent budget</div>
+        <div style={{ ...LABEL, fontSize: 18, color: MUTED }}>下降預算</div>
         <div style={{ fontSize: 26, lineHeight: 1.5, marginTop: 8 }}>
-          Δv used ....... 1,960 m/s
-          <br />
-          Propellant .... 1,090 kg
-          <br />
-          Hover margin .. 45 s
+          {(
+            [
+              ['Δv 消耗', '1,960 m/s'],
+              ['推進劑', '1,090 kg'],
+              ['懸停餘裕', '45 s'],
+            ] as const
+          ).map(([k, v]) => (
+            <div key={k} style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <span>{k}</span>
+              <span>{v}</span>
+            </div>
+          ))}
         </div>
       </div>
     </Sheet>
@@ -2315,13 +2316,13 @@ const Manifest: Page = () => {
     <Sheet>
       <Header
         n="09"
-        kicker="Payload manifest"
-        title="Seven payloads, 412 kilograms."
+        kicker="酬載清單"
+        title="七項酬載，共 412 公斤。"
         aside={
           <>
-            <span style={{ color: MUSTARD }}>■</span> science{' '}
-            <span style={{ color: ACCENT }}>■</span> mobility <span style={{ color: RUST }}>■</span>{' '}
-            relay <span style={{ color: BROWN }}>■</span> cargo
+            <span style={{ color: MUSTARD }}>■</span> 科學 <span style={{ color: ACCENT }}>■</span>{' '}
+            移動 <span style={{ color: RUST }}>■</span> 中繼 <span style={{ color: BROWN }}>■</span>{' '}
+            貨運
           </>
         }
       />
@@ -2338,14 +2339,14 @@ const Manifest: Page = () => {
           }}
         >
           <span>ID</span>
-          <span>Payload</span>
-          <span>Customer</span>
-          <span>Mass</span>
-          <span style={{ textAlign: 'right' }}>Peak</span>
+          <span>酬載</span>
+          <span>客戶</span>
+          <span>質量</span>
+          <span style={{ textAlign: 'right' }}>峰值功率</span>
         </div>
         <ManifestRow
           id="P-01"
-          name="PRISM ice drill"
+          name="PRISM 水冰鑽具"
           owner="Lunar Volatiles Cons."
           kg={94}
           power="310 W"
@@ -2355,7 +2356,7 @@ const Manifest: Page = () => {
         />
         <ManifestRow
           id="P-02"
-          name="PIKA micro-rover"
+          name="PIKA 微型月球車"
           owner="Meridian Robotics"
           kg={22}
           power="40 W"
@@ -2365,7 +2366,7 @@ const Manifest: Page = () => {
         />
         <ManifestRow
           id="P-03"
-          name="Neutron spectrometer"
+          name="中子能譜儀"
           owner="Arcadia University"
           kg={6}
           power="9 W"
@@ -2375,7 +2376,7 @@ const Manifest: Page = () => {
         />
         <ManifestRow
           id="P-04"
-          name="VOLTA mass spec."
+          name="VOLTA 質譜儀"
           owner="Halvard Institute"
           kg={14}
           power="60 W"
@@ -2385,7 +2386,7 @@ const Manifest: Page = () => {
         />
         <ManifestRow
           id="P-05"
-          name="Laser retroreflector"
+          name="雷射後向反射器"
           owner="Bracken Observatory"
           kg={1}
           power="—"
@@ -2395,18 +2396,18 @@ const Manifest: Page = () => {
         />
         <ManifestRow
           id="P-06"
-          name="LUNET relay smallsat"
+          name="LUNET 中繼小衛星"
           owner="Cislune Comms"
           kg={196}
-          power="in orbit"
+          power="在軌道上"
           color={RUST}
           live={live}
           delay={600}
         />
         <ManifestRow
           id="P-07"
-          name="Cargo locker"
-          owner="6 commercial clients"
+          name="貨運置物櫃"
+          owner="6 家商業客戶"
           kg={79}
           power="15 W"
           color={BROWN}
@@ -2424,10 +2425,10 @@ const Manifest: Page = () => {
           }}
         >
           <span />
-          <span style={{ ...DISPLAY, fontWeight: 800, fontSize: 30 }}>Total</span>
-          <span style={{ fontSize: 24, color: MUTED }}>Capacity 450 kg</span>
+          <span style={{ ...DISPLAY, fontWeight: 800, fontSize: 30 }}>合計</span>
+          <span style={{ fontSize: 24, color: MUTED }}>容量 450 kg</span>
           <span style={{ fontSize: 28, fontWeight: 700 }}>
-            412 kg <span style={{ color: AVOCADO }}>· margin 38 kg</span>
+            412 kg <span style={{ color: AVOCADO }}>· 餘裕 38 kg</span>
           </span>
           <span style={{ fontSize: 26, textAlign: 'right', fontWeight: 700 }}>434 W</span>
         </div>
@@ -2546,7 +2547,7 @@ const Risks: Page = () => {
   const live = useIsActivePage();
   return (
     <Sheet>
-      <Header n="10" kicker="Risk posture" title="Two yellows. No reds." />
+      <Header n="10" kicker="風險概況" title="兩項黃燈，沒有紅燈。" />
       <div
         style={abs(300, 300, {
           width: 520,
@@ -2627,7 +2628,7 @@ const Risks: Page = () => {
           textAlign: 'center',
         })}
       >
-        Consequence →
+        影響程度 →
       </div>
       <div
         style={abs(150, 560, {
@@ -2642,7 +2643,7 @@ const Risks: Page = () => {
           justifyContent: 'center',
         })}
       >
-        Likelihood →
+        發生可能性 →
       </div>
       <RiskDot id="R1" l={3} c={4} open live={live} delay={300} />
       <RiskDot id="R2" l={3} c={3} open live={live} delay={450} />
@@ -2663,45 +2664,37 @@ const Risks: Page = () => {
             <RiskItem
               id="R1"
               open
-              title="LIDAR false hazards in low-sun shadow"
-              status="Open · TRN fallback proven in 212 sims"
+              title="低太陽角陰影造成 LIDAR 誤判障礙"
+              status="未結案 · TRN 備援已通過 212 次模擬驗證"
             />
           </Step>
           <Step>
             <RiskItem
               id="R2"
               open
-              title="Ka-band dropouts while Earth is hidden"
-              status="Open · LUNET relay covers 92% of gaps"
+              title="地球被遮蔽時 Ka 頻段通訊中斷"
+              status="未結案 · LUNET 中繼涵蓋 92% 的中斷時段"
             />
           </Step>
           <Step>
             <RiskItem
               id="R3"
-              title="Rover thermal at −200 °C in shadow"
-              status="Closed · heater soak test, 06 Oct"
+              title="月球車在陰影區 −200 °C 的熱控"
+              status="已結案 · 加熱器浸泡測試（10月6日）"
             />
           </Step>
           <Step>
             <RiskItem
               id="R4"
-              title="Engine roughness below 25% throttle"
-              status="Closed · 41 hot-fires, all stable"
+              title="推力低於 25% 時引擎燃燒不穩"
+              status="已結案 · 41 次熱試車皆穩定"
             />
           </Step>
           <Step>
-            <RiskItem
-              id="R5"
-              title="Late delivery of the VOLTA payload"
-              status="Closed · integrated 22 Sep"
-            />
+            <RiskItem id="R5" title="VOLTA 酬載延遲交付" status="已結案 · 9月22日完成整合" />
           </Step>
           <Step>
-            <RiskItem
-              id="R6"
-              title="Range conflict on 04 November"
-              status="Closed · range slot confirmed"
-            />
+            <RiskItem id="R6" title="11月4日靶場時段衝突" status="已結案 · 靶場時段已確認" />
           </Step>
         </Steps>
       </div>
@@ -2795,13 +2788,13 @@ const Poll: Page = () => {
     <Sheet>
       <Header
         n="11"
-        kicker="Readiness poll"
-        title="Twelve consoles, twelve GOs."
+        kicker="整備徵詢"
+        title="十二個控制台，十二個 GO。"
         aside={
           <>
-            Poll FRR-2 · closed 11:52 UTC
+            FRR-2 徵詢 · 11:52 UTC 結束
             <br />
-            Flight Director T. Ibarra, polling
+            由飛行總監 T. Ibarra 主持徵詢
           </>
         }
       />
@@ -2821,18 +2814,18 @@ const Poll: Page = () => {
         <Screw x={14} y={610} />
         <Screw x={1650} y={610} />
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 32, rowGap: 10 }}>
-          <PollRow call="FLIGHT" duty="Flight Director" live={live} delay={300} />
-          <PollRow call="COMM" duty="Comms & Ground" note="R2 open" live={live} delay={1800} />
-          <PollRow call="FDO" duty="Flight Dynamics" live={live} delay={550} />
-          <PollRow call="PAYLOAD" duty="Payload Ops" live={live} delay={2050} />
-          <PollRow call="GNC" duty="Guidance & Nav" note="R1 open" live={live} delay={800} />
-          <PollRow call="SURFACE" duty="Surface & Rover" live={live} delay={2300} />
-          <PollRow call="PROP" duty="Propulsion" live={live} delay={1050} />
-          <PollRow call="LAUNCH VEH." duty="Perseus 2 team" live={live} delay={2550} />
-          <PollRow call="POWER" duty="Power & Thermal" live={live} delay={1300} />
-          <PollRow call="RANGE" duty="Range Safety" live={live} delay={2800} />
-          <PollRow call="THERMAL" duty="Thermal Control" live={live} delay={1550} />
-          <PollRow call="WEATHER" duty="Forecast" note="80% favourable" live={live} delay={3050} />
+          <PollRow call="FLIGHT" duty="飛行總監" live={live} delay={300} />
+          <PollRow call="COMM" duty="通訊與地面站" note="R2 未結案" live={live} delay={1800} />
+          <PollRow call="FDO" duty="飛行動力" live={live} delay={550} />
+          <PollRow call="PAYLOAD" duty="酬載作業" live={live} delay={2050} />
+          <PollRow call="GNC" duty="導引與導航" note="R1 未結案" live={live} delay={800} />
+          <PollRow call="SURFACE" duty="月面與月球車" live={live} delay={2300} />
+          <PollRow call="PROP" duty="推進系統" live={live} delay={1050} />
+          <PollRow call="LAUNCH VEH." duty="Perseus 2 團隊" live={live} delay={2550} />
+          <PollRow call="POWER" duty="電力與熱控" live={live} delay={1300} />
+          <PollRow call="RANGE" duty="靶場安全" live={live} delay={2800} />
+          <PollRow call="THERMAL" duty="熱控" live={live} delay={1550} />
+          <PollRow call="WEATHER" duty="氣象預報" note="80% 適宜" live={live} delay={3050} />
         </div>
         <div
           style={{
@@ -2856,10 +2849,10 @@ const Poll: Page = () => {
               letterSpacing: '0.08em',
             }}
           >
-            BOARD STATUS
+            委員會狀態
           </span>
           <span style={{ fontSize: 24, color: '#B8A68C', flex: 1 }}>
-            12 of 12 consoles · 2 risks carried
+            12 / 12 個控制台 · 2 項風險持續列管
           </span>
           <span
             className="se-m"
@@ -2962,7 +2955,7 @@ const WindowDay = ({
           color: kind === 'closed' ? MUTED : INK,
         }}
       >
-        {kind === 'closed' ? 'closed' : `${minutes} min`}
+        {kind === 'closed' ? '關閉' : `${minutes} 分鐘`}
       </div>
       {kind === 'closed' ? (
         <div
@@ -3026,26 +3019,27 @@ const Window: Page = () => {
   const live = useIsActivePage();
   return (
     <Sheet>
-      <Header n="12" kicker="Launch window" title="Window opens 04 November." />
+      <Header n="12" kicker="發射窗口" title="11月4日開啟窗口。" />
       <div style={abs(120, 296, { ...LABEL, fontSize: 18, color: MUTED })}>
-        Time to T-0, from this briefing
+        距 T-0 的時間（自本簡報起算）
       </div>
       <div style={abs(120, 336, { display: 'flex', alignItems: 'flex-start' })}>
-        <DigitGroup a="2" b="2" label="Days" />
+        <DigitGroup a="2" b="2" label="天" />
         <Colon />
-        <DigitGroup a="1" b="8" label="Hours" />
+        <DigitGroup a="1" b="8" label="時" />
         <Colon />
-        <DigitGroup a="4" b="2" label="Min" />
+        <DigitGroup a="4" b="2" label="分" />
       </div>
       <div style={abs(1000, 300, { width: 800 })}>
         <div style={{ ...DISPLAY, fontWeight: 800, fontSize: 40, lineHeight: 1.15 }}>
           T-0 · 06:42:00 UTC
         </div>
         <div style={{ fontSize: 28, lineHeight: 1.5, marginTop: 14 }}>
-          Wed 04 Nov 2026 · LC-2, Halcyon Point
-          <br />A 38-minute daily window, five days long.
+          2026年11月4日（週三）· LC-2，Halcyon Point
           <br />
-          <span style={{ color: MUTED }}>Next window if we slip: 03 December.</span>
+          每日窗口 38 分鐘，共開放五天。
+          <br />
+          <span style={{ color: MUTED }}>若延後，下一個窗口為 12月3日。</span>
         </div>
       </div>
       <div
@@ -3056,13 +3050,13 @@ const Window: Page = () => {
           gap: 20,
         })}
       >
-        <WindowDay day="Wed 04" minutes={38} kind="primary" live={live} delay={200} />
-        <WindowDay day="Thu 05" minutes={34} kind="backup" live={live} delay={300} />
-        <WindowDay day="Fri 06" minutes={29} kind="backup" live={live} delay={400} />
-        <WindowDay day="Sat 07" minutes={22} kind="backup" live={live} delay={500} />
-        <WindowDay day="Sun 08" minutes={14} kind="backup" live={live} delay={600} />
-        <WindowDay day="Mon 09" minutes={0} kind="closed" live={live} delay={0} />
-        <WindowDay day="Tue 10" minutes={0} kind="closed" live={live} delay={0} />
+        <WindowDay day="週三 04" minutes={38} kind="primary" live={live} delay={200} />
+        <WindowDay day="週四 05" minutes={34} kind="backup" live={live} delay={300} />
+        <WindowDay day="週五 06" minutes={29} kind="backup" live={live} delay={400} />
+        <WindowDay day="週六 07" minutes={22} kind="backup" live={live} delay={500} />
+        <WindowDay day="週日 08" minutes={14} kind="backup" live={live} delay={600} />
+        <WindowDay day="週一 09" minutes={0} kind="closed" live={live} delay={0} />
+        <WindowDay day="週二 10" minutes={0} kind="closed" live={live} delay={0} />
       </div>
       <div style={abs(120, 812, { width: 1680, height: 3, background: RULE })} />
       <div
@@ -3073,12 +3067,12 @@ const Window: Page = () => {
           gap: 24,
         })}
       >
-        <CountStep t="L–3 d" label="Readiness review" live={live} delay={900} />
-        <CountStep t="L–1 d" label="Rollout, vertical" live={live} delay={1200} />
-        <CountStep t="T–6 h" label="Propellant load" live={live} delay={1500} />
-        <CountStep t="T–40 m" label="Final poll · hold" live={live} delay={1800} />
-        <CountStep t="T–4 m" label="Terminal count" live={live} delay={2100} />
-        <CountStep t="T–0" label="Liftoff" last live={live} delay={2500} />
+        <CountStep t="L–3 d" label="整備審查" live={live} delay={900} />
+        <CountStep t="L–1 d" label="垂直推出" live={live} delay={1200} />
+        <CountStep t="T–6 h" label="推進劑加註" live={live} delay={1500} />
+        <CountStep t="T–40 m" label="最終徵詢 · 暫停" live={live} delay={1800} />
+        <CountStep t="T–4 m" label="終端倒數" live={live} delay={2100} />
+        <CountStep t="T–0" label="升空" last live={live} delay={2500} />
       </div>
     </Sheet>
   );
@@ -3096,7 +3090,7 @@ const Close: Page = () => {
   const live = useIsActivePage();
   return (
     <Sheet chrome={false}>
-      <div style={abs(120, 120, { ...LABEL, color: ACCENT })}>Board recommendation</div>
+      <div style={abs(120, 120, { ...LABEL, color: ACCENT })}>委員會建議</div>
       <h2
         style={abs(112, 168, {
           ...DISPLAY,
@@ -3108,10 +3102,10 @@ const Close: Page = () => {
           textShadow: '5px 3px 0 rgba(217,160,34,0.5)',
         })}
       >
-        GO for launch.
+        准予發射。
       </h2>
       <div style={abs(120, 352, { fontSize: 32, lineHeight: 1.5 })}>
-        SELENE-4 · Perseus 2 · LC-2 · 04 Nov 2026, 06:42 UTC
+        SELENE-4 · Perseus 2 · LC-2 · 2026年11月4日 06:42 UTC
       </div>
       <svg width={1920} height={1080} viewBox="0 0 1920 1080" style={abs(0, 0)} aria-hidden="true">
         <path
@@ -3149,12 +3143,10 @@ const Close: Page = () => {
       >
         <Patch size={420} />
       </div>
-      <div style={abs(120, 690, { fontSize: 28, color: MUTED })}>
-        Submitted for the board's vote —
-      </div>
+      <div style={abs(120, 690, { fontSize: 28, color: MUTED })}>提請委員會表決 —</div>
       <div style={abs(120, 740, { display: 'flex', gap: 80 })}>
-        <SignBlock duty="Mission Director" name="Ruth Okafor" />
-        <SignBlock duty="Flight Director" name="Tomás Ibarra" />
+        <SignBlock duty="任務總監" name="Ruth Okafor" />
+        <SignBlock duty="飛行總監" name="Tomás Ibarra" />
       </div>
       <div
         className="se-m"
@@ -3172,7 +3164,7 @@ const Close: Page = () => {
           ...anim(live, `se-stamp 520ms ${EASE_OUT} 1300ms both`),
         })}
       >
-        RECOMMEND GO
+        建議 GO
       </div>
       <div
         style={abs(120, 1000, {
@@ -3183,8 +3175,8 @@ const Close: Page = () => {
           color: MUTED,
         })}
       >
-        <span>MERIDIAN LUNAR SYSTEMS · PROGRAM INTERNAL</span>
-        <span>MLS-S4-FRR-001 · REV C · END OF BRIEFING</span>
+        <span>MERIDIAN LUNAR SYSTEMS · 計畫內部文件</span>
+        <span>MLS-S4-FRR-001 · REV C · 簡報結束</span>
       </div>
     </Sheet>
   );
@@ -3192,61 +3184,61 @@ const Close: Page = () => {
 Close.transition = settle;
 
 export const meta: SlideMeta = {
-  title: 'SELENE-4 Flight Readiness Briefing',
+  title: 'SELENE-4 飛行整備簡報',
   createdAt: '2026-10-12T12:18:11.692Z',
 };
 
 export const notes: (string | undefined)[] = [
-  `Good afternoon. This is the flight readiness review for SELENE-4.
-I'm Ruth Okafor, mission director. In the next twenty minutes I'll walk the board through where we are, and at the end I'll ask for one vote.
-The patch on the right was designed by the GNC team. The three stripes are our trajectory; the little figure at the end of it is KESTREL.`,
-  `Here's the memo that went out on Friday, so nothing in this room should be a surprise.
-One decision: commit to the 04 November launch.
-Numbers to keep in your head: 1,840 kilograms at separation, four and a half days to the Moon, eleven and a half minutes of powered descent, ten days on the surface.
-The stamp says "for decision", not "for discussion". We've had the discussions.`,
-  `Four objectives, ranked. The first two are the mission; the second two are the science bonus.
-Click through: precision landing within 100 metres. Then seven payloads, powered for ten Earth days.
-Then the drill: ice measurements in 10-centimetre steps to one metre.
-Last, PIKA into permanent shadow. If we only hit the first two, the mission is a success, and our customers have agreed to that definition in writing.`,
-  `Eight consoles, one room in Tucson. Three shifts, 112 people on rotation.
-Every lead you see here has run at least two full mission simulations as prime.
-Tomás Ibarra is flight director for launch and landing; he'll run the poll you'll see in a few minutes.`,
-  `Perseus 2, block B. Eleven flights, eleven successes, and this is the twelfth vehicle off the line.
-Stage 1 has seven VR-1 engines, 4,120 kilonewtons at liftoff. Stage 2 restarts once, for the translunar burn.
-KESTREL rides in the five-metre fairing; you can see it in the cutaway on the right.
-The vehicle is the least of our worries: the lander is integrated, and the stack was signed off last Tuesday.`,
-  `This is KESTREL from the front, at 1 to 40.
-Walk the numbers: throttleable main engine, 4.4 to 22 kilonewtons, which is what gives us the hover margin.
-Point out the solar array: it's vertical because at 89 degrees south the Sun never gets more than a degree and a half above the horizon.
-The drill on the right, PIKA on its ramp on the left, LIDAR in the middle looking down.`,
-  `How we get there. Liftoff, forty-two minutes in a parking orbit, then the translunar burn: 3.15 kilometres per second.
-Two small correction burns, one on day 1, one on day 3, each a few metres per second.
-Lunar orbit insertion at four point six days, 850 metres per second, into a 100-kilometre polar orbit.
-Then two and a half days of checkout before we commit to descent.`,
-  `This is the south pole looking straight down. Earth is at the top.
-Site 04 is on the ridge that connects de Gerlache to Shackleton: sunlit 81 percent of the year, Earth in view 54 percent.
-Permanent shadow is 1.4 kilometres away; that's where PIKA goes.
-Site 07, near Shoemaker, is our backup if the hazard map changes before descent.`,
-  `Eleven and a half minutes, fifteen kilometres to zero.
-Note the time axis expands after high gate; most of the drama is in the last two and a half minutes.
-Throttle-down at six forty, high gate at nine minutes, hazard scan at 500 metres, low gate at 30 metres, touchdown at 1.2 metres per second.
-We carry 45 seconds of hover margin. That's the number GNC fought hardest for.`,
-  `Seven payloads, 412 kilograms, against a 450-kilogram capacity: 38 kilograms of margin.
-The big one is LUNET, the relay smallsat. It deploys in lunar orbit, before descent, and it's the answer to risk R2.
-PRISM is the main science; the cargo locker carries six commercial customers.`,
-  `Six risks were on the board at the last review. Four are closed.
-Click through: R1, LIDAR false hazards in low-sun shadow. Open, mitigated by terrain-relative navigation, proven in 212 simulations.
-R2, comms dropouts when Earth is below the horizon. Open, and the relay covers 92 percent of those gaps.
-The other four are closed; I'll take questions on any of them.`,
-  `This is the poll Tomás ran at eleven fifty-two this morning.
-Twelve consoles, twelve GOs. GNC and COMM each voted GO with their open risk noted, and weather is 80 percent favourable for the fourth.
-Let the lamps finish before you move on.`,
-  `The window opens Wednesday the fourth at 06:42 UTC. It's 38 minutes a day and gets shorter each day: five opportunities, then it closes until December.
-The countdown has a planned 30-minute hold at T-minus-40 for the final poll.
-From this briefing that's twenty-two days, eighteen hours, forty-two minutes.`,
-  `So the recommendation is GO.
-Tomás and I have signed. We're asking the board to vote now.
-Pause and hold this page through the vote.`,
+  `午安。這是 SELENE-4 的飛行整備審查。
+我是任務總監 Ruth Okafor。接下來二十分鐘，我會向委員會說明目前進度，最後請各位做一項表決。
+右邊的任務徽章是 GNC 團隊設計的：三條色帶代表我們的飛行軌跡，軌跡盡頭的小小身影就是 KESTREL。`,
+  `這是週五已經發出的備忘錄，所以今天在座各位不該有任何意外。
+只有一項決定：批准 11月4日發射。
+請記住幾個數字：分離時 1,840 公斤、飛往月球四天半、動力下降 11.5 分鐘、月面作業十天。
+印章上寫的是「待決議」，不是「待討論」。該討論的我們都討論過了。`,
+  `四項任務目標，依優先順序排列。前兩項是任務本體，後兩項是額外的科學成果。
+點擊逐項展開：先是 100 公尺內的精準著陸，接著是七項酬載，供電十個地球日。
+然後是鑽探：每 10 公分一層，量測深達一公尺的水冰。
+最後，讓 PIKA 進入永久陰影區。只要前兩項達成，任務就算成功，這個定義我們的客戶也已經以書面同意。`,
+  `八個控制台，同一間位於 Tucson 的控制室。三班制，輪值人員共 112 位。
+你在這裡看到的每位主管，都至少擔任過兩次完整任務模擬的主控。
+Tomás Ibarra 是發射與著陸階段的飛行總監；幾分鐘後你會看到，由他主持整備徵詢。`,
+  `Perseus 2，Block B 型。十一次飛行、十一次成功，這是下線的第十二枚。
+第一節搭載七具 VR-1 引擎，升空推力 4,120 千牛頓。第二節會重新點火一次，進行地月轉移。
+KESTREL 裝在五公尺的整流罩內，右邊的剖面圖看得到。
+火箭本身是我們最不擔心的部分：登陸器已完成整合，整個箭體組合上週二已簽核通過。`,
+  `這是 KESTREL 的正視圖，比例 1 比 40。
+來看幾個數字：主引擎可調節推力，範圍 4.4 到 22 千牛頓，這就是我們懸停餘裕的來源。
+請指出太陽能板：它是垂直的，因為在南緯 89 度，太陽高度從來不會超過地平線上 1.5 度。
+右邊是鑽具，左邊是斜坡上的 PIKA，中間是朝下看的 LIDAR。`,
+  `我們怎麼抵達月球。升空後，先在停泊軌道停留四十二分鐘，然後進行地月轉移點火：每秒 3.15 公里。
+兩次小幅修正點火，一次在第 1 天，一次在第 3 天，各只有幾公尺每秒。
+第 4.6 天進行月球軌道插入，850 公尺每秒，進入 100 公里極軌道。
+接著再花兩天半做檢測，才會決定是否開始下降。`,
+  `這是從正上方俯視的月球南極，地球在上方。
+著陸點 04 位於連接 de Gerlache 與 Shackleton 的山脊上：一年有 81% 的時間有日照，54% 的時間看得到地球。
+永久陰影區在 1.4 公里外，那就是 PIKA 要去的地方。
+著陸點 07 靠近 Shoemaker，若下降前障礙地圖有變，就改用它作為備用。`,
+  `十一分半鐘，從十五公里降到零。
+請注意高位檢查點之後時間軸被拉長；大部分的驚險都在最後兩分半鐘。
+6 分 40 秒降低推力，9 分鐘到高位檢查點，500 公尺進行障礙掃描，30 公尺到低位檢查點，以每秒 1.2 公尺觸地。
+我們保留 45 秒的懸停餘裕。這是 GNC 團隊爭取最久的數字。`,
+  `七項酬載、412 公斤，容量 450 公斤，所以有 38 公斤的餘裕。
+最大的一項是 LUNET 中繼小衛星。它在下降之前於月球軌道上部署，正是風險 R2 的解法。
+PRISM 是主要的科學酬載；貨運置物櫃則載了六家商業客戶的物品。`,
+  `上次審查時，板上有六項風險，現在有四項已結案。
+點擊逐項展開：R1，低太陽角陰影造成 LIDAR 誤判障礙。未結案，以地形相對導航降低風險，已通過 212 次模擬驗證。
+R2，地球落到地平線下時的通訊中斷。未結案，中繼衛星涵蓋其中 92% 的中斷時段。
+其餘四項都已結案；任何一項我都樂意回答問題。`,
+  `這是 Tomás 今天上午十一點五十二分主持的徵詢。
+十二個控制台，十二個 GO。GNC 與 COMM 都投了 GO，並註記各自未結案的風險；氣象方面，良好的機率是 80%，是第四項。
+請等燈號全部亮完再翻頁。`,
+  `發射窗口在週三 11月4日 UTC 06:42 開啟。每天 38 分鐘，而且逐日縮短：共有五次機會，之後要等到 12 月才會再開。
+倒數過程中，T-40 分鐘有一次預定 30 分鐘的暫停，用於最終徵詢。
+從這場簡報算起，還有二十二天又十八小時四十二分鐘。`,
+  `所以，我們的建議是 GO。
+Tomás 和我都已簽署，現在請委員會表決。
+表決期間，請停留在這一頁。`,
 ];
 
 export default [

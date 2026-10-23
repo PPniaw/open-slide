@@ -13,8 +13,9 @@ import type { CSSProperties, ReactNode } from 'react';
 export const design: DesignSystem = {
   palette: { bg: '#1E332B', text: '#EEEDE6', accent: '#F4DE84' },
   fonts: {
-    display: '"Caveat", "Segoe Print", "Comic Sans MS", cursive',
-    body: '"Kalam", "Segoe Print", "Comic Sans MS", cursive',
+    display:
+      '"Caveat", "Segoe Print", "Comic Sans MS", cursive, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
+    body: '"Kalam", "Segoe Print", "Comic Sans MS", cursive, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
   },
   typeScale: { hero: 250, body: 34 },
   radius: 6,
@@ -453,7 +454,7 @@ const Footer = () => {
   return (
     <>
       <div style={abs(120, 1000, { ...HAND, fontSize: 20, color: DIM, letterSpacing: '0.05em' })}>
-        Crumb School · Bread 101 · Lesson 4
+        Crumb School · 麵包入門 101 · 第 4 堂
       </div>
       <div
         style={{
@@ -465,7 +466,7 @@ const Footer = () => {
           color: DIM,
         }}
       >
-        p. {current} of {total}
+        第 {current} 頁 / 共 {total} 頁
       </div>
     </>
   );
@@ -772,7 +773,7 @@ const Cover: Page = () => {
           ...fadeIn(live, 0.5),
         })}
       >
-        Bread 101 · Lesson 4 of 8
+        麵包入門 101 · 第 4 堂（共 8 堂）
       </div>
       <div
         style={abs(1460, 100, {
@@ -784,21 +785,21 @@ const Cover: Page = () => {
           ...fadeIn(live, 3.2),
         })}
       >
-        phones in aprons, please :)
+        手機請收進圍裙口袋 :)
       </div>
       <h1
         style={{
           ...SCRIPT,
           ...abs(118, 250),
-          fontSize: 'var(--osd-size-hero)',
-          lineHeight: 0.92,
+          fontSize: 'calc(var(--osd-size-hero) * 0.78)',
+          lineHeight: 1.05,
           ...writeIn(live, 0.4, 1.2),
         }}
       >
-        Why bread
+        麵包為什麼
         <br />
         <span style={{ position: 'relative', display: 'inline-block' }}>
-          rises.
+          會發起來。
           <svg
             viewBox="0 0 100 20"
             preserveAspectRatio="none"
@@ -832,7 +833,7 @@ const Cover: Page = () => {
           ...writeIn(live, 2.1, 1),
         })}
       >
-        Yeast, gluten, warmth — and a little patience.
+        酵母、麩質、溫度，再加一點耐心。
       </div>
       <div
         style={abs(130, 848, {
@@ -843,7 +844,7 @@ const Cover: Page = () => {
           ...fadeIn(live, 2.8),
         })}
       >
-        Tue 14 Oct · 6:30 pm · Kitchen 2 · with Chef Mara Okafor
+        10 月 14 日（二）· 下午 6:30 · 廚房 2 · 主廚 Mara Okafor
       </div>
       <div style={abs(1150, 250, { width: 640, height: 512 })}>
         <HappyLoaf live={live} />
@@ -866,7 +867,7 @@ const Cover: Page = () => {
           ...fadeIn(live, 3),
         })}
       >
-        the ear!
+        麵包耳！
       </div>
       <div
         style={abs(1310, 790, {
@@ -877,7 +878,7 @@ const Cover: Page = () => {
           ...fadeIn(live, 2.6),
         })}
       >
-        fig. 1 — a happy loaf
+        圖 1 — 開心的麵包
       </div>
     </Board>
   );
@@ -941,24 +942,17 @@ const Agenda: Page = () => {
   const live = useIsActivePage();
   return (
     <Board variant={1}>
-      <Title eyebrow="Lesson 4 · Tue 14 Oct">Tonight on the board</Title>
-      <AgendaItem n={1} label="Meet the yeast" left={130} top={300} color={YELLOW} delay={0.5} />
-      <AgendaItem
-        n={2}
-        label="The fermentation sum"
-        left={130}
-        top={400}
-        color={YELLOW}
-        delay={0.65}
-      />
-      <AgendaItem n={3} label="The gluten net" left={130} top={500} color={YELLOW} delay={0.8} />
-      <AgendaItem n={4} label="Warmth vs. time" left={130} top={600} color={BLUE} delay={0.95} />
-      <AgendaItem n={5} label="Baker's maths" left={130} top={700} color={BLUE} delay={1.1} />
-      <AgendaItem n={6} label="A sourdough day" left={740} top={300} color={BLUE} delay={1.25} />
-      <AgendaItem n={7} label="Feeding the starter" left={740} top={400} color={PINK} delay={1.4} />
-      <AgendaItem n={8} label="Oven spring" left={740} top={500} color={PINK} delay={1.55} />
-      <AgendaItem n={9} label="What went wrong?" left={740} top={600} color={PINK} delay={1.7} />
-      <AgendaItem n={10} label="Pop quiz!" left={740} top={700} color={CHALK} delay={1.85} />
+      <Title eyebrow="第 4 堂 · 10 月 14 日（二）">今晚的黑板內容</Title>
+      <AgendaItem n={1} label="認識酵母" left={130} top={300} color={YELLOW} delay={0.5} />
+      <AgendaItem n={2} label="發酵算式" left={130} top={400} color={YELLOW} delay={0.65} />
+      <AgendaItem n={3} label="麩質網" left={130} top={500} color={YELLOW} delay={0.8} />
+      <AgendaItem n={4} label="溫度與時間" left={130} top={600} color={BLUE} delay={0.95} />
+      <AgendaItem n={5} label="烘焙百分比" left={130} top={700} color={BLUE} delay={1.1} />
+      <AgendaItem n={6} label="酸種麵包的一天" left={740} top={300} color={BLUE} delay={1.25} />
+      <AgendaItem n={7} label="餵養酵種" left={740} top={400} color={PINK} delay={1.4} />
+      <AgendaItem n={8} label="爐內膨脹" left={740} top={500} color={PINK} delay={1.55} />
+      <AgendaItem n={9} label="哪裡出錯了？" left={740} top={600} color={PINK} delay={1.7} />
+      <AgendaItem n={10} label="隨堂小測驗！" left={740} top={700} color={CHALK} delay={1.85} />
       <div style={abs(1380, 300, { width: 400, height: 440, transform: 'rotate(-2deg)' })}>
         <svg
           viewBox="0 0 400 440"
@@ -987,7 +981,7 @@ const Agenda: Page = () => {
             ...writeIn(live, 2.6),
           })}
         >
-          7:45 pm
+          下午 7:45
         </div>
         <div
           style={abs(0, 250, {
@@ -998,7 +992,7 @@ const Agenda: Page = () => {
             ...fadeIn(live, 2.9),
           })}
         >
-          tasting break
+          試吃休息
         </div>
         <div
           style={abs(0, 310, {
@@ -1010,12 +1004,13 @@ const Agenda: Page = () => {
             ...fadeIn(live, 3.1),
           })}
         >
-          warm focaccia
-          <br />& good butter
+          熱騰騰的佛卡夏
+          <br />
+          配上好奶油
         </div>
       </div>
       <div style={abs(130, 840, { ...HAND, fontSize: 28, color: DIM, ...fadeIn(live, 2.2) })}>
-        About two hours · aprons on · bring your notebook to the bench
+        約兩小時 · 請穿好圍裙 · 筆記本帶到工作檯
       </div>
     </Board>
   );
@@ -1032,7 +1027,7 @@ const Circled = ({
   live: boolean;
   delay: number;
 }) => (
-  <span style={{ position: 'relative', display: 'inline-block', marginLeft: 18 }}>
+  <span style={{ position: 'relative', display: 'inline-block', marginLeft: 30 }}>
     {children}
     <svg
       viewBox="0 0 100 100"
@@ -1177,7 +1172,7 @@ const BUBBLES = `${scribble(80, 70, 46, 46, 2, 1.05)} ${scribble(170, 120, 30, 3
 
 const BigIdea: Page = () => {
   const live = useIsActivePage();
-  const line: CSSProperties = { ...SCRIPT, fontSize: 108, lineHeight: 1 };
+  const line: CSSProperties = { ...SCRIPT, fontSize: 100, lineHeight: 1 };
   return (
     <Board variant={2}>
       <div
@@ -1189,7 +1184,7 @@ const BigIdea: Page = () => {
           ...fadeIn(live, 0),
         })}
       >
-        The big idea — copy this into your notebook
+        核心觀念 — 請抄進你的筆記本
       </div>
       <Doodle
         left={1520}
@@ -1202,30 +1197,30 @@ const BigIdea: Page = () => {
         delay={3.6}
       />
       <div style={{ ...line, ...abs(130, 250), ...writeIn(live, 0.2, 1.1) }}>
-        Bread rises because{' '}
+        麵包會發起來，是因為
         <Circled color={YELLOW} live={live} delay={1.2}>
-          tiny living things
+          微小生物
         </Circled>
       </div>
       <div style={{ ...line, ...abs(130, 410), ...writeIn(live, 1.6, 0.9) }}>
         <Underlined color={PINK} live={live} delay={2.3}>
-          breathe out gas
+          不斷吐出氣體
         </Underlined>{' '}
         —
       </div>
       <div style={{ ...line, ...abs(130, 570), ...writeIn(live, 2.6, 1.1) }}>
-        and a{' '}
+        而一張
         <Boxed color={BLUE} live={live} delay={3.5}>
-          stretchy net
-        </Boxed>{' '}
-        catches it.
+          有彈性的網
+        </Boxed>
+        把氣體困住。
       </div>
       <KeyTag
         left={130}
         glyph={scribble(35, 25, 28, 18, 2)}
         color={YELLOW}
-        word="yeast"
-        meaning="a living fungus"
+        word="酵母"
+        meaning="一種活的真菌"
         delay={3.9}
       />
       <KeyTag
@@ -1233,15 +1228,15 @@ const BigIdea: Page = () => {
         glyph="M4 22 C 24 18, 44 24, 66 20 M8 34 C 30 30, 50 34, 62 31"
         color={PINK}
         word="CO₂"
-        meaning="the gas"
+        meaning="就是那些氣體"
         delay={4.1}
       />
       <KeyTag
         left={1160}
         glyph="M6 6 L 64 5 M63 3 L 64 46 M66 44 L 5 45 M6 48 L 5 4"
         color={BLUE}
-        word="gluten"
-        meaning="the net, from wheat"
+        word="麩質"
+        meaning="小麥裡的那張網"
         delay={4.3}
       />
     </Board>
@@ -1273,23 +1268,23 @@ const YeastCell = ({ live }: { live: boolean }) => (
     <Chalk d={GRANULES} w={3} opacity={0.6} live={live} delay={2.2} dur={0.6} />
     <LabelLine d="M150 150 C 180 170, 200 190, 228 216" live={live} delay={2.5} />
     <text x={40} y={140} style={{ ...SVG_TEXT, fontSize: 32 }}>
-      cell wall
+      細胞壁
     </text>
     <LabelLine d="M180 560 C 220 520, 250 470, 278 440" live={live} delay={2.6} />
     <text x={40} y={600} style={{ ...SVG_TEXT, fontSize: 32, fill: BLUE }}>
-      nucleus (the recipe)
+      細胞核（食譜）
     </text>
     <LabelLine d="M420 92 C 440 140, 456 190, 466 236" live={live} delay={2.7} />
     <text x={330} y={78} style={{ ...SVG_TEXT, fontSize: 32, fill: PINK }}>
-      vacuole (the pantry)
+      液泡（儲藏室）
     </text>
     <LabelLine d="M806 128 C 790 150, 770 168, 748 180" live={live} delay={2.8} />
     <text x={720} y={112} style={{ ...SVG_TEXT, fontSize: 32, fill: YELLOW }}>
-      a new bud!
+      新長出的芽！
     </text>
     <Chalk d="M520 620 L 780 620 M520 606 L 520 634 M780 606 L 780 634" w={3} opacity={0.8} />
     <text x={650} y={596} textAnchor="middle" style={{ ...SVG_TEXT, fontSize: 26, fill: DIM }}>
-      about 7 µm across
+      直徑約 7 µm
     </text>
   </svg>
 );
@@ -1332,27 +1327,27 @@ const Yeast: Page = () => {
   const live = useIsActivePage();
   return (
     <Board variant={0}>
-      <Title eyebrow="Part 1 · the living bit">Meet the yeast</Title>
+      <Title eyebrow="第一部分 · 活的那一塊">認識酵母</Title>
       <YeastCell live={live} />
-      <Fact left={1070} top={300} big="10 billion" color={YELLOW} delay={3}>
-        cells in a single gram
+      <Fact left={1070} top={300} big="100 億" color={YELLOW} delay={3}>
+        個細胞，就在 1 公克
         <br />
-        of fresh yeast
+        新鮮酵母裡
       </Fact>
       <Fact left={1450} top={300} big="~7 µm" color={BLUE} delay={3.3}>
-        across — ten side by
+        寬度，十個並排
         <br />
-        side span one hair
+        約等於一根頭髮粗
       </Fact>
-      <Fact left={1070} top={580} big="90 min" color={PINK} delay={3.6}>
-        to bud a brand-new
+      <Fact left={1070} top={580} big="90 分鐘" color={PINK} delay={3.6}>
+        舒適的環境下，
         <br />
-        cell when it's cosy
+        長出一顆全新的細胞
       </Fact>
       <Fact left={1450} top={580} big="60 °C" color={CHALK} delay={3.9}>
-        where yeast
+        酵母到這個溫度
         <br />
-        stops for good
+        就永遠停工了
       </Fact>
       <div
         style={abs(1070, 846, {
@@ -1363,8 +1358,8 @@ const Yeast: Page = () => {
           ...fadeIn(live, 4.3),
         })}
       >
-        <span style={{ fontStyle: 'italic', color: CHALK }}>Saccharomyces cerevisiae</span> — “sugar
-        fungus”
+        <span style={{ fontStyle: 'italic', color: CHALK }}>Saccharomyces cerevisiae</span>
+        （釀酒酵母）— 意思是「糖的真菌」
       </div>
     </Board>
   );
@@ -1436,7 +1431,7 @@ const Equation: Page = () => {
   const live = useIsActivePage();
   return (
     <Board variant={1}>
-      <Title eyebrow="Part 1 · fermentation">What yeast actually does</Title>
+      <Title eyebrow="第一部分 · 發酵">酵母到底做了什麼</Title>
       <Term left={130} width={500} delay={0.4}>
         C<Sub>6</Sub>H<Sub>12</Sub>O<Sub>6</Sub>
       </Term>
@@ -1454,8 +1449,8 @@ const Equation: Page = () => {
       </Term>
       <Steps>
         <Step>
-          <LabelBelow cx={380} color={YELLOW} word="sugar">
-            from the flour's starch
+          <LabelBelow cx={380} color={YELLOW} word="糖">
+            來自麵粉裡的澱粉
           </LabelBelow>
         </Step>
         <Step>
@@ -1474,8 +1469,8 @@ const Equation: Page = () => {
                 cls="cs-ds"
               />
             </svg>
-            <LabelBelow cx={1015} color={PINK} word="carbon dioxide">
-              the bubbles = the rise!
+            <LabelBelow cx={1015} color={PINK} word="二氧化碳">
+              氣泡 = 麵團發起來！
             </LabelBelow>
           </div>
         </Step>
@@ -1489,8 +1484,8 @@ const Equation: Page = () => {
             >
               <Chalk d={wobble(6, 14, 454, 12, 3, 3)} color={BLUE} w={6} live={live} cls="cs-ds" />
             </svg>
-            <LabelBelow cx={1540} color={BLUE} word="alcohol">
-              flavour & aroma — bakes off
+            <LabelBelow cx={1540} color={BLUE} word="酒精">
+              風味與香氣 — 烘烤時會揮發
             </LabelBelow>
           </div>
         </Step>
@@ -1520,7 +1515,7 @@ const Equation: Page = () => {
                 whiteSpace: 'nowrap',
               })}
             >
-              In grams: 180 g sugar → 88 g CO₂ + 92 g alcohol (+ a little warmth)
+              換成公克：180 g 糖 → 88 g CO₂ + 92 g 酒精（外加一點熱）
             </div>
             <div
               style={abs(0, 82, {
@@ -1531,7 +1526,7 @@ const Equation: Page = () => {
                 color: YELLOW,
               })}
             >
-              The yeast keeps the energy — we keep the bubbles.
+              能量歸酵母，氣泡歸我們。
             </div>
           </div>
         </Step>
@@ -1585,7 +1580,7 @@ const Gluten: Page = () => {
   const live = useIsActivePage();
   return (
     <Board variant={2}>
-      <Title eyebrow="Part 2 · the stretchy bit">The gluten net</Title>
+      <Title eyebrow="第二部分 · 有彈性的那一塊">麩質網</Title>
       <svg width={680} height={430} viewBox="0 0 680 430" style={{ ...abs(130, 290), ...ROUGH }}>
         <Chalk d={PANEL} w={3} opacity={0.45} live={live} delay={0.4} dur={0.8} />
         <Chalk d={TANGLE} color={YELLOW} w={3.5} live={live} delay={0.8} dur={1.6} />
@@ -1600,7 +1595,7 @@ const Gluten: Page = () => {
           ...writeIn(live, 1.6),
         })}
       >
-        just mixed: a tangle
+        剛混合：一團亂麻
       </div>
       <div
         style={abs(820, 410, {
@@ -1612,7 +1607,7 @@ const Gluten: Page = () => {
           ...writeIn(live, 2),
         })}
       >
-        knead!
+        揉！
       </div>
       <svg width={260} height={80} viewBox="0 0 260 80" style={{ ...abs(830, 470), ...ROUGH }}>
         <Chalk d={arrow(16, 46, 130, 20, 240, 44, 22)} w={6} live={live} delay={2.1} dur={0.6} />
@@ -1627,9 +1622,9 @@ const Gluten: Page = () => {
           ...fadeIn(live, 2.4),
         })}
       >
-        10 minutes, or
+        揉 10 分鐘，或是
         <br />
-        rest + 4 folds
+        靜置 + 4 次摺疊
       </div>
       <svg width={680} height={430} viewBox="0 0 680 430" style={{ ...abs(1110, 290), ...ROUGH }}>
         <Chalk d={PANEL} w={3} opacity={0.45} live={live} delay={2.4} dur={0.8} />
@@ -1671,10 +1666,10 @@ const Gluten: Page = () => {
           ...writeIn(live, 4.4),
         })}
       >
-        kneaded: a net that traps gas
+        揉好了：能困住氣體的網
       </div>
       <GlutenKey left={130} glyph={coil(4, 14, 58, 0, 1, 7)} color={YELLOW} delay={4.6}>
-        glutenin — springy strength
+        麥穀蛋白 — 彈力十足
       </GlutenKey>
       <GlutenKey
         left={720}
@@ -1682,10 +1677,10 @@ const Gluten: Page = () => {
         color={PINK}
         delay={4.8}
       >
-        gliadin — lets it stretch
+        醇溶蛋白 — 讓麵團能延展
       </GlutenKey>
       <GlutenKey left={1290} glyph={scribble(34, 24, 22, 20, 3, 1.05)} color={BLUE} delay={5}>
-        CO₂ bubbles, trapped
+        被困住的 CO₂ 氣泡
       </GlutenKey>
     </Board>
   );
@@ -1816,10 +1811,10 @@ const RiseChart = ({ live }: { live: boolean }) => (
       8 h
     </AxisLabel>
     <AxisLabel x={1110} y={652} anchor="end">
-      dough temperature (°C)
+      麵團溫度 (°C)
     </AxisLabel>
     <text x={160} y={46} style={{ ...SVG_TEXT, fontSize: 28, fill: DIM }}>
-      hours for the bulk to rise +50%
+      基礎發酵漲大 50% 所需時數
     </text>
     <text
       x={(tx(24) + tx(27)) / 2}
@@ -1827,7 +1822,7 @@ const RiseChart = ({ live }: { live: boolean }) => (
       textAnchor="middle"
       style={{ ...SVG_SCRIPT, fontSize: 46, fill: YELLOW }}
     >
-      sweet spot
+      甜蜜點
     </text>
     <Chalk
       d={`M${tx(22)} 550 L${tx(22)} 290`}
@@ -1843,7 +1838,7 @@ const RiseChart = ({ live }: { live: boolean }) => (
       textAnchor="end"
       style={{ ...SVG_TEXT, fontSize: 28, fill: PINK }}
     >
-      our kitchen tonight: 22 °C
+      今晚的廚房：22 °C
     </text>
     <Chalk d={RISE_CURVE} color={CHALK} w={6} live={live} delay={1.6} dur={1.4} />
     <Chalk d={POINT_MARKS} color={YELLOW} w={4} live={live} delay={2.4} dur={0.6} />
@@ -1888,22 +1883,22 @@ const Temperature: Page = () => {
   const live = useIsActivePage();
   return (
     <Board variant={0}>
-      <Title eyebrow="Part 3 · temperature & time">Warmth = speed</Title>
+      <Title eyebrow="第三部分 · 溫度與時間">越暖 = 越快</Title>
       <RiseChart live={live} />
       <Note top={300} head="+3 °C" color={YELLOW} delay={3} size={84}>
-        ≈ a quarter quicker
+        發酵速度每次
         <br />
-        rise, every time
+        約快四分之一
       </Note>
-      <Note top={530} head="too warm: 30 °C +" color={PINK} delay={3.4}>
-        slack, sour and boozy —
+      <Note top={530} head="太熱：30 °C 以上" color={PINK} delay={3.4}>
+        鬆垮、偏酸又有酒味 —
         <br />
-        it rises before it tastes
+        還沒入味就先發過頭
       </Note>
-      <Note top={720} head="too cold: under 18 °C" color={BLUE} delay={3.8}>
-        slow, but so tasty.
+      <Note top={720} head="太冷：低於 18 °C" color={BLUE} delay={3.8}>
+        雖然慢，但超級好吃。
         <br />
-        Hello, fridge!
+        冰箱，你好！
       </Note>
     </Board>
   );
@@ -1995,16 +1990,17 @@ const Bakers: Page = () => {
   const live = useIsActivePage();
   return (
     <Board variant={1}>
-      <Title eyebrow="Part 4 · the recipe as percentages">Baker's maths</Title>
+      <Title eyebrow="第四部分 · 用百分比寫配方">烘焙百分比</Title>
       <div
         style={abs(130, 276, {
           ...SCRIPT,
-          fontSize: 50,
+          fontSize: 44,
+          whiteSpace: 'nowrap',
           color: YELLOW,
           ...writeIn(live, 0.5, 0.9),
         })}
       >
-        Flour = 100%. Everything else is a % of flour.
+        麵粉 = 100%，其他材料都是麵粉的百分比。
       </div>
       <div
         style={abs(130, 362, {
@@ -2015,15 +2011,15 @@ const Bakers: Page = () => {
           ...fadeIn(live, 0.9),
         })}
       >
-        <span>ingredient</span>
-        <span style={{ position: 'absolute', right: 220 }}>grams</span>
-        <span style={{ position: 'absolute', right: 20 }}>baker's %</span>
+        <span>材料</span>
+        <span style={{ position: 'absolute', right: 220 }}>公克</span>
+        <span style={{ position: 'absolute', right: 20 }}>烘焙 %</span>
       </div>
-      <PctRow top={410} name="Strong white flour" grams="900 g" pct="90%" delay={1} />
-      <PctRow top={476} name="Wholemeal flour" grams="100 g" pct="10%" delay={1.15} />
-      <PctRow top={542} name="Water" grams="720 g" pct="72%" color={BLUE} delay={1.3} />
-      <PctRow top={608} name="Starter" grams="200 g" pct="20%" color={PINK} delay={1.45} />
-      <PctRow top={674} name="Salt" grams="20 g" pct="2%" delay={1.6} />
+      <PctRow top={410} name="高筋白麵粉" grams="900 g" pct="90%" delay={1} />
+      <PctRow top={476} name="全麥麵粉" grams="100 g" pct="10%" delay={1.15} />
+      <PctRow top={542} name="水" grams="720 g" pct="72%" color={BLUE} delay={1.3} />
+      <PctRow top={608} name="酵種" grams="200 g" pct="20%" color={PINK} delay={1.45} />
+      <PctRow top={674} name="鹽" grams="20 g" pct="2%" delay={1.6} />
       <svg
         width={1000}
         height={160}
@@ -2045,7 +2041,7 @@ const Bakers: Page = () => {
       <svg width={880} height={20} viewBox="0 0 880 20" style={{ ...abs(120, 742), ...ROUGH }}>
         <Chalk d={wobble(4, 10, 876, 8, 4, 2)} w={4} live={live} delay={1.8} dur={0.6} />
       </svg>
-      <PctRow top={764} name="Dough total" grams="1940 g" pct="194%" bold delay={2} />
+      <PctRow top={764} name="麵團總重" grams="1940 g" pct="194%" bold delay={2} />
       <div
         style={abs(130, 860, {
           ...HAND,
@@ -2055,7 +2051,7 @@ const Bakers: Page = () => {
           ...fadeIn(live, 2.3),
         })}
       >
-        72% water = a friendly dough: soft, not too sticky.
+        72% 含水量 = 好上手的麵團：柔軟但不太黏手。
       </div>
       <svg width={20} height={620} viewBox="0 0 20 620" style={{ ...abs(1124, 290), ...ROUGH }}>
         <Chalk
@@ -2068,26 +2064,26 @@ const Bakers: Page = () => {
         />
       </svg>
       <div style={abs(1170, 286, { ...SCRIPT, fontSize: 60, color: PINK, ...writeIn(live, 2.4) })}>
-        Scale it up:
+        放大配方：
       </div>
       <Steps>
         <Step>
-          <MathRow top={390} label="want">
+          <MathRow top={390} label="目標">
             2 × 900 g = 1800 g
           </MathRow>
         </Step>
         <Step>
-          <MathRow top={510} label="flour" color={YELLOW} note="(the whole recipe is 194%)">
+          <MathRow top={510} label="麵粉" color={YELLOW} note="（整份配方是 194%）">
             1800 ÷ 1.94 = 928 g
           </MathRow>
         </Step>
         <Step>
-          <MathRow top={650} label="water" color={BLUE}>
+          <MathRow top={650} label="水" color={BLUE}>
             928 × 0.72 = 668 g
           </MathRow>
         </Step>
         <Step>
-          <MathRow top={770} label="salt">
+          <MathRow top={770} label="鹽">
             928 × 0.02 = 19 g
           </MathRow>
         </Step>
@@ -2150,7 +2146,7 @@ const SourdoughDay: Page = () => {
   const live = useIsActivePage();
   return (
     <Board variant={2}>
-      <Title eyebrow="Part 5 · Saturday morning → Sunday morning">A sourdough day</Title>
+      <Title eyebrow="第五部分 · 週六早上 → 週日早上">酸種麵包的一天</Title>
       <svg
         width={1920}
         height={1080}
@@ -2167,37 +2163,30 @@ const SourdoughDay: Page = () => {
       <div style={abs(1576, 538, { ...SCRIPT, fontSize: 34, color: YELLOW, ...fadeIn(live, 2.2) })}>
         z z z
       </div>
-      <TimeEvent x={210} above time="9:00" title="Feed the starter" sub="1 : 5 : 5" delay={0.6} />
+      <TimeEvent x={210} above time="9:00" title="餵養酵種" sub="1 : 5 : 5" delay={0.6} />
       <TimeEvent
         x={420}
         above={false}
         time="13:00"
-        title="Mix flour + water"
-        sub="then rest 45 min"
+        title="混合麵粉與水"
+        sub="靜置 45 分鐘"
         delay={0.8}
       />
-      <TimeEvent
-        x={630}
-        above
-        time="13:45"
-        title="Add starter + salt"
-        sub="squish it all in"
-        delay={1}
-      />
+      <TimeEvent x={630} above time="13:45" title="加入酵種與鹽" sub="全部捏進麵團裡" delay={1} />
       <TimeEvent
         x={840}
         above={false}
         time="14:15"
-        title="Stretch & fold"
-        sub="4 sets, every 30 min"
+        title="拉伸摺疊"
+        sub="共 4 組，每 30 分鐘"
         delay={1.2}
       />
       <TimeEvent
         x={1050}
         above
         time="16:30"
-        title="Bulk rise done"
-        sub="+50%, domed, jiggly"
+        title="基礎發酵完成"
+        sub="漲 50%、圓頂、會晃"
         color={PINK}
         delay={1.4}
       />
@@ -2205,25 +2194,25 @@ const SourdoughDay: Page = () => {
         x={1260}
         above={false}
         time="17:00"
-        title="Shape"
-        sub="into a floured basket"
+        title="整形"
+        sub="放進撒粉的發酵籃"
         delay={1.6}
       />
       <TimeEvent
         x={1460}
         above
         time="17:30"
-        title="Into the fridge"
-        sub="12–14 h, cold & slow"
+        title="放進冰箱"
+        sub="12–14 小時，低溫慢發"
         color={BLUE}
         delay={1.8}
       />
       <TimeEvent
         x={1650}
         above={false}
-        time="Sun 8:00"
-        title="Bake!"
-        sub="250 °C · 45 min"
+        time="週日 8:00"
+        title="烘烤！"
+        sub="250 °C · 45 分鐘"
         color={PINK}
         width={280}
         delay={2.2}
@@ -2237,8 +2226,7 @@ const SourdoughDay: Page = () => {
           ...writeIn(live, 2.6, 1),
         })}
       >
-        ≈ 23 hours, start to finish ·{' '}
-        <span style={{ color: YELLOW }}>about 40 minutes of actual work</span>
+        ≈ 23 小時，從頭到尾 · <span style={{ color: YELLOW }}>實際動手約 40 分鐘</span>
       </div>
     </Board>
   );
@@ -2328,7 +2316,7 @@ const Starter: Page = () => {
   const live = useIsActivePage();
   return (
     <Board variant={0}>
-      <Title eyebrow="Part 6 · a pet that lives in a jar">Feeding the starter</Title>
+      <Title eyebrow="第六部分 · 住在罐子裡的寵物">餵養酵種</Title>
       <div
         style={abs(130, 264, {
           display: 'flex',
@@ -2339,7 +2327,7 @@ const Starter: Page = () => {
         })}
       >
         <span style={{ ...SCRIPT, fontSize: 66, color: YELLOW }}>1 : 5 : 5</span>
-        <span style={{ ...HAND, fontSize: 32 }}>20 g starter + 100 g flour + 100 g water</span>
+        <span style={{ ...HAND, fontSize: 32 }}>20 g 酵種 + 100 g 麵粉 + 100 g 水</span>
       </div>
       <div
         style={abs(1340, 252, {
@@ -2352,9 +2340,9 @@ const Starter: Page = () => {
           ...fadeIn(live, 4),
         })}
       >
-        smells like yoghurt = happy
+        聞起來像優格 = 狀態很好
         <br />
-        smells like nail polish = hungry!
+        聞起來像指甲油 = 餓了！
       </div>
       <Jar
         left={170}
@@ -2363,7 +2351,7 @@ const Starter: Page = () => {
         bubbles={4}
         seed={3}
         time="0 h"
-        state="just fed"
+        state="剛餵完"
         delay={0.8}
       />
       <Jar
@@ -2373,7 +2361,7 @@ const Starter: Page = () => {
         bubbles={12}
         seed={7}
         time="3 h"
-        state="bubbly & rising"
+        state="冒泡、上升中"
         delay={1.4}
       />
       <Jar
@@ -2383,7 +2371,7 @@ const Starter: Page = () => {
         bubbles={22}
         seed={11}
         time="6 h"
-        state="peak! use it now"
+        state="高峰！現在用最好"
         color={YELLOW}
         delay={2}
       />
@@ -2395,7 +2383,7 @@ const Starter: Page = () => {
         seed={5}
         streak={118}
         time="10 h"
-        state="collapsed: feed me"
+        state="已塌陷：快餵我"
         color={PINK}
         delay={2.6}
       />
@@ -2449,8 +2437,7 @@ const Starter: Page = () => {
           ...fadeIn(live, 3.4),
         })}
       >
-        Pink line = the rubber band you put on right after feeding. At 24 °C it peaks in about 6
-        hours.
+        粉紅線 = 餵完酵種後立刻套上的橡皮筋。24 °C 時，大約 6 小時達到高峰。
       </div>
     </Board>
   );
@@ -2500,7 +2487,7 @@ const OvenSpring: Page = () => {
   const live = useIsActivePage();
   return (
     <Board variant={1}>
-      <Title eyebrow="Part 7 · the last big push">Oven spring</Title>
+      <Title eyebrow="第七部分 · 最後的大推進">爐內膨脹</Title>
       <svg width={880} height={500} viewBox="0 0 880 500" style={{ ...abs(100, 300), ...ROUGH }}>
         <Fill d={SMALL_LOAF} color="rgba(244,222,132,0.08)" live={live} delay={0.8} />
         <Chalk d={SMALL_LOAF} w={6} live={live} delay={0.3} dur={0.9} />
@@ -2519,7 +2506,7 @@ const OvenSpring: Page = () => {
           textAnchor="middle"
           style={{ ...SVG_SCRIPT, fontSize: 40, fill: YELLOW }}
         >
-          250 °C, lid on
+          250 °C，蓋上鍋蓋
         </text>
         <Fill d={BIG_LOAF} color="rgba(244,222,132,0.1)" live={live} delay={2.2} />
         <Chalk d={BIG_LOAF} w={7} live={live} delay={1.8} dur={1} />
@@ -2537,16 +2524,16 @@ const OvenSpring: Page = () => {
           +25%
         </text>
         <text x={200} y={476} textAnchor="middle" style={{ ...SVG_TEXT, fontSize: 30 }}>
-          into the oven
+          入爐前
         </text>
         <text x={640} y={476} textAnchor="middle" style={{ ...SVG_TEXT, fontSize: 30 }}>
-          20 minutes later
+          20 分鐘後
         </text>
       </svg>
       <div style={abs(130, 830, { ...HAND, fontSize: 30, color: DIM, ...fadeIn(live, 3.3) })}>
-        Lid on for the first 20 min: the steam keeps
+        前 20 分鐘蓋上鍋蓋：蒸氣讓外皮保持柔軟，
         <br />
-        the crust soft, so the loaf can keep stretching.
+        麵包才能繼續往上膨脹。
       </div>
       <svg width={40} height={600} viewBox="0 0 40 600" style={{ ...abs(1020, 300), ...ROUGH }}>
         <Chalk
@@ -2561,27 +2548,27 @@ const OvenSpring: Page = () => {
       <Steps>
         <Step>
           <SpringRow top={290} temp="30 → 50 °C" color={YELLOW}>
-            the yeast's last frenzy of gas
+            酵母最後一波瘋狂產氣
           </SpringRow>
         </Step>
         <Step>
           <SpringRow top={410} temp="~60 °C" color={CHALK}>
-            yeast is done; water turns to steam
+            酵母結束工作；水分變成蒸氣
           </SpringRow>
         </Step>
         <Step>
           <SpringRow top={530} temp="~75 °C" color={BLUE}>
-            gluten firms up: the shape is locked
+            麩質變硬定型：形狀固定了
           </SpringRow>
         </Step>
         <Step>
-          <SpringRow top={650} temp="150 °C + on the crust" color={PINK}>
-            browning — that toasty flavour
+          <SpringRow top={650} temp="外皮 150 °C 以上" color={PINK}>
+            褐變反應 — 烤香味的來源
           </SpringRow>
         </Step>
         <Step>
-          <SpringRow top={770} temp="96 °C in the middle" color={YELLOW}>
-            done! now wait an hour to slice
+          <SpringRow top={770} temp="中心 96 °C" color={YELLOW}>
+            完成！等一小時再切
           </SpringRow>
         </Step>
       </Steps>
@@ -2637,10 +2624,10 @@ const Fault = ({
         {name}
       </div>
       <div style={abs(0, 358, { ...fadeIn(live, delay + 0.3) })}>
-        <div style={{ ...HAND, fontSize: 22, color: DIM, letterSpacing: '0.08em' }}>LIKELY</div>
+        <div style={{ ...HAND, fontSize: 22, color: DIM, letterSpacing: '0.08em' }}>可能原因</div>
         <div style={{ ...HAND, fontSize: 28, whiteSpace: 'nowrap' }}>{likely}</div>
         <div style={{ ...HAND, fontSize: 22, color: DIM, letterSpacing: '0.08em', marginTop: 16 }}>
-          TRY
+          試試看
         </div>
         <div style={{ ...HAND, fontSize: 28, whiteSpace: 'nowrap', color }}>{fix}</div>
       </div>
@@ -2652,7 +2639,7 @@ const Faults: Page = () => {
   const live = useIsActivePage();
   return (
     <Board variant={2}>
-      <Title eyebrow="Part 8 · the loaf doctor is in">What went wrong?</Title>
+      <Title eyebrow="第八部分 · 麵包診所開診">哪裡出錯了？</Title>
       <Doodle
         left={655}
         top={300}
@@ -2675,7 +2662,7 @@ const Faults: Page = () => {
       />
       <Fault
         left={130}
-        name="Flat"
+        name="扁塌"
         color={PINK}
         delay={1}
         drawing={
@@ -2687,22 +2674,22 @@ const Faults: Page = () => {
         }
         likely={
           <>
-            overproofed, weak gluten,
+            發酵過頭、麩質太弱、
             <br />
-            too much water
+            水太多
           </>
         }
         fix={
           <>
-            shorter bulk, one more fold,
+            縮短基礎發酵、多摺一次，
             <br />
-            drop to 70% water
+            把含水量降到 70%
           </>
         }
       />
       <Fault
         left={700}
-        name="Dense"
+        name="太紮實"
         color={BLUE}
         delay={1.6}
         drawing={
@@ -2714,21 +2701,22 @@ const Faults: Page = () => {
         }
         likely={
           <>
-            underproofed, cold kitchen,
-            <br />a sleepy starter
+            發酵不足、廚房太冷、
+            <br />
+            酵種沒精神
           </>
         }
         fix={
           <>
-            a warmer spot (25 °C),
+            換個溫暖的地方（25 °C），
             <br />
-            use starter at its peak
+            用高峰期的酵種
           </>
         }
       />
       <Fault
         left={1270}
-        name="Too sour"
+        name="太酸"
         color={YELLOW}
         delay={2.2}
         drawing={
@@ -2740,16 +2728,16 @@ const Faults: Page = () => {
         }
         likely={
           <>
-            a long, warm ferment,
+            又長又暖的發酵、
             <br />
-            starter past its peak
+            酵種已過高峰
           </>
         }
         fix={
           <>
-            feed 1:5:5 the night before,
+            前一晚以 1:5:5 餵養，
             <br />
-            shorter time in the fridge
+            縮短冷藏時間
           </>
         }
       />
@@ -2811,9 +2799,9 @@ const Answer = ({ left, top, children }: { left: number; top: number; children: 
 
 const Quiz: Page = () => (
   <Board variant={0}>
-    <Title eyebrow="No phones, no notes — just shout it out">Pop quiz!</Title>
-    <Doodle left={470} top={120} w={90} h={90} d={star(45, 45, 32)} color={YELLOW} delay={1} />
-    <Doodle left={556} top={168} w={60} h={60} d={star(30, 30, 20)} color={PINK} delay={1.2} />
+    <Title eyebrow="不看手機、不看筆記 — 直接喊出答案">隨堂小測驗！</Title>
+    <Doodle left={800} top={120} w={90} h={90} d={star(45, 45, 32)} color={YELLOW} delay={1} />
+    <Doodle left={886} top={168} w={60} h={60} d={star(30, 30, 20)} color={PINK} delay={1.2} />
     <Doodle
       left={120}
       top={560}
@@ -2835,32 +2823,32 @@ const Quiz: Page = () => (
       delay={0.6}
     />
     <Question left={130} top={300} n={1}>
-      Which gas makes the bubbles in bread?
+      麵包裡的氣泡是什麼氣體造成的？
     </Question>
     <Question left={990} top={300} n={2}>
-      Dough at 20 °C or at 26 °C:
+      20 °C 和 26 °C 的麵團，
       <br />
-      which one rises first?
+      哪一個先發起來？
     </Question>
     <Question left={130} top={620} n={3}>
-      500 g of flour at 75% hydration.
+      500 g 麵粉，含水量 75%，
       <br />
-      How much water?
+      要加多少水？
     </Question>
     <Question left={990} top={620} n={4}>
-      It spreads like a pancake and
+      像鬆餅一樣攤平，
       <br />
-      smells boozy. What happened?
+      還有酒味。發生了什麼事？
     </Question>
     <Steps>
       <Step>
         <Answer left={130} top={430}>
-          CO₂ — carbon dioxide
+          CO₂ — 二氧化碳
         </Answer>
       </Step>
       <Step>
         <Answer left={990} top={430}>
-          26 °C, about twice as fast
+          26 °C，約快兩倍
         </Answer>
       </Step>
       <Step>
@@ -2870,7 +2858,7 @@ const Quiz: Page = () => (
       </Step>
       <Step>
         <Answer left={990} top={750}>
-          Overproofed: shorter bulk
+          發酵過頭：縮短基礎發酵
         </Answer>
       </Step>
     </Steps>
@@ -2932,33 +2920,33 @@ const Homework: Page = () => {
   const live = useIsActivePage();
   return (
     <Board variant={1}>
-      <Title eyebrow="Due Tuesday 21 October">Homework (the tasty kind)</Title>
+      <Title eyebrow="10 月 21 日（週二）繳交">回家作業（好吃的那種）</Title>
       <Task
         top={300}
         seed={1}
-        title="Bake one loaf on the Saturday plan"
-        sub="a half batch is fine: 464 g of flour"
+        title="照週六的流程烤一條麵包"
+        sub="做半份量也可以：464 g 麵粉"
         delay={0.6}
       />
       <Task
         top={430}
         seed={5}
-        title="Keep a dough diary"
-        sub="room temp, dough temp, every time you touch it"
+        title="寫一本麵團日記"
+        sub="室溫、麵團溫度，每次動到麵團都要記錄"
         delay={0.9}
       />
       <Task
         top={560}
         seed={9}
-        title="Photograph the crumb"
-        sub="slice it only once it's cool: give it an hour!"
+        title="拍下麵包的內部組織"
+        sub="放涼再切：至少等一小時！"
         delay={1.2}
       />
       <Task
         top={690}
         seed={13}
-        title="Bring one slice next week"
-        sub="for the crumb clinic: we'll read them together"
+        title="下週帶一片麵包來"
+        sub="給「麵包心門診」用：大家一起判讀"
         delay={1.5}
       />
       <div
@@ -2979,25 +2967,25 @@ const Homework: Page = () => {
           <Chalk d={DIARY_LINES} w={2} opacity={0.35} />
           <Chalk d="M136 120 L136 496 M244 120 L244 496" w={2} opacity={0.35} />
         </svg>
-        <div style={abs(30, 26, { ...SCRIPT, fontSize: 54 })}>Dough diary — Sat</div>
+        <div style={abs(30, 26, { ...SCRIPT, fontSize: 54 })}>麵團日記 — 週六</div>
         <div style={abs(30, 128, { ...HAND, fontSize: 22, color: DIM, letterSpacing: '0.06em' })}>
-          TIME
+          時間
         </div>
         <div style={abs(150, 128, { ...HAND, fontSize: 22, color: DIM, letterSpacing: '0.06em' })}>
-          TEMP
+          溫度
         </div>
         <div style={abs(260, 128, { ...HAND, fontSize: 22, color: DIM, letterSpacing: '0.06em' })}>
-          NOTES
+          筆記
         </div>
-        <DiaryRow top={186} time="9:00" temp="23°" note="fed Clint, 1:5:5" />
-        <DiaryRow top={246} time="13:45" temp="25°" note="mixed. sticky!!" />
-        <DiaryRow top={306} time="16:30" temp="26°" note="+50%, jiggly :)" />
-        <DiaryRow top={366} time="17:30" temp="—" note="shaped, fridge" />
+        <DiaryRow top={186} time="9:00" temp="23°" note="餵 Clint，1:5:5" />
+        <DiaryRow top={246} time="13:45" temp="25°" note="混好了，好黏！！" />
+        <DiaryRow top={306} time="16:30" temp="26°" note="+50%，會晃 :)" />
+        <DiaryRow top={366} time="17:30" temp="—" note="整形，入冰箱" />
       </div>
       <div
         style={abs(130, 860, { ...HAND, fontSize: 32, whiteSpace: 'nowrap', ...fadeIn(live, 2.4) })}
       >
-        Bonus point: name your starter. Class favourite so far:{' '}
+        加分題：幫你的酵種取名字。目前班上最愛：{' '}
         <span style={{ ...SCRIPT, fontSize: 48, color: YELLOW }}>Clint Yeastwood</span>
       </div>
     </Board>
@@ -3009,7 +2997,7 @@ const Close: Page = () => {
   return (
     <Board variant={2} ledge footer={false}>
       <div style={abs(130, 110, { ...HAND, fontSize: 30, color: BLUE, ...fadeIn(live, 0) })}>
-        That's Lesson 4 — well done!
+        第 4 堂結束 — 大家辛苦了！
       </div>
       <h2
         style={{
@@ -3020,9 +3008,9 @@ const Close: Page = () => {
           ...writeIn(live, 0.2, 1.2),
         }}
       >
-        Thank you,
+        謝謝大家，
         <br />
-        bakers!
+        烘焙師們！
       </h2>
       <div
         style={abs(130, 600, {
@@ -3033,12 +3021,12 @@ const Close: Page = () => {
           ...writeIn(live, 1.4, 0.9),
         })}
       >
-        Next week · Lesson 5: Shaping & Scoring
+        下週 · 第 5 堂：整形與割紋
       </div>
       <div
         style={abs(130, 700, { ...HAND, fontSize: 34, whiteSpace: 'nowrap', ...fadeIn(live, 2) })}
       >
-        Bring: an apron, a sharp blade, your dough diary and one slice.
+        請帶：圍裙、鋒利的割刀、麵團日記，還有一片麵包。
       </div>
       <div
         style={abs(130, 770, {
@@ -3049,7 +3037,7 @@ const Close: Page = () => {
           ...fadeIn(live, 2.3),
         })}
       >
-        Questions? I'll be by the proofing cabinet.
+        有問題嗎？我會在發酵箱旁邊。
       </div>
       <div
         style={abs(130, 850, {
@@ -3060,7 +3048,7 @@ const Close: Page = () => {
           ...fadeIn(live, 2.6),
         })}
       >
-        crumbschool.co · @crumbschool · Chef Mara Okafor
+        crumbschool.co · @crumbschool · 主廚 Mara Okafor
       </div>
       <div style={abs(1220, 200, { width: 580, height: 464 })}>
         <HappyLoaf live={live} face />
@@ -3091,75 +3079,75 @@ const Close: Page = () => {
 };
 
 export const meta: SlideMeta = {
-  title: 'Crumb School — Why Bread Rises',
+  title: 'Crumb School — 麵包為什麼會發起來',
   createdAt: '2026-10-12T12:10:50.467Z',
 };
 
 export const notes: (string | undefined)[] = [
-  `Welcome everyone, aprons on, grab a stool. Quick show of hands: who's had a loaf come out flat? Good — that's tonight.
-Lesson 4 is the "why" lesson. Weeks 1 to 3 were technique; tonight is what's actually happening inside the dough, so the technique starts to make sense.`,
-  `Here's the plan for the next two hours. First three: the science — the yeast, the sum it does, and the gluten net.
-Then timing: temperature, baker's maths, a full sourdough day.
-Then troubleshooting, and a quiz at the end — yes, a real one.
-Focaccia break around 7:45. It's already proofing in the back, you'll smell it.`,
-  `If you only write down one sentence tonight, it's this one. Read it out loud with me.
-Tiny living things — that's yeast. Breathe out gas — that's carbon dioxide. A stretchy net — that's gluten.
-Every bread problem you'll ever have is one of those three going wrong. Too little life, too little gas, or a weak net.`,
-  `This is our hero. One cell, about seven microns across — you'd need ten of them to cross a single hair.
-A gram of fresh yeast is about ten billion of them. That block in the fridge is a city.
-Point at the bud: this is how yeast multiplies. In a warm dough a new cell buds off roughly every ninety minutes.
-And remember sixty degrees — above that, they're gone. That number comes back when we get to the oven.`,
-  `Don't panic about the chemistry; it's one line. Sugar in, gas and alcohol out.
-Click: the sugar comes from the flour — enzymes break the starch down so the yeast can eat it.
-Click: carbon dioxide. That's the rise. Every hole in your crumb was made by this.
-Click: alcohol. It's flavour and smell, and nearly all of it bakes off — sorry.
-Click: in grams, 180 of sugar gives you 88 of gas and 92 of alcohol. The yeast keeps the energy; we keep the bubbles.`,
-  `Gas on its own just escapes. So we need a net.
-Flour has two proteins: glutenin, these springy coils, and gliadin, these little beads that let things slide and stretch.
-Add water and they're a tangle. Knead — or rest and fold — and they line up into a net.
-Now the bubbles from the yeast get trapped and the dough inflates like a balloon. At the bench later, we'll do the windowpane test to check the net.`,
-  `This is the one chart I want you to take home. Warmer dough, faster rise.
-At 18 degrees, a sourdough bulk takes about 8 hours to grow by half. At 30, under 3.
-Rule of thumb: every 3 degrees is about a quarter quicker.
-Our kitchen tonight is 22 — a little cool, which is why we'll use warm water.
-Aim for the sweet spot, 24 to 27. Warmer than 30 and it rises before it tastes of anything.`,
-  `Baker's maths. It sounds scary; it's the friendliest thing in baking.
-Flour is always 100 percent, even if it's two flours. Everything else is a percentage of the flour.
-So 72 percent water means 720 grams for every kilo of flour.
-Click through the scaling: we want two 900-gram loaves, 1800 grams. The recipe adds up to 194 percent, so divide by 1.94: 928 grams of flour. Water is 928 times 0.72, 668. Salt, 19.
-Once it's in percentages, any size batch is one division.`,
-  `Here's a real Saturday, the one you'll bake for homework.
-Feed the starter at 9 in the morning. Mix flour and water at 1 and let it rest.
-Add starter and salt, then four sets of stretch and folds.
-Bulk ends around 4:30 when it's grown by half and jiggles. Shape at 5, fridge by 5:30, bake Sunday morning straight from cold.
-Twenty-three hours start to finish, and about forty minutes of actual work. Most of baking is waiting.`,
-  `The starter is a pet. Feed it 1:5:5 — 20 grams of starter, 100 flour, 100 water.
-Put a rubber band on the jar right after feeding. Then watch: bubbly at 3 hours, peak at about 6 at 24 degrees — domed, doubled-plus, smells like yoghurt.
-Use it at the peak. By 10 hours it's collapsed — see the streaks on the glass — and it smells like nail-polish remover. That means hungry, not dead.`,
-  `The last big push happens in the first twenty minutes of the bake.
-Click through: up to about 50 degrees, the yeast goes into a final frenzy. Gas expands, water turns to steam.
-Around 60 the yeast dies — remember that number. Around 75 the gluten sets and the shape is locked.
-The crust browns above 150. And the middle is done at 96.
-That's why the lid stays on for twenty minutes: steam keeps the crust soft so the loaf can keep growing. Expect about a quarter more volume.`,
-  `The loaf doctor is in. Three loaves I see every single week.
-Flat: usually overproofed or a weak net. The gas has worn the gluten out. Shorter bulk, one more fold, a little less water.
-Dense: the opposite — underproofed. Cold kitchen, sleepy starter. Find a warmer spot.
-Too sour: fermentation went long and warm, or the starter was past its peak. Feed it the night before.
-Ask: which of these have you baked? No shame — I've made all three this year.`,
-  `Pop quiz. Shout it out, no phones.
-Give them five seconds per question, then click to reveal each answer.
-One: carbon dioxide. Two: 26 degrees, roughly twice as fast — back to the chart.
-Three: 375 grams — 500 times 0.75. Four: overproofed — the net gave up. Cut the bulk shorter.
-Anyone who got all four gets the first slice of focaccia.`,
-  `Homework, the tasty kind. Due next Tuesday.
-Bake one loaf using the Saturday plan — half a batch is fine, that's 464 grams of flour.
-Keep a dough diary like this one: time, temperature, what you saw. It's how you learn your own kitchen.
-Don't slice it hot — give it an hour. Photograph the crumb, and bring a slice next week for the crumb clinic.
-And name your starter. Clint Yeastwood is the one to beat.`,
-  `That's it for tonight — thank you, bakers.
-Next week is Lesson 5, shaping and scoring, which is where that ear on the loaf comes from.
-Bring your apron, a sharp blade, your dough diary and one slice.
-I'll hang around by the proofing cabinet for questions. Now — focaccia.`,
+  `歡迎大家，圍裙穿好，找個凳子坐。先舉手問一下：有誰烤出過一條扁塌的麵包？很好，今晚就是為你們準備的。
+第 4 堂是「為什麼」這一堂。前三週教的是技巧，今晚要看的是麵團裡面到底發生了什麼事，這樣之前學的技巧才會變得合理。`,
+  `接下來兩個小時是這樣安排的。前三個主題是科學：酵母、它做的那道算式，還有麩質網。
+接著是時間掌控：溫度、烘焙百分比，還有完整的一個酸種麵包日。
+最後是疑難排解，還有一場小測驗，對，是真的測驗。
+7:45 左右有佛卡夏試吃休息。它已經在後面發酵了，你們會聞到香味。`,
+  `今晚如果只能抄一句話，就是這一句。大家跟我一起大聲念出來。
+微小生物，就是酵母。吐出氣體，就是二氧化碳。有彈性的網，就是麩質。
+你這輩子遇到的所有麵包問題，都是這三件事其中之一出了差錯：生命太少、氣體太少，或是網太弱。`,
+  `這是今天的主角。一顆細胞，寬度大約七微米，要十顆並排才跨得過一根頭髮。
+一公克新鮮酵母大約有一百億顆這樣的細胞。冰箱裡那一塊酵母，就是一座城市。
+請看這個芽：這就是酵母繁殖的方式。在溫暖的麵團裡，大約每九十分鐘就會長出一顆新細胞。
+還要記住六十度，超過這個溫度它們就全部陣亡了。講到烤箱的時候，這個數字還會再出現。`,
+  `別被化學嚇到，其實就一行：糖進去，氣體和酒精出來。
+點一下：糖來自麵粉，酵素把澱粉分解掉，酵母才吃得到。
+再點一下：二氧化碳，這就是麵團發起來的原因。麵包內部每一個氣孔都是它造成的。
+再點一下：酒精，它是風味和香氣，幾乎全都會在烘烤時揮發掉，抱歉囉。
+再點一下：換成公克，180 公克的糖會變成 88 公克的氣體和 92 公克的酒精。能量歸酵母，氣泡歸我們。`,
+  `氣體單獨存在只會跑掉，所以我們需要一張網。
+麵粉裡有兩種蛋白質：麥穀蛋白，是這些有彈力的螺旋；醇溶蛋白，是這些小珠子，讓東西能滑動、延展。
+加水之後，它們是亂成一團的。揉麵，或是靜置再摺疊，它們就會排列成一張網。
+這時酵母產生的氣泡就被困住，麵團像氣球一樣被撐大。等一下在工作檯上，我們會用薄膜測試來檢查這張網。`,
+  `這是我希望你們帶回家的一張圖：麵團越暖，發得越快。
+在 18 度時，酸種麵包的基礎發酵大約要 8 小時才會漲大一半；到了 30 度，不到 3 小時。
+經驗法則：每升高 3 度，大約快四分之一。
+今晚我們的廚房是 22 度，有點涼，所以我們會用溫水。
+目標是甜蜜點，24 到 27 度。超過 30 度，麵團還沒入味就先發過頭了。`,
+  `烘焙百分比。聽起來嚇人，其實是烘焙裡最親切的東西。
+麵粉永遠是 100%，就算是兩種麵粉加起來也一樣。其他材料都是麵粉的百分比。
+所以 72% 的水，就是每一公斤麵粉配 720 公克的水。
+我們點著看怎麼放大：想要兩條 900 公克的麵包，就是 1800 公克。整份配方加起來是 194%，所以除以 1.94，得到 928 公克麵粉。水是 928 乘以 0.72，等於 668。鹽是 19。
+一旦換成百分比，不管多大的份量，都只要做一次除法。`,
+  `這是真實的一個星期六，也就是你們回家作業要烤的流程。
+早上 9 點餵養酵種。1 點把麵粉和水混合，然後靜置。
+加入酵種和鹽，再做四組拉伸摺疊。
+基礎發酵在 4:30 左右結束，這時麵團漲大一半，晃一晃會抖動。5 點整形，5:30 放進冰箱，星期天早上直接從冰箱拿出來烤。
+從頭到尾二十三小時，實際動手大約四十分鐘。烘焙大部分的時間都在等待。`,
+  `酵種就像寵物。用 1:5:5 餵它：20 公克酵種、100 公克麵粉、100 公克水。
+餵完立刻在罐子上套一條橡皮筋。然後觀察：3 小時冒泡，24 度時大約 6 小時達到高峰，表面圓鼓、漲到兩倍以上，聞起來像優格。
+要在高峰時使用。到了 10 小時就塌下去了，你可以看到玻璃上的痕跡，聞起來像去光水。那代表它餓了，不是死了。`,
+  `最後一波大推進，發生在烘烤的前二十分鐘。
+一步一步點：到大約 50 度，酵母進入最後一陣瘋狂，氣體膨脹，水分變成蒸氣。
+大約 60 度酵母死亡，記得這個數字。大約 75 度麩質定型，形狀就固定了。
+外皮在 150 度以上開始上色，而中心煮熟的溫度是 96 度。
+這就是為什麼前二十分鐘要蓋著鍋蓋：蒸氣讓外皮保持柔軟，麵包才能繼續長大。預期體積會再多大約四分之一。`,
+  `麵包診所開診了。這是我每個星期都會看到的三種麵包。
+扁塌：通常是發酵過頭，或是網太弱。氣體把麩質磨損光了。縮短基礎發酵、多摺一次、水少一點。
+太紮實：剛好相反，是發酵不足。廚房太冷、酵種沒精神。換個溫暖的地方。
+太酸：發酵又長又暖，或是酵種已經過了高峰。前一晚先餵養它。
+請問：你們有人烤過其中哪一種？別不好意思，我今年這三種全都烤出來過。`,
+  `隨堂小測驗。直接喊出來，不准看手機。
+每題給五秒鐘，然後點一下揭曉答案。
+第一題：二氧化碳。第二題：26 度，大約快兩倍，回頭看看那張圖。
+第三題：375 公克，500 乘以 0.75。第四題：發酵過頭，網撐不住了，下次要縮短基礎發酵。
+四題全對的人，可以拿到第一片佛卡夏。`,
+  `回家作業，好吃的那種。下週二繳交。
+照週六的流程烤一條麵包，做半份量也可以，也就是 464 公克麵粉。
+像這樣寫一本麵團日記：時間、溫度、你觀察到的狀況。這樣你才會學會自己家廚房的脾氣。
+不要熱的時候就切，至少等一個小時。拍下麵包的內部組織，下週帶一片來參加麵包心門診。
+還有，幫你的酵種取個名字。Clint Yeastwood 是目前的最高紀錄保持者。`,
+  `今晚就到這裡，謝謝大家，烘焙師們。
+下週是第 5 堂，整形與割紋，麵包上那道「耳」就是這樣來的。
+請帶圍裙、鋒利的割刀、麵團日記，還有一片麵包。
+有問題我會在發酵箱旁邊。現在，來吃佛卡夏吧。`,
 ];
 
 export default [

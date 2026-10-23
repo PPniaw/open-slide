@@ -13,8 +13,9 @@ import { type CSSProperties, type ReactNode, useId } from 'react';
 export const design: DesignSystem = {
   palette: { bg: '#0F3B6E', text: '#EEF5FF', accent: '#8FD8FF' },
   fonts: {
-    display: '"Saira Semi Condensed", "Arial Narrow", sans-serif',
-    body: '"Saira Semi Condensed", "Arial Narrow", sans-serif',
+    display:
+      '"Saira Semi Condensed", "Arial Narrow", sans-serif, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
+    body: '"Saira Semi Condensed", "Arial Narrow", sans-serif, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif',
   },
   typeScale: { hero: 124, body: 30 },
   radius: 0,
@@ -28,8 +29,10 @@ const MUTE = '#9DBEE0';
 const FAINT = 'rgba(238,245,255,0.42)';
 const GHOST = 'rgba(214,236,255,0.2)';
 const AMBER = '#FFD27A';
-const MONO = '"Share Tech Mono", ui-monospace, Menlo, monospace';
-const HAND = '"Architects Daughter", "Comic Sans MS", cursive';
+const MONO =
+  '"Share Tech Mono", ui-monospace, Menlo, monospace, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif';
+const HAND =
+  '"Architects Daughter", "Comic Sans MS", cursive, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif';
 
 const SLIDE_ID = 'arden-footbridge-review';
 const FONT_HREF =
@@ -301,9 +304,9 @@ const TitleBlock = ({ title, scale }: { title: string; scale: string }) => {
         >
           Kestrel &amp; Vane Engineers
         </span>
-        <span style={SMALL}>For City of Halbrook</span>
+        <span style={SMALL}>委託單位 Halbrook 市</span>
       </div>
-      <Cell label={`Drawing · KV-2417-S-${100 + current}`}>
+      <Cell label={`圖號 · KV-2417-S-${100 + current}`}>
         <span
           style={{
             fontFamily: 'var(--osd-font-display)',
@@ -328,7 +331,7 @@ const TitleBlock = ({ title, scale }: { title: string; scale: string }) => {
           flexDirection: 'column',
         }}
       >
-        <span style={SMALL}>Sheet</span>
+        <span style={SMALL}>圖紙</span>
         <span
           style={{
             fontFamily: 'var(--osd-font-display)',
@@ -341,19 +344,19 @@ const TitleBlock = ({ title, scale }: { title: string; scale: string }) => {
         >
           {n}
         </span>
-        <span style={SMALL}>of {String(total).padStart(2, '0')}</span>
+        <span style={SMALL}>共 {String(total).padStart(2, '0')}</span>
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: '1.3fr 0.8fr 0.9fr 0.9fr' }}>
-        <Cell label="Scale">
+        <Cell label="比例">
           <span style={{ fontFamily: MONO, fontSize: 22, lineHeight: 1.3 }}>{scale}</span>
         </Cell>
-        <Cell label="Rev">
+        <Cell label="版次">
           <span style={{ fontFamily: MONO, fontSize: 22, lineHeight: 1.3, color: AMBER }}>C</span>
         </Cell>
-        <Cell label="Drn">
+        <Cell label="繪製">
           <span style={{ fontFamily: MONO, fontSize: 22, lineHeight: 1.3 }}>R.O.</span>
         </Cell>
-        <Cell label="Chk">
+        <Cell label="校核">
           <span style={{ fontFamily: MONO, fontSize: 22, lineHeight: 1.3 }}>M.L.</span>
         </Cell>
       </div>
@@ -363,7 +366,7 @@ const TitleBlock = ({ title, scale }: { title: string; scale: string }) => {
 
 const Sheet = ({
   title,
-  scale = 'NTS',
+  scale = '無比例',
   label,
   heading,
   children,
@@ -1272,9 +1275,9 @@ const Elevation = ({
 const CoverPage: Page = () => {
   const g = geo(11, 998, 176);
   return (
-    <Sheet title="Cover sheet" scale="1:500">
+    <Sheet title="封面" scale="1:500">
       <div className="ab-in" style={abs(120, 104, LABEL)}>
-        City of Halbrook · Design Review Panel · 14 Oct 2026
+        Halbrook 市 · 設計審查小組 · 2026 年 10 月 14 日
       </div>
       <div className="ab-in" style={{ ...abs(120, 250), ...d(0.15) }}>
         <div
@@ -1289,11 +1292,11 @@ const CoverPage: Page = () => {
         >
           Arden Street
           <br />
-          Footbridge
+          人行橋
         </div>
       </div>
       <div className="ab-in" style={{ ...abs(124, 528, { width: 800 }), ...d(0.35) }}>
-        <div style={{ ...LABEL, fontSize: 24, color: AMBER }}>60% design review · Rev C</div>
+        <div style={{ ...LABEL, fontSize: 24, color: AMBER }}>60% 設計審查 · 版次 C</div>
         <p
           style={{
             margin: '18px 0 0',
@@ -1302,8 +1305,8 @@ const CoverPage: Page = () => {
             color: MUTE,
           }}
         >
-          A 64 m cable-stayed walking and cycling bridge over the River Kell and the Carrow line,
-          linking Kell Meadows to Arden Street.
+          一座跨越 Kell 河與 Carrow 鐵路線、全長 64 m 的斜張式步行與自行車橋，連接 Kell Meadows 與
+          Arden Street。
         </p>
       </div>
       <Svg>
@@ -1311,7 +1314,7 @@ const CoverPage: Page = () => {
           <Elevation g={g} lite />
         </g>
         <g style={d(1.2)}>
-          <ScaleBar x={1010} y={700} ppm={11} label="SCALE 1:500" />
+          <ScaleBar x={1010} y={700} ppm={11} label="比例 1:500" />
           <path
             d="M1412,772 C1430,740 1452,694 1480,664"
             fill="none"
@@ -1320,17 +1323,17 @@ const CoverPage: Page = () => {
           />
           <Head x={1484} y={657} ang={-1.05} c={AMBER} />
           <text x={1392} y={800} textAnchor="middle" style={tx(26, AMBER, HAND)}>
-            pylon on the embankment —
+            堤岸上的橋塔 —
           </text>
           <text x={1392} y={832} textAnchor="middle" style={tx(26, AMBER, HAND)}>
-            no piers in the river
+            河中不設橋墩
           </text>
         </g>
       </Svg>
       <div className="ab-in" style={{ ...abs(120, 862), ...d(0.6) }}>
-        <div style={SMALL}>Presented by</div>
+        <div style={SMALL}>報告人</div>
         <div style={{ fontSize: 30, marginTop: 8, lineHeight: 1.35 }}>
-          Ruth Okafor, Project Engineer · Magnus Lindqvist, Design Lead
+          Ruth Okafor，專案工程師 · Magnus Lindqvist，設計主持人
         </div>
       </div>
     </Sheet>
@@ -1394,7 +1397,7 @@ const Stat = ({
 const SitePage: Page = () => {
   const uid = uidOf(useId());
   return (
-    <Sheet title="Site plan" scale="1:1000" label="Site context · plan" heading="Where it lands">
+    <Sheet title="基地平面圖" scale="1:1000" label="基地環境 · 平面" heading="落腳何處">
       <Svg>
         <defs>
           <pattern id={`${uid}w`} width={26} height={14} patternUnits="userSpaceOnUse">
@@ -1448,7 +1451,7 @@ const SitePage: Page = () => {
           <line x1={566} y1={790} x2={566} y2={862} stroke={CY} strokeWidth={1.4} />
           <Head x={566} y={868} ang={Math.PI / 2} />
           <text x={580} y={832} style={tx(18, CY)}>
-            FLOW
+            水流
           </text>
         </g>
         <g style={d(0.3)}>
@@ -1461,7 +1464,7 @@ const SitePage: Page = () => {
             textAnchor="middle"
             style={{ ...tx(18, MUTE), ...HALO }}
           >
-            CARROW LINE · 25 kV
+            CARROW 鐵路線 · 25 kV
           </text>
         </g>
         <g style={d(0.4)}>
@@ -1571,8 +1574,8 @@ const SitePage: Page = () => {
         </g>
         <g style={d(1.0)}>
           <SectionCut x={624} y1={548} y2={652} n="A" />
-          <Leader pts={[398, 612, 360, 668, 330, 668]} text="A1 · GREENWAY" end />
-          <Leader pts={[768, 645, 740, 730, 720, 730]} text="P1 · ON FLOOD EMBANKMENT" end />
+          <Leader pts={[398, 612, 360, 668, 330, 668]} text="A1 · 綠道" end />
+          <Leader pts={[768, 645, 740, 730, 720, 730]} text="P1 · 位於防洪堤岸" end />
           <Leader pts={[912, 578, 950, 520, 962, 520]} text="A2 · ARDEN ST" />
           <NorthArrow x={1110} y={604} />
           <ScaleBar x={150} y={262} ppm={8} label="" />
@@ -1584,10 +1587,10 @@ const SitePage: Page = () => {
             strokeDasharray="6 5"
           />
           <text x={300} y={906} style={tx(24, AMBER, HAND)}>
-            detour today:
+            目前繞行距離：
           </text>
           <text x={300} y={936} style={{ ...tx(20, AMBER), ...HALO }}>
-            1.1 KM ↓
+            1.1 公里 ↓
           </text>
           <text x={150} y={440} style={{ ...tx(18, MUTE), ...HALO }}>
             KELL MEADOWS
@@ -1597,22 +1600,22 @@ const SitePage: Page = () => {
       <Stat
         top={262}
         value="1.1 km → 64 m"
-        label="Crossing length"
-        note="Today’s detour via the Carrow Road bridge."
+        label="跨越長度"
+        note="目前須繞經 Carrow Road 橋。"
         delay={0.5}
       />
       <Stat
         top={462}
-        value="2,400 / day"
-        label="Forecast trips, 2030"
-        note="60% on foot, 40% by bike."
+        value="2,400 / 日"
+        label="2030 年預估通行量"
+        note="60% 步行，40% 騎自行車。"
         delay={0.7}
       />
       <Stat
         top={662}
-        value="13 min"
-        label="Saved per walking trip"
-        note="Meadows to Halbrook Central."
+        value="13 分鐘"
+        label="每趟步行節省"
+        note="從 Meadows 到 Halbrook Central。"
         delay={0.9}
       />
     </Sheet>
@@ -1666,8 +1669,8 @@ const ConstraintRow = ({
       </span>
     </div>
     <div style={{ marginLeft: 50, marginTop: 6, fontFamily: MONO, fontSize: 22, lineHeight: 1.45 }}>
-      <div style={{ color: MUTE }}>REQ&nbsp;&nbsp;{req}</div>
-      <div style={{ color: CY }}>PROV&nbsp;{prov}</div>
+      <div style={{ color: MUTE }}>要求&nbsp;&nbsp;{req}</div>
+      <div style={{ color: CY }}>提供&nbsp;{prov}</div>
     </div>
   </div>
 );
@@ -1689,10 +1692,10 @@ const ConstraintsPage: Page = () => {
   const soffit = (ch: number) => deckZ(ch) - 0.75;
   return (
     <Sheet
-      title="Constraints · long section"
+      title="限制條件 · 縱斷面"
       scale="1:500 V×2"
-      label="Constraints · long section · vertical ×2"
-      heading="What fixes the levels"
+      label="限制條件 · 縱斷面 · 垂直放大 ×2"
+      heading="什麼決定了高程"
     >
       <Svg>
         <defs>
@@ -1811,7 +1814,7 @@ const ConstraintsPage: Page = () => {
             textAnchor="middle"
             style={{ ...tx(18, AMBER), ...HALO }}
           >
-            OLE ENVELOPE
+            OLE 淨空範圍
           </text>
           <line
             x1={X(49.6)}
@@ -1847,7 +1850,7 @@ const ConstraintsPage: Page = () => {
             strokeWidth={1.6}
           />
           <text x={X(52)} y={262} style={tx(26, AMBER, HAND)}>
-            Rev C: deck +250 mm
+            版次 C：橋面 +250 mm
           </text>
           <line
             x1={X(60)}
@@ -1857,7 +1860,7 @@ const ConstraintsPage: Page = () => {
             stroke={AMBER}
             strokeWidth={1.3}
           />
-          <ChTick x={X(0)} label="CH 0" />
+          <ChTick x={X(0)} label="里程 0" />
           <ChTick x={X(10)} label="10" />
           <ChTick x={X(20)} label="20" />
           <ChTick x={X(30)} label="30" />
@@ -1876,33 +1879,33 @@ const ConstraintsPage: Page = () => {
       <ConstraintRow
         top={268}
         n="1"
-        title="Flood freeboard"
-        req="600 mm over +15.850"
-        prov="1,160 mm at west bank"
+        title="洪水乾舷"
+        req="高於 +15.850 達 600 mm"
+        prov="西岸為 1,160 mm"
         delay={0.4}
       />
       <ConstraintRow
         top={410}
         n="2"
-        title="Rail · OLE clearance"
-        req="5.80 m above rail"
-        prov="6.07 m — governs profile"
+        title="鐵路 · OLE 淨空"
+        req="軌面上方 5.80 m"
+        prov="6.07 m — 控制縱斷面"
         delay={0.6}
       />
       <ConstraintRow
         top={552}
         n="3"
-        title="Gradient"
-        req="1:20 max, landings at 1:20"
-        prov="1:25 — no landings"
+        title="坡度"
+        req="最大 1:20，平台處 1:20"
+        prov="1:25 — 免設平台"
         delay={0.8}
       />
       <ConstraintRow
         top={694}
         n="4"
-        title="Pylon set-back"
-        req="4.5 m from nearest rail"
-        prov="5.48 m · no river piers"
+        title="橋塔退縮距離"
+        req="距最近鋼軌 4.5 m"
+        prov="5.48 m · 河中無橋墩"
         delay={1.0}
       />
     </Sheet>
@@ -2056,36 +2059,30 @@ const StaySketch = () => (
 );
 
 const ConceptPage: Page = () => (
-  <Sheet title="Structural options" label="Structural concept · options" heading="Why cable-stayed">
+  <Sheet title="結構方案" label="結構概念 · 方案比較" heading="為何選斜張橋">
     <Steps>
       <Step>
-        <OptionCard x={120} tag="Option A" title="Through truss" sketch={<TrussSketch />}>
-          <Metric k="Cost P50" v="£8.1 M" good />
-          <Metric k="Rail possessions" v="2 × 54 h" />
-          <Metric k="Piers in channel" v="1" />
-          <Metric k="Truss height" v="4.1 m" />
+        <OptionCard x={120} tag="方案 A" title="下承式桁架" sketch={<TrussSketch />}>
+          <Metric k="成本 P50" v="£8.1 M" good />
+          <Metric k="鐵路封軌" v="2 × 54 h" />
+          <Metric k="河道內橋墩" v="1" />
+          <Metric k="桁架高度" v="4.1 m" />
         </OptionCard>
       </Step>
       <Step>
-        <OptionCard x={700} tag="Option B" title="Tied arch, 64 m" sketch={<ArchSketch />}>
-          <Metric k="Cost P50" v="£10.4 M" />
-          <Metric k="Rail possessions" v="1 × 72 h" />
-          <Metric k="Piers in channel" v="0" good />
-          <Metric k="Crane for lift" v="1,200 t" />
+        <OptionCard x={700} tag="方案 B" title="繫桿拱，64 m" sketch={<ArchSketch />}>
+          <Metric k="成本 P50" v="£10.4 M" />
+          <Metric k="鐵路封軌" v="1 × 72 h" />
+          <Metric k="河道內橋墩" v="0" good />
+          <Metric k="吊裝起重機" v="1,200 t" />
         </OptionCard>
       </Step>
       <Step>
-        <OptionCard
-          x={1280}
-          tag="Option C · preferred"
-          title="Cable-stayed"
-          chosen
-          sketch={<StaySketch />}
-        >
-          <Metric k="Cost P50" v="£8.9 M" />
-          <Metric k="Rail possessions" v="1 × 54 h" good />
-          <Metric k="Piers in channel" v="0" good />
-          <Metric k="Deck depth" v="0.75 m" good />
+        <OptionCard x={1280} tag="方案 C · 首選" title="斜張橋" chosen sketch={<StaySketch />}>
+          <Metric k="成本 P50" v="£8.9 M" />
+          <Metric k="鐵路封軌" v="1 × 54 h" good />
+          <Metric k="河道內橋墩" v="0" good />
+          <Metric k="橋面厚度" v="0.75 m" good />
         </OptionCard>
       </Step>
       <Step>
@@ -2097,15 +2094,15 @@ const ConceptPage: Page = () => (
             strokeWidth={2}
           />
           <text x={1300} y={206} style={tx(28, AMBER, HAND)}>
-            only option with no river pier
+            唯一不需河中橋墩的方案
           </text>
           <text x={1300} y={240} style={tx(28, AMBER, HAND)}>
-            and a single possession
+            且只需一次封軌
           </text>
           <line x1={1690} y1={238} x2={1640} y2={300} stroke={AMBER} strokeWidth={1.4} />
           <Head x={1634} y={307} ang={2.25} c={AMBER} />
           <text x={130} y={866} style={tx(26, AMBER, HAND)}>
-            A: EA objects to a pier in the channel
+            A：環境署反對在河道內設橋墩
           </text>
         </Svg>
       </Step>
@@ -2134,18 +2131,13 @@ const ElevationPage: Page = () => {
   const g = geo(13, 658, 238);
   const { X, Y } = g;
   return (
-    <Sheet
-      title="General arrangement"
-      scale="1:400"
-      label="General arrangement · elevation looking north"
-      heading="Elevation"
-    >
+    <Sheet title="總體配置圖" scale="1:400" label="總體配置 · 向北立面" heading="立面圖">
       <div className="ab-in" style={d(0.6)}>
-        <KeyFig top={300} k="Spans" v="46.0 m + 18.0 m" />
-        <KeyFig top={390} k="Pylon" v="30.0 m above deck" />
-        <KeyFig top={480} k="Stays" v="9 pairs, locked coil" />
-        <KeyFig top={570} k="Deck" v="Steel, 750 mm deep" />
-        <KeyFig top={660} k="Gradient" v="1:25 rising east" />
+        <KeyFig top={300} k="跨徑" v="46.0 m + 18.0 m" />
+        <KeyFig top={390} k="橋塔" v="高出橋面 30.0 m" />
+        <KeyFig top={480} k="斜拉索" v="9 對，全封閉式鋼纜" />
+        <KeyFig top={570} k="橋面" v="鋼造，厚 750 mm" />
+        <KeyFig top={660} k="坡度" v="1:25，向東上升" />
       </div>
       <Svg>
         <g style={d(0)}>
@@ -2156,26 +2148,26 @@ const ElevationPage: Page = () => {
           <Elevation g={g} zBot={9} />
         </g>
         <g style={d(1.0)}>
-          <Level x1={X(46) + 10} x2={X(46) + 200} y={Y(PY_TOP)} text="+49.540 PYLON" right />
+          <Level x1={X(46) + 10} x2={X(46) + 200} y={Y(PY_TOP)} text="+49.540 橋塔" right />
           <Level x1={X(-8)} x2={X(0)} y={Y(17.7)} text="+17.700" />
           <Level x1={X(64)} x2={X(72)} y={Y(20.26)} text="+20.260" right />
           <text x={X(10)} y={Y(15.85) + 22} style={{ ...tx(18, CY), ...HALO }}>
             1% AEP+CC +15.850
           </text>
           <text x={X(12)} y={Y(12.4) + 22} style={{ ...tx(18, CY), ...HALO }}>
-            NWL +12.400 · RIVER KELL
+            NWL +12.400 · KELL 河
           </text>
           <Leader
             pts={[X(34.6), Y(31.5), X(30), Y(36), X(26), Y(36)]}
-            text="6 MAIN STAYS · Ø40"
+            text="6 根主斜拉索 · Ø40"
             end
           />
-          <Leader pts={[X(56), Y(33.4), X(60), Y(38), X(63), Y(38)]} text="3 BACKSTAYS · Ø60" />
-          <Leader pts={[X(46.4), Y(28), X(52), Y(28), X(54), Y(28)]} text="P1 · A-FRAME S460" />
+          <Leader pts={[X(56), Y(33.4), X(60), Y(38), X(63), Y(38)]} text="3 根背拉索 · Ø60" />
+          <Leader pts={[X(46.4), Y(28), X(52), Y(28), X(54), Y(28)]} text="P1 · A 型 S460" />
           <Leader
             pts={[X(55.5), Y(16.8), X(62), Y(14.5), X(64), Y(14.5)]}
-            text="CARROW LINE"
-            sub="2 TRACKS · OLE"
+            text="CARROW 鐵路線"
+            sub="雙軌 · OLE"
           />
           <SectionCut x={X(28)} y1={Y(deckZ(28)) - 44} y2={Y(deckZ(28)) + 36} n="A" />
           <DimV
@@ -2191,7 +2183,7 @@ const ElevationPage: Page = () => {
         <g style={d(1.4)}>
           <DimH x1={X(0)} x2={X(46)} y={806} text="46 000" from1={Y(13.6)} from2={Y(9)} tick />
           <DimH x1={X(46)} x2={X(64)} y={806} text="18 000" from2={Y(15.8)} tick />
-          <DimH x1={X(0)} x2={X(64)} y={838} text="64 000 OVERALL" tick />
+          <DimH x1={X(0)} x2={X(64)} y={838} text="總長 64 000" tick />
         </g>
       </Svg>
     </Sheet>
@@ -2374,12 +2366,7 @@ const SectionPage: Page = () => {
   const deckTop = `M${X(-2.1)},${Y(-0.0525)} L${X(0)},${Y(0)} L${X(2.1)},${Y(-0.0525)}`;
   const deckBot = `L${X(2.1)},${Y(-0.0665)} L${X(0)},${Y(-0.014)} L${X(-2.1)},${Y(-0.0665)} Z`;
   return (
-    <Sheet
-      title="Deck section A–A"
-      scale="1:25"
-      label="Section A–A · typical deck"
-      heading="Deck cross-section"
-    >
+    <Sheet title="橋面斷面 A–A" scale="1:25" label="斷面 A–A · 標準橋面" heading="橋面橫斷面">
       <Svg>
         <g style={d(0.1)}>
           <path
@@ -2435,16 +2422,16 @@ const SectionPage: Page = () => {
             strokeDasharray="30 6 6 6"
           />
           <text x={X(0)} y={Y(1.95) - 10} textAnchor="middle" style={tx(20, MUTE)}>
-            ℄ DECK
+            ℄ 橋面
           </text>
         </g>
         <g style={d(1.1)}>
-          <DimH x1={X(-2.0)} x2={X(2.0)} y={Y(0.62)} text="4 000 CLEAR" />
+          <DimH x1={X(-2.0)} x2={X(2.0)} y={Y(0.62)} text="淨寬 4 000" />
           <DimH
             x1={X(-2.7)}
             x2={X(2.7)}
             y={Y(-0.75) + 52}
-            text="5 400 OVERALL"
+            text="總寬 5 400"
             from1={Y(-0.75)}
             from2={Y(-0.75)}
           />
@@ -2472,7 +2459,7 @@ const SectionPage: Page = () => {
             2.5% →
           </text>
           <text x={X(0)} y={Y(-0.55) + 26} textAnchor="middle" style={{ ...tx(18, MUTE), ...HALO }}>
-            CROSS-BEAM @ 3.0 m (BEYOND)
+            橫梁 @ 3.0 m（後方）
           </text>
           <text
             x={X(2.3) - 14}
@@ -2480,7 +2467,7 @@ const SectionPage: Page = () => {
             textAnchor="end"
             style={{ ...tx(18, MUTE), ...HALO }}
           >
-            1.8 m OVER RAIL
+            跨鐵路段 1.8 m
           </text>
           <Tag x={X(-1.5)} y={Y(-0.42)} n="1" />
           <Tag x={X(-2.4)} y={Y(-0.95)} n="2" />
@@ -2523,17 +2510,17 @@ const SectionPage: Page = () => {
         </g>
       </Svg>
       <div className="ab-in" style={d(0.8)}>
-        <div style={abs(1400, 262, SMALL)}>Key</div>
-        <KeyNote top={300} n="1" text="14 mm deck plate + troughs" />
-        <KeyNote top={360} n="2" text="Edge box 600 × 750, S355" />
-        <KeyNote top={420} n="3" text="Pinned stay anchor bracket" />
-        <KeyNote top={480} n="4" text="1.4 m parapet, 316L mesh" />
-        <KeyNote top={540} n="5" text="LED handrail lighting" />
-        <KeyNote top={600} n="6" text="8 mm epoxy-bauxite surfacing" />
+        <div style={abs(1400, 262, SMALL)}>圖例</div>
+        <KeyNote top={300} n="1" text="14 mm 橋面鋼板與 U 形肋" />
+        <KeyNote top={360} n="2" text="邊箱梁 600 × 750，S355" />
+        <KeyNote top={420} n="3" text="鉸接式斜拉索錨座" />
+        <KeyNote top={480} n="4" text="1.4 m 欄杆，316L 網" />
+        <KeyNote top={540} n="5" text="LED 扶手照明" />
+        <KeyNote top={600} n="6" text="8 mm 環氧鋁礬土面層" />
       </div>
       <div className="ab-in" style={{ ...abs(1400, 680, { width: 420 }), ...d(1.1) }}>
         <div style={{ fontFamily: HAND, fontSize: 28, color: AMBER, lineHeight: 1.35 }}>
-          4.0 m clear = two cyclists passing a pushchair
+          淨寬 4.0 m＝兩輛自行車可與嬰兒推車錯身
         </div>
       </div>
     </Sheet>
@@ -2617,12 +2604,7 @@ const PylonPage: Page = () => {
   const bx = 1090;
   const by = 330;
   return (
-    <Sheet
-      title="Pylon P1"
-      scale="AS SHOWN"
-      label="Pylon P1 · transverse elevation + details"
-      heading="A-frame pylon"
-    >
+    <Sheet title="橋塔 P1" scale="如圖示" label="橋塔 P1 · 橫向立面與詳圖" heading="A 型橋塔">
       <Svg>
         <defs>
           <pattern
@@ -2711,10 +2693,10 @@ const PylonPage: Page = () => {
           <line x1={X(1)} y1={Y(42.4)} x2={X(2.85)} y2={Y(19.6)} stroke={CY} strokeWidth={1.2} />
         </g>
         <g style={d(0.9)}>
-          <Level x1={140} x2={X(-1.2)} y={Y(PY_TOP)} text="+49.540 TOP" />
-          <Level x1={140} x2={X(-1.2)} y={Y(41)} text="+41.000 ANCHOR ZONE" />
-          <Level x1={140} x2={X(-3.6)} y={Y(19.54)} text="+19.540 DECK" />
-          <Level x1={140} x2={X(-5.6)} y={Y(15.4)} text="+15.400 CAP" />
+          <Level x1={140} x2={X(-1.2)} y={Y(PY_TOP)} text="+49.540 塔頂" />
+          <Level x1={140} x2={X(-1.2)} y={Y(41)} text="+41.000 錨固區" />
+          <Level x1={140} x2={X(-3.6)} y={Y(19.54)} text="+19.540 橋面" />
+          <Level x1={140} x2={X(-5.6)} y={Y(15.4)} text="+15.400 承台" />
           <SectionCutH y={Y(25)} x1={X(-5.4)} x2={X(-1.2)} n="B" />
           <circle
             cx={X(0)}
@@ -2736,8 +2718,8 @@ const PylonPage: Page = () => {
           <Tag x={hx - 106} y={326} n="1" c={AMBER} />
           <Leader
             pts={[X(3.2), Y(9), X(7), Y(4.5), X(9), Y(4.5)]}
-            text="8 × Ø900 CFA PILES"
-            sub="TOE −8.0 m AOD"
+            text="8 × Ø900 CFA 基樁"
+            sub="樁底 −8.0 m AOD"
           />
         </g>
         <g style={d(0.5)}>
@@ -2779,7 +2761,7 @@ const PylonPage: Page = () => {
             right
           />
           <text x={hx - 60} y={752} style={tx(20, INK)}>
-            DETAIL 1 · HEAD · 1:50
+            詳圖 1 · 塔頭 · 1:50
           </text>
           <line x1={hx - 60} y1={760} x2={hx + 200} y2={760} stroke={INK} strokeWidth={1.2} />
         </g>
@@ -2819,26 +2801,26 @@ const PylonPage: Page = () => {
           <DimH x1={bx} x2={bx + 300} y={by + 270} text="1 200" from1={by + 225} from2={by + 225} />
           <Leader
             pts={[bx + 296, by + 40, bx + 360, by + 40, bx + 372, by + 40]}
-            text="40 PLATE S460ML"
+            text="40 厚鋼板 S460ML"
           />
           <Leader
             pts={[bx + 209, by + 50, bx + 260, by + 92, bx + 372, by + 92]}
-            text="FLAT 200 × 25"
+            text="扁鋼 200 × 25"
           />
           <Leader
             pts={[bx + 300, by + 225, bx + 360, by + 190, bx + 372, by + 190]}
-            text="900 DEEP"
+            text="深 900"
           />
           <text x={bx} y={by + 340} style={tx(20, INK)}>
-            SECTION B–B · LEG · 1:20
+            斷面 B–B · 塔柱 · 1:20
           </text>
           <line x1={bx} y1={by + 348} x2={bx + 290} y2={by + 348} stroke={INK} strokeWidth={1.2} />
         </g>
       </Svg>
       <div className="ab-in" style={d(1.2)}>
-        <PylonFig left={1090} k="Height" v="34.1 m above cap" />
-        <PylonFig left={1370} k="Steel" v="S460ML · 96 t" />
-        <PylonFig left={1610} k="Erection" v="2 lifts" />
+        <PylonFig left={1090} k="高度" v="承台以上 34.1 m" />
+        <PylonFig left={1370} k="鋼材" v="S460ML · 96 t" />
+        <PylonFig left={1610} k="吊裝" v="2 次吊裝" />
       </div>
     </Sheet>
   );
@@ -2991,27 +2973,16 @@ const UtilBar = ({
 );
 
 const LoadsPage: Page = () => (
-  <Sheet
-    title="Load cases + checks"
-    label="Design basis · EN 1990–1993 + UK NA"
-    heading="Load cases"
-  >
+  <Sheet title="載重案例與檢核" label="設計基準 · EN 1990–1993 + 英國國家附錄" heading="載重案例">
     <div className="ab-in" style={d(0.2)}>
-      <div style={abs(264, 266, SMALL)}>Case</div>
-      <div style={abs(548, 266, SMALL)}>Basis</div>
-      <div style={abs(940, 266, { ...SMALL, width: 200, textAlign: 'right' })}>Value</div>
-      <LoadRow
-        top={300}
-        code="LC1"
-        title="Permanent"
-        basis="Self-weight + finishes"
-        value="34 kN/m"
-        kind="g"
-      />
+      <div style={abs(264, 266, SMALL)}>案例</div>
+      <div style={abs(548, 266, SMALL)}>依據</div>
+      <div style={abs(940, 266, { ...SMALL, width: 200, textAlign: 'right' })}>數值</div>
+      <LoadRow top={300} code="LC1" title="永久載重" basis="自重與鋪面" value="34 kN/m" kind="g" />
       <LoadRow
         top={382}
         code="LC2"
-        title="Crowd"
+        title="人群載重"
         basis="EN 1991-2 §5.3.2.1"
         value="5.0 kN/m²"
         kind="q"
@@ -3019,7 +2990,7 @@ const LoadsPage: Page = () => (
       <LoadRow
         top={464}
         code="LC3"
-        title="Service vehicle"
+        title="維護車輛"
         basis="EN 1991-2 §5.6.3"
         value="12 t"
         kind="v"
@@ -3027,15 +2998,15 @@ const LoadsPage: Page = () => (
       <LoadRow
         top={546}
         code="LC4"
-        title="Wind"
-        basis="Basic wind 22.5 m/s"
+        title="風載重"
+        basis="基本風速 22.5 m/s"
         value="1.05 kN/m²"
         kind="w"
       />
       <LoadRow
         top={628}
         code="LC5"
-        title="Temperature"
+        title="溫度"
         basis="EN 1991-1-5"
         value="−17 / +38 °C"
         kind="t"
@@ -3043,34 +3014,22 @@ const LoadsPage: Page = () => (
       <LoadRow
         top={710}
         code="LC6"
-        title="Stay loss"
-        basis="Any one stay · DAF 2.0"
-        value="1 stay"
+        title="斷索"
+        basis="任一根斜拉索 · DAF 2.0"
+        value="1 根"
         kind="x"
       />
     </div>
-    <div style={abs(1230, 266, LABEL)}>Governing checks</div>
+    <div style={abs(1230, 266, LABEL)}>控制性檢核</div>
     <div className="ab-in" style={d(0.6)}>
-      <UtilBar top={312} label="Edge girder, bending" sub="ULS · LC1 + LC2" u={0.78} val="0.78" />
-      <UtilBar
-        top={438}
-        label="Pylon leg, axial + bending"
-        sub="ULS · LC1 + LC2 + LC4"
-        u={0.71}
-        val="0.71"
-      />
-      <UtilBar top={564} label="Stays, after stay loss" sub="ALS · LC6" u={0.62} val="0.62" />
-      <UtilBar
-        top={690}
-        label="Mid-span deflection"
-        sub="SLS · 74 mm vs L/400"
-        u={0.64}
-        val="L/622"
-      />
+      <UtilBar top={312} label="邊梁，彎矩" sub="ULS · LC1 + LC2" u={0.78} val="0.78" />
+      <UtilBar top={438} label="塔柱，軸力與彎矩" sub="ULS · LC1 + LC2 + LC4" u={0.71} val="0.71" />
+      <UtilBar top={564} label="斜拉索，斷索後" sub="ALS · LC6" u={0.62} val="0.62" />
+      <UtilBar top={690} label="跨中撓度" sub="SLS · 74 mm vs L/400" u={0.64} val="L/622" />
     </div>
     <div className="ab-in" style={{ ...abs(120, 840), ...d(1.2) }}>
       <span style={{ fontFamily: HAND, fontSize: 30, color: AMBER }}>
-        every check under 0.80 — headroom for 90% design
+        所有檢核均低於 0.80 — 為 90% 設計保留餘裕
       </span>
     </div>
   </Sheet>
@@ -3243,7 +3202,7 @@ const GritSwatch = () => (
     />
     <line x1={10} y1={58} x2={130} y2={58} stroke={CY} strokeWidth={3} />
     <text x={70} y={102} textAnchor="middle" style={tx(18, MUTE)}>
-      DECK PLATE
+      橋面鋼板
     </text>
   </svg>
 );
@@ -3308,34 +3267,34 @@ const MatCard = ({
 );
 
 const MaterialsPage: Page = () => (
-  <Sheet title="Materials schedule" label="Materials · hatch legend + schedule" heading="Materials">
+  <Sheet title="材料明細表" label="材料 · 填充圖例與明細" heading="材料">
     <div className="ab-in" style={d(0.2)}>
       <MatCard
         x={120}
         y={262}
         swatch={<SteelSwatch />}
-        name="Structural steel"
-        spec="S355 deck · S460 pylon"
+        name="結構鋼材"
+        spec="橋面 S355 · 橋塔 S460"
         qty="412 t"
-        note="Shop-welded, nine segments"
+        note="工廠焊接，分九段"
       />
       <MatCard
         x={694}
         y={262}
         swatch={<StrandSwatch />}
-        name="Stays"
-        spec="Locked coil · Ø40 / Ø60"
-        qty="18 no."
-        note="Replaceable one at a time"
+        name="斜拉索"
+        spec="全封閉式鋼纜 · Ø40 / Ø60"
+        qty="18 根"
+        note="可逐根更換"
       />
       <MatCard
         x={1268}
         y={262}
         swatch={<ConcreteSwatch />}
-        name="Concrete"
-        spec="C40/50 · piles + abutments"
+        name="混凝土"
+        spec="C40/50 · 基樁與橋台"
         qty="640 m³"
-        note="30% GGBS cement swap"
+        note="30% GGBS 取代水泥"
       />
     </div>
     <div className="ab-in" style={d(0.5)}>
@@ -3343,34 +3302,34 @@ const MaterialsPage: Page = () => (
         x={120}
         y={558}
         swatch={<PaintSwatch />}
-        name="Paint system"
-        spec="ISO 12944 C4 · 4 coats"
+        name="塗裝系統"
+        spec="ISO 12944 C4 · 4 道塗層"
         qty="320 µm DFT"
-        note="25 years to first repaint"
+        note="25 年後首次重新塗裝"
       />
       <MatCard
         x={694}
         y={558}
         swatch={<MeshSwatch />}
-        name="Parapet infill"
-        spec="316L mesh · rail screens"
+        name="欄杆填充"
+        spec="316L 網 · 鐵路段遮蔽板"
         qty="1.4 m / 1.8 m"
-        note="Climb-proof over the rail"
+        note="跨鐵路段防攀爬"
       />
       <MatCard
         x={1268}
         y={558}
         swatch={<GritSwatch />}
-        name="Surfacing"
-        spec="Epoxy + calcined bauxite"
-        qty="PTV ≥ 45 wet"
-        note="Grips when wet"
+        name="鋪面"
+        spec="環氧樹脂 + 煅燒鋁礬土"
+        qty="濕滑 PTV ≥ 45"
+        note="濕滑時仍有抓地力"
       />
     </div>
     <div className="ab-in" style={{ ...abs(120, 872, { width: 1060 }), ...d(0.9) }}>
-      <div style={SMALL}>Embodied carbon · A1–A5</div>
+      <div style={SMALL}>隱含碳 · A1–A5</div>
       <div style={{ fontSize: 30, marginTop: 6 }}>
-        1,140 tCO₂e — <span style={{ color: CY }}>31% below</span> our 2019 footbridge baseline
+        1,140 tCO₂e — <span style={{ color: CY }}>低 31%，</span> 對照我們 2019 年人行橋的基準
       </div>
     </div>
   </Sheet>
@@ -3474,11 +3433,7 @@ const AccBar = ({
 const VibrationPage: Page = () => {
   const uid = uidOf(useId());
   return (
-    <Sheet
-      title="Dynamics + comfort"
-      label="Pedestrian dynamics · Sétra class II"
-      heading="Vibration + comfort"
-    >
+    <Sheet title="動力與舒適度" label="人行動力 · Sétra II 級" heading="振動與舒適度">
       <Svg>
         <defs>
           <pattern
@@ -3493,10 +3448,10 @@ const VibrationPage: Page = () => {
         </defs>
         <g style={d(0.1)}>
           <text x={120} y={348} style={tx(20, INK)}>
-            VERTICAL
+            垂直向
           </text>
           <text x={120} y={478} style={tx(20, INK)}>
-            LATERAL
+            側向
           </text>
           <Band f0={1.0} f1={1.7} y={318} h={54} lvl={2} />
           <Band f0={1.7} f1={2.1} y={318} h={54} lvl={1} pat={`${uid}h`} />
@@ -3547,7 +3502,7 @@ const VibrationPage: Page = () => {
             strokeWidth={1}
           />
           <text x={272} y={615} style={tx(18, MUTE)}>
-            RANGE 1 · MAX RISK
+            範圍 1 · 風險最高
           </text>
           <rect
             x={520}
@@ -3560,7 +3515,7 @@ const VibrationPage: Page = () => {
             strokeWidth={1}
           />
           <text x={556} y={615} style={tx(18, MUTE)}>
-            RANGE 2 · MEDIUM
+            範圍 2 · 中等
           </text>
           <rect
             x={790}
@@ -3573,12 +3528,12 @@ const VibrationPage: Page = () => {
             strokeWidth={1}
           />
           <text x={826} y={615} style={tx(18, MUTE)}>
-            RANGE 3 · LOW
+            範圍 3 · 低
           </text>
         </g>
         <g style={d(1.0)}>
           <text x={120} y={688} style={tx(20, INK)}>
-            MODE V1 · 2.31 Hz · MAIN SPAN
+            模態 V1 · 2.31 Hz · 主跨
           </text>
           <line x1={200} y1={770} x2={1040} y2={770} stroke={FAINT} strokeWidth={1.2} />
           <polygon points="200,772 190,790 210,790" fill="none" stroke={INK} strokeWidth={1.4} />
@@ -3598,13 +3553,13 @@ const VibrationPage: Page = () => {
       <Svg>
         <g style={d(0.4)}>
           <text x={1170} y={286} style={tx(20, CY)}>
-            PEAK ACCEL. m/s² · 0.8 P/m²
+            尖峰加速度 m/s² · 0.8 人/m²
           </text>
           <text x={1170} y={336} style={tx(18, INK)}>
-            VERTICAL
+            垂直向
           </text>
-          <AccBar y={352} v={0.71} max={1.0} label="NO TMD" />
-          <AccBar y={392} v={0.32} max={1.0} label="WITH TMD" after />
+          <AccBar y={352} v={0.71} max={1.0} label="無 TMD" />
+          <AccBar y={392} v={0.32} max={1.0} label="有 TMD" after />
           <line
             x1={1360 + 0.5 * 420}
             y1={344}
@@ -3615,13 +3570,13 @@ const VibrationPage: Page = () => {
             strokeDasharray="5 4"
           />
           <text x={1360 + 0.5 * 420} y={448} textAnchor="middle" style={tx(18, AMBER)}>
-            LIMIT 0.50
+            限值 0.50
           </text>
           <text x={1170} y={498} style={tx(18, INK)}>
-            LATERAL
+            側向
           </text>
-          <AccBar y={514} v={0.19} max={0.25} label="NO TMD" />
-          <AccBar y={554} v={0.06} max={0.25} label="WITH TMD" after />
+          <AccBar y={514} v={0.19} max={0.25} label="無 TMD" />
+          <AccBar y={554} v={0.06} max={0.25} label="有 TMD" after />
           <line
             x1={1360 + 0.4 * 420}
             y1={506}
@@ -3632,7 +3587,7 @@ const VibrationPage: Page = () => {
             strokeDasharray="5 4"
           />
           <text x={1360 + 0.4 * 420} y={610} textAnchor="middle" style={tx(18, AMBER)}>
-            LIMIT 0.10
+            限值 0.10
           </text>
         </g>
         <g style={d(0.9)}>
@@ -3663,16 +3618,16 @@ const VibrationPage: Page = () => {
             1.2 t
           </text>
           <text x={1476} y={700} style={tx(20, INK)}>
-            3 TMDs
+            3 組 TMD
           </text>
           <text x={1476} y={730} style={tx(18, MUTE)}>
-            2 × 1.2 t VERT
+            2 × 1.2 t 垂直
           </text>
           <text x={1476} y={758} style={tx(18, MUTE)}>
-            1 × 0.8 t LAT
+            1 × 0.8 t 側向
           </text>
           <text x={1476} y={792} style={tx(20, AMBER)}>
-            £180k PROV.
+            暫列 £180k
           </text>
         </g>
       </Svg>
@@ -3706,7 +3661,7 @@ const StageCol = ({
         paddingBottom: 6,
       }}
     >
-      <span style={LABEL}>Stage {n}</span>
+      <span style={LABEL}>階段 {n}</span>
       <span style={{ ...SMALL, color: AMBER }}>{when}</span>
     </div>
     <div style={{ display: 'flex', gap: 24, marginTop: 6 }}>
@@ -3740,20 +3695,16 @@ const StageCol = ({
 const ConstructionPage: Page = () => {
   const sg = geo(6, 58, 3, 52);
   return (
-    <Sheet
-      title="Construction sequence"
-      label="Construction sequence · 4 stages"
-      heading="How it gets built"
-    >
+    <Sheet title="施工順序" label="施工順序 · 4 個階段" heading="如何施工">
       <Steps>
         <Step>
           <StageCol
             x={120}
             y={256}
             n="1"
-            title="Substructure"
-            when="Aug–Dec 2027"
-            body="Piles, pile cap and abutments, then the lower pylon to deck level."
+            title="下部結構"
+            when="2027 年 8–12 月"
+            body="先施作基樁、承台與橋台，接著把橋塔下段做到橋面高程為止。"
           >
             <Elevation g={sg} zBot={11.5} lite show={['sub', 'pyLo']} hl={['sub', 'pyLo']} />
           </StageCol>
@@ -3763,9 +3714,9 @@ const ConstructionPage: Page = () => {
             x={980}
             y={256}
             n="2"
-            title="Back span"
-            when="Easter 2028 · 54 h"
-            body="18 m span lifted over the railway in one piece, in a single possession."
+            title="背跨"
+            when="2028 年復活節 · 54 小時"
+            body="18 m 跨段整段吊裝跨越鐵路，一次封軌完成。"
           >
             <Elevation
               g={sg}
@@ -3782,9 +3733,9 @@ const ConstructionPage: Page = () => {
             x={120}
             y={556}
             n="3"
-            title="Upper pylon"
-            when="May 2028"
-            body="Pylon head lifted in two pieces; backstays fitted and part-stressed."
+            title="橋塔上段"
+            when="2028 年 5 月"
+            body="塔頭分兩段吊裝；背拉索安裝完成後，先施加部分預力。"
           >
             <Elevation
               g={sg}
@@ -3801,9 +3752,9 @@ const ConstructionPage: Page = () => {
             x={980}
             y={556}
             n="4"
-            title="Main span"
-            when="Jun–Sep 2028"
-            body="Three segments on two river trestles; stays stressed, trestles out."
+            title="主跨"
+            when="2028 年 6–9 月"
+            body="三個節段架設於兩座河中臨時支架；斜拉索張拉後拆除支架。"
           >
             <Elevation
               g={sg}
@@ -3923,10 +3874,10 @@ const BigStat = ({ x, k, v, accent }: { x: number; k: string; v: string; accent?
 const CostPage: Page = () => {
   const uid = uidOf(useId());
   return (
-    <Sheet title="Cost plan" label="Cost plan · 60% estimate · Q3 2026 prices" heading="Cost">
+    <Sheet title="成本計畫" label="成本計畫 · 60% 估算 · 2026 年第三季價格" heading="成本">
       <div className="ab-in" style={d(0.1)}>
-        <BigStat x={120} k="P50 estimate" v="£8.90 M" accent />
-        <BigStat x={540} k="Approved envelope" v="£9.40 M" />
+        <BigStat x={120} k="P50 估算" v="£8.90 M" accent />
+        <BigStat x={540} k="核定預算上限" v="£9.40 M" />
         <BigStat x={960} k="P90" v="£9.62 M" />
       </div>
       <Svg>
@@ -3998,7 +3949,7 @@ const CostPage: Page = () => {
             strokeDasharray="6 4"
           />
           <text x={1616} y={414} textAnchor="end" style={tx(18, INK)}>
-            ENVELOPE 9.40
+            預算上限 9.40
           </text>
           <line
             x1={1659}
@@ -4014,23 +3965,23 @@ const CostPage: Page = () => {
           </text>
           <path d="M1546,534 q39,22 78,0" fill="none" stroke={AMBER} strokeWidth={1.6} />
           <text x={1586} y={616} textAnchor="middle" style={tx(24, AMBER, HAND)}>
-            £0.5 M headroom
+            餘裕 £0.5 M
           </text>
         </g>
       </Svg>
       <div className="ab-in" style={d(0.7)}>
-        <CostLine x={120} y={620} letter="A" name="Piling + substructure" v="1.42" />
-        <CostLine x={120} y={672} letter="B" name="Deck steelwork" v="2.18" />
-        <CostLine x={120} y={724} letter="C" name="Pylon" v="0.96" />
-        <CostLine x={120} y={776} letter="D" name="Stays + anchorages" v="0.64" />
-        <CostLine x={120} y={828} letter="E" name="Rail interface + possession" v="0.88" />
-        <CostLine x={650} y={620} letter="F" name="River works + ecology" v="0.46" />
-        <CostLine x={650} y={672} letter="G" name="Parapets, surfacing, lighting" v="0.71" />
-        <CostLine x={650} y={724} letter="H" name="Preliminaries" v="0.95" />
-        <CostLine x={650} y={776} letter="I" name="Quantified risk (P50)" v="0.70" />
+        <CostLine x={120} y={620} letter="A" name="基樁與下部結構" v="1.42" />
+        <CostLine x={120} y={672} letter="B" name="橋面鋼構" v="2.18" />
+        <CostLine x={120} y={724} letter="C" name="橋塔" v="0.96" />
+        <CostLine x={120} y={776} letter="D" name="斜拉索與錨具" v="0.64" />
+        <CostLine x={120} y={828} letter="E" name="鐵路介面與封軌" v="0.88" />
+        <CostLine x={650} y={620} letter="F" name="河道工程與生態" v="0.46" />
+        <CostLine x={650} y={672} letter="G" name="欄杆、鋪面與照明" v="0.71" />
+        <CostLine x={650} y={724} letter="H" name="開辦費用" v="0.95" />
+        <CostLine x={650} y={776} letter="I" name="量化風險 (P50)" v="0.70" />
       </div>
       <div className="ab-in" style={{ ...abs(1250, 680, { width: 550 }), ...d(1.0) }}>
-        <div style={{ ...SMALL, color: CY }}>Deck area rate</div>
+        <div style={{ ...SMALL, color: CY }}>橋面單位面積造價</div>
         <div
           style={{
             fontFamily: 'var(--osd-font-display)',
@@ -4042,9 +3993,7 @@ const CostPage: Page = () => {
         >
           £25.8k / m²
         </div>
-        <div style={{ fontSize: 28, color: MUTE, marginTop: 2 }}>
-          UK footbridges 2019–25: £18–32k
-        </div>
+        <div style={{ fontSize: 28, color: MUTE, marginTop: 2 }}>英國人行橋 2019–25：£18–32k</div>
       </div>
     </Sheet>
   );
@@ -4121,7 +4070,7 @@ const MonthTick = ({ m, t }: { m: number; t: string }) => (
 const ProgrammePage: Page = () => {
   const uid = uidOf(useId());
   return (
-    <Sheet title="Programme" label="Programme · Oct 2026 – Dec 2028" heading="Programme">
+    <Sheet title="施工進度" label="進度 · 2026 年 10 月 – 2028 年 12 月" heading="施工進度">
       <Svg>
         <defs>
           <pattern
@@ -4145,10 +4094,10 @@ const ProgrammePage: Page = () => {
             stroke="none"
           />
           <text x={mx(10)} y={822} textAnchor="middle" style={{ ...tx(18, CY), ...HALO }}>
-            RIVER WINDOW
+            河道作業期
           </text>
           <text x={mx(22)} y={822} textAnchor="middle" style={{ ...tx(18, CY), ...HALO }}>
-            RIVER WINDOW
+            河道作業期
           </text>
           <line x1={mx(0)} y1={252} x2={mx(27)} y2={252} stroke={INK} strokeWidth={1.4} />
           <line x1={mx(0)} y1={310} x2={mx(27)} y2={310} stroke={INK} strokeWidth={1.4} />
@@ -4165,47 +4114,47 @@ const ProgrammePage: Page = () => {
           <text x={mx(21)} y={276} textAnchor="middle" style={tx(18, INK)}>
             2028
           </text>
-          <MonthTick m={0} t="O" />
-          <MonthTick m={1} t="N" />
-          <MonthTick m={2} t="D" />
-          <MonthTick m={3} t="J" />
-          <MonthTick m={4} t="F" />
-          <MonthTick m={5} t="M" />
-          <MonthTick m={6} t="A" />
-          <MonthTick m={7} t="M" />
-          <MonthTick m={8} t="J" />
-          <MonthTick m={9} t="J" />
-          <MonthTick m={10} t="A" />
-          <MonthTick m={11} t="S" />
-          <MonthTick m={12} t="O" />
-          <MonthTick m={13} t="N" />
-          <MonthTick m={14} t="D" />
-          <MonthTick m={15} t="J" />
-          <MonthTick m={16} t="F" />
-          <MonthTick m={17} t="M" />
-          <MonthTick m={18} t="A" />
-          <MonthTick m={19} t="M" />
-          <MonthTick m={20} t="J" />
-          <MonthTick m={21} t="J" />
-          <MonthTick m={22} t="A" />
-          <MonthTick m={23} t="S" />
-          <MonthTick m={24} t="O" />
-          <MonthTick m={25} t="N" />
-          <MonthTick m={26} t="D" />
+          <MonthTick m={0} t="10" />
+          <MonthTick m={1} t="11" />
+          <MonthTick m={2} t="12" />
+          <MonthTick m={3} t="1" />
+          <MonthTick m={4} t="2" />
+          <MonthTick m={5} t="3" />
+          <MonthTick m={6} t="4" />
+          <MonthTick m={7} t="5" />
+          <MonthTick m={8} t="6" />
+          <MonthTick m={9} t="7" />
+          <MonthTick m={10} t="8" />
+          <MonthTick m={11} t="9" />
+          <MonthTick m={12} t="10" />
+          <MonthTick m={13} t="11" />
+          <MonthTick m={14} t="12" />
+          <MonthTick m={15} t="1" />
+          <MonthTick m={16} t="2" />
+          <MonthTick m={17} t="3" />
+          <MonthTick m={18} t="4" />
+          <MonthTick m={19} t="5" />
+          <MonthTick m={20} t="6" />
+          <MonthTick m={21} t="7" />
+          <MonthTick m={22} t="8" />
+          <MonthTick m={23} t="9" />
+          <MonthTick m={24} t="10" />
+          <MonthTick m={25} t="11" />
+          <MonthTick m={26} t="12" />
         </g>
         <g style={d(0.5)}>
           <GBar r={0} m0={0} m1={6.5} crit />
           <GBar r={1} m0={0} m1={7} />
-          <GMile r={2} m={3.9} label="29 JAN 2027" crit />
+          <GMile r={2} m={3.9} label="2027/1/29" crit />
           <GBar r={3} m0={7} m1={10} crit />
           <GBar r={4} m0={11} m1={18} />
           <GBar r={5} m0={10} m1={15} crit />
-          <GMile r={6} m={18.5} label="15–17 APR · 54 h" crit />
+          <GMile r={6} m={18.5} label="4/15–17 · 54 小時" crit />
           <GBar r={7} m0={18.6} m1={20} crit />
           <GBar r={8} m0={20} m1={24} crit />
           <GBar r={9} m0={24} m1={26.4} crit />
-          <GMile r={10} m={26.6} label="DEC 2028" crit end />
-          <GMile r={0} m={4.3} label="90% REVIEW · 9 FEB" lm={6.5} />
+          <GMile r={10} m={26.6} label="2028/12" crit end />
+          <GMile r={0} m={4.3} label="90% 審查 · 2/9" lm={6.5} />
         </g>
         <g style={d(1.1)}>
           <line
@@ -4218,7 +4167,7 @@ const ProgrammePage: Page = () => {
             strokeDasharray="6 5"
           />
           <text x={mx(0.4) + 10} y={238} style={tx(24, AMBER, HAND)}>
-            today
+            今天
           </text>
         </g>
         <g style={d(1.3)}>
@@ -4233,11 +4182,11 @@ const ProgrammePage: Page = () => {
             strokeWidth={1.4}
           />
           <text x={180} y={896} style={tx(18, MUTE)}>
-            CRITICAL PATH
+            要徑
           </text>
           <rect x={400} y={880} width={46} height={18} fill="none" stroke={INK} strokeWidth={1.4} />
           <text x={460} y={896} style={tx(18, MUTE)}>
-            FLOAT
+            浮時
           </text>
           <polygon
             points="620,876 633,889 620,902 607,889"
@@ -4246,22 +4195,22 @@ const ProgrammePage: Page = () => {
             strokeWidth={1.4}
           />
           <text x={646} y={896} style={tx(18, MUTE)}>
-            KEY DATE
+            關鍵日期
           </text>
         </g>
       </Svg>
       <div className="ab-in" style={d(0.3)}>
-        <GRow r={0} text="Detailed design" />
-        <GRow r={1} text="Consents + rail approvals" />
-        <GRow r={2} text="Possession request lodged" />
-        <GRow r={3} text="Tender + award" />
-        <GRow r={4} text="Steel fabrication" />
-        <GRow r={5} text="Substructure" />
-        <GRow r={6} text="Back span lift" />
-        <GRow r={7} text="Upper pylon + backstays" />
-        <GRow r={8} text="Main span + stays" />
-        <GRow r={9} text="Finishes, TMDs, load test" />
-        <GRow r={10} text="Open to the public" />
+        <GRow r={0} text="細部設計" />
+        <GRow r={1} text="許可與鐵路核准" />
+        <GRow r={2} text="提出封軌申請" />
+        <GRow r={3} text="招標與決標" />
+        <GRow r={4} text="鋼構製造" />
+        <GRow r={5} text="下部結構" />
+        <GRow r={6} text="背跨吊裝" />
+        <GRow r={7} text="橋塔上段與背拉索" />
+        <GRow r={8} text="主跨與斜拉索" />
+        <GRow r={9} text="裝修、TMD 與載重試驗" />
+        <GRow r={10} text="對外開放" />
       </div>
     </Sheet>
   );
@@ -4338,7 +4287,7 @@ const RiskRow = ({
         textAlign: 'center',
       }}
     >
-      {rating}
+      {{ HIGH: '高', MED: '中', LOW: '低' }[rating]}
     </span>
   </div>
 );
@@ -4346,7 +4295,7 @@ const RiskRow = ({
 const RisksPage: Page = () => {
   const uid = uidOf(useId());
   return (
-    <Sheet title="Risk register" label="Risk register · top five, residual" heading="Risks">
+    <Sheet title="風險登錄表" label="風險登錄 · 前五大殘餘風險" heading="風險">
       <Svg>
         <defs>
           <pattern
@@ -4417,10 +4366,10 @@ const RisksPage: Page = () => {
             1
           </text>
           <text x={430} y={772} textAnchor="middle" style={tx(18, INK)}>
-            LIKELIHOOD →
+            可能性 →
           </text>
           <text transform="translate(162,500) rotate(-90)" textAnchor="middle" style={tx(18, INK)}>
-            IMPACT →
+            衝擊 →
           </text>
         </g>
         <g style={d(0.7)}>
@@ -4432,7 +4381,7 @@ const RisksPage: Page = () => {
           <line x1={452} y1={262} x2={438} y2={300} stroke={AMBER} strokeWidth={1.4} />
           <Head x={436} y={306} ang={1.9} c={AMBER} />
           <text x={420} y={256} style={tx(26, AMBER, HAND)}>
-            R1 sets the programme
+            R1 決定整體進度
           </text>
         </g>
       </Svg>
@@ -4440,36 +4389,36 @@ const RisksPage: Page = () => {
         <RiskRow
           top={290}
           n="R1"
-          title="Easter 2028 rail possession not granted"
-          mit="Request lodged Jan 2027; Christmas 2028 fallback agreed"
+          title="2028 年復活節封軌申請未獲核准"
+          mit="2027 年 1 月提出申請；已議定 2028 年聖誕節為備案"
           rating="HIGH"
         />
         <RiskRow
           top={398}
           n="R2"
-          title="Rockhead deeper than BH-04 at the pylon"
-          mit="Two extra boreholes in Nov 2026; +4 m pile allowance"
+          title="橋塔處岩盤比 BH-04 更深"
+          mit="2026 年 11 月加鑽兩孔；基樁預留 +4 m"
           rating="MED"
         />
         <RiskRow
           top={506}
           n="R3"
-          title="Summer flood closes the river window"
-          mit="Trestles sized for a 1-in-10 summer flow; 3 weeks float"
+          title="夏季洪水中斷河道作業期"
+          mit="支架依十年一遇夏季流量設計；保留 3 週浮時"
           rating="MED"
         />
         <RiskRow
           top={614}
           n="R4"
-          title="Steel price rises more than 8%"
-          mit="Early mill order at 90% design; indexed tender clause"
+          title="鋼價漲幅超過 8%"
+          mit="90% 設計時提早向鋼廠下單；招標納入物價指數條款"
           rating="MED"
         />
         <RiskRow
           top={722}
           n="R5"
-          title="Lateral lock-in under dense crowds"
-          mit="Lateral TMD fitted; crowd test before opening"
+          title="密集人群下的側向鎖定效應"
+          mit="加裝側向 TMD；通車前進行人群試驗"
           rating="LOW"
         />
       </div>
@@ -4548,43 +4497,43 @@ const Decision = ({
 );
 
 const DecisionsPage: Page = () => (
-  <Sheet title="Decisions requested" label="For the panel · today" heading="Decisions requested">
+  <Sheet title="請求決議事項" label="提請小組 · 今日" heading="請求決議事項">
     <Steps>
       <Step>
         <Decision
           top={272}
           n="D1"
-          title="Endorse the cable-stayed A-frame as the basis for 90% design"
-          detail="Option C: no river pier, one rail possession, 750 mm deck."
-          verb="Approve"
+          title="認可以斜張式 A 型橋塔作為 90% 設計基礎"
+          detail="方案 C：無河中橋墩、一次封軌、750 mm 橋面。"
+          verb="核准"
         />
       </Step>
       <Step>
         <Decision
           top={412}
           n="D2"
-          title="Confirm 4.0 m clear width and the 1:25 profile"
-          detail="Fixes the deck section and both landing levels."
-          verb="Approve"
+          title="確認 4.0 m 淨寬與 1:25 縱斷面"
+          detail="據此確定橋面斷面與兩端落地高程。"
+          verb="核准"
         />
       </Step>
       <Step>
         <Decision
           top={552}
           n="D3"
-          title="Authorise the Easter 2028 possession request"
-          detail="Must be lodged with the rail operator by 29 January 2027."
-          note="← the one with a deadline"
-          verb="Approve"
+          title="授權提出 2028 年復活節封軌申請"
+          detail="須於 2027 年 1 月 29 日前向鐵路營運方提出。"
+          note="← 唯一有期限的一項"
+          verb="核准"
         />
       </Step>
       <Step>
         <Decision
           top={692}
           n="D4"
-          title="Note the £8.90 M P50 estimate within the £9.40 M envelope"
-          detail="Includes the £180k provisional sum for tuned mass dampers."
-          verb="Note"
+          title="備查：P50 估算 £8.90 M，在 £9.40 M 預算上限內"
+          detail="含 £180k 調諧質量阻尼器暫列金額。"
+          verb="備查"
         />
       </Step>
     </Steps>
@@ -4605,7 +4554,7 @@ const ClosePage: Page = () => {
   const cx = 1500;
   const cy = 470;
   return (
-    <Sheet title="Questions + next steps" label="End of sheet set · Rev C">
+    <Sheet title="提問與後續步驟" label="圖紙組結束 · 版次 C">
       <div className="ab-in" style={{ ...abs(120, 220), ...d(0.1) }}>
         <div
           style={{
@@ -4616,17 +4565,17 @@ const ClosePage: Page = () => {
             textTransform: 'uppercase',
           }}
         >
-          Questions
+          提問
         </div>
         <div style={{ fontFamily: HAND, fontSize: 40, color: AMBER, marginTop: 14 }}>
-          …and mark-ups welcome on any sheet
+          …歡迎在任何一張圖上標註意見
         </div>
       </div>
       <div className="ab-in" style={d(0.5)}>
-        <div style={abs(120, 560, SMALL)}>Next</div>
-        <NextStep top={600} date="28 OCT 2026" text="Panel comments back to Kestrel & Vane" />
-        <NextStep top={664} date="29 JAN 2027" text="Easter 2028 possession request lodged" />
-        <NextStep top={728} date="09 FEB 2027" text="90% design review with this panel" />
+        <div style={abs(120, 560, SMALL)}>接下來</div>
+        <NextStep top={600} date="2026/10/28" text="小組意見回覆 Kestrel & Vane" />
+        <NextStep top={664} date="2027/1/29" text="提出 2028 年復活節封軌申請" />
+        <NextStep top={728} date="2027/2/9" text="與本小組進行 90% 設計審查" />
       </div>
       <Svg>
         <defs>
@@ -4639,12 +4588,10 @@ const ClosePage: Page = () => {
           <circle cx={cx} cy={cy} r={236} fill="none" stroke={AMBER} strokeWidth={3} />
           <circle cx={cx} cy={cy} r={160} fill="none" stroke={AMBER} strokeWidth={1.6} />
           <text style={tx(26, AMBER, MONO, { letterSpacing: '0.3em' })}>
-            <textPath href={`#${uid}c`}>
-              KESTREL & VANE ENGINEERS · ARDEN STREET FOOTBRIDGE ·
-            </textPath>
+            <textPath href={`#${uid}c`}>KESTREL & VANE ENGINEERS · ARDEN STREET 人行橋 ·</textPath>
           </text>
           <text x={cx} y={cy - 42} textAnchor="middle" style={tx(22, AMBER)}>
-            ISSUED FOR
+            送審
           </text>
           <text
             x={cx}
@@ -4655,7 +4602,7 @@ const ClosePage: Page = () => {
             60%
           </text>
           <text x={cx} y={cy + 60} textAnchor="middle" style={tx(22, AMBER)}>
-            REVIEW · REV C
+            審查版 · 版次 C
           </text>
           <text x={cx} y={cy + 100} textAnchor="middle" style={tx(18, AMBER)}>
             14.10.2026
@@ -4663,7 +4610,7 @@ const ClosePage: Page = () => {
         </g>
       </Svg>
       <div className="ab-in" style={{ ...abs(120, 880, { width: 1000 }), ...d(0.8) }}>
-        <div style={SMALL}>Contact</div>
+        <div style={SMALL}>聯絡</div>
         <div style={{ fontSize: 30, marginTop: 6 }}>Ruth Okafor · r.okafor@kestrelvane.co.uk</div>
       </div>
     </Sheet>
@@ -4671,83 +4618,83 @@ const ClosePage: Page = () => {
 };
 
 export const notes: (string | undefined)[] = [
-  `Good morning, panel. I'm Ruth Okafor, project engineer; Magnus Lindqvist leads the design.
-This is the 60% review of the Arden Street Footbridge — revision C of the drawing set.
-Everything you'll see is laid out as drawing sheets, so you can refer to any sheet number when you comment.
-Point at the pylon: the headline is one pylon, on the flood embankment, and nothing standing in the river.`,
-  `Start with why this bridge exists.
-Today, someone walking from Kell Meadows to Arden Street goes 1.1 kilometres round by the Carrow Road bridge.
-The bridge cuts that to 64 metres. We forecast about 2,400 trips a day by 2030, roughly sixty-forty walking to cycling.
-For a walker that's thirteen minutes saved each way.
-Show the three fixed points: A1 on the greenway, P1 on the embankment between the river and the railway, A2 on Arden Street.`,
-  `This long section is drawn with vertical exaggeration, so the levels are easy to read.
-Four things fix the profile. Flood: 600 mm freeboard over the 1% plus climate change level. We have 1,160 at the west bank.
-Rail: 5.80 metres above the rail for the overhead line. We have 6.07. That margin is the tightest, and it sets the whole profile.
-Gradient: 1:25, so we don't need landings.
-Pylon: 5.48 metres from the nearest rail, which keeps it out of the derailment zone without extra protection.
-Mention the revision cloud: since 30% we raised the deck 250 mm to protect the OLE clearance.`,
-  `We looked at three structural forms.
-Click: the truss is cheapest, but it needs a pier in the channel, which the Environment Agency has already told us it will object to.
-Click: the tied arch clears the river entirely, but lifting 64 metres in one go needs a 1,200-tonne crane and a 72-hour possession.
-Click: cable-stayed. £8.9 million, no river pier, one 54-hour possession, and the shallowest deck.
-Click: that's why it's our preferred option.`,
-  `This is the general arrangement.
-Two spans: 46 metres over the river, 18 over the railway. The pylon stands 30 metres above the deck.
-Six main stays carry the river span; three heavier backstays tie the pylon back to the east abutment.
-Note the 6,066 dimension in amber. That's the rail clearance at the tightest point.
-Section A–A, cut through the main span, is the next sheet.`,
-  `Section A–A.
-Two steel edge boxes, 600 by 750, with an orthotropic deck plate between them. That's what gets us a 750 mm deck.
-The stays pin onto brackets outside the boxes, so they don't take any of the walking width.
-Clear width is 4 metres between handrails. In practice that's two cyclists passing a pushchair.
-The parapet is 1.4 metres with stainless mesh, rising to 1.8-metre solid screens over the railway, which the rail operator requires.`,
-  `The pylon is an A-frame, seen here along the bridge.
-The legs are steel boxes, 1,200 by 900, in S460, 40 mm plate. Section B–B shows the stiffeners.
-All 18 stays anchor in the head, in Detail 1, at 1.2-metre spacing.
-Foundations are eight 900 mm CFA piles to the mudstone.
-96 tonnes of steel, erected in two lifts.`,
-  `Design basis: Eurocodes with the UK National Annex.
-Six load cases. The two to point out: crowd loading at 5 kN per square metre, and losing any single stay with a dynamic factor of 2.
-On the right are the governing checks. Nothing is above 0.78 at this stage, so there's headroom for design development.
-Deflection under crowd load is L over 622, against a limit of L over 400.`,
-  `Six materials, each with its drawing hatch, so you'll recognise them on every sheet.
-412 tonnes of steel, 18 locked-coil stays, 640 cubic metres of concrete.
-The paint system is rated for 25 years to first major maintenance.
-Embodied carbon is 1,140 tonnes, 31% below our 2019 baseline, mainly because there's no river pier.`,
-  `This is the sheet the panel asked about at 30%.
-The first vertical mode is 2.31 hertz, just outside the worst range for footfall. The first lateral mode, 1.12, sits right at the edge of the lock-in range.
-Without damping, a dense crowd gives 0.71 metres per second squared vertically, above the 0.5 comfort limit.
-With three tuned mass dampers we get 0.32 vertical and 0.06 lateral.
-We've carried £180k as a provisional sum, which we'll confirm by testing after erection.`,
-  `Four stages.
-Click: substructure, from August to December 2027.
-Click: the back span goes over the railway in one lift, during the Easter 2028 possession: 54 hours.
-Click: the upper pylon in May, with the backstays holding the back span.
-Click: the main span in the June-to-September river window, on two temporary trestles that come out once the stays are stressed.`,
-  `The 60% estimate is £8.90 million at P50, inside the £9.40 million envelope, with P90 at £9.62 million.
-The bar is a dimension chain. Each segment is one cost element, and the hatched one is quantified risk.
-The biggest items are deck steelwork and substructure.
-Headroom to the envelope is about half a million.`,
-  `Twenty-seven months from today to opening.
-The critical path runs through the possession. The request has to be lodged by 29 January 2027.
-The hatched bands are the river windows. The main span has to land in the 2028 one.
-If everything holds, we open to the public in December 2028.`,
-  `Five residual risks.
-R1 is the one that matters: if the Easter possession isn't granted, the next suitable block is Christmas 2028, which costs about eight months.
-That's why the request goes in early and the fallback is agreed now.
-The other four are medium or low, and each has a named mitigation.`,
-  `Four decisions today.
-Click: D1, endorse the cable-stayed A-frame.
-Click: D2, confirm the 4-metre width and the 1:25 profile.
-Click: D3, the one with a deadline: authorise the possession request.
-Click: D4, note the estimate and the damper provision.`,
-  `Thank you. We'll take questions now.
-We'd like written comments by 28 October so they feed into 90% design.
-We'll be back with you on 9 February.`,
+  `各位小組成員早安。我是 Ruth Okafor，專案工程師；Magnus Lindqvist 負責設計主持。
+今天報告的是 Arden Street 人行橋的 60% 設計審查，也就是圖紙組的版次 C。
+接下來看到的內容，都編排成一張張圖紙，各位提出意見時可以直接指明圖紙編號。
+請看橋塔：重點就是一座橋塔，立在防洪堤岸上，河裡不設任何橋墩。`,
+  `先從這座橋為什麼存在說起。
+現在要從 Kell Meadows 走到 Arden Street，必須繞經 Carrow Road 橋，多走 1.1 公里。
+這座橋把距離縮短到 64 公尺。我們預估 2030 年每天約有 2,400 人次通行，步行與自行車大約是六四比。
+對步行者來說，每趟可以節省十三分鐘。
+請指出三個固定點：綠道上的 A1、河與鐵路之間堤岸上的 P1、Arden Street 上的 A2。`,
+  `這張縱斷面刻意把垂直方向放大，所以高程很容易判讀。
+有四項條件決定了縱斷面。洪水：高於 1% 年超越機率加氣候變遷水位，要有 600 mm 的乾舷，我們在西岸有 1,160。
+鐵路：電車線上方到軌面要 5.80 公尺，我們有 6.07。這個餘裕最小，也決定了整條縱斷面。
+坡度：1:25，所以不需要設置休息平台。
+橋塔：距最近的鋼軌 5.48 公尺，不需額外防護，就能避開出軌影響範圍。
+請提一下修訂雲形線：自從 30% 之後，我們把橋面抬高了 250 mm，以保住 OLE 淨空。`,
+  `我們比較了三種結構型式。
+點一下：桁架最便宜，但需要在河道內設橋墩，環境署已經明確表示會反對。
+點一下：繫桿拱完全不碰河道，但要一次吊裝 64 公尺，需要 1,200 噸的起重機和 72 小時的封軌。
+點一下：斜張橋。£8.9 百萬、不設河中橋墩、一次 54 小時的封軌，而且橋面最薄。
+點一下：這就是它成為首選方案的原因。`,
+  `這是總體配置圖。
+兩個跨徑：跨河 46 公尺、跨鐵路 18 公尺。橋塔高出橋面 30 公尺。
+六根主斜拉索承載跨河段；三根較粗的背拉索把橋塔往東側橋台拉回。
+請注意琥珀色的 6,066 尺寸，那是最緊處的鐵路淨空。
+通過主跨的斷面 A–A，在下一張圖。`,
+  `斷面 A–A。
+兩個鋼製邊箱梁，尺寸 600 × 750，中間是正交異向性橋面鋼板。這就是我們能做出 750 mm 薄橋面的原因。
+斜拉索鉸接在箱梁外側的錨座上，所以不會占用任何行走寬度。
+兩側扶手之間的淨寬是 4 公尺，實際上就是兩輛自行車可以和一輛嬰兒推車錯身。
+欄杆高 1.4 公尺，採不鏽鋼網；跨越鐵路的部分改為 1.8 公尺的實心遮蔽板，這是鐵路營運方的要求。`,
+  `橋塔是 A 型，這裡是沿著橋身方向看。
+塔柱是鋼箱，尺寸 1,200 × 900，S460 鋼材、40 mm 鋼板。斷面 B–B 可以看到加勁肋。
+全部 18 根斜拉索都錨固在塔頭，也就是詳圖 1，間距 1.2 公尺。
+基礎是八根直徑 900 mm 的 CFA 基樁，打到泥岩層。
+鋼材共 96 噸，分兩次吊裝。`,
+  `設計基準：歐洲規範搭配英國國家附錄。
+共六個載重案例。要特別指出兩個：每平方公尺 5 kN 的人群載重，以及任一根斜拉索失效、動力係數取 2。
+右側是控制性檢核。現階段沒有任何一項超過 0.78，所以在設計深化時還有餘裕。
+人群載重下的撓度是 L 除以 622，限值是 L 除以 400。`,
+  `六種材料，每一種都有對應的圖面填充圖樣，所以在每張圖上都認得出來。
+鋼材 412 噸、全封閉式鋼纜斜拉索 18 根、混凝土 640 立方公尺。
+塗裝系統的設計是 25 年後才需要第一次大修。
+隱含碳為 1,140 噸，比我們 2019 年的基準低 31%，主要是因為沒有河中橋墩。`,
+  `這是小組在 30% 審查時問到的那一張圖。
+第一垂直模態是 2.31 赫茲，剛好避開行人腳步最不利的範圍。第一側向模態是 1.12，正好落在鎖定效應範圍的邊緣。
+不做減振時，密集人群會造成垂直 0.71 公尺每平方秒的加速度，超過 0.5 的舒適度限值。
+加上三組調諧質量阻尼器後，垂直降到 0.32，側向是 0.06。
+我們已經編列 £180k 作為暫列金額，會在吊裝完成後經由試驗確認。`,
+  `分四個階段。
+點一下：下部結構，2027 年 8 月到 12 月。
+點一下：背跨在 2028 年復活節的封軌期間，一次吊裝跨過鐵路：54 小時。
+點一下：5 月施作橋塔上段，由背拉索先撐住背跨。
+點一下：主跨在 6 月到 9 月的河道作業期施工，架在兩座臨時支架上，斜拉索張拉完成後就拆除。`,
+  `60% 估算在 P50 是 £8.90 百萬，低於 £9.40 百萬的預算上限，P90 是 £9.62 百萬。
+這條長條是一條尺寸鏈。每一段代表一項成本，有斜線填充的那一段是量化風險。
+最大的項目是橋面鋼構和下部結構。
+距離預算上限的餘裕大約是五十萬。`,
+  `從今天到通車，共二十七個月。
+要徑通過封軌這一關。申請必須在 2027 年 1 月 29 日前提出。
+斜線色帶是河道作業期。主跨必須在 2028 年那一個作業期內完成。
+如果一切順利，2028 年 12 月就能對外開放。`,
+  `五項殘餘風險。
+R1 是最關鍵的：如果復活節的封軌申請沒有獲准，下一個合適的時段是 2028 年聖誕節，大約會延誤八個月。
+所以我們要提早提出申請，並且現在就先議定備案。
+其他四項是中度或低度風險，每一項都有指定的因應對策。`,
+  `今天有四項決議。
+點一下：D1，認可斜張式 A 型橋塔。
+點一下：D2，確認 4 公尺淨寬與 1:25 縱斷面。
+點一下：D3，唯一有期限的一項：授權提出封軌申請。
+點一下：D4，備查成本估算與阻尼器暫列金額。`,
+  `謝謝大家。現在開放提問。
+希望在 10 月 28 日前收到書面意見，以便納入 90% 設計。
+我們會在 2 月 9 日再向各位報告。`,
 ];
 
 export const meta: SlideMeta = {
-  title: 'Arden Street Footbridge — 60% Design Review',
+  title: 'Arden Street 人行橋 — 60% 設計審查',
   createdAt: '2026-10-12T12:21:16.830Z',
 };
 
