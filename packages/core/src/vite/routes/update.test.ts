@@ -53,22 +53,14 @@ describe('update routes helpers', () => {
     await expect(detectPackageManager(cwd)).resolves.toBe('bun');
   });
 
-  it('uses fixed update commands for each package manager', () => {
-    expect(updateCommandFor('pnpm')).toEqual({
-      cmd: 'pnpm',
-      args: ['add', '@open-slide/core@latest'],
-    });
-    expect(updateCommandFor('yarn')).toEqual({
-      cmd: 'yarn',
-      args: ['add', '@open-slide/core@latest'],
-    });
-    expect(updateCommandFor('bun')).toEqual({
-      cmd: 'bun',
-      args: ['add', '@open-slide/core@latest'],
-    });
+  it('installs the fork behind the @open-slide/core alias for each package manager', () => {
+    const spec = '@open-slide/core@npm:@ppniaw/open-slide-core@latest';
+    expect(updateCommandFor('pnpm')).toEqual({ cmd: 'pnpm', args: ['add', spec] });
+    expect(updateCommandFor('yarn')).toEqual({ cmd: 'yarn', args: ['add', spec] });
+    expect(updateCommandFor('bun')).toEqual({ cmd: 'bun', args: ['add', spec] });
     expect(updateCommandFor('npm')).toEqual({
       cmd: 'npm',
-      args: ['install', '@open-slide/core@latest'],
+      args: ['install', spec, '--legacy-peer-deps'],
     });
   });
 });

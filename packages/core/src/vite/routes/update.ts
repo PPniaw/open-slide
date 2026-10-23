@@ -13,6 +13,11 @@ import { type ApiContext, json } from './context.ts';
 //   runs `open-slide sync:skills`.
 
 const PKG = '@open-slide/core';
+// This fork publishes under its own name and is installed behind the `@open-slide/core`
+// alias, so imports, skills and docs keep the upstream name while updates come from here.
+// TODO: placeholder until the npm package name is chosen.
+const PUBLISHED_PKG = '@ppniaw/open-slide-core';
+const INSTALL_SPEC = `${PKG}@npm:${PUBLISHED_PKG}@latest`;
 const CACHE_TTL_MS = 10 * 60 * 1000;
 const COMMAND_TIMEOUT_MS = 300_000;
 
@@ -49,7 +54,7 @@ function isOutdated(current: string, latest: string): boolean {
 async function fetchLatest(now: number): Promise<string | null> {
   if (cache && now - cache.at < CACHE_TTL_MS) return cache.latest;
   try {
-    const res = await fetch(`https://registry.npmjs.org/${PKG}/latest`, {
+    const res = await fetch(`https://registry.npmjs.org/${PUBLISHED_PKG}/latest`, {
       signal: AbortSignal.timeout(3000),
       headers: { accept: 'application/json' },
     });
@@ -102,13 +107,15 @@ export async function detectPackageManager(cwd: string): Promise<PackageManager>
 export function updateCommandFor(packageManager: PackageManager): CommandSpec {
   switch (packageManager) {
     case 'pnpm':
-      return { cmd: 'pnpm', args: ['add', `${PKG}@latest`] };
+      return { cmd: 'pnpm', args: ['add', INSTALL_SPEC] };
     case 'yarn':
-      return { cmd: 'yarn', args: ['add', `${PKG}@latest`] };
+      return { cmd: 'yarn', args: ['add', INSTALL_SPEC] };
     case 'bun':
-      return { cmd: 'bun', args: ['add', `${PKG}@latest`] };
+      return { cmd: 'bun', args: ['add', INSTALL_SPEC] };
     case 'npm':
-      return { cmd: 'npm', args: ['install', `${PKG}@latest`] };
+      // npm 10's arborist crashes resolving core's peer set ("Cannot read properties of
+      // null (reading 'edgesOut')"); skipping peer resolution avoids it.
+      return { cmd: 'npm', args: ['install', INSTALL_SPEC, '--legacy-peer-deps'] };
   }
 }
 
