@@ -1,41 +1,41 @@
 ---
 name: slide-motion
-description: Use this skill whenever the user asks for an in-page animation effect on a slide or on a selected element — spring entrances, items appearing one after another, numbers counting up, rows re-ordering — or names one of the catalog effects (Reveal, Stagger, CountUp, LayoutList; 彈出、淡入、升起、滑入、模糊淡入、逐項彈入、依序出現、數字跳動、數字滾動、版面重排、排名變化、動畫). Also use it when a `@slide-comment` asks to "套用動畫" / "apply motion". Covers the ready-made components in `@open-slide/core/motion`, when each fits, how they trigger, and the rules that keep thumbnails and PPTX/PDF exports correct. Page-to-page transitions are NOT this skill — those are `SlideTransition` in `slide-authoring`.
+description: 使用者要在投影片或選取的元素上加頁內動畫時使用——彈出、淡入、升起、滑入、模糊淡入、逐項彈入、依序出現、數字跳動、數字滾動、版面重排、排名變化，或直接說出型錄裡的效果名稱（Reveal、Stagger、CountUp、LayoutList）。`@slide-comment` 寫著「套用動畫」或 "apply motion" 時也用這個 skill。Use this skill for any in-page animation request — spring entrances, items appearing one after another, numbers counting up, rows re-ordering. 涵蓋 `@open-slide/core/motion` 的現成元件、各自適合的元素、觸發方式，以及讓縮圖與 PPTX/PDF 匯出保持正確的規則。換頁轉場不屬於這個 skill，請看 `slide-authoring` 的 `SlideTransition`。
 ---
 
-# Slide motion catalog
+# 投影片動畫型錄
 
-`@open-slide/core/motion` ships a small set of spring-based animation components. They are the **only** way to use motion in a slide: import from `@open-slide/core/motion`, never from `motion` or `motion/react` directly, and don't hand-roll a replacement with `useEffect` + inline styles. The hard rule "only `react` and `@open-slide/core`" still holds — this is part of `@open-slide/core`.
+`@open-slide/core/motion` 提供一組以彈簧物理為基礎的動畫元件。在投影片裡用動畫**只能透過它們**：從 `@open-slide/core/motion` 匯入，不要直接匯入 `motion` 或 `motion/react`，也不要自己用 `useEffect` 加 inline style 重做一套。「只能用 `react` 與 `@open-slide/core`」這條硬規則依然成立——這些元件就是 `@open-slide/core` 的一部分。
 
-Every component already handles the parts that are easy to get wrong:
+每個元件都已經處理好容易出錯的地方：
 
-- It plays **only for the instance the audience is watching**. Thumbnails, the overview, presenter previews and PPTX/PDF exports render the final state, with no animation.
-- Inside a `<Step>`, it plays **when that step is revealed**, not when the page mounts. (`<Step>` keeps its children mounted and only fades them in, so plain mount-time animations would finish while still invisible.)
-- `prefers-reduced-motion: reduce` renders the final state immediately.
+- **只在觀眾正在看的那一份播放。** 縮圖、總覽、講者預覽、PPTX/PDF 匯出都直接畫出最終狀態，不播動畫。
+- **放在 `<Step>` 裡時，等那一步揭露才播**，而不是頁面一載入就播。（`<Step>` 會讓子元素一直掛著、只做淡入，一般的掛載動畫會在還看不見的時候就播完。）
+- 系統設定 `prefers-reduced-motion: reduce`（減少動態效果）時，直接顯示最終狀態。
 
-## Catalog
+## 型錄
 
-| Effect (say any of these) | Component | Wrap it around | Key props |
+| 效果（說這些都可以） | 元件 | 包在什麼外面 | 主要參數 |
 | --- | --- | --- | --- |
-| **Reveal** — 彈出 / 淡入 / 升起 / 滑入 / 模糊淡入 | `<Reveal effect="pop">` | one element: a heading, an image, a card | `effect`: `fade` · `rise` (default) · `pop` · `slide` · `blur`; `delay` (s) |
-| **Stagger** — 逐項彈入 / 依序出現 | `<Stagger effect="rise">` | a group of siblings: bullets, cards, logos | `effect`, `interval` (s between items, default `0.11`), `itemStyle` |
-| **CountUp** — 數字跳動 / 數字滾動 | `<CountUp to={36} />` | a single number (replaces the literal) | `to`, `from`, `decimals`, `prefix`, `suffix`, `grouping`, `duration` (s) |
-| **LayoutList** — 版面重排 / 排名變化 | `<LayoutList items revealedItems getKey renderItem trigger>` | a ranked list or table rows whose order changes | `items` (before), `revealedItems` (after), `trigger` |
+| **Reveal**：彈出／淡入／升起／滑入／模糊淡入 | `<Reveal effect="pop">` | 單一元素：標題、圖片、卡片 | `effect`：`fade` 淡入・`rise` 升起（預設）・`pop` 彈出・`slide` 滑入・`blur` 模糊淡入；`delay`（秒） |
+| **Stagger**：逐項彈入／依序出現 | `<Stagger effect="rise">` | 一組並列的元素：條列、卡片、logo | `effect`、`interval`（每項間隔秒數，預設 `0.11`）、`itemStyle` |
+| **CountUp**：數字跳動／數字滾動 | `<CountUp to={36} />` | 單一數字（取代原本寫死的數字） | `to`、`from`、`decimals`、`prefix`、`suffix`、`grouping`（千分位）、`duration`（秒） |
+| **LayoutList**：版面重排／排名變化 | `<LayoutList items revealedItems getKey renderItem trigger>` | 名次或順序會改變的清單、表格列 | `items`（揭露前）、`revealedItems`（揭露後）、`trigger` |
 
 ```tsx
 import { Step, Steps } from '@open-slide/core';
 import { CountUp, LayoutList, Reveal, Stagger } from '@open-slide/core/motion';
 ```
 
-## When does it play?
+## 什麼時候播？
 
-Pick one of three triggers. Ask the user only if the request doesn't make it obvious ("按一下才出現" → click; otherwise default to page entry).
+三種觸發方式選一種。只有在使用者的要求看不出來時才問（說「按一下才出現」就是點擊觸發；其他情況預設進頁就播）。
 
-1. **On page entry** — no `<Step>` around it. Plays as the page appears.
+1. **進頁就播**：外面不包 `<Step>`，頁面出現時就播。
    ```tsx
-   <Reveal effect="pop"><h1 style={TITLE}>Q3 results</h1></Reveal>
+   <Reveal effect="pop"><h1 style={TITLE}>第三季成果</h1></Reveal>
    ```
-2. **On click** — wrap in `<Step>` inside `<Steps>`. Plays when that step is revealed.
+2. **按一下才播**：包在 `<Steps>` 裡的 `<Step>` 中，那一步揭露時才播。
    ```tsx
    <Steps>
      <Step>
@@ -47,10 +47,10 @@ Pick one of three triggers. Ask the user only if the request doesn't make it obv
      </Step>
    </Steps>
    ```
-3. **On click, but stay visible before it** — for content that must be on screen *before* it animates (a list that re-orders, a number that changes). Put a small marker with `data-reveal="<name>"` inside a `<Step>` and pass the same name as `trigger`.
+3. **按一下才播，但播之前也要看得到**：用在動畫前就必須在畫面上的內容（會重新排序的清單、會改變的數字）。在某個 `<Step>` 裡放一個帶 `data-reveal="<名稱>"` 的小標記，再把同一個名稱傳給 `trigger`。
    ```tsx
    <Steps>
-     <Step><span data-reveal="after">→ After switching to agents</span></Step>
+     <Step><span data-reveal="after">→ 改用 agent 之後</span></Step>
    </Steps>
    <LayoutList
      trigger="after"
@@ -61,21 +61,21 @@ Pick one of three triggers. Ask the user only if the request doesn't make it obv
    />
    ```
 
-## Rules
+## 規則
 
-- **Never animate on the first page of a deck with a step trigger.** Starting a presentation lands on page 1 as a *jump*, and jumps render every `<Step>` already revealed, so the click never happens. Put a cover or title page first. Page-entry triggers are fine on page 1.
-- **One motion component per element.** Don't nest `<Reveal>` inside `<Stagger>` items or wrap a `<CountUp>` in a `<Reveal>` — use the outer one only.
-- **Never wrap a `MorphElement` node.** Motion animates `transform`, and morphs require no transform on the morph node (see `references/morph.md` in `slide-authoring`). Wrap a parent instead.
-- **Keep the final state complete.** PPTX/PDF exports and thumbnails show only the end frame, so the page must read correctly with everything shown. Motion adds emphasis; it must not carry information.
-- **Restraint.** One or two animated groups per page. A deck where everything bounces reads as noise. If the deck's theme has a Motion section, match its philosophy: `fade`/`rise` for calm themes, `pop` and Stagger for playful ones.
-- **Layout and sizing stay on your elements.** The components only add motion. Put flex/grid layout on `style` (Reveal, Stagger, LayoutList) or `itemStyle` (each Stagger child), and keep typography on the children.
+- **簡報的第一頁不要放「按一下才播」的動畫。** 開始簡報時，第一頁算是「直接跳進來」，直接跳進來的頁面會把所有 `<Step>` 都先展開，點擊永遠不會發生。前面放一張封面或標題頁。「進頁就播」放在第一頁沒問題。
+- **一個元素只用一個動畫元件。** 不要在 `<Stagger>` 的項目裡再包 `<Reveal>`，也不要把 `<CountUp>` 包進 `<Reveal>`——只留外層那個。
+- **不要包在 `MorphElement` 那個節點外面。** 動畫會改 `transform`，而 morph 要求 morph 節點本身不能有 transform（見 `slide-authoring` 的 `references/morph.md`）。改包它的父層。
+- **最終畫面必須完整。** PPTX/PDF 匯出和縮圖只會看到最後一格，所以全部顯示時頁面就要能讀懂。動畫是強調，不能承載資訊。
+- **節制。** 一頁一到兩組動畫就夠。整份簡報都在彈來彈去只會變成噪音。如果簡報的主題有 Motion 段落，跟著它的風格走：沉穩的主題用 `fade`／`rise`，活潑的主題才用 `pop` 和 Stagger。
+- **版面和尺寸留在你自己的元素上。** 元件只負責動畫。flex/grid 版面放在 `style`（Reveal、Stagger、LayoutList）或 `itemStyle`（Stagger 的每個子項），字體樣式留在子元素上。
 
-## Applying an effect to a selected element
+## 套用到選取的元素
 
-When the user selects an element (see the `current-slide` skill) or leaves a comment such as "套用動畫：逐項彈入":
+使用者選取了某個元素（見 `current-slide` skill），或留言寫「套用動畫：逐項彈入」時：
 
-1. Map the request to a catalog row. If it's ambiguous, choose the row whose "Wrap it around" matches the element, and say which one you picked.
-2. Wrap the element's JSX — don't restyle it. For CountUp, replace the numeric literal and keep its surrounding `prefix`/`suffix` text.
-3. If the user said "按一下" / "on click", add `<Steps><Step>…</Step></Steps>` around it (or extend an existing `<Steps>` block in document order).
-4. Add the `@open-slide/core/motion` import and remove the resolved `@slide-comment` marker, as `apply-comments` does.
-5. Self-check in the single-page preview route from `slide-authoring`. It renders the final state, so confirm the layout there and tell the user to press `Enter` (present mode) and `→` to see the animation itself.
+1. 把要求對應到型錄的一列。不明確時，挑「包在什麼外面」跟這個元素最吻合的那一列，並告訴使用者你選了哪一個。
+2. 把元素的 JSX 包起來，不要改它的樣式。CountUp 是取代寫死的數字，前後的文字改用 `prefix`／`suffix`。
+3. 使用者說「按一下」或 "on click" 時，外面加 `<Steps><Step>…</Step></Steps>`（或照文件順序併入既有的 `<Steps>`）。
+4. 加上 `@open-slide/core/motion` 的 import，並像 `apply-comments` 一樣移除已處理的 `@slide-comment` 標記。
+5. 用 `slide-authoring` 裡的單頁預覽路由自我檢查。預覽畫的是最終狀態，所以在那裡確認版面就好；動畫本身請使用者按 `Enter`（簡報模式）再按 `→` 觀看。

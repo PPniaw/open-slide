@@ -1,42 +1,42 @@
 ---
 name: slide-assets
-description: Use this skill whenever a slide needs a photo, image, illustration, logo or icon, or when the user adds, renames or asks about files in the asset library (素材庫、圖庫、照片庫、放一張照片、換張圖、加 logo). It maintains `assets/INDEX.md`, the catalog that lets you pick the right existing file by meaning instead of guessing from file names, and records where each file came from and whether it may be used publicly.
+description: 投影片需要照片、圖片、插圖、logo 或圖示時使用；使用者新增、重新命名或詢問素材庫裡的檔案時也用（素材庫、圖庫、照片庫、放一張照片、換張圖、加 logo）。Use whenever a slide needs a photo, image, illustration, logo or icon, or the user adds or asks about asset files. 這個 skill 維護 `assets/INDEX.md`：一份讓你依「內容」挑對既有檔案、而不是靠檔名猜的目錄，並記錄每個檔案的來源與能否公開使用。
 ---
 
-# Asset library (`assets/INDEX.md`)
+# 素材庫（`assets/INDEX.md`）
 
-Global assets live in the project-root `assets/` folder and are imported with the `@assets` alias (see `references/assets.md` in `slide-authoring`). File names rarely say what a picture shows, so this project keeps a catalog next to them: `assets/INDEX.md`. Read it **before** choosing any image, and update it whenever you add one.
+全站共用的素材放在專案根目錄的 `assets/`，用 `@assets` 別名匯入（見 `slide-authoring` 的 `references/assets.md`）。檔名很少能說明圖片拍的是什麼，所以這個專案在旁邊放一份目錄：`assets/INDEX.md`。挑任何圖片**之前**先讀它，新增圖片時也要更新它。
 
-## Format
+## 格式
 
-One row per file, path relative to `assets/`:
+一個檔案一列，路徑相對於 `assets/`：
 
 ```md
-# Asset index
+# 素材目錄
 
-| File | What it shows | Tags | Source / license |
+| 檔案 | 內容 | 標籤 | 來源／授權 |
 | --- | --- | --- | --- |
-| photos/team-offsite-2026.jpg | Twelve people on a rooftop at sunset, casual, smiling | team, people, outdoor, warm | Own photo — internal use |
-| logos/acme.svg | Acme wordmark, black on transparent | logo, brand | Acme brand kit — OK with permission |
-| photos/city-night.jpg | Taipei skyline at night, long exposure | city, night, cover, blue | Unsplash (@author) — free, credit appreciated |
+| photos/team-offsite-2026.jpg | 十二個人在頂樓看夕陽，穿著輕鬆、在笑 | 團隊, 人物, 戶外, 暖色 | 自己拍的，僅限內部使用 |
+| logos/acme.svg | Acme 文字商標，黑色、透明背景 | logo, 品牌 | Acme 品牌包，需取得同意 |
+| photos/city-night.jpg | 台北夜景，長曝光 | 城市, 夜景, 封面, 藍色 | Unsplash（@作者），免費，建議標註 |
 ```
 
-- **What it shows** — one plain sentence a reader could check against the picture: subjects, setting, mood, dominant colours.
-- **Tags** — 3–6 lowercase words used for matching ("cover", "people", "product", "dark", "warm").
-- **Source / license** — where it came from and what that allows. Use `unknown` if nobody knows. Never invent a license.
+- **內容**：一句讀者看了圖就能核對的白話描述，包括主體、場景、氛圍、主要顏色。
+- **標籤**：3 到 6 個用來比對的詞（封面、人物、產品、深色、暖色…）。
+- **來源／授權**：從哪裡來、允許怎麼用。沒人知道就寫 `不明`。**絕對不要自己編授權。**
 
-## Picking an image
+## 挑圖
 
-1. Read `assets/INDEX.md` and match the slide's need against **What it shows** and **Tags**.
-2. If there's a good match, import it: `import photo from '@assets/photos/team-offsite-2026.jpg';`
-3. If the deck will be shared publicly (deployed, exported for an external audience, or the user says so), skip rows whose license is `unknown` or internal-only, and tell the user which one you skipped and why.
-4. If nothing fits, don't stretch a poor match. Use `<ImagePlaceholder>` (see `slide-authoring`) and tell the user what kind of picture would fit. They can drop one into the Assets panel (dev UI → Assets), which also searches brand logos (svgl) and Google Fonts.
+1. 讀 `assets/INDEX.md`，拿這一頁的需求去比對「內容」和「標籤」。
+2. 有合適的就匯入：`import photo from '@assets/photos/team-offsite-2026.jpg';`
+3. 如果簡報會公開（要部署、要給外部的人看，或使用者這樣說），跳過授權為 `不明` 或僅限內部的圖，並告訴使用者你跳過了哪一張、為什麼。
+4. 沒有合適的就不要硬湊。改用 `<ImagePlaceholder>`（見 `slide-authoring`），並告訴使用者這裡適合放什麼樣的圖。使用者可以從素材面板（開發介面 → 素材）把檔案拖進來；那個面板也能搜尋品牌 logo（svgl）和 Google Fonts。
 
-Deck-specific images that no other deck will use still go in `slides/<id>/assets/` and don't need an index row.
+只有這份簡報會用到的圖片，照樣放在 `slides/<id>/assets/`，不需要在目錄裡加一列。
 
-## Keeping the index current
+## 讓目錄保持正確
 
-- **Adding a file** (the user drops one in, or you download a logo or font through the Assets panel): add its row in the same turn. If you can view the image, write **What it shows** yourself from what you see; ask the user only for **Source / license**.
-- **Missing index**: if `assets/INDEX.md` doesn't exist, create it. List every image under `assets/`, view each to describe it, and mark sources `unknown` for the user to fill in.
-- **Files without a row**: when you notice one, view it, add the row, and mention it.
-- **Removed or renamed files**: fix or delete the row so the index never points at a missing file.
+- **新增檔案時**（使用者拖進來，或你透過素材面板下載 logo、字型）：同一輪就補上那一列。如果你看得到圖片，「內容」自己看圖寫；只需要問使用者「來源／授權」。
+- **目錄不存在時**：如果 `assets/INDEX.md` 不存在，就建立它。把 `assets/` 底下每張圖都列出來，逐張看過寫下描述，來源先標 `不明` 讓使用者補。
+- **有檔案沒有對應的列**：發現時就看圖補上，並告訴使用者。
+- **檔案被刪除或改名**：修正或刪掉那一列，讓目錄永遠不會指向不存在的檔案。
