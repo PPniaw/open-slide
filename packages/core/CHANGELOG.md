@@ -12,7 +12,7 @@
 ### Patch Changes
 
 - 55a84ca: Default the UI to Traditional Chinese until a language is picked in the language menu.
-- Updates come from `@pik-singular/open-slide-core` and follow the npm registry the project is configured with.
+- Updates come from `@pik-singular/slidez-core` and follow the npm registry the project is configured with.
 - 011a8ef: Check for and install updates from the workshop fork's npm package behind the `@open-slide/core` alias, and pass `--legacy-peer-deps` to npm.
 - 8bcece1: Enlarge the mobile present control bar so its buttons meet the 44px touch-target minimum.
 - d343462: Published decks are play-only: production build even when started from the dev server, no deck list, editor chrome or downloads, the bare domain opens the deck, and the player supports swipe on phones.

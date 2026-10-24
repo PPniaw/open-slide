@@ -1,7 +1,7 @@
 name: Fork release
 
-# Publishes the workshop fork as @pik-singular/open-slide-core and
-# @pik-singular/open-slide. Every push to `workshop` runs the full test suite;
+# Publishes the workshop fork as @pik-singular/slidez-core and
+# @pik-singular/slidez. Every push to `workshop` runs the full test suite;
 # packages are published only when their package.json version is not on npm
 # yet, so bump versions with `pnpm changeset version` to release.
 

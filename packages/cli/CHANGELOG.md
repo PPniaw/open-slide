@@ -4,7 +4,7 @@
 
 ### Minor Changes
 
-- New projects install the workshop core (`@pik-singular/open-slide-core`) behind the `@open-slide/core` alias and start with a Chinese sample deck that shows motion and live interaction, plus the fresh-nutrition and cozy-home-shop themes.
+- New projects install the workshop core (`@pik-singular/slidez-core`) behind the `@open-slide/core` alias and start with a Chinese sample deck that shows motion and live interaction, plus the fresh-nutrition and cozy-home-shop themes.
 
 ### Patch Changes
 

@@ -38,7 +38,7 @@ declare const __CORE_VERSION_AT_BUILD__: string;
 
 // Same names as packages/core/src/fork.ts: the core is installed behind the
 // upstream name so imports and skills keep working unchanged.
-const FORK_CORE_PACKAGE = '@pik-singular/open-slide-core';
+const FORK_CORE_PACKAGE = '@pik-singular/slidez-core';
 
 function coreVersionRange(): string {
   return `npm:${FORK_CORE_PACKAGE}@^${__CORE_VERSION_AT_BUILD__}`;

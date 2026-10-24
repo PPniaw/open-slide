@@ -15,11 +15,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const REPO = 'https://github.com/PPniaw/open-slide';
+const REPO = 'https://github.com/PPniaw/slidez';
 // Keep in sync with packages/core/src/fork.ts.
 const PACKAGES = [
-  { dir: 'packages/core', name: '@pik-singular/open-slide-core' },
-  { dir: 'packages/cli', name: '@pik-singular/open-slide' },
+  { dir: 'packages/core', name: '@pik-singular/slidez-core' },
+  { dir: 'packages/cli', name: '@pik-singular/slidez' },
 ];
 
 const [mode, ...rest] = process.argv.slice(2);
