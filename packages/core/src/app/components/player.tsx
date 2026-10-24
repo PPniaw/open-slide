@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { hasModifier, isBackwardKey, isForwardKey, isTypingTarget } from '@/lib/keys';
 import { useClickPageNavigation } from '@/lib/use-click-page-navigation';
 import { useWheelPageNavigation } from '@/lib/use-wheel-page-navigation';
@@ -48,6 +48,8 @@ type Props = {
    * without entering fullscreen. Defaults to true for back-compat.
    */
   fullscreen?: boolean;
+  /** Drawn over the slides inside the player, e.g. the live-interaction layer. */
+  overlay?: ReactNode;
 };
 
 export function Player({
@@ -62,6 +64,7 @@ export function Player({
   slideId,
   onSwitchSlide,
   fullscreen = true,
+  overlay,
 }: Props) {
   const isMobile = useIsMobile();
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -418,6 +421,8 @@ export function Player({
           onStepAggregateChange={handleAggregateChange}
         />
       </SlideCanvas>
+
+      {overlay}
 
       {controls && (
         <div data-osd-chrome style={{ display: 'contents' }}>

@@ -1,6 +1,6 @@
 import { type CSSProperties, useCallback, useRef, useState } from 'react';
-import { isLiveDev, joinUrl, qrUrl, useLiveRoom } from './room.ts';
-import { type LiveStatus, useLiveDisplay } from './socket.ts';
+import { isLiveDev, joinUrl, qrUrl, useLiveRoom } from '../app/lib/live/room.ts';
+import { type LiveStatus, useLiveDisplay } from '../app/lib/live/socket.ts';
 
 // Sized for the 1920×1080 canvas. Colours follow the deck's design tokens so
 // the blocks sit inside any theme.

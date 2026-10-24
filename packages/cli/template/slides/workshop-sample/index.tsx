@@ -1,9 +1,8 @@
 import { type DesignSystem, type Page, type SlideMeta, Step, Steps } from '@open-slide/core';
-import { LiveFeedback, LiveJoin, LiveQA } from '@open-slide/core/live';
 import { CountUp, Reveal, Stagger } from '@open-slide/core/motion';
 import type { CSSProperties, ReactNode } from 'react';
 
-// 工作坊範例：示範動畫（@open-slide/core/motion）和現場互動（@open-slide/core/live）。
+// 工作坊範例：示範動畫（@open-slide/core/motion），以及發布時開啟的現場互動。
 // 想改哪裡，直接跟 Claude 說，例如「把第 2 頁的三個步驟改成我的課程大綱」。
 
 export const design: DesignSystem = {
@@ -159,38 +158,57 @@ const Numbers: Page = () => (
   </div>
 );
 
-const Join: Page = () => (
-  <div style={{ ...frame, justifyContent: 'center', alignItems: 'center', gap: 56 }}>
-    <Title kicker="現場互動">拿出手機，掃一下</Title>
-    <LiveJoin size={340} label="掃描 QR code，一起互動" />
+const LIVE_STEPS = [
+  { n: '1', title: '發布時勾選', body: '按「發布」，勾選「開啟現場互動」。' },
+  { n: '2', title: '觀眾掃碼', body: '投影片右下角會出現 QR code，觀眾用手機發問、評分、送表情。' },
+  { n: '3', title: '你在工作台管理', body: '工具列的「互動」面板裡，挑問題按「上螢幕」。' },
+];
+
+const Live: Page = () => (
+  <div style={frame}>
+    <Title kicker="現場互動">讓觀眾一起參與</Title>
+    <Stagger
+      effect="rise"
+      style={{ display: 'flex', flexDirection: 'column', gap: 28, marginTop: 64 }}
+    >
+      {LIVE_STEPS.map((s) => (
+        <div key={s.n} style={{ display: 'flex', alignItems: 'center', gap: 36 }}>
+          <div
+            style={{
+              width: 88,
+              height: 88,
+              borderRadius: '50%',
+              background: C.soft,
+              color: 'var(--osd-accent)',
+              display: 'grid',
+              placeItems: 'center',
+              fontSize: 44,
+              fontWeight: 900,
+              flex: 'none',
+            }}
+          >
+            {s.n}
+          </div>
+          <div>
+            <div style={{ fontSize: 44, fontWeight: 700 }}>{s.title}</div>
+            <div style={{ fontSize: 32, color: C.muted, marginTop: 6 }}>{s.body}</div>
+          </div>
+        </div>
+      ))}
+    </Stagger>
   </div>
 );
 
-const QA: Page = () => (
-  <div style={{ ...frame, flexDirection: 'row', gap: 96, alignItems: 'flex-start' }}>
-    <div style={{ width: 560, display: 'flex', flexDirection: 'column', gap: 48 }}>
-      <Title kicker="現場提問">有問題，直接問</Title>
-      <LiveJoin
-        size={240}
-        label="掃碼發問，也能幫別人的問題按讚"
-        style={{ flexDirection: 'column', alignItems: 'flex-start', gap: 28 }}
-      />
-    </div>
-    <LiveQA style={{ flex: 1, paddingTop: 12 }} limit={4} />
-  </div>
-);
-
-const Feedback: Page = () => (
-  <div style={{ ...frame, flexDirection: 'row', alignItems: 'center', gap: 120 }}>
-    <div style={{ flex: 1 }}>
-      <Title kicker="謝謝聆聽">給我一點回饋</Title>
-      <LiveFeedback title="即時反饋" style={{ marginTop: 64 }} />
-    </div>
-    <LiveJoin
-      size={260}
-      label="評分、送表情、留一句話心得"
-      style={{ flexDirection: 'column', alignItems: 'flex-start', gap: 28, width: 520 }}
-    />
+const Thanks: Page = () => (
+  <div style={{ ...frame, justifyContent: 'center' }}>
+    <Reveal effect="pop">
+      <h1 style={{ ...heading, fontSize: 'var(--osd-size-hero)' }}>謝謝聆聽</h1>
+    </Reveal>
+    <Reveal effect="fade" delay={0.3}>
+      <p style={{ fontSize: 40, color: C.muted, margin: '32px 0 0' }}>
+        有問題？掃右下角的 QR code 問我
+      </p>
+    </Reveal>
   </div>
 );
 
@@ -200,9 +218,8 @@ export const notes = [
   '這是工作坊的範例簡報。想改任何一頁，直接跟 Claude 說要改哪一頁、改成什麼。',
   '三張卡片會依序升起，這是 Stagger 動畫。跟 Claude 說「讓卡片一張一張出現」也能做到。',
   '這頁用 Steps：每按一次下一頁，就多出現一個數字，數字會跳動。',
-  '發布後這裡會出現真正的 QR code。觀眾掃碼後就能發問和回饋。',
-  '投影片只顯示你在管理頁按「上螢幕」的問題。管理頁在發布視窗裡打開，不要投影出去。',
-  '評分和表情會即時出現在這裡。心得只有你在管理頁看得到。',
+  '現場互動不用改投影片：發布時勾選，右下角就會出現 QR code。播放時按 Q 可以隱藏或顯示它。',
+  '開啟互動後，你在「互動」面板按「上螢幕」的問題會以字幕出現在投影片下方。',
 ];
 
-export default [Cover, HowItWorks, Numbers, Join, QA, Feedback] satisfies Page[];
+export default [Cover, HowItWorks, Numbers, Live, Thanks] satisfies Page[];

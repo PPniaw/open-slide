@@ -7,7 +7,7 @@ const PAGE_BY_PAGE =
 
 // Workshop fork: kept in its own constant so upstream edits to the prompt merge cleanly.
 const WORKSHOP_RULES =
-  'Write slide content (titles, body copy, labels and speaker notes) in Traditional Chinese (zh-TW) unless the user asks for another language; slide ids, code and file names stay in English. Use slide-motion for in-page animation, slide-live for audience Q&A and feedback, and read slide-assets before choosing any image.';
+  'Write slide content (titles, body copy, labels and speaker notes) in Traditional Chinese (zh-TW) unless the user asks for another language; slide ids, code and file names stay in English. Use slide-motion for in-page animation, slide-live for audience Q&A and feedback (usually a publish-time switch, not slide code), and read slide-assets before choosing any image.';
 
 const DECK_SLUG =
   "This deck's folder still has a placeholder name. Never rename or move the folder yourself: once the deck has content, end your final reply with a slug for it on a line of its own as <deck-slug>short-kebab-case-english-slug</deck-slug>, and open-slide renames the folder from it.";

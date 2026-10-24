@@ -2,7 +2,7 @@ import config from 'virtual:open-slide/config';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Toaster } from './components/ui/sonner';
 import { TooltipProvider } from './components/ui/tooltip';
-import { LIVE_GLOBAL_KEY } from './lib/live-config';
+import { LIVE_GLOBAL_KEY } from './lib/live/config';
 import { useLocale } from './lib/use-locale';
 import { AssetsPage } from './routes/assets';
 import { Home } from './routes/home';

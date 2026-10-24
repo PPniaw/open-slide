@@ -9,15 +9,17 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { LIVE_CHANGED_EVENT } from '@/lib/live/room';
 import { useLocale } from '@/lib/use-locale';
 
 type PublishRecord = { project: string; url: string; publishedAt: string };
 type LiveStatus = {
-  uses: boolean;
+  /** The deck has live blocks, so live interaction can't be turned off. */
+  required: boolean;
   server: string | null;
-  owner: string | null;
-  cohort: string | null;
-  room: { roomId: string; joinUrl: string; adminUrl: string } | null;
+  /** Published with live interaction on. */
+  enabled: boolean;
+  joinUrl: string | null;
 };
 type Status = {
   vercel: { installed: boolean; loggedIn: boolean; user: string | null };
@@ -39,7 +41,7 @@ const ZH = {
   account: 'Vercel 帳號',
   intro:
     '上線後，任何拿到網址的人都能看到這份簡報；搜尋引擎不會收錄。只會上傳這一份，其他簡報不會跟著上去。',
-  urlPreview: '網址通常會是',
+  urlAfterPublish: '網址會在發布完成後顯示。',
   publish: '發布上線',
   republish: '更新上線內容',
   publishing: '正在打包、檢查並部署，大約需要 1 分鐘…',
@@ -55,21 +57,12 @@ const ZH = {
   confirmUnpublish: '確定下架',
   unpublishing: '正在下架…',
   failed: '沒有成功',
-  liveTitle: '現場互動',
-  liveNoServer: '還沒設定互動服務網址，請聯絡工作坊講師。',
-  liveSetupHint: '這份簡報有互動區塊。第一次發布前，請輸入講師給的工作坊代碼。',
-  liveCohort: '工作坊代碼',
-  liveOwner: '你的名字（讓講師找得到你的互動）',
-  liveSave: '儲存',
-  liveChange: '更改工作坊代碼',
-  livePending: '發布後會自動開啟互動。',
+  liveToggle: '開啟現場互動（發問、回饋）',
+  liveToggleHint: '投影片右下角會出現 QR code，觀眾掃了就能發問、評分、送表情。',
+  liveRequired: '這份簡報有互動區塊，一定要開啟。',
   liveJoin: '觀眾加入網址',
-  liveAdmin: '講者管理頁',
-  liveAdminHint: '管理連結只給你自己，不要投影或分享。',
-  liveOpenAdmin: '開啟管理頁',
-  liveCopyAdmin: '複製管理連結',
-  liveReset: '重設管理連結',
-  liveResetConfirm: '重設後，舊的管理連結會立刻失效。確定嗎？',
+  livePanelHint: '在工作台工具列的「互動」查看發問和回饋。',
+  liveNeedsRepublish: '按「更新上線內容」後才會套用。',
 };
 const EN: typeof ZH = {
   button: 'Publish',
@@ -82,7 +75,7 @@ const EN: typeof ZH = {
   account: 'Vercel account',
   intro:
     'Anyone with the link can view the deck once it is live; search engines will not index it. Only this deck is uploaded.',
-  urlPreview: 'The address will usually be',
+  urlAfterPublish: 'The address appears once publishing finishes.',
   publish: 'Publish',
   republish: 'Update the live deck',
   publishing: 'Building, checking and deploying — about a minute…',
@@ -99,27 +92,19 @@ const EN: typeof ZH = {
   confirmUnpublish: 'Unpublish',
   unpublishing: 'Unpublishing…',
   failed: 'Something went wrong',
-  liveTitle: 'Live interaction',
-  liveNoServer: 'No live service is configured. Ask the workshop host.',
-  liveSetupHint: 'This deck has live blocks. Enter the workshop code before the first publish.',
-  liveCohort: 'Workshop code',
-  liveOwner: 'Your name (so the host can find your room)',
-  liveSave: 'Save',
-  liveChange: 'Change workshop code',
-  livePending: 'Live interaction opens when you publish.',
+  liveToggle: 'Turn on live interaction (Q&A, feedback)',
+  liveToggleHint:
+    'A QR code appears in the corner of the slides; the audience scans it to ask, rate and react.',
+  liveRequired: 'This deck has live blocks, so live interaction stays on.',
   liveJoin: 'Audience link',
-  liveAdmin: 'Presenter page',
-  liveAdminHint: 'Keep the admin link to yourself; do not project or share it.',
-  liveOpenAdmin: 'Open presenter page',
-  liveCopyAdmin: 'Copy admin link',
-  liveReset: 'Reset admin link',
-  liveResetConfirm: 'The old admin link stops working at once. Reset it?',
+  livePanelHint: 'Follow questions and feedback under "Live" in the workspace toolbar.',
+  liveNeedsRepublish: 'Applies after you update the live deck.',
 };
 
 async function post(
   path: string,
   slideId: string,
-  extra: Record<string, string> = {},
+  extra: Record<string, unknown> = {},
 ): Promise<Record<string, unknown>> {
   const res = await fetch(path, {
     method: 'POST',
@@ -138,14 +123,14 @@ export function PublishButton({ slideId }: { slideId: string }) {
   const [phase, setPhase] = useState<Phase>('idle');
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
-  const [editingLive, setEditingLive] = useState(false);
-  const [cohortInput, setCohortInput] = useState('');
-  const [ownerInput, setOwnerInput] = useState('');
+  const [liveOn, setLiveOn] = useState(false);
 
   const refresh = useCallback(async () => {
     setStatus(null);
     const res = await fetch(`/__publish/status?slideId=${encodeURIComponent(slideId)}`);
-    setStatus((await res.json()) as Status);
+    const next = (await res.json()) as Status;
+    setStatus(next);
+    setLiveOn(next.live.required || next.live.enabled);
   }, [slideId]);
 
   useEffect(() => {
@@ -157,47 +142,13 @@ export function PublishButton({ slideId }: { slideId: string }) {
   const record = status?.record ?? null;
   const live = status?.live ?? null;
   const busy = phase === 'publishing' || phase === 'unpublishing';
-  // A live deck can't go up until it has a workshop code to open its room with.
-  const liveBlocked = Boolean(live?.uses && !live.room && (!live.server || !live.cohort));
-  const showLiveSetup = Boolean(
-    live?.uses && live.server && !live.room && (!live.cohort || editingLive),
-  );
-
-  const saveLive = async () => {
-    setError(null);
-    try {
-      const body = await post('/__publish/live-setup', slideId, {
-        cohort: cohortInput,
-        owner: ownerInput,
-      });
-      setStatus((prev) => (prev ? { ...prev, live: body.live as LiveStatus } : prev));
-      setEditingLive(false);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : String(err));
-    }
-  };
-
-  const resetLive = async () => {
-    if (!window.confirm(s.liveResetConfirm)) return;
-    setError(null);
-    try {
-      const body = await post('/__publish/live-reset', slideId);
-      setStatus((prev) => (prev ? { ...prev, live: body.live as LiveStatus } : prev));
-    } catch (err) {
-      setError(err instanceof Error ? err.message : String(err));
-    }
-  };
-
   const publish = async () => {
     setError(null);
     setPhase('publishing');
     try {
-      const body = await post('/__publish', slideId);
-      setStatus((prev) => (prev ? { ...prev, record: body.record as PublishRecord } : prev));
-      if (live?.uses) {
-        const res = await fetch(`/__publish/status?slideId=${encodeURIComponent(slideId)}`);
-        setStatus((await res.json()) as Status);
-      }
+      await post('/__publish', slideId, { live: liveOn, owner: status?.vercel.user ?? '' });
+      await refresh();
+      window.dispatchEvent(new Event(LIVE_CHANGED_EVENT));
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));
     } finally {
@@ -210,7 +161,8 @@ export function PublishButton({ slideId }: { slideId: string }) {
     setPhase('unpublishing');
     try {
       await post('/__publish/unpublish', slideId);
-      setStatus((prev) => (prev ? { ...prev, record: null } : prev));
+      await refresh();
+      window.dispatchEvent(new Event(LIVE_CHANGED_EVENT));
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));
     } finally {
@@ -305,111 +257,45 @@ export function PublishButton({ slideId }: { slideId: string }) {
                   </div>
                 </div>
               ) : (
-                <p className="text-muted-foreground">
-                  {s.urlPreview}：
-                  <span className="font-mono text-foreground">
-                    https://{slideId.toLowerCase()}.vercel.app
-                  </span>
-                </p>
+                // Vercel adds a suffix when the name is taken, so the address is only
+                // known after the deploy; don't promise one up front.
+                <p className="text-muted-foreground">{s.urlAfterPublish}</p>
               )}
             </div>
           )}
 
-          {status?.vercel.loggedIn && phase !== 'confirm-unpublish' && live?.uses && (
+          {status?.vercel.loggedIn && phase !== 'confirm-unpublish' && live?.server && (
             <div
               className="grid gap-2 rounded-[8px] border border-border p-3 text-[13px]"
               data-publish-live
             >
-              <span className="font-medium">{s.liveTitle}</span>
-              {!live.server && <p className="text-muted-foreground">{s.liveNoServer}</p>}
-              {showLiveSetup && (
-                <div className="grid gap-2" data-publish-live-setup>
-                  <p className="text-muted-foreground">{s.liveSetupHint}</p>
-                  <input
-                    className="h-8 rounded-[6px] border border-border bg-background px-2 font-mono uppercase"
-                    placeholder={s.liveCohort}
-                    aria-label={s.liveCohort}
-                    value={cohortInput}
-                    onChange={(e) => setCohortInput(e.target.value)}
-                    data-publish-live-cohort
-                  />
-                  <input
-                    className="h-8 rounded-[6px] border border-border bg-background px-2"
-                    placeholder={s.liveOwner}
-                    aria-label={s.liveOwner}
-                    value={ownerInput}
-                    onChange={(e) => setOwnerInput(e.target.value)}
-                    data-publish-live-owner
-                  />
-                  <div>
-                    <Button
-                      size="sm"
-                      onClick={() => void saveLive()}
-                      disabled={!cohortInput.trim()}
-                      data-publish-action="live-setup"
-                    >
-                      {s.liveSave}
-                    </Button>
-                  </div>
-                </div>
-              )}
-              {live.server && !live.room && live.cohort && !editingLive && (
-                <div className="flex items-center gap-2 text-muted-foreground">
+              <label className="flex items-start gap-2">
+                <input
+                  type="checkbox"
+                  className="mt-0.5 size-4 accent-[var(--brand,#e5484d)]"
+                  checked={liveOn}
+                  disabled={busy || live.required}
+                  onChange={(e) => setLiveOn(e.target.checked)}
+                  data-publish-live-toggle
+                />
+                <span className="grid gap-0.5">
+                  <span className="font-medium">{s.liveToggle}</span>
+                  <span className="text-muted-foreground">
+                    {live.required ? s.liveRequired : s.liveToggleHint}
+                  </span>
+                </span>
+              </label>
+              {live.enabled && live.joinUrl && (
+                <div className="grid gap-1 text-muted-foreground" data-publish-live-room>
                   <span>
-                    {s.livePending}（{s.liveCohort}：
-                    <span className="font-mono text-foreground">{live.cohort}</span>）
+                    {s.liveJoin}：
+                    <span className="break-all font-mono text-foreground">{live.joinUrl}</span>
                   </span>
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    onClick={() => {
-                      setCohortInput(live.cohort ?? '');
-                      setOwnerInput(live.owner ?? '');
-                      setEditingLive(true);
-                    }}
-                  >
-                    {s.liveChange}
-                  </Button>
+                  <span>{s.livePanelHint}</span>
                 </div>
               )}
-              {live.room && (
-                <div className="grid gap-2" data-publish-live-room>
-                  <span className="text-muted-foreground">
-                    {s.liveJoin}：
-                    <span className="break-all font-mono text-foreground">{live.room.joinUrl}</span>
-                  </span>
-                  <span className="text-muted-foreground">
-                    {s.liveAdmin}：{s.liveAdminHint}
-                  </span>
-                  <div className="flex flex-wrap gap-2">
-                    <a
-                      href={live.room.adminUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className={buttonVariants({ variant: 'outline', size: 'sm' })}
-                      data-publish-live-admin
-                    >
-                      <ExternalLink className="size-3.5" />
-                      {s.liveOpenAdmin}
-                    </a>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => void navigator.clipboard.writeText(live.room?.adminUrl ?? '')}
-                    >
-                      <Copy className="size-3.5" />
-                      {s.liveCopyAdmin}
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={() => void resetLive()}
-                      data-publish-action="live-reset"
-                    >
-                      {s.liveReset}
-                    </Button>
-                  </div>
-                </div>
+              {record && liveOn !== live.enabled && (
+                <span className="text-muted-foreground">{s.liveNeedsRepublish}</span>
               )}
             </div>
           )}
@@ -460,7 +346,7 @@ export function PublishButton({ slideId }: { slideId: string }) {
                 )}
                 <Button
                   size="sm"
-                  disabled={busy || liveBlocked}
+                  disabled={busy}
                   onClick={() => void publish()}
                   data-publish-action="publish"
                 >

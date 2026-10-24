@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useIsActivePage } from '../app/lib/step-context.tsx';
+import { useIsActivePage } from '../step-context.tsx';
 import type { LiveRoom } from './room.ts';
 
 export type LiveQuestion = {
@@ -18,6 +18,8 @@ export type LiveDisplayState = {
   rating: { avg: number | null; count: number; dist: number[] };
   reactions: Record<string, number>;
   questions: LiveQuestion[];
+  /** The question the presenter is showing as a caption, if any. */
+  spotlight: LiveQuestion | null;
 };
 
 export type LiveStatus = 'connecting' | 'online' | 'offline' | 'closed';
@@ -119,13 +121,16 @@ function subscribe(room: LiveRoom, listener: Listener): () => void {
 /**
  * Live state for the slide on screen. Only the page the audience is watching
  * connects; thumbnails, the overview grid and exports render the static
- * fallback instead of opening a socket each.
+ * fallback instead of opening a socket each. `always` is for chrome outside
+ * any page, like the presenting overlay.
  */
 export function useLiveDisplay(
   room: LiveRoom | null,
   onReaction?: (emoji: string) => void,
+  { always = false }: { always?: boolean } = {},
 ): { state: LiveDisplayState | null; status: LiveStatus; message?: string } {
-  const active = useIsActivePage();
+  const activePage = useIsActivePage();
+  const active = always || activePage;
   const [state, setState] = useState<LiveDisplayState | null>(null);
   const [status, setStatus] = useState<{ status: LiveStatus; message?: string }>({
     status: 'connecting',

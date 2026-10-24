@@ -44,6 +44,8 @@ import {
   useInspector,
 } from '@/components/inspector/inspector-provider';
 import { SaveBar } from '@/components/inspector/save-bar';
+import { LiveOverlay } from '@/components/live/live-overlay';
+import { LivePanelButton } from '@/components/live/live-panel';
 import { EditorSidebar } from '@/components/panel/editor-sidebar';
 import { ResizeHandle, useStoredWidth } from '@/components/panel/resize-handle';
 import { PublishButton } from '@/components/publish/publish-button';
@@ -429,6 +431,7 @@ export function Slide() {
           slideId={presented.slideId}
           onSwitchSlide={switchPresentedSlide}
           fullscreen={playMode === 'fullscreen'}
+          overlay={<LiveOverlay slideId={presented.slideId} />}
         />
         {!presentReady && slide && pageCount > 0 && (
           <SlidePreloadLayer
@@ -530,6 +533,7 @@ export function Slide() {
         // and a phone can't enter fullscreen without a tap first.
         controls
         fullscreen={false}
+        overlay={<LiveOverlay slideId={slideId} />}
       />
     );
   }
@@ -795,7 +799,10 @@ export function Slide() {
                 </DropdownMenu>
               )}
               {import.meta.env.DEV && view === 'slides' && !narrowToolbar && slideId && (
-                <PublishButton slideId={slideId} />
+                <>
+                  <LivePanelButton slideId={slideId} />
+                  <PublishButton slideId={slideId} />
+                </>
               )}
               {import.meta.env.DEV && view === 'slides' && !narrowToolbar && <AgentToggleButton />}
               {view === 'slides' && !narrowToolbar && (

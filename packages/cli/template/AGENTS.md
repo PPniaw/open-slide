@@ -19,7 +19,7 @@ You are authoring **slides** in this repo. Every slide is arbitrary React code t
 - **Resolving "this page" / "this element"** — when the user references the current slide or selection without naming it, consult the `current-slide` skill. It reads the dev server's `node_modules/.open-slide/current.json` to find which slide, page, and inspector-picked element they mean.
 - **Writing a speech script / speaker notes** — use the framework's built-in feature: the `notes` export in the slide's `index.tsx`, index-aligned with the page array and shown in the presenter view. See the **Speaker notes** section of the `slide-authoring` skill. Never deliver a script as a markdown or text file.
 - **Animating an element** (彈出、逐項出現、數字跳動、版面重排…) — use the `slide-motion` skill and the components in `@open-slide/core/motion`.
-- **Audience interaction** (QR code 加入、現場提問、評分、表情反饋…) — use the `slide-live` skill and the blocks in `@open-slide/core/live`.
+- **Audience interaction** (QR code 加入、現場提問、評分、表情反饋…) — use the `slide-live` skill. Usually no code: the presenter turns on live interaction when publishing; the `@open-slide/core/live` blocks are only for custom layouts.
 - **Choosing or adding an image** — use the `slide-assets` skill; it keeps `assets/INDEX.md` up to date.
 - **Any other slide edit** — read the `slide-authoring` skill before writing. It is the technical reference for everything inside `slides/<id>/`: file contract, the 1920×1080 canvas, type scale, palette, layout, assets, self-review checklist, and anti-patterns. `create-slide` and `apply-comments` both defer to it for the *how*.
 
