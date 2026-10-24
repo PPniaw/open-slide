@@ -1,5 +1,11 @@
 # @open-slide/cli
 
+## 2.2.0
+
+### Minor Changes
+
+- 59619af: The workshop sample deck shows the publish-time live switch instead of embedding live blocks.
+
 ## 2.1.0
 
 ### Minor Changes
