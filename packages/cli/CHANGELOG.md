@@ -1,5 +1,11 @@
 # @open-slide/cli
 
+## 2.2.2
+
+### Patch Changes
+
+- New projects use core 2.7.0, and the template decks and themes call a deck 簡報 and a page 頁 throughout.
+
 ## 2.2.1
 
 ### Patch Changes
