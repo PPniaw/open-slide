@@ -76,7 +76,7 @@ const Cover: Page = () => (
       </h1>
     </Reveal>
     <Reveal effect="fade" delay={0.3}>
-      <p style={{ fontSize: 40, color: C.muted, margin: 0 }}>跟 Claude 說想法，它幫你做成投影片</p>
+      <p style={{ fontSize: 40, color: C.muted, margin: 0 }}>跟 Claude 說想法，它幫你做成簡報</p>
     </Reveal>
   </div>
 );
@@ -160,7 +160,7 @@ const Numbers: Page = () => (
 
 const LIVE_STEPS = [
   { n: '1', title: '發布時勾選', body: '按「發布」，勾選「開啟現場互動」。' },
-  { n: '2', title: '觀眾掃碼', body: '投影片右下角會出現 QR code，觀眾用手機發問、評分、送表情。' },
+  { n: '2', title: '觀眾掃碼', body: '簡報右下角會出現 QR code，觀眾用手機發問、評分、送表情。' },
   { n: '3', title: '你在工作台管理', body: '工具列的「互動」面板裡，挑問題按「上螢幕」。' },
 ];
 
@@ -218,8 +218,8 @@ export const notes = [
   '這是工作坊的範例簡報。想改任何一頁，直接跟 Claude 說要改哪一頁、改成什麼。',
   '三張卡片會依序升起，這是 Stagger 動畫。跟 Claude 說「讓卡片一張一張出現」也能做到。',
   '這頁用 Steps：每按一次下一頁，就多出現一個數字，數字會跳動。',
-  '現場互動不用改投影片：發布時勾選，右下角就會出現 QR code。播放時按 Q 可以隱藏或顯示它。',
-  '開啟互動後，你在「互動」面板按「上螢幕」的問題會以字幕出現在投影片下方。',
+  '現場互動不用改簡報：發布時勾選，右下角就會出現 QR code。播放時按 Q 可以隱藏或顯示它。',
+  '開啟互動後，你在「互動」面板按「上螢幕」的問題會以字幕出現在簡報下方。',
 ];
 
 export default [Cover, HowItWorks, Numbers, Live, Thanks] satisfies Page[];

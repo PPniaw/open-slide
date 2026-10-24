@@ -64,10 +64,10 @@ test.describe('home slide browser', () => {
     await page.goto('/');
     await page.getByRole('button', { name: 'Change language' }).click();
     await page.getByRole('menuitem', { name: '繁體中文' }).click();
-    await expect(page.getByText('投影片').first()).toBeVisible();
+    await expect(page.getByText('簡報', { exact: true }).first()).toBeVisible();
 
     await page.reload();
-    await expect(page.getByText('投影片').first()).toBeVisible();
+    await expect(page.getByText('簡報', { exact: true }).first()).toBeVisible();
   });
 
   test('sidebar toolbar buttons label themselves on hover', async ({ page }) => {

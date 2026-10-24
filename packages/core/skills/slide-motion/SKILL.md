@@ -1,11 +1,11 @@
 ---
 name: slide-motion
-description: 使用者要在投影片或選取的元素上加頁內動畫時使用——彈出、淡入、升起、滑入、模糊淡入、逐項彈入、依序出現、數字跳動、數字滾動、版面重排、排名變化，或直接說出型錄裡的效果名稱（Reveal、Stagger、CountUp、LayoutList）。`@slide-comment` 寫著「套用動畫」或 "apply motion" 時也用這個 skill。Use this skill for any in-page animation request — spring entrances, items appearing one after another, numbers counting up, rows re-ordering. 涵蓋 `@open-slide/core/motion` 的現成元件、各自適合的元素、觸發方式，以及讓縮圖與 PPTX/PDF 匯出保持正確的規則。換頁轉場不屬於這個 skill，請看 `slide-authoring` 的 `SlideTransition`。
+description: 使用者要在簡報或選取的元素上加頁內動畫時使用——彈出、淡入、升起、滑入、模糊淡入、逐項彈入、依序出現、數字跳動、數字滾動、版面重排、排名變化，或直接說出型錄裡的效果名稱（Reveal、Stagger、CountUp、LayoutList）。`@slide-comment` 寫著「套用動畫」或 "apply motion" 時也用這個 skill。Use this skill for any in-page animation request — spring entrances, items appearing one after another, numbers counting up, rows re-ordering. 涵蓋 `@open-slide/core/motion` 的現成元件、各自適合的元素、觸發方式，以及讓縮圖與 PPTX/PDF 匯出保持正確的規則。換頁轉場不屬於這個 skill，請看 `slide-authoring` 的 `SlideTransition`。
 ---
 
-# 投影片動畫型錄
+# 簡報動畫型錄
 
-`@open-slide/core/motion` 提供一組以彈簧物理為基礎的動畫元件。在投影片裡用動畫**只能透過它們**：從 `@open-slide/core/motion` 匯入，不要直接匯入 `motion` 或 `motion/react`，也不要自己用 `useEffect` 加 inline style 重做一套。「只能用 `react` 與 `@open-slide/core`」這條硬規則依然成立——這些元件就是 `@open-slide/core` 的一部分。
+`@open-slide/core/motion` 提供一組以彈簧物理為基礎的動畫元件。在簡報裡用動畫**只能透過它們**：從 `@open-slide/core/motion` 匯入，不要直接匯入 `motion` 或 `motion/react`，也不要自己用 `useEffect` 加 inline style 重做一套。「只能用 `react` 與 `@open-slide/core`」這條硬規則依然成立——這些元件就是 `@open-slide/core` 的一部分。
 
 每個元件都已經處理好容易出錯的地方：
 

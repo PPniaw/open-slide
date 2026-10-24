@@ -44,7 +44,7 @@ mode: light
 
 ## Fixed components
 
-這些可以直接貼進使用此主題的投影片。商品圖在真實簡報裡放去背或情境照片（`slide-assets` skill 會從 `assets/INDEX.md` 挑），沒有照片時用 `<ImagePlaceholder>`。
+這些可以直接貼進使用此主題的簡報。商品圖在真實簡報裡放去背或情境照片（`slide-assets` skill 會從 `assets/INDEX.md` 挑），沒有照片時用 `<ImagePlaceholder>`。
 
 ### Title
 

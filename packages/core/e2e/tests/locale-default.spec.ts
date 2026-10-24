@@ -40,7 +40,7 @@ test.describe('workshop default locale', () => {
 
   test('a first visit shows Traditional Chinese and English stays selected', async ({ page }) => {
     await page.goto(`${baseUrl}/`);
-    await expect(page.getByText('投影片').first()).toBeVisible({ timeout: 30_000 });
+    await expect(page.getByText('簡報', { exact: true }).first()).toBeVisible({ timeout: 30_000 });
 
     await page.getByRole('button', { name: '切換語言' }).click();
     await page.getByRole('menuitem', { name: 'English' }).click();

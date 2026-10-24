@@ -1,6 +1,6 @@
 ---
 name: slide-assets
-description: 投影片需要照片、圖片、插圖、logo 或圖示時使用；使用者新增、重新命名或詢問素材庫裡的檔案時也用（素材庫、圖庫、照片庫、放一張照片、換張圖、加 logo）。Use whenever a slide needs a photo, image, illustration, logo or icon, or the user adds or asks about asset files. 這個 skill 維護 `assets/INDEX.md`：一份讓你依「內容」挑對既有檔案、而不是靠檔名猜的目錄，並記錄每個檔案的來源與能否公開使用。
+description: 簡報需要照片、圖片、插圖、logo 或圖示時使用；使用者新增、重新命名或詢問素材庫裡的檔案時也用（素材庫、圖庫、照片庫、放一張照片、換張圖、加 logo）。Use whenever a slide needs a photo, image, illustration, logo or icon, or the user adds or asks about asset files. 這個 skill 維護 `assets/INDEX.md`：一份讓你依「內容」挑對既有檔案、而不是靠檔名猜的目錄，並記錄每個檔案的來源與能否公開使用。
 ---
 
 # 素材庫（`assets/INDEX.md`）

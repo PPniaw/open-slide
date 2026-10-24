@@ -51,7 +51,7 @@ const ZH = {
   unanswer: '取消已回答',
   hide: '隱藏',
   restore: '復原',
-  noQuestions: '這裡還沒有問題。觀眾掃投影片角落的 QR code 就能發問。',
+  noQuestions: '這裡還沒有問題。觀眾掃簡報角落的 QR code 就能發問。',
   rating: '評分',
   ratingCount: '{n} 人評分',
   noRating: '還沒有人評分',

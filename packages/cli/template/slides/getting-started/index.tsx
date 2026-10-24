@@ -1793,7 +1793,7 @@ const EditorHeader = ({
       <div style={{ display: 'flex', alignItems: 'center', gap: u(8) }}>
         <GhostIcon name="chevron-left" size={16} />
         <Divider />
-        <TabsMock items={['投影片', '素材']} active={slides ? 0 : 1} />
+        <TabsMock items={['簡報', '素材']} active={slides ? 0 : 1} />
         {!compact && <AgentBadge label="Agent 已連線" />}
       </div>
       <div
@@ -2494,7 +2494,7 @@ const ContentSection = () => (
     action={
       <Btn variant="ghost" size="xs" style={{ color: ink.muted }}>
         <Icon name="pencil-line" size={14} />
-        在投影片上編輯
+        在簡報上編輯
       </Btn>
     }
   >
@@ -3163,7 +3163,7 @@ const AssetsView = () => (
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: u(12), minWidth: 0 }}>
-        <TabsMock items={['此投影片', '全域']} active={0} />
+        <TabsMock items={['此簡報', '全域']} active={0} />
         <span
           style={{
             fontSize: u(12),
@@ -3916,7 +3916,7 @@ const HelloPage = () => (
         <CycleWord delay={1.4} after="。" />
       </em>
     </h1>
-    <p style={{ margin: '40px 0 0', fontSize: 44, color: ink.soft }}>即時渲染的 React 投影片。</p>
+    <p style={{ margin: '40px 0 0', fontSize: 44, color: ink.soft }}>即時渲染的 React 簡報。</p>
   </div>
 );
 
@@ -3985,7 +3985,7 @@ const FilePage: Page = () => (
             {'    '}
             <P>&lt;</P>
             <Tag>p</Tag>
-            <P>&gt;</P>即時渲染的 React 投影片。<P>&lt;/</P>
+            <P>&gt;</P>即時渲染的 React 簡報。<P>&lt;/</P>
             <Tag>p</Tag>
             <P>&gt;</P>
           </Line>
@@ -5321,7 +5321,7 @@ const AgentsPage: Page = () => (
   <Frame
     eyebrow="為什麼選 open-slide"
     title="用你自己的 agent。"
-    lead="每個工作區都內建 agent 規則與技能。投影片就是單純的 .tsx，不需要 SDK，也不會被綁死。"
+    lead="每個工作區都內建 agent 規則與技能。簡報就是單純的 .tsx，不需要 SDK，也不會被綁死。"
   >
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 520px', gap: 64, height: '100%' }}>
       <Window className="gs gs-rise" title="~/my-deck" delay={0.2} style={{ height: '100%' }}>
@@ -5341,7 +5341,7 @@ const AgentsPage: Page = () => (
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
         <GitRow label="AGENTS.md" caption="任何 agent 都會讀的規則。" delay={0.4} />
         <GitRow label="內建技能" caption="草擬、編輯、主題、套用留言。" delay={0.5} />
-        <GitRow label="純 React" caption="會改程式碼，就會改投影片。" delay={0.6} />
+        <GitRow label="純 React" caption="會改程式碼，就會改簡報。" delay={0.6} />
       </div>
     </div>
   </Frame>
@@ -5351,7 +5351,7 @@ const GitPage: Page = () => (
   <Frame
     eyebrow="為什麼選 open-slide"
     title="永遠屬於你。"
-    lead="每份投影片都是你 repo 裡的檔案。可以比對差異、審閱、開分支。沒有專屬資料庫，也不用匯出後祈禱一切正常。"
+    lead="每份簡報都是你 repo 裡的檔案。可以比對差異、審閱、開分支。沒有專屬資料庫，也不用匯出後祈禱一切正常。"
   >
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 520px', gap: 64, height: '100%' }}>
       <Window
@@ -5528,14 +5528,14 @@ PresentPage.transition = morphFade;
 
 export const notes: (string | undefined)[] = [
   '歡迎！這份簡報是新手入門導覽。用方向鍵換頁，按 F 進入全螢幕，按 P 開啟這個主講人檢視。',
-  '每份投影片都是一個普通的 React 檔案。預設匯出（default export）就是依序排列的頁面陣列。',
+  '每份簡報都是一個普通的 React 檔案。預設匯出（default export）就是依序排列的頁面陣列。',
   '一行指令就建好工作區：相依套件、git，還有隨時可以啟動的 dev server。',
   '用 /create-slide 提示你的 agent。檔案寫入的同時，頁面會陸續出現在左側縮圖欄。',
   '切換到編輯模式，點選任何元素，在格式面板裡修改。按儲存會一次寫入所有變更。',
   '排列分頁和智慧對齊線，負責位置、大小、旋轉和圖層順序。',
   '在元素上留言，它會以 @slide-comment 標記的形式寫進原始碼。',
   '執行 /apply-comments。Agent 只會修改你標出的地方，然後移除標記。',
-  '素材就放在投影片旁邊。拖入檔案，或直接搜尋 Logo 和字型，不必離開編輯器。',
+  '素材就放在簡報旁邊。拖入檔案，或直接搜尋 Logo 和字型，不必離開編輯器。',
   '用一個 design 常數宣告設計樣式。設計面板可以即時調整，並寫回檔案。',
   '主題就是 markdown 檔：配色、字體，以及可直接貼上的元件。/create-slide 會先讀取它。',
   '三種動態基本元件：Steps、SlideTransition 和 MorphElement。每個方框都各自循環播放。',
@@ -5543,7 +5543,7 @@ export const notes: (string | undefined)[] = [
   '演講備忘就寫在檔案裡，會顯示在這裡：主講人檢視的計時器旁邊。',
   '在編輯器裡匯出 HTML、PDF 或 PPTX，或是建置一次，把 dist 資料夾部署到任何地方。',
   '任何能寫檔案的 agent 都能用。不需要 SDK，也不會被綁死。',
-  '投影片就是你 repo 裡的檔案。可以比對差異、審閱、開分支。',
+  '簡報就是你 repo 裡的檔案。可以比對差異、審閱、開分支。',
   '這就是完整流程。按 → 讓每個步驟逐一出現，接著編輯這個檔案，看畫面即時更新。',
 ];
 

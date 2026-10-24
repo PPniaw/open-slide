@@ -43,7 +43,7 @@ mode: light
 
 ## Fixed components
 
-這些可以直接貼進使用此主題的投影片。
+這些可以直接貼進使用此主題的簡報。
 
 ### Title
 
