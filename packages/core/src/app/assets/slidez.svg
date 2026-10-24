@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none">
+  <!-- slidez: two slides joined by a stroke, read as a "z" -->
+  <rect width="512" height="512" rx="120" fill="#DD3F3B"/>
+  <rect x="128" y="132" width="256" height="72" rx="22" fill="#FFFFFF"/>
+  <rect x="128" y="308" width="256" height="72" rx="22" fill="#FFFFFF"/>
+  <path d="M346 196 166 316" stroke="#FFFFFF" stroke-width="64" stroke-linecap="round"/>
+</svg>

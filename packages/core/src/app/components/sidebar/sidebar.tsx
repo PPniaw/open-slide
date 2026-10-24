@@ -1,12 +1,14 @@
 import { Plus, Search } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
-import logo from '@/assets/open-slide.svg';
+import logo from '@/assets/slidez.svg';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { PUBLISHED_ID, usePublishedDecks } from '@/lib/publish/published';
 import type { Folder, FolderIcon } from '@/lib/sdk';
 import { format, useLocale } from '@/lib/use-locale';
 import { cn } from '@/lib/utils';
 import { COMMAND_MENU_SHORTCUT } from '../command/command-menu';
+import { UpstreamAttribution } from './attribution';
 import { FolderIconChip, FolderItem } from './folder-item';
 import { IconPicker, PRESET_COLORS } from './icon-picker';
 import { SidebarFooter } from './sidebar-footer';
@@ -127,6 +129,8 @@ export function Sidebar({
     return () => document.removeEventListener('mousedown', onDown);
   }, [creating]);
 
+  const publishedCount = Object.keys(usePublishedDecks()).length;
+
   return (
     <aside className="group/side relative flex h-full w-[16.5rem] shrink-0 flex-col bg-sidebar text-sidebar-foreground">
       <div className="flex items-center gap-2.5 px-4 pt-4 pb-3">
@@ -171,6 +175,15 @@ export function Sidebar({
           onSelect={() => onSelect(ALL_SLIDES_ID)}
           onDropSlide={() => {}}
         />
+        {import.meta.env.DEV && (
+          <FolderItem
+            row={{ kind: 'published' }}
+            count={publishedCount}
+            selected={selectedId === PUBLISHED_ID}
+            onSelect={() => onSelect(PUBLISHED_ID)}
+            onDropSlide={() => {}}
+          />
+        )}
         <FolderItem
           row={{ kind: 'themes' }}
           count={themesCount}
@@ -323,6 +336,7 @@ export function Sidebar({
         )}
       </div>
 
+      <UpstreamAttribution />
       <SidebarFooter />
     </aside>
   );

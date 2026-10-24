@@ -35,10 +35,17 @@ import { useAgentStatus, useCreateDeck } from '@/lib/agent/use-agent';
 import { format, useLocale } from '@/lib/use-locale';
 import { cn, pad2 } from '@/lib/utils';
 import { ProviderLogo } from '../components/agent/provider-logo';
-import { FolderIconChip, SLIDE_DND_MIME, SystemViewIcon } from '../components/sidebar/folder-item';
+import { PublishedFooter } from '../components/publish/published-footer';
+import {
+  FolderIconChip,
+  publishedLabel,
+  SLIDE_DND_MIME,
+  SystemViewIcon,
+} from '../components/sidebar/folder-item';
 import { ALL_SLIDES_ID, DRAFT_ID } from '../components/sidebar/sidebar';
 import { SlideCanvas } from '../components/slide-canvas';
 import { SlidePageProvider } from '../lib/page-context';
+import { PUBLISHED_ID, type PublishedDeck, usePublishedDecks } from '../lib/publish/published';
 import type { Folder, SlideModule } from '../lib/sdk';
 import { loadSlide, slideCreatedAt, slideIds } from '../lib/slides';
 import type { HomeOutletContext } from './home-shell';
@@ -91,15 +98,23 @@ export function Home() {
 
   const isAll = selectedId === ALL_SLIDES_ID;
   const isDraft = selectedId === DRAFT_ID;
+  const isPublished = selectedId === PUBLISHED_ID;
+  const published = usePublishedDecks();
   const selectedFolder =
-    isAll || isDraft ? null : (manifest.folders.find((f) => f.id === selectedId) ?? null);
+    isAll || isDraft || isPublished
+      ? null
+      : (manifest.folders.find((f) => f.id === selectedId) ?? null);
   const visibleSlides = isAll
     ? slideIds
     : isDraft
       ? draftSlides
-      : (slidesByFolder[selectedId] ?? []);
+      : isPublished
+        ? slideIds.filter((id) => published[id])
+        : (slidesByFolder[selectedId] ?? []);
 
-  const title = selectedFolder?.name ?? (isAll ? t.home.slides : t.home.draft);
+  const title =
+    selectedFolder?.name ??
+    (isAll ? t.home.slides : isPublished ? publishedLabel(t.id) : t.home.draft);
 
   const [query, setQuery] = useState('');
   const [sortKey, setSortKey] = useSortPref();
@@ -140,7 +155,10 @@ export function Home() {
           {selectedFolder ? (
             <FolderIconChip icon={selectedFolder.icon} className="size-5 text-[16px]" />
           ) : (
-            <SystemViewIcon kind={isAll ? 'all' : 'draft'} className="text-muted-foreground" />
+            <SystemViewIcon
+              kind={isAll ? 'all' : isPublished ? 'published' : 'draft'}
+              className="text-muted-foreground"
+            />
           )}
           <h1 className="font-heading text-[19px] font-semibold leading-none tracking-[-0.015em] md:text-[21px]">
             {title}
@@ -204,7 +222,15 @@ export function Home() {
       {loading ? (
         <HomeLoading />
       ) : visibleSlides.length === 0 ? (
-        <EmptyState isDraft={isAll || isDraft} folderName={selectedFolder?.name} />
+        isPublished ? (
+          <p className="py-16 text-center text-[13px] text-muted-foreground" data-published-empty>
+            {t.id.startsWith('zh')
+              ? '目前沒有上線的簡報。在簡報裡按「發布」，上線後就會出現在這裡。'
+              : 'Nothing is online. Publish a deck and it shows up here.'}
+          </p>
+        ) : (
+          <EmptyState isDraft={isAll || isDraft} folderName={selectedFolder?.name} />
+        )
       ) : filteredSlides.length === 0 ? (
         <NoResultsState query={query} onClear={() => setQuery('')} />
       ) : (
@@ -237,6 +263,7 @@ export function Home() {
                 onMove={(folderId) => assign(id, folderId)}
                 onDelete={() => deleteSlide(id)}
                 onTitleResolved={reportTitle}
+                published={isPublished ? published[id] : undefined}
               />
             </li>
           ))}
@@ -486,6 +513,7 @@ function SlideCard({
   onMove,
   onDelete,
   onTitleResolved,
+  published,
 }: {
   id: string;
   folders: Folder[];
@@ -495,6 +523,8 @@ function SlideCard({
   onMove: (folderId: string | null) => Promise<void> | void;
   onDelete: () => Promise<void> | void;
   onTitleResolved?: (id: string, title: string) => void;
+  /** Set in the "Published" view: shows the live address and an unpublish button. */
+  published?: PublishedDeck;
 }) {
   const [slide, setSlide] = useState<SlideModule | null>(null);
   const [dragging, setDragging] = useState(false);
@@ -575,6 +605,7 @@ function SlideCard({
             </Link>
           )}
         </div>
+        {published && <PublishedFooter slideId={id} title={displayTitle} deck={published} />}
 
         {import.meta.env.DEV && (
           <div className="absolute right-2 top-2 z-20">

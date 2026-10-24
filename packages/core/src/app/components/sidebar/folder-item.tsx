@@ -1,5 +1,6 @@
 import {
   FolderOpen,
+  Globe,
   LayoutGrid,
   type LucideIcon,
   MoreHorizontal,
@@ -42,14 +43,20 @@ function useSlideDragActive() {
   return active;
 }
 
-export type SystemViewKind = 'all' | 'draft' | 'themes' | 'assets';
+export type SystemViewKind = 'all' | 'draft' | 'themes' | 'assets' | 'published';
 
 const SYSTEM_VIEW_ICONS: Record<SystemViewKind, LucideIcon> = {
   all: LayoutGrid,
   draft: PenLine,
   themes: Palette,
   assets: FolderOpen,
+  published: Globe,
 };
+
+// The "Published" view is fork-only, so its label stays out of the shared locales.
+export function publishedLabel(localeId: string): string {
+  return localeId.startsWith('zh') ? '發布中' : 'Published';
+}
 
 export function SystemViewIcon({ kind, className }: { kind: SystemViewKind; className?: string }) {
   const Icon = SYSTEM_VIEW_ICONS[kind];
@@ -103,6 +110,9 @@ type Row =
     }
   | {
       kind: 'assets';
+    }
+  | {
+      kind: 'published';
     };
 
 export function FolderItem({
@@ -168,7 +178,9 @@ export function FolderItem({
           ? t.home.themes
           : row.kind === 'assets'
             ? t.home.assets
-            : row.folder.name;
+            : row.kind === 'published'
+              ? publishedLabel(t.id)
+              : row.folder.name;
 
   const commitRename = () => {
     if (row.kind !== 'folder') return;

@@ -31,7 +31,7 @@ export const en: Locale = {
   },
 
   home: {
-    appTitle: 'open-slide',
+    appTitle: 'slidez',
     draft: 'Draft',
     duplicate: 'Duplicate',
     themes: 'Themes',
