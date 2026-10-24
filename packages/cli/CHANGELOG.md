@@ -1,5 +1,11 @@
 # @open-slide/cli
 
+## 2.2.1
+
+### Patch Changes
+
+- 14a0a6e: New projects pin react and react-dom to 19.2.8. React 19.3 logs a console error for the theme script in dev, which agents reading the console tend to "fix".
+
 ## 2.2.0
 
 ### Minor Changes
