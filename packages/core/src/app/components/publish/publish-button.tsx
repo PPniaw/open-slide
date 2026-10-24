@@ -42,12 +42,14 @@ const ZH = {
   notConnected: '這台電腦還沒連上 Vercel。',
   notConnectedHint: '打開 Claude App，跟它說：「幫我安裝並登入 Vercel」。完成後按「重新檢查」。',
   loginHint:
-    '按「登入 Vercel」，在瀏覽器按一下確認就完成了。還沒有帳號的話，登入頁可以用 GitHub 或 email 免費註冊。',
+    '發布要用 Vercel（免費）放上網。按「登入 Vercel」後瀏覽器會打開 Vercel 的英文頁面，有帳號就登入。',
+  loginSignup:
+    '還沒有帳號？在那頁最下面按「Sign Up」，選 Google、Apple、email 或 ChatGPT 帳號註冊；註冊完會回到確認代碼的畫面。如果問方案，選免費的 Hobby。',
   login: '登入 Vercel',
   loginStarting: '正在向 Vercel 要登入代碼…',
-  loginCode: '確認瀏覽器頁面上的代碼是',
-  loginGo: '前往 Vercel 確認',
-  loginWaiting: '在瀏覽器按下確認後，這裡會自動接上。',
+  loginCode: '瀏覽器已打開 Vercel，確認頁面上的代碼和這裡一樣：',
+  loginGo: '瀏覽器沒有打開？點這裡',
+  loginWaiting: '在瀏覽器登入並按下確認後，這裡會自動接上。',
   recheck: '重新檢查',
   account: 'Vercel 帳號',
   intro:
@@ -69,7 +71,7 @@ const ZH = {
   unpublishing: '正在下架…',
   failed: '沒有成功',
   liveToggle: '開啟現場互動（發問、回饋）',
-  liveToggleHint: '投影片右下角會出現 QR code，觀眾掃了就能發問、評分、送表情。',
+  liveToggleHint: '簡報右下角會出現 QR code，觀眾掃了就能發問、評分、送表情。',
   liveRequired: '這份簡報有互動區塊，一定要開啟。',
   liveJoin: '觀眾加入網址',
   livePanelHint: '在工作台工具列的「互動」查看發問和回饋。',
@@ -83,12 +85,14 @@ const EN: typeof ZH = {
   notConnectedHint:
     'Open the Claude app and say "install and log in to Vercel for me", then press Check again.',
   loginHint:
-    'Press Log in to Vercel and confirm in the browser. No account yet? The login page lets you sign up free with GitHub or email.',
+    'Publishing puts the deck online with Vercel (free). Press Log in to Vercel and the browser opens Vercel; sign in if you have an account.',
+  loginSignup:
+    'No account yet? Press Sign Up at the bottom of that page and use Google, Apple, email or ChatGPT; afterwards it returns to the code confirmation. If asked for a plan, pick the free Hobby plan.',
   login: 'Log in to Vercel',
   loginStarting: 'Asking Vercel for a login code…',
-  loginCode: 'Check that the browser shows the code',
-  loginGo: 'Confirm on Vercel',
-  loginWaiting: 'Once you confirm in the browser, this connects by itself.',
+  loginCode: 'Vercel is open in your browser; check that it shows the same code:',
+  loginGo: "Browser didn't open? Click here",
+  loginWaiting: 'Once you sign in and confirm in the browser, this connects by itself.',
   recheck: 'Check again',
   account: 'Vercel account',
   intro:
@@ -273,7 +277,10 @@ export function PublishButton({ slideId }: { slideId: string }) {
               {!status.vercel.installed ? (
                 <p className="text-muted-foreground">{s.notConnectedHint}</p>
               ) : login === null ? (
-                <p className="text-muted-foreground">{s.loginHint}</p>
+                <>
+                  <p className="text-muted-foreground">{s.loginHint}</p>
+                  <p className="text-muted-foreground">{s.loginSignup}</p>
+                </>
               ) : login === 'starting' ? (
                 <p className="flex items-center gap-2 text-muted-foreground">
                   <Loader2 className="size-3.5 animate-spin motion-reduce:animate-none" />
@@ -295,6 +302,17 @@ export function PublishButton({ slideId }: { slideId: string }) {
                     <Loader2 className="size-3.5 animate-spin motion-reduce:animate-none" />
                     {s.loginWaiting}
                   </p>
+                  <p className="text-[12px] text-muted-foreground">{s.loginSignup}</p>
+                  {/* The CLI opens the page itself; this is only the fallback. */}
+                  <a
+                    href={login.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="justify-self-start text-[12px] text-muted-foreground underline underline-offset-2 hover:text-foreground"
+                    data-publish-action="login-go"
+                  >
+                    {s.loginGo}
+                  </a>
                 </div>
               )}
             </div>
@@ -412,32 +430,11 @@ export function PublishButton({ slideId }: { slideId: string }) {
                 {s.recheck}
               </Button>
             )}
-            {status &&
-              !status.vercel.loggedIn &&
-              status.vercel.installed &&
-              // A real link, not window.open after an await, so popup blockers
-              // leave it alone; the desktop app sends it to the default browser.
-              (typeof login === 'object' && login !== null ? (
-                <a
-                  href={login.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={buttonVariants({ size: 'sm' })}
-                  data-publish-action="login-go"
-                >
-                  <ExternalLink className="size-3.5" />
-                  {s.loginGo}
-                </a>
-              ) : (
-                <Button
-                  size="sm"
-                  disabled={login === 'starting'}
-                  onClick={() => void startLogin()}
-                  data-publish-action="login"
-                >
-                  {s.login}
-                </Button>
-              ))}
+            {status && !status.vercel.loggedIn && status.vercel.installed && login === null && (
+              <Button size="sm" onClick={() => void startLogin()} data-publish-action="login">
+                {s.login}
+              </Button>
+            )}
             {status?.vercel.loggedIn && phase === 'confirm-unpublish' && (
               <>
                 <Button size="sm" variant="ghost" onClick={() => setPhase('idle')}>

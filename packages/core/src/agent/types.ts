@@ -21,6 +21,9 @@ export type AgentModelOption = {
   efforts: AgentEffort[];
 };
 
+// 'unknown' when there is no CLI on PATH to ask, or it gave no clear answer.
+export type AgentAuth = 'loggedIn' | 'loggedOut' | 'unknown';
+
 export type AgentProviderStatus = {
   id: AgentProviderId;
   name: string;
@@ -30,12 +33,18 @@ export type AgentProviderStatus = {
   cliFound: boolean;
   cliVersion: string | null;
   ready: boolean;
+  auth: AgentAuth;
+  // 0..1 while a host installer is downloading this provider, else null.
+  installProgress: number | null;
   models: AgentModelOption[];
 };
 
 export type AgentStatus = {
   enabled: boolean;
   packageManager: string;
+  // 'host' when an app that ships its own runtime downloads the agents
+  // (OPEN_SLIDE_AGENT_INSTALLER); 'package-manager' installs the SDK into the project.
+  installer: 'host' | 'package-manager';
   providers: AgentProviderStatus[];
 };
 

@@ -1,9 +1,10 @@
-import { type ChildProcess, spawn } from 'node:child_process';
+import { spawn } from 'node:child_process';
 import { readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import type { ViteDevServer } from 'vite';
 import { PUBLISHED_LABEL, resolveProjectName } from '../../cli/publish-names.ts';
 import { isLoopbackRequest, validateMutationRequest } from '../../http/request-guard.ts';
+import { type CliLoginJob, startCliLogin, tail } from '../cli-login.ts';
 import { type ApiContext, json, readBody } from './context.ts';
 import {
   currentLiveRoom,
@@ -96,55 +97,27 @@ export function parseDeviceLogin(output: string): DeviceLogin | null {
   return m ? { url: m[0], code: m[1] } : null;
 }
 
-type LoginJob = { child: ChildProcess; prompt: Promise<DeviceLogin> };
+type LoginJob = CliLoginJob<DeviceLogin>;
 
 // The child keeps running after the prompt is returned: it finishes the login
 // itself once the code is approved, and /status picks that up.
 function startLogin(cwd: string, onExit: () => void): LoginJob {
-  const child = spawn('vercel', ['login'], {
+  const job = startCliLogin({
+    cmd: 'vercel',
+    args: ['login'],
     cwd,
     env: childEnv(),
-    stdio: ['ignore', 'pipe', 'pipe'],
-    shell: process.platform === 'win32',
-    windowsHide: true,
+    parse: parseDeviceLogin,
+    timeoutMs: LOGIN_TIMEOUT_MS,
+    promptTimeoutMs: LOGIN_PROMPT_TIMEOUT_MS,
+    messages: {
+      missing: '這台電腦還沒有安裝 Vercel CLI。',
+      silent: 'Vercel 沒有回應登入要求。',
+      ended: 'Vercel 登入沒有開始。',
+    },
   });
-  const killTimer = setTimeout(() => child.kill(), LOGIN_TIMEOUT_MS);
-  const done = () => {
-    clearTimeout(killTimer);
-    onExit();
-  };
-  child.on('close', done);
-  child.on('error', done);
-  const prompt = new Promise<DeviceLogin>((resolve, reject) => {
-    let output = '';
-    const promptTimer = setTimeout(() => {
-      child.kill();
-      reject(new Error(`Vercel 沒有回應登入要求。\n${tail(output)}`));
-    }, LOGIN_PROMPT_TIMEOUT_MS);
-    const onData = (c: Buffer) => {
-      output += c.toString('utf8');
-      const found = parseDeviceLogin(output);
-      if (found) {
-        clearTimeout(promptTimer);
-        resolve(found);
-      }
-    };
-    child.stdout?.on('data', onData);
-    child.stderr?.on('data', onData);
-    child.on('error', (err) => {
-      clearTimeout(promptTimer);
-      reject(
-        (err as NodeJS.ErrnoException).code === 'ENOENT'
-          ? new Error('這台電腦還沒有安裝 Vercel CLI。')
-          : err,
-      );
-    });
-    child.on('close', () => {
-      clearTimeout(promptTimer);
-      reject(new Error(`Vercel 登入沒有開始。\n${tail(output)}`));
-    });
-  });
-  return { child, prompt };
+  void job.done.then(onExit);
+  return job;
 }
 
 function recordsPath(ctx: ApiContext): string {
@@ -174,10 +147,6 @@ async function vercelStatus(cwd: string) {
     }
     return { installed: true, loggedIn: false, user: null };
   }
-}
-
-function tail(output: string): string {
-  return output.trim().split('\n').slice(-12).join('\n');
 }
 
 // OPEN_SLIDE_BIN lets a host without a per-project install (the slidez

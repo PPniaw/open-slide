@@ -20,6 +20,9 @@ type ModelChoice = { model: string; effort: AgentEffort | null };
 
 type AgentRequest = { text: string };
 
+// A sign-in the panel started: `url` is null until the CLI has opened the page.
+export type LoginPrompt = { url: string | null };
+
 type State = {
   status: AgentStatus | null;
   statusError: boolean;
@@ -34,6 +37,7 @@ type State = {
   request: AgentRequest | null;
   installing: AgentProviderId | null;
   connectErrors: Partial<Record<AgentProviderId, string>>;
+  logins: Partial<Record<AgentProviderId, LoginPrompt>>;
   newDeck: string | null;
 };
 
@@ -96,6 +100,7 @@ let state: State = {
   request: null,
   installing: null,
   connectErrors: {},
+  logins: {},
   newDeck: readStorage(NEW_DECK_KEY),
 };
 
@@ -353,6 +358,9 @@ export async function installProvider(provider: AgentProviderId): Promise<void> 
     installing: provider,
     connectErrors: { ...prev.connectErrors, [provider]: undefined },
   }));
+  // A host download reports its progress through /status while it runs.
+  const progress =
+    state.status?.installer === 'host' ? setInterval(() => void refreshStatus(), 1000) : null;
   try {
     await request('/__agent/install', post({ provider }));
     await refreshStatus();
@@ -361,8 +369,64 @@ export async function installProvider(provider: AgentProviderId): Promise<void> 
     setState((prev) => ({ connectErrors: { ...prev.connectErrors, [provider]: message } }));
     throw err;
   } finally {
+    if (progress) clearInterval(progress);
     setState({ installing: null });
   }
+}
+
+const LOGIN_POLL_MS = 2000;
+const LOGIN_WAIT_MS = 10 * 60 * 1000;
+
+function setLogin(provider: AgentProviderId, login: LoginPrompt | undefined) {
+  setState((prev) => ({ logins: { ...prev.logins, [provider]: login } }));
+}
+
+function authOf(provider: AgentProviderId) {
+  return state.status?.providers.find((p) => p.id === provider)?.auth;
+}
+
+// The CLI opens the sign-in page itself; the panel waits for /status to see
+// the login land, then switches to that provider.
+export async function loginProvider(provider: AgentProviderId): Promise<void> {
+  if (state.logins[provider]) return;
+  setLogin(provider, { url: null });
+  setState((prev) => ({ connectErrors: { ...prev.connectErrors, [provider]: undefined } }));
+  try {
+    const { url } = await request<{ url: string }>('/__agent/login', post({ provider }));
+    setLogin(provider, { url });
+    const deadline = Date.now() + LOGIN_WAIT_MS;
+    while (state.logins[provider] && Date.now() < deadline) {
+      await new Promise((resolve) => setTimeout(resolve, LOGIN_POLL_MS));
+      await refreshStatus();
+      if (authOf(provider) === 'loggedIn') {
+        selectProvider(provider);
+        break;
+      }
+    }
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    setState((prev) => ({ connectErrors: { ...prev.connectErrors, [provider]: message } }));
+  } finally {
+    setLogin(provider, undefined);
+  }
+}
+
+export function cancelLogin(provider: AgentProviderId): void {
+  setLogin(provider, undefined);
+}
+
+export async function submitLoginCode(provider: AgentProviderId, code: string): Promise<void> {
+  await request('/__agent/login/code', post({ provider, code }));
+}
+
+export async function logoutProvider(provider: AgentProviderId): Promise<void> {
+  await request('/__agent/logout', post({ provider }));
+  await refreshStatus();
+}
+
+export function selectProvider(provider: AgentProviderId): void {
+  writeStorage(PROVIDER_KEY, provider);
+  setState({ provider });
 }
 
 let autoConnecting: Promise<void> | null = null;
@@ -463,8 +527,9 @@ export function consumeRequest(): AgentRequest | null {
   return req;
 }
 
+// A provider whose CLI says it is signed out would only answer 401s.
 export function readyProviders(status: AgentStatus | null) {
-  return status?.enabled ? status.providers.filter((p) => p.ready) : [];
+  return status?.enabled ? status.providers.filter((p) => p.ready && p.auth !== 'loggedOut') : [];
 }
 
 function resolveProvider(status: AgentStatus | null, preferred: AgentProviderId) {

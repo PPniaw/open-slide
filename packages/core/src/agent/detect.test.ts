@@ -89,6 +89,24 @@ describe('resolveWorkspacePackage', () => {
     expect(mod?.hello).toBe('world');
   });
 
+  it('falls back to the packages installed next to core', async () => {
+    const workspace = path.join(dir, 'project');
+    const host = path.join(dir, 'host');
+    const pkgDir = path.join(host, 'node_modules', '@scope', 'fake-sdk');
+    await mkdir(workspace, { recursive: true });
+    await mkdir(pkgDir, { recursive: true });
+    await writeFile(
+      path.join(pkgDir, 'package.json'),
+      JSON.stringify({ name: '@scope/fake-sdk', version: '1.2.3', main: './index.js' }),
+    );
+    const resolved = resolveWorkspacePackage(
+      workspace,
+      '@scope/fake-sdk',
+      path.join(host, 'node_modules', 'core'),
+    );
+    expect(resolved).toMatchObject({ version: '1.2.3', entry: path.join(pkgDir, 'index.js') });
+  });
+
   it('returns null when the package is missing', async () => {
     await writeFile(path.join(dir, 'package.json'), '{"name":"ws"}');
     expect(resolveWorkspacePackage(dir, '@scope/nope')).toBeNull();

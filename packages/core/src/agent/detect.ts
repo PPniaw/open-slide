@@ -1,10 +1,14 @@
 import { spawn } from 'node:child_process';
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const IS_WINDOWS = process.platform === 'win32';
 const VERSION_TIMEOUT_MS = 5000;
+// Where this copy of core is installed. A host that ships its own runtime (the
+// slidez desktop app) gives projects no node_modules but installs the agent
+// SDKs next to core, so lookups fall back to here.
+const CORE_DIR = path.dirname(fileURLToPath(import.meta.url));
 
 export function findOnPath(command: string, env: NodeJS.ProcessEnv = process.env): string | null {
   const dirs = (env.PATH ?? env.Path ?? '').split(path.delimiter).filter(Boolean);
@@ -128,9 +132,18 @@ function pickCondition(target: unknown): string | null {
 
 // Walks node_modules up from the workspace like Node does, but reads
 // package.json directly: the SDKs' `exports` maps don't expose it, so
-// `require.resolve('<pkg>/package.json')` would refuse.
-export function resolveWorkspacePackage(userCwd: string, name: string): ResolvedPackage | null {
-  let dir = path.resolve(userCwd);
+// `require.resolve('<pkg>/package.json')` would refuse. Falls back to the
+// node_modules around core itself, where a host app ships the SDKs.
+export function resolveWorkspacePackage(
+  userCwd: string,
+  name: string,
+  fallbackFrom: string = CORE_DIR,
+): ResolvedPackage | null {
+  return findPackageFrom(userCwd, name) ?? findPackageFrom(fallbackFrom, name);
+}
+
+function findPackageFrom(start: string, name: string): ResolvedPackage | null {
+  let dir = path.resolve(start);
   while (true) {
     const pkgJsonPath = path.join(dir, 'node_modules', name, 'package.json');
     if (existsSync(pkgJsonPath)) {

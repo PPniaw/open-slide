@@ -169,6 +169,62 @@ test.describe('agent panel', () => {
     expect(requested).toEqual(['claude']);
   });
 
+  test('agent errors are explained in plain words, notices stay quiet', async ({ page }) => {
+    await mockStatus(page, (p) =>
+      p.id === 'codex'
+        ? { cliFound: true, ready: true, sdkVersion: '0.0.0', auth: 'loggedIn' }
+        : { cliFound: false, ready: false },
+    );
+    const ts = new Date().toISOString();
+    const session = {
+      id: 's-errors',
+      provider: 'codex',
+      title: 'Errors',
+      createdAt: ts,
+      updatedAt: ts,
+      status: 'idle',
+      slideId: 'alpha',
+      providerSessionId: null,
+      items: [
+        { kind: 'user', id: 'u-1', ts, text: 'Make it bolder' },
+        {
+          kind: 'error',
+          id: 'e-1',
+          ts,
+          text: 'This session was recorded with model `gpt-6-sol` but is resuming with `gpt-6-luna`.',
+        },
+        {
+          kind: 'error',
+          id: 'e-2',
+          ts,
+          text: "Usage limit reached. You've reached your usage limit.",
+        },
+        { kind: 'error', id: 'e-3', ts, text: 'The model produced an invalid tool call' },
+      ],
+    };
+    const { items: _items, providerSessionId: _p, ...summary } = session;
+    await page.route('**/__agent/sessions', (route) =>
+      route.fulfill({ json: { sessions: [summary] } }),
+    );
+    await page.route('**/__agent/sessions/s-errors', (route) => route.fulfill({ json: session }));
+    await page.addInitScript(() => localStorage.setItem('open-slide:agent-session', 's-errors'));
+
+    await openSlide(page, 'alpha');
+    await page.keyboard.press('a');
+    const dock = page.locator('[data-agent-dock]');
+    await expect(dock.getByText('Note: This session was recorded with model')).toBeVisible();
+    await expect(dock.locator('[data-agent-error]')).toHaveCount(2);
+    const quota = dock.locator('[data-agent-error="quota"]');
+    await expect(quota).toContainText('The allowance is used up');
+    // The raw text stays one click away.
+    await expect(quota.getByText('Usage limit reached.')).toBeHidden();
+    await quota.getByText('Technical details').click();
+    await expect(quota.getByText('Usage limit reached.')).toBeVisible();
+    await expect(dock.locator('[data-agent-error="other"]')).toContainText(
+      'The model produced an invalid tool call',
+    );
+  });
+
   test('transcript messages can be copied, and sent ones edited', async ({ page, context }) => {
     await context.grantPermissions(['clipboard-read', 'clipboard-write']);
     await mockStatus(page, (p) =>

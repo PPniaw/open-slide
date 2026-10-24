@@ -2,6 +2,8 @@ import fs from 'node:fs/promises';
 import type { ServerResponse } from 'node:http';
 import path from 'node:path';
 import type { ViteDevServer } from 'vite';
+import { AUTH_COMMANDS, forgetAuth } from '../../agent/auth.ts';
+import { findOnPath } from '../../agent/detect.ts';
 import { extractDeckSlug, stripDeckSlug } from '../../agent/prompt.ts';
 import { createProviders } from '../../agent/providers/index.ts';
 import {
@@ -10,9 +12,10 @@ import {
   type TurnEnd,
   type TurnSettings,
 } from '../../agent/runner.ts';
-import { agentStatus, installSdk } from '../../agent/status.ts';
+import { agentStatus, hostInstaller, installSdk, installWithHost } from '../../agent/status.ts';
 import { createSessionStore, type SessionStore } from '../../agent/store.ts';
 import {
+  type AgentProviderId,
   type AgentStreamEvent,
   type AgentTurnContext,
   isAgentEffort,
@@ -30,13 +33,19 @@ import {
 } from '../../editing/slide-ops.ts';
 import { readManifest, writeManifest } from '../../files/folders.ts';
 import { isLoopbackRequest, validateMutationRequest } from '../../http/request-guard.ts';
+import { type CliLoginJob, startCliLogin } from '../cli-login.ts';
 import { invalidateSlidesModule } from '../open-slide-plugin.ts';
 import { recordWrite } from '../recent-writes.ts';
 import { type ApiContext, BodyTooLargeError, json, readBody } from './context.ts';
-import { detectPackageManager } from './update.ts';
+import { detectPackageManager, runCommand } from './update.ts';
 
 // GET    /__agent/status                      → AgentStatus
 // POST   /__agent/install                     { provider } → { ok }
+//          (with OPEN_SLIDE_AGENT_INSTALLER the host downloads the CLI; /status reports progress)
+// POST   /__agent/login                       { provider } → { url } once the CLI has opened
+//          the sign-in page; the panel then polls /status until `auth` turns loggedIn
+// POST   /__agent/login/code                  { provider, code } → { ok } for a code pasted back
+// POST   /__agent/logout                      { provider } → { ok }
 // GET    /__agent/sessions                    → { sessions: AgentSessionSummary[] }
 // POST   /__agent/sessions                    { provider, slideId? } → AgentSession
 // GET    /__agent/sessions/:id                → AgentSession
@@ -78,6 +87,9 @@ function parseContext(raw: unknown): AgentTurnContext | undefined {
 }
 
 const MODEL_RE = /^[\w.:[\]-]{1,80}$/;
+const LOGIN_TIMEOUT_MS = 10 * 60 * 1000;
+const LOGIN_PROMPT_TIMEOUT_MS = 30_000;
+const LOGIN_CODE_RE = /^[\w#.~-]{1,512}$/;
 
 function parseModel(raw: unknown): string | null {
   return typeof raw === 'string' && MODEL_RE.test(raw) ? raw : null;
@@ -204,6 +216,11 @@ export function registerAgentRoutes(server: ViteDevServer, ctx: ApiContext): voi
   });
 
   const installsInFlight = new Map<string, Promise<void>>();
+  const installProgress = new Map<AgentProviderId, number>();
+  const logins = new Map<AgentProviderId, CliLoginJob<{ url: string }>>();
+  server.httpServer?.on('close', () => {
+    for (const job of logins.values()) job.child.kill();
+  });
 
   server.middlewares.use('/__agent', async (req, res, next) => {
     const url = new URL(req.url ?? '/', 'http://local');
@@ -219,7 +236,9 @@ export function registerAgentRoutes(server: ViteDevServer, ctx: ApiContext): voi
         res.setHeader('cache-control', 'no-store');
         if (!enabled) return json(res, 200, { enabled: false, packageManager: '', providers: [] });
         const pm = await detectPackageManager(ctx.userCwd);
-        return json(res, 200, await agentStatus(ctx.userCwd, providers, pm));
+        // The panel polls while someone signs in, so that answer must be fresh.
+        for (const id of logins.keys()) forgetAuth(id);
+        return json(res, 200, await agentStatus(ctx.userCwd, providers, pm, installProgress));
       }
 
       if (!enabled) return json(res, 404, { error: 'agent panel disabled' });
@@ -244,14 +263,92 @@ export function registerAgentRoutes(server: ViteDevServer, ctx: ApiContext): voi
         const body = (await readBody(req, AGENT_BODY_LIMIT)) as { provider?: unknown };
         if (!isAgentProviderId(body.provider)) return json(res, 400, { error: 'invalid provider' });
         const provider = providers[body.provider];
-        const pm = await detectPackageManager(ctx.userCwd);
+        const installer = hostInstaller();
+        const id = provider.id;
         const pkg = provider.sdkPackage;
         let install = installsInFlight.get(pkg);
         if (!install) {
-          install = installSdk(pm, pkg, ctx.userCwd).finally(() => installsInFlight.delete(pkg));
+          if (installer) {
+            installProgress.set(id, 0);
+            install = installWithHost(installer, id, (value) => installProgress.set(id, value));
+          } else {
+            const pm = await detectPackageManager(ctx.userCwd);
+            install = installSdk(pm, pkg, ctx.userCwd);
+          }
+          install = install.finally(() => {
+            installsInFlight.delete(pkg);
+            installProgress.delete(id);
+            forgetAuth(id);
+          });
           installsInFlight.set(pkg, install);
         }
         await install;
+        return json(res, 200, { ok: true });
+      }
+
+      if (method === 'POST' && segments[0] === 'login' && segments.length === 1) {
+        const guard = validateMutationRequest(req, { requireJsonBody: true });
+        if (!guard.ok) return json(res, guard.status, { error: guard.error });
+        const body = (await readBody(req, AGENT_BODY_LIMIT)) as { provider?: unknown };
+        if (!isAgentProviderId(body.provider)) return json(res, 400, { error: 'invalid provider' });
+        const id = body.provider;
+        const cli = findOnPath(providers[id].cliCommand);
+        if (!cli) return json(res, 409, { error: '這個 AI 還沒下載完成。' });
+        // Pressing the button again reuses the sign-in that is still waiting.
+        let job = logins.get(id);
+        if (!job) {
+          const commands = AUTH_COMMANDS[id];
+          const started = startCliLogin({
+            cmd: cli,
+            args: commands.login,
+            cwd: ctx.userCwd,
+            parse: (output) => {
+              const found = commands.loginUrl(output);
+              return found ? { url: found } : null;
+            },
+            timeoutMs: LOGIN_TIMEOUT_MS,
+            promptTimeoutMs: LOGIN_PROMPT_TIMEOUT_MS,
+            messages: {
+              missing: '這個 AI 還沒下載完成。',
+              silent: '登入頁面沒有出現，請再試一次。',
+              ended: '登入沒有開始，請再試一次。',
+            },
+          });
+          void started.done.then(() => {
+            if (logins.get(id) === started) logins.delete(id);
+          });
+          logins.set(id, started);
+          job = started;
+        }
+        return json(res, 200, await job.prompt);
+      }
+
+      if (method === 'POST' && url.pathname === '/login/code') {
+        const guard = validateMutationRequest(req, { requireJsonBody: true });
+        if (!guard.ok) return json(res, guard.status, { error: guard.error });
+        const body = (await readBody(req, AGENT_BODY_LIMIT)) as {
+          provider?: unknown;
+          code?: unknown;
+        };
+        if (!isAgentProviderId(body.provider)) return json(res, 400, { error: 'invalid provider' });
+        const code = typeof body.code === 'string' ? body.code.trim() : '';
+        if (!LOGIN_CODE_RE.test(code)) return json(res, 400, { error: '代碼格式不對。' });
+        const job = logins.get(body.provider);
+        if (!job) return json(res, 409, { error: '登入已經結束，請重新按「登入」。' });
+        job.send(code);
+        return json(res, 200, { ok: true });
+      }
+
+      if (method === 'POST' && url.pathname === '/logout') {
+        const guard = validateMutationRequest(req, { requireJsonBody: true });
+        if (!guard.ok) return json(res, guard.status, { error: guard.error });
+        const body = (await readBody(req, AGENT_BODY_LIMIT)) as { provider?: unknown };
+        if (!isAgentProviderId(body.provider)) return json(res, 400, { error: 'invalid provider' });
+        const id = body.provider;
+        logins.get(id)?.child.kill();
+        const cli = findOnPath(providers[id].cliCommand);
+        if (cli) await runCommand({ cmd: cli, args: AUTH_COMMANDS[id].logout }, ctx.userCwd);
+        forgetAuth(id);
         return json(res, 200, { ok: true });
       }
 

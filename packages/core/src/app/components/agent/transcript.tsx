@@ -1,12 +1,15 @@
-import { Check, ChevronRight, CircleAlert, Copy, Pencil } from 'lucide-react';
+import { Check, ChevronRight, CircleAlert, Copy, Info, Pencil } from 'lucide-react';
 import { type ReactNode, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { classifyAgentError } from '@/lib/agent/friendly-error';
+import { refreshStatus } from '@/lib/agent/use-agent';
 import { useAutoGrow } from '@/lib/use-auto-grow';
 import { format, plural, useLocale } from '@/lib/use-locale';
 import { cn } from '@/lib/utils';
 import { stripDeckSlug } from '../../../agent/prompt';
 import type { AgentItem, AgentQuestion, AgentSession, RespondPayload } from '../../../agent/types';
 import { AgentMarkdown } from './agent-markdown';
+import { useAgentForkStrings } from './fork-strings';
 
 export function Transcript({
   session,
@@ -403,16 +406,55 @@ function ToolGroup({ tools }: { tools: ToolEntry[] }) {
 }
 
 function ErrorItem({ text }: { text: string }) {
-  const t = useLocale();
+  const s = useAgentForkStrings();
+  const kind = classifyAgentError(text);
+  // A signed-out CLI drops out of the ready list, so the panel offers to log in.
+  useEffect(() => {
+    if (kind === 'auth') void refreshStatus();
+  }, [kind]);
+  if (kind === 'warning') {
+    return (
+      <p className="flex gap-1.5 text-[11px] leading-relaxed text-muted-foreground">
+        <Info className="mt-0.5 size-3 shrink-0" aria-hidden />
+        <span>
+          {s.notice}
+          {text}
+        </span>
+      </p>
+    );
+  }
+  const friendly = {
+    auth: [s.errorAuthTitle, s.errorAuthBody],
+    quota: [s.errorQuotaTitle, s.errorQuotaBody],
+    network: [s.errorNetworkTitle, s.errorNetworkBody],
+    other: [s.errorOtherTitle, null],
+  }[kind];
   return (
-    <div className="rounded-[6px] border border-destructive/30 bg-destructive/5 px-3 py-2">
-      <span className="eyebrow flex items-center gap-1 text-destructive/80">
+    <div
+      className="rounded-[6px] border border-destructive/30 bg-destructive/5 px-3 py-2"
+      data-agent-error={kind}
+    >
+      <span className="flex items-center gap-1 text-[12px] font-medium text-destructive">
         <CircleAlert className="size-3" aria-hidden />
-        {t.agent.errorEyebrow}
+        {friendly[0]}
       </span>
-      <pre className="mt-1 whitespace-pre-wrap font-mono text-[11px] leading-relaxed text-foreground/85">
-        {text}
-      </pre>
+      {friendly[1] ? (
+        <>
+          <p className="mt-1 text-[12px] leading-relaxed text-foreground/85">{friendly[1]}</p>
+          <details className="mt-1">
+            <summary className="cursor-pointer text-[11px] text-muted-foreground">
+              {s.details}
+            </summary>
+            <pre className="mt-1 whitespace-pre-wrap font-mono text-[11px] leading-relaxed text-foreground/70">
+              {text}
+            </pre>
+          </details>
+        </>
+      ) : (
+        <pre className="mt-1 whitespace-pre-wrap font-mono text-[11px] leading-relaxed text-foreground/85">
+          {text}
+        </pre>
+      )}
     </div>
   );
 }
@@ -425,7 +467,8 @@ function ResultItem({ item }: { item: Extract<AgentItem, { kind: 'result' }> }) 
       format(t.agent.resultSeconds, { seconds: Math.max(1, Math.round(item.durationMs / 1000)) }),
     );
   }
-  if (item.costUsd !== null && item.costUsd > 0) parts.push(`$${item.costUsd.toFixed(2)}`);
+  // No dollar figure: students sign in with a ChatGPT or Claude plan, and an
+  // API-equivalent cost reads as a charge they are not paying.
   return <p className="folio text-muted-foreground/70">{parts.join(' · ')}</p>;
 }
 

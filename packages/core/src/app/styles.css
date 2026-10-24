@@ -446,6 +446,18 @@
   animation: agent-fade-in 400ms var(--ease-swift) both;
 }
 
+/* The toolbar Agent button breathes while a session runs. */
+@keyframes agent-breathe {
+  50% {
+    opacity: 0.55;
+    transform: scale(0.86);
+  }
+}
+
+.agent-busy-icon {
+  animation: agent-breathe 1.6s var(--ease-swift) infinite;
+}
+
 @keyframes agent-sweep {
   from {
     background-position: 120% 0;
@@ -522,6 +534,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .agent-busy-icon {
+    animation: none;
+  }
   .agent-ring {
     animation: agent-fade-in 160ms ease-out both;
     --agent-angle: 120deg;
