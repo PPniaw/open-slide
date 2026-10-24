@@ -1,4 +1,4 @@
-import { spawn } from 'node:child_process';
+import { type ChildProcess, spawn } from 'node:child_process';
 import { readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import type { ViteDevServer } from 'vite';
@@ -20,6 +20,9 @@ import {
 // POST /__publish/unpublish  { slideId }  → deletes the Vercel project, returns { ok }
 // GET  /__publish/live?slideId=           → { server, roomId } while live interaction is on
 // GET  /__publish/live-admin?slideId=     → { server, roomId, adminKey } for the workspace panel
+// GET  /__publish/list                    → { decks: { [slideId]: { url, publishedAt, live } } }
+// POST /__publish/login  {}               → starts `vercel login`, returns { url, code } to confirm
+//                    in the browser; the dialog then polls /status until the login lands
 //
 // The workshop fork's toolbar button drives these so nobody has to open a
 // terminal. Deploys reuse the machine's Vercel CLI login.
@@ -27,6 +30,8 @@ import {
 const SLIDE_ID_RE = /^[a-z0-9_-]+$/i;
 const PUBLISH_TIMEOUT_MS = 6 * 60 * 1000;
 const STATUS_TIMEOUT_MS = 20_000;
+const LOGIN_TIMEOUT_MS = 10 * 60 * 1000;
+const LOGIN_PROMPT_TIMEOUT_MS = 30_000;
 
 export type PublishRecord = { project: string; url: string; publishedAt: string };
 type Records = Record<string, PublishRecord>;
@@ -82,6 +87,66 @@ export function parsePublishedUrl(output: string): string | null {
   return output.match(new RegExp(`${escaped}(https?://\\S+)`))?.[1] ?? null;
 }
 
+export type DeviceLogin = { url: string; code: string };
+
+// `vercel login` without a terminal prints the device page and waits for it
+// to be approved, e.g. "Visit https://vercel.com/oauth/device?user_code=ABCD-EFGH".
+export function parseDeviceLogin(output: string): DeviceLogin | null {
+  const m = output.match(/https:\/\/vercel\.com\/oauth\/device\?user_code=([A-Z0-9-]+)/);
+  return m ? { url: m[0], code: m[1] } : null;
+}
+
+type LoginJob = { child: ChildProcess; prompt: Promise<DeviceLogin> };
+
+// The child keeps running after the prompt is returned: it finishes the login
+// itself once the code is approved, and /status picks that up.
+function startLogin(cwd: string, onExit: () => void): LoginJob {
+  const child = spawn('vercel', ['login'], {
+    cwd,
+    env: childEnv(),
+    stdio: ['ignore', 'pipe', 'pipe'],
+    shell: process.platform === 'win32',
+    windowsHide: true,
+  });
+  const killTimer = setTimeout(() => child.kill(), LOGIN_TIMEOUT_MS);
+  const done = () => {
+    clearTimeout(killTimer);
+    onExit();
+  };
+  child.on('close', done);
+  child.on('error', done);
+  const prompt = new Promise<DeviceLogin>((resolve, reject) => {
+    let output = '';
+    const promptTimer = setTimeout(() => {
+      child.kill();
+      reject(new Error(`Vercel 沒有回應登入要求。\n${tail(output)}`));
+    }, LOGIN_PROMPT_TIMEOUT_MS);
+    const onData = (c: Buffer) => {
+      output += c.toString('utf8');
+      const found = parseDeviceLogin(output);
+      if (found) {
+        clearTimeout(promptTimer);
+        resolve(found);
+      }
+    };
+    child.stdout?.on('data', onData);
+    child.stderr?.on('data', onData);
+    child.on('error', (err) => {
+      clearTimeout(promptTimer);
+      reject(
+        (err as NodeJS.ErrnoException).code === 'ENOENT'
+          ? new Error('這台電腦還沒有安裝 Vercel CLI。')
+          : err,
+      );
+    });
+    child.on('close', () => {
+      clearTimeout(promptTimer);
+      reject(new Error(`Vercel 登入沒有開始。\n${tail(output)}`));
+    });
+  });
+  return { child, prompt };
+}
+
 function recordsPath(ctx: ApiContext): string {
   return path.join(ctx.slidesRoot, '.published.json');
 }
@@ -115,7 +180,10 @@ function tail(output: string): string {
   return output.trim().split('\n').slice(-12).join('\n');
 }
 
+// OPEN_SLIDE_BIN lets a host without a per-project install (the slidez
+// desktop app) point at its own copy of the CLI.
 function openSlideBin(cwd: string): string {
+  if (process.env.OPEN_SLIDE_BIN) return process.env.OPEN_SLIDE_BIN;
   const bin = process.platform === 'win32' ? 'open-slide.cmd' : 'open-slide';
   return path.join(cwd, 'node_modules', '.bin', bin);
 }
@@ -149,6 +217,8 @@ async function enabledRoom(ctx: ApiContext, slideId: string) {
 
 export function registerPublishRoutes(server: ViteDevServer, ctx: ApiContext): void {
   let inFlight: Promise<unknown> | null = null;
+  let login: LoginJob | null = null;
+  server.httpServer?.on('close', () => login?.child.kill());
 
   server.middlewares.use('/__publish', async (req, res, next) => {
     if (!isLoopbackRequest(req)) return json(res, 403, { error: '只能在本機操作發布。' });
@@ -166,6 +236,20 @@ export function registerPublishRoutes(server: ViteDevServer, ctx: ApiContext): v
           live: await liveStatus(ctx, slideId),
           busy: inFlight !== null,
         });
+      }
+
+      if (method === 'GET' && url.pathname === '/list') {
+        const records = await readRecords(ctx);
+        const decks: Record<string, { url: string; publishedAt: string; live: boolean }> = {};
+        for (const [id, record] of Object.entries(records)) {
+          decks[id] = {
+            url: record.url,
+            publishedAt: record.publishedAt,
+            live: Boolean((await currentLiveRoom(ctx, id))?.enabled),
+          };
+        }
+        res.setHeader('cache-control', 'no-store');
+        return json(res, 200, { decks });
       }
 
       if (method === 'GET' && url.pathname === '/live') {
@@ -190,6 +274,18 @@ export function registerPublishRoutes(server: ViteDevServer, ctx: ApiContext): v
       if (method !== 'POST') return next();
       const guard = validateMutationRequest(req, { requireJsonBody: true });
       if (!guard.ok) return json(res, guard.status, { error: guard.error });
+
+      if (url.pathname === '/login') {
+        // Pressing the button again shows the same code while it is still valid.
+        if (!login) {
+          const job = startLogin(ctx.userCwd, () => {
+            if (login === job) login = null;
+          });
+          login = job;
+        }
+        return json(res, 200, await login.prompt);
+      }
+
       const body = (await readBody(req, 4096)) as {
         slideId?: unknown;
         live?: unknown;

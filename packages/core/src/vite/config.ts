@@ -4,7 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
-import type { InlineConfig } from 'vite';
+import type { InlineConfig, Plugin } from 'vite';
 import { apiPlugin } from './api-plugin.ts';
 import { currentPlugin } from './current-plugin.ts';
 import { designPlugin } from './design-plugin.ts';
@@ -53,6 +53,30 @@ function resolveRuntimeAssetRoots(): string[] {
   return roots;
 }
 
+// Decks normally resolve `react` and `@open-slide/core` from the workspace's
+// own node_modules. A workspace without one (the slidez desktop app keeps one
+// shared copy for every project) falls back to resolving them from core's own
+// install. Workspaces that have the package never reach the fallback.
+function resolveFromCorePlugin(): Plugin {
+  const anchor = path.join(APP_ROOT, 'main.tsx');
+  return {
+    name: 'open-slide:resolve-from-core',
+    enforce: 'pre',
+    async resolveId(source, importer, options) {
+      // Real packages resolve their own imports; skip them. The publish
+      // staging copy lives under node_modules/.open-slide but is deck code.
+      const inPackage =
+        importer?.includes(`${path.sep}node_modules${path.sep}`) &&
+        !importer.includes(`${path.sep}node_modules${path.sep}.open-slide${path.sep}`);
+      if (!importer || importer === anchor || inPackage) return null;
+      if (/^[./\\\0]/.test(source) || source.includes(':')) return null;
+      const own = await this.resolve(source, importer, { ...options, skipSelf: true });
+      if (own) return own;
+      return this.resolve(source, anchor, { ...options, skipSelf: true });
+    },
+  };
+}
+
 export type CreateViteConfigOptions = {
   userCwd: string;
   config?: OpenSlideConfig;
@@ -75,6 +99,7 @@ export async function createViteConfig(opts: CreateViteConfigOptions): Promise<I
     configFile: false,
     envDir: userCwd,
     plugins: [
+      resolveFromCorePlugin(),
       locTagsPlugin({ userCwd, slidesDir }),
       react(),
       tailwindcss(),

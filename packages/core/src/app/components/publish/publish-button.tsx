@@ -10,6 +10,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { LIVE_CHANGED_EVENT } from '@/lib/live/room';
+import { PUBLISHED_CHANGED_EVENT } from '@/lib/publish/published';
 import { useLocale } from '@/lib/use-locale';
 
 type PublishRecord = { project: string; url: string; publishedAt: string };
@@ -28,6 +29,9 @@ type Status = {
   busy: boolean;
 };
 type Phase = 'idle' | 'publishing' | 'confirm-unpublish' | 'unpublishing';
+type DeviceLogin = { url: string; code: string };
+
+const LOGIN_POLL_MS = 2000;
 
 // Kept here instead of the shared locale files so this fork-only feature
 // doesn't touch files upstream edits every release.
@@ -37,6 +41,13 @@ const ZH = {
   checking: '正在檢查 Vercel 連線…',
   notConnected: '這台電腦還沒連上 Vercel。',
   notConnectedHint: '打開 Claude App，跟它說：「幫我安裝並登入 Vercel」。完成後按「重新檢查」。',
+  loginHint:
+    '按「登入 Vercel」，在瀏覽器按一下確認就完成了。還沒有帳號的話，登入頁可以用 GitHub 或 email 免費註冊。',
+  login: '登入 Vercel',
+  loginStarting: '正在向 Vercel 要登入代碼…',
+  loginCode: '確認瀏覽器頁面上的代碼是',
+  loginGo: '前往 Vercel 確認',
+  loginWaiting: '在瀏覽器按下確認後，這裡會自動接上。',
   recheck: '重新檢查',
   account: 'Vercel 帳號',
   intro:
@@ -71,6 +82,13 @@ const EN: typeof ZH = {
   notConnected: 'This computer is not connected to Vercel yet.',
   notConnectedHint:
     'Open the Claude app and say "install and log in to Vercel for me", then press Check again.',
+  loginHint:
+    'Press Log in to Vercel and confirm in the browser. No account yet? The login page lets you sign up free with GitHub or email.',
+  login: 'Log in to Vercel',
+  loginStarting: 'Asking Vercel for a login code…',
+  loginCode: 'Check that the browser shows the code',
+  loginGo: 'Confirm on Vercel',
+  loginWaiting: 'Once you confirm in the browser, this connects by itself.',
   recheck: 'Check again',
   account: 'Vercel account',
   intro:
@@ -124,6 +142,7 @@ export function PublishButton({ slideId }: { slideId: string }) {
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [liveOn, setLiveOn] = useState(false);
+  const [login, setLogin] = useState<DeviceLogin | 'starting' | null>(null);
 
   const refresh = useCallback(async () => {
     setStatus(null);
@@ -137,6 +156,26 @@ export function PublishButton({ slideId }: { slideId: string }) {
     if (open) void refresh().catch((err: unknown) => setError(String(err)));
   }, [open, refresh]);
 
+  // While the code waits for approval in the browser, check quietly (no
+  // spinner) until the CLI has stored the login.
+  const waiting = open && login !== null && login !== 'starting';
+  useEffect(() => {
+    if (!waiting) return;
+    const timer = setInterval(async () => {
+      try {
+        const res = await fetch(`/__publish/status?slideId=${encodeURIComponent(slideId)}`);
+        const next = (await res.json()) as Status;
+        if (!next.vercel.loggedIn) return;
+        setLogin(null);
+        setStatus(next);
+        setLiveOn(next.live.required || next.live.enabled);
+      } catch {
+        // Try again on the next tick.
+      }
+    }, LOGIN_POLL_MS);
+    return () => clearInterval(timer);
+  }, [waiting, slideId]);
+
   if (import.meta.env.PROD) return null;
 
   const record = status?.record ?? null;
@@ -149,6 +188,7 @@ export function PublishButton({ slideId }: { slideId: string }) {
       await post('/__publish', slideId, { live: liveOn, owner: status?.vercel.user ?? '' });
       await refresh();
       window.dispatchEvent(new Event(LIVE_CHANGED_EVENT));
+      window.dispatchEvent(new Event(PUBLISHED_CHANGED_EVENT));
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));
     } finally {
@@ -163,10 +203,31 @@ export function PublishButton({ slideId }: { slideId: string }) {
       await post('/__publish/unpublish', slideId);
       await refresh();
       window.dispatchEvent(new Event(LIVE_CHANGED_EVENT));
+      window.dispatchEvent(new Event(PUBLISHED_CHANGED_EVENT));
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));
     } finally {
       setPhase('idle');
+    }
+  };
+
+  const startLogin = async () => {
+    setError(null);
+    setLogin('starting');
+    try {
+      const res = await fetch('/__publish/login', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: '{}',
+      });
+      const body = (await res.json().catch(() => ({}))) as Partial<DeviceLogin> & {
+        error?: string;
+      };
+      if (!res.ok || !body.url || !body.code) throw new Error(body.error ?? `HTTP ${res.status}`);
+      setLogin({ url: body.url, code: body.code });
+    } catch (err) {
+      setLogin(null);
+      setError(err instanceof Error ? err.message : String(err));
     }
   };
 
@@ -209,7 +270,33 @@ export function PublishButton({ slideId }: { slideId: string }) {
           {status && !status.vercel.loggedIn && (
             <div className="grid gap-2 text-[13px]" data-publish-state="not-connected">
               <p className="font-medium">{s.notConnected}</p>
-              <p className="text-muted-foreground">{s.notConnectedHint}</p>
+              {!status.vercel.installed ? (
+                <p className="text-muted-foreground">{s.notConnectedHint}</p>
+              ) : login === null ? (
+                <p className="text-muted-foreground">{s.loginHint}</p>
+              ) : login === 'starting' ? (
+                <p className="flex items-center gap-2 text-muted-foreground">
+                  <Loader2 className="size-3.5 animate-spin motion-reduce:animate-none" />
+                  {s.loginStarting}
+                </p>
+              ) : (
+                <div
+                  className="grid gap-2 rounded-[8px] border border-border p-3"
+                  data-publish-state="login-code"
+                >
+                  <p className="text-muted-foreground">{s.loginCode}</p>
+                  <p
+                    className="font-mono text-[20px] font-semibold tracking-[0.12em]"
+                    translate="no"
+                  >
+                    {login.code}
+                  </p>
+                  <p className="flex items-center gap-2 text-muted-foreground">
+                    <Loader2 className="size-3.5 animate-spin motion-reduce:animate-none" />
+                    {s.loginWaiting}
+                  </p>
+                </div>
+              )}
             </div>
           )}
 
@@ -316,11 +403,41 @@ export function PublishButton({ slideId }: { slideId: string }) {
 
           <DialogFooter>
             {status && !status.vercel.loggedIn && (
-              <Button size="sm" onClick={() => void refresh()}>
+              <Button
+                size="sm"
+                variant={status.vercel.installed ? 'ghost' : 'default'}
+                onClick={() => void refresh()}
+              >
                 <RefreshCw className="size-3.5" />
                 {s.recheck}
               </Button>
             )}
+            {status &&
+              !status.vercel.loggedIn &&
+              status.vercel.installed &&
+              // A real link, not window.open after an await, so popup blockers
+              // leave it alone; the desktop app sends it to the default browser.
+              (typeof login === 'object' && login !== null ? (
+                <a
+                  href={login.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={buttonVariants({ size: 'sm' })}
+                  data-publish-action="login-go"
+                >
+                  <ExternalLink className="size-3.5" />
+                  {s.loginGo}
+                </a>
+              ) : (
+                <Button
+                  size="sm"
+                  disabled={login === 'starting'}
+                  onClick={() => void startLogin()}
+                  data-publish-action="login"
+                >
+                  {s.login}
+                </Button>
+              ))}
             {status?.vercel.loggedIn && phase === 'confirm-unpublish' && (
               <>
                 <Button size="sm" variant="ghost" onClick={() => setPhase('idle')}>
