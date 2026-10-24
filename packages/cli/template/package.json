@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@open-slide/core": "^0.0.6",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
   },
   "devDependencies": {
     "@types/react": "^19.2.18",
