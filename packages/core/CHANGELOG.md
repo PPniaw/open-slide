@@ -1,5 +1,12 @@
 # @open-slide/core
 
+## 2.6.0
+
+### Minor Changes
+
+- c807c9c: Run inside a host that ships its own runtime, such as the slidez desktop app: deck imports fall back to core's own install when the project has no node_modules, and `OPEN_SLIDE_BIN` points publishing at the host's CLI. The publish dialog can now log in to Vercel itself: it starts `vercel login`, shows the code, links to the confirmation page and connects once the login lands, so nobody needs a terminal.
+- 5f5dc04: The workspace is now called slidez, with its own logo and favicon and a sidebar credit linking back to open-slide. A new "Published" view in the sidebar lists the decks that are online, with their address, whether live interaction is on, and an Unpublish button.
+
 ## 2.5.0
 
 ### Minor Changes
